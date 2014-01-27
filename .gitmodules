@@ -25,3 +25,6 @@
 [submodule "submodules/antlr3"]
 	path = submodules/antlr3
 	url = git://git.linphone.org/antlr3.git
+[submodule "submodules/libxml2"]
+	path = submodules/libxml2
+	url = git://git.gnome.org/libxml2
