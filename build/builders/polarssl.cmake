@@ -1,6 +1,6 @@
 ############################################################################
-# gsm.mk 
-# Copyright (C) 2014  Belledonne Communications,Grenoble France
+# polarssl.cmake
+# Copyright (C) 2014  Belledonne Communications, Grenoble France
 #
 ############################################################################
 #
@@ -20,26 +20,8 @@
 #
 ############################################################################
 
-gsm_dir?=gsm
-enable_gsm?=yes
-
-update-tree-libgsm:  $(BUILDER_SRC_DIR)/$(gsm_dir)/Makefile
-	mkdir -p $(BUILDER_BUILD_DIR)/$(gsm_dir)
-	cd $(BUILDER_BUILD_DIR)/$(gsm_dir)/ && \
-	rsync -rvLpgoc --exclude ".git" $(BUILDER_SRC_DIR)/$(gsm_dir)/ .
-
-build-libgsm: update-tree-libgsm
-	cd $(BUILDER_BUILD_DIR)/$(gsm_dir) \
-	&& mkdir -p $(prefix)/include/gsm \
-	&& host_alias=$(host)  . $(BUILDER_SRC_DIR)/build/$(config_site) \
-	&&  make -j1 CC="$${CC}" INSTALL_ROOT=$(prefix)  GSM_INSTALL_INC=$(prefix)/include/gsm  install \
-	&& chmod u+w $(prefix)/lib/libgsm.a \
-	&& chmod u+w -R $(prefix)/include/gsm
-
-clean-libgsm:
-	cd $(BUILDER_BUILD_DIR)/$(gsm_dir)\
-	&& make clean
-
-veryclean-libgsm: 
-	 -cd $(BUILDER_BUILD_DIR)/$(gsm_dir) \
-	&& make uninstall
+ExternalProject_Add(EP_polarssl
+	GIT_REPOSITORY git://git.linphone.org/polarssl.git
+	GIT_TAG linphone
+	CMAKE_ARGS ${GENERAL_EP_ARGS}
+)
