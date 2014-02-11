@@ -26,7 +26,7 @@
 
     <!-- A universally unique application identifier. Must be unique across all BlackBerry 10 applications.
          Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-    <id>com.belledonne-communications.mediastream</id>
+    <id>com.belledonne_communications.mediastream</id>
 
     <!-- The name that is displayed in the BlackBerry 10 application installer.
          May have multiple values for each language. See samples or xsd schema file. Optional. -->
@@ -55,44 +55,48 @@
     <author>Belledonne Communications</author>
     <configuration name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="../liblinphonesdk/bb10-arm/bin/mediastream" entry="true" type="Qnx/Elf">mediastream</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libopus.so.4" type="Qnx/Elf">lib/libopus.so.4</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
+       <asset path="arm/mediastream" entry="true" type="Qnx/Elf">mediastream</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libopus.so.4" type="Qnx/Elf">lib/libopus.so.4</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libcunit.so.1" type="Qnx/Elf">lib/libcunit.so.1</asset>
     </configuration>
     <configuration name="Device-Release">
        <entryPointType>Qnx/Cascades</entryPointType>
        <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="../liblinphonesdk/bb10-arm/bin/mediastream" entry="true" type="Qnx/Elf">mediastream</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libopus.so.4" type="Qnx/Elf">lib/libopus.so.4</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
+       <asset path="arm/mediastream" entry="true" type="Qnx/Elf">mediastream</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libopus.so.4" type="Qnx/Elf">lib/libopus.so.4</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libcunit.so.1" type="Qnx/Elf">lib/libcunit.so.1</asset>
     </configuration>
     <configuration name="Device-Profile">
        <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="../liblinphonesdk/bb10-arm/bin/mediastream" entry="true" type="Qnx/Elf">mediastream</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libopus.so.4" type="Qnx/Elf">lib/libopus.so.4</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
-       <asset path="../liblinphonesdk/bb10-arm/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
+       <asset path="arm/mediastream" entry="true" type="Qnx/Elf">mediastream</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libopus.so.4" type="Qnx/Elf">lib/libopus.so.4</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
+       <asset path="../build/liblinphonesdk/bb10-arm/lib/libcunit.so.1" type="Qnx/Elf">lib/libcunit.so.1</asset>
     </configuration>
     <configuration name="Simulator-Debug">
        <platformArchitecture>x86</platformArchitecture>
-       <asset path="../liblinphonesdk/bb10-i486/bin/mediastream" entry="true" type="Qnx/Elf">mediastream</asset>
-       <asset path="../liblinphonesdk/bb10-i486/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
-       <asset path="../liblinphonesdk/bb10-i486/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
-       <asset path="../liblinphonesdk/bb10-i486/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
-       <asset path="../liblinphonesdk/bb10-i486/lib/libopus.so.4" type="Qnx/Elf">lib/libopus.so.4</asset>
-       <asset path="../liblinphonesdk/bb10-i486/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
-       <asset path="../liblinphonesdk/bb10-i486/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
+       <asset path="i486/mediastream" entry="true" type="Qnx/Elf">mediastream</asset>
+       <asset path="../build/liblinphonesdk/bb10-i486/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
+       <asset path="../build/liblinphonesdk/bb10-i486/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
+       <asset path="../build/liblinphonesdk/bb10-i486/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
+       <asset path="../build/liblinphonesdk/bb10-i486/lib/libopus.so.4" type="Qnx/Elf">lib/libopus.so.4</asset>
+       <asset path="../build/liblinphonesdk/bb10-i486/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
+       <asset path="../build/liblinphonesdk/bb10-i486/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
+       <asset path="../build/liblinphonesdk/bb10-i486/lib/libcunit.so.1" type="Qnx/Elf">lib/libcunit.so.1</asset>
     </configuration>
 
     <!--  Unique author ID assigned by signing authority. Required if using debug tokens. -->
@@ -106,6 +110,8 @@
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
+    <permission>play_audio</permission>
+    <permission>record_audio</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
 
 </qnx>

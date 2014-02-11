@@ -20,12 +20,31 @@
 #
 ############################################################################
 
-PWD=`pwd`
+PWD=$(shell pwd)
 
-all:
-	cd /home/ghislain/code/linphone-bb10.new/build/ && \
+all: build
+
+build-arm:
+	mkdir -p $(PWD)/arm && \
+	cd $(PWD)/../build/ && \
 	make build-bb10-arm
-	cp /home/ghislain/code/belle-sip/tester/.libs/belle_sip_tester $(PWD)/ 
+	cp ../build/build-bb10-arm/EP_bellesip-prefix/src/EP_bellesip-build/tester/belle_sip_tester $(PWD)/arm/
+
+build-i486:
+	mkdir -p $(PWD)/i486 && \
+	cd $(PWD)/../build/ && \
+	make build-bb10-i486
+	cp ../build/build-bb10-i486/EP_bellesip-prefix/src/EP_bellesip-build/tester/belle_sip_tester $(PWD)/i486/
+
+build: build-arm build-i486
+
+clean-arm:
+	rm -f $(PWD)/arm/belle_sip_tester
+
+clean-i486:
+	rm -f $(PWD)/i486/belle_sip_tester
+
+clean: clean-arm clean-i486
 
 package:
 	blackberry-nativepackager -package -devMode -debugToken ~/.rim/debugtoken1.bar -configuration Device-Debug bellesip-tester.bar bar-descriptor.xml
@@ -38,4 +57,3 @@ run: install
 
 uninstall:
 	blackberry-deploy -uninstallApp -device 169.254.0.1 -password 1234 bellesip-tester.bar
-

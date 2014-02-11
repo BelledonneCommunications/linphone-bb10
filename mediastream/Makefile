@@ -20,10 +20,36 @@
 #
 ############################################################################
 
+PWD=$(shell pwd)
+
+all: build
+
+build-arm:
+	mkdir -p $(PWD)/arm && \
+	cd $(PWD)/../build/ && \
+	make build-bb10-arm
+	cp ../build/liblinphonesdk/bb10-arm/bin/mediastream $(PWD)/arm/
+
+build-i486:
+	mkdir -p $(PWD)/i486 && \
+	cd $(PWD)/../build/ && \
+	make build-bb10-i486
+	cp ../build/liblinphonesdk/bb10-i486/bin/mediastream $(PWD)/i486/
+
+build: build-arm build-i486
+
+clean-arm:
+	rm -f $(PWD)/arm/mediastream
+
+clean-i486:
+	rm -f $(PWD)/i486/mediastream
+
+clean: clean-arm clean-i486
+
 package:
 	blackberry-nativepackager -package -devMode -debugToken ~/.rim/debugtoken1.bar -configuration Device-Debug mediastream.bar bar-descriptor.xml
 
-install: mediastream.bar
+install: package
 	blackberry-nativepackager -installApp -device 169.254.0.1 -password 1234 mediastream.bar
 
 run: install
@@ -31,4 +57,3 @@ run: install
 
 uninstall:
 	blackberry-deploy -uninstallApp -device 169.254.0.1 -password 1234 mediastream.bar
-
