@@ -26,11 +26,11 @@
 
     <!-- A universally unique application identifier. Must be unique across all BlackBerry 10 applications.
          Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-    <id>com.belledonne_communications.ms2_tester</id>
+    <id>com.belledonne_communications.liblinphone_tester</id>
 
     <!-- The name that is displayed in the BlackBerry 10 application installer.
          May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <name>mediastreamer2-tester</name>
+    <name>liblinphone-tester</name>
 
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
@@ -46,7 +46,7 @@
 
     <!-- Description, displayed in the BlackBerry 10 application installer.
          May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <description>The mediastream2-tester application</description>
+    <description>The liblinphone-tester application</description>
 
     <!-- Copyright information. Optional. -->
     <!-- <copyright></copyright> -->
@@ -55,7 +55,11 @@
     <author>Belledonne Communications</author>
     <configuration name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="arm/mediastreamer2_tester" entry="true" type="Qnx/Elf">mediastreamer2_tester</asset>
+       <asset path="arm/liblinphone_tester" entry="true" type="Qnx/Elf">liblinphone_tester</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/liblinphone.so.5" type="Qnx/Elf">lib/liblinphone.so.5</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libbellesip.so.0" type="Qnx/Elf">lib/libbellesip.so.0</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libantlr3c.so.1" type="Qnx/Elf">lib/libantlr3c.so.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libpolarssl.so.3" type="Qnx/Elf">lib/libpolarssl.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
@@ -63,11 +67,16 @@
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libcunit.so.1.0.1" type="Qnx/Elf">lib/libcunit.so.1.0.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libxml2.so.10" type="Qnx/Elf">lib/libxml2.so.10</asset>
     </configuration>
     <configuration name="Device-Release">
        <entryPointType>Qnx/Cascades</entryPointType>
        <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="arm/mediastreamer2_tester" entry="true" type="Qnx/Elf">mediastreamer2_tester</asset>
+       <asset path="arm/liblinphone_tester" entry="true" type="Qnx/Elf">liblinphone_tester</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/liblinphone.so.5" type="Qnx/Elf">lib/liblinphone.so.5</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libbellesip.so.0" type="Qnx/Elf">lib/libbellesip.so.0</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libantlr3c.so.1" type="Qnx/Elf">lib/libantlr3c.so.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libpolarssl.so.3" type="Qnx/Elf">lib/libpolarssl.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
@@ -75,10 +84,15 @@
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libcunit.so.1.0.1" type="Qnx/Elf">lib/libcunit.so.1.0.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libxml2.so.10" type="Qnx/Elf">lib/libxml2.so.10</asset>
     </configuration>
     <configuration name="Device-Profile">
        <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="arm/mediastreamer2_tester" entry="true" type="Qnx/Elf">mediastreamer2_tester</asset>
+       <asset path="arm/liblinphone_tester" entry="true" type="Qnx/Elf">liblinphone_tester</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/liblinphone.so.5" type="Qnx/Elf">lib/liblinphone.so.5</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libbellesip.so.0" type="Qnx/Elf">lib/libbellesip.so.0</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libantlr3c.so.1" type="Qnx/Elf">lib/libantlr3c.so.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libpolarssl.so.3" type="Qnx/Elf">lib/libpolarssl.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
@@ -86,10 +100,15 @@
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libcunit.so.1.0.1" type="Qnx/Elf">lib/libcunit.so.1.0.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libxml2.so.10" type="Qnx/Elf">lib/libxml2.so.10</asset>
     </configuration>
     <configuration name="Simulator-Debug">
        <platformArchitecture>x86</platformArchitecture>
-       <asset path="i486/mediastreamer2_tester" entry="true" type="Qnx/Elf">mediastreamer2_tester</asset>
+       <asset path="i486/liblinphone_tester" entry="true" type="Qnx/Elf">liblinphone_tester</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/liblinphone.so.5" type="Qnx/Elf">lib/liblinphone.so.5</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libbellesip.so.0" type="Qnx/Elf">lib/libbellesip.so.0</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libantlr3c.so.1" type="Qnx/Elf">lib/libantlr3c.so.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libpolarssl.so.3" type="Qnx/Elf">lib/libpolarssl.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
@@ -97,6 +116,7 @@
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libcunit.so.1.0.1" type="Qnx/Elf">lib/libcunit.so.1.0.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libxml2.so.10" type="Qnx/Elf">lib/libxml2.so.10</asset>
     </configuration>
 
     <!--  Unique author ID assigned by signing authority. Required if using debug tokens. -->
@@ -108,7 +128,19 @@
         <transparent>false</transparent>
     </initialWindow>
 
-    <asset path="../build/WORK/Source/EP_ms2/tester/sounds">assets/sounds</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/certificates">assets/certificates</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/empty_rc">assets/empty_rc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/marie_early_rc">assets/marie_early_rc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/marie_no_sdp_rc">assets/marie_no_sdp_rc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/marie_rc">assets/marie_rc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/multi_account_lrc">assets/multi_account_lrc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/pauline_alt_rc">assets/pauline_alt_rc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/pauline_rc">assets/pauline_rc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/pauline_rc_tcp">assets/pauline_rc_tcp</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/pauline_wild_rc">assets/pauline_wild_rc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/sounds">assets/sounds</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/stun_rc">assets/stun_rc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/tester_hosts">assets/tester_hosts</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>

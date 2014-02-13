@@ -56,34 +56,34 @@
     <configuration name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/belle_sip_tester" entry="true" type="Qnx/Elf">belle_sip_tester</asset>
-       <asset path="../build/liblinphonesdk/bb10-arm/lib/libbellesip.so.0" type="Qnx/Elf">lib/libbellesip.so.0</asset>
-       <asset path="../build/liblinphonesdk/bb10-arm/lib/libantlr3c.so.1" type="Qnx/Elf">lib/libantlr3c.so.1</asset>
-       <asset path="../build/liblinphonesdk/bb10-arm/lib/libpolarssl.so.3" type="Qnx/Elf">lib/libpolarssl.so.3</asset>
-       <asset path="../build/liblinphonesdk/bb10-arm/lib/libcunit.so.1.0.1" type="Qnx/Elf">lib/libcunit.so.1.0.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libbellesip.so.0" type="Qnx/Elf">lib/libbellesip.so.0</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libantlr3c.so.1" type="Qnx/Elf">lib/libantlr3c.so.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libpolarssl.so.3" type="Qnx/Elf">lib/libpolarssl.so.3</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libcunit.so.1.0.1" type="Qnx/Elf">lib/libcunit.so.1.0.1</asset>
     </configuration>
     <configuration name="Device-Release">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/belle_sip_tester" entry="true" type="Qnx/Elf">belle_sip_tester</asset>
-       <asset path="../build/liblinphonesdk/bb10-arm/lib/libbellesip.so.0" type="Qnx/Elf">lib/libbellesip.so.0</asset>
-       <asset path="../build/liblinphonesdk/bb10-arm/lib/libantlr3c.so.1" type="Qnx/Elf">lib/libantlr3c.so.1</asset>
-       <asset path="../build/liblinphonesdk/bb10-arm/lib/libpolarssl.so.3" type="Qnx/Elf">lib/libpolarssl.so.3</asset>
-       <asset path="../build/liblinphonesdk/bb10-arm/lib/libcunit.so.1.0.1" type="Qnx/Elf">lib/libcunit.so.1.0.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libbellesip.so.0" type="Qnx/Elf">lib/libbellesip.so.0</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libantlr3c.so.1" type="Qnx/Elf">lib/libantlr3c.so.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libpolarssl.so.3" type="Qnx/Elf">lib/libpolarssl.so.3</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libcunit.so.1.0.1" type="Qnx/Elf">lib/libcunit.so.1.0.1</asset>
     </configuration>
     <configuration name="Device-Profile">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/belle_sip_tester" entry="true" type="Qnx/Elf">belle_sip_tester</asset>
-       <asset path="../build/liblinphonesdk/bb10-arm/lib/libbellesip.so.0" type="Qnx/Elf">lib/libbellesip.so.0</asset>
-       <asset path="../build/liblinphonesdk/bb10-arm/lib/libantlr3c.so.1" type="Qnx/Elf">lib/libantlr3c.so.1</asset>
-       <asset path="../build/liblinphonesdk/bb10-arm/lib/libpolarssl.so.3" type="Qnx/Elf">lib/libpolarssl.so.3</asset>
-       <asset path="../build/liblinphonesdk/bb10-arm/lib/libcunit.so.1.0.1" type="Qnx/Elf">lib/libcunit.so.1.0.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libbellesip.so.0" type="Qnx/Elf">lib/libbellesip.so.0</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libantlr3c.so.1" type="Qnx/Elf">lib/libantlr3c.so.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libpolarssl.so.3" type="Qnx/Elf">lib/libpolarssl.so.3</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libcunit.so.1.0.1" type="Qnx/Elf">lib/libcunit.so.1.0.1</asset>
     </configuration>
     <configuration name="Simulator-Debug">
        <platformArchitecture>x86</platformArchitecture>
        <asset path="i486/belle_sip_tester" entry="true" type="Qnx/Elf">belle_sip_tester</asset>
-       <asset path="../build/liblinphonesdk/bb10-i486/lib/libbellesip.so.0" type="Qnx/Elf">lib/libbellesip.so.0</asset>
-       <asset path="../build/liblinphonesdk/bb10-i486/lib/libantlr3c.so.1" type="Qnx/Elf">lib/libantlr3c.so.1</asset>
-       <asset path="../build/liblinphonesdk/bb10-i486/lib/libpolarssl.so.3" type="Qnx/Elf">lib/libpolarssl.so.3</asset>
-       <asset path="../build/liblinphonesdk/bb10-i486/lib/libcunit.so.1.0.1" type="Qnx/Elf">lib/libcunit.so.1.0.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libbellesip.so.0" type="Qnx/Elf">lib/libbellesip.so.0</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libantlr3c.so.1" type="Qnx/Elf">lib/libantlr3c.so.1</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libpolarssl.so.3" type="Qnx/Elf">lib/libpolarssl.so.3</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libcunit.so.1.0.1" type="Qnx/Elf">lib/libcunit.so.1.0.1</asset>
     </configuration>
 
     <!--  Unique author ID assigned by signing authority. Required if using debug tokens. -->
@@ -94,6 +94,8 @@
         <systemChrome>none</systemChrome>
         <transparent>false</transparent>
     </initialWindow>
+
+    <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/share/linphone/rootca.pem">assets/rootca.pem</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>

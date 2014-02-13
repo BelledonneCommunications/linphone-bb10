@@ -20,40 +20,46 @@
 #
 ############################################################################
 
-PWD=$(shell pwd)
+DEVICE?=169.254.0.1
+PASSWORD?=1234
+DEBUG_TOKEN?=~/.rim/debugtoken1.bar
+
+WORKING_DIR=$(shell pwd)
 
 all: build
 
 build-arm:
-	mkdir -p $(PWD)/arm && \
-	cd $(PWD)/../build/ && \
+	mkdir -p $(WORKING_DIR)/arm && \
+	cd $(WORKING_DIR)/../build/ && \
 	make build-bb10-arm
-	cp ../build/build-bb10-arm/EP_linphone-prefix/src/EP_linphone/mediastreamer2/tester/.libs/mediastreamer2_tester $(PWD)/arm/
+	cp ../build/WORK/Build-bb10-arm/ms2/tester/.libs/mediastreamer2_tester $(WORKING_DIR)/arm/
 
 build-i486:
-	mkdir -p $(PWD)/i486 && \
-	cd $(PWD)/../build/ && \
+	mkdir -p $(WORKING_DIR)/i486 && \
+	cd $(WORKING_DIR)/../build/ && \
 	make build-bb10-i486
-	cp ../build/build-bb10-i486/EP_linphone-prefix/src/EP_linphone/mediastreamer2/tester/.libs/mediastreamer2_tester $(PWD)/i486/
+	cp ../build/WORK/Build-bb10-i486/ms2/tester/.libs/mediastreamer2_tester $(WORKING_DIR)/i486/
 
 build: build-arm build-i486
 
 clean-arm:
-	rm -f $(PWD)/arm/mediastreamer2_tester
+	rm -f $(WORKING_DIR)/arm/mediastreamer2_tester
 
 clean-i486:
-	rm -f $(PWD)/i486/mediastreamer2_tester
+	rm -f $(WORKING_DIR)/i486/mediastreamer2_tester
 
 clean: clean-arm clean-i486
 
 package:
-	blackberry-nativepackager -package -devMode -debugToken ~/.rim/debugtoken1.bar -configuration Device-Debug mediastreamer2-tester.bar bar-descriptor.xml
+	blackberry-nativepackager -package -devMode -debugToken $(DEBUG_TOKEN) -configuration Device-Debug mediastreamer2-tester.bar bar-descriptor.xml
 
 install: package
-	blackberry-nativepackager -installApp -device 169.254.0.1 -password 1234 mediastreamer2-tester.bar
+	blackberry-nativepackager -installApp -device $(DEVICE) -password $(PASSWORD) mediastreamer2-tester.bar
 
 run: install
-	blackberry-nativepackager -launchApp -device 169.254.0.1 -password 1234 mediastreamer2-tester.bar
+	blackberry-nativepackager -launchApp -device $(DEVICE) -password $(PASSWORD) mediastreamer2-tester.bar
+	blackberry-deploy -terminateApp -device $(DEVICE) -password $(PASSWORD) mediastreamer2-tester.bar
+	ssh bb10 'sh -c "cd /accounts/1000/appdata/com.belledonne_communications.ms2_tester* && LD_LIBRARY_PATH=app/native/lib app/native/mediastreamer2_tester --verbose"'
 
 uninstall:
-	blackberry-deploy -uninstallApp -device 169.254.0.1 -password 1234 mediastreamer2-tester.bar
+	blackberry-deploy -uninstallApp -device $(DEVICE) -password $(PASSWORD) mediastreamer2-tester.bar

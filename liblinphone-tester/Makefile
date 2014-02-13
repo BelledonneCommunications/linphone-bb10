@@ -32,34 +32,34 @@ build-arm:
 	mkdir -p $(WORKING_DIR)/arm && \
 	cd $(WORKING_DIR)/../build/ && \
 	make build-bb10-arm
-	cp ../build/OUTPUT/liblinphone-bb10-sdk/arm/bin/mediastream $(WORKING_DIR)/arm/
+	cp ../build/WORK/Build-bb10-arm/linphone/tester/.libs/liblinphone_tester $(WORKING_DIR)/arm/
 
 build-i486:
 	mkdir -p $(WORKING_DIR)/i486 && \
 	cd $(WORKING_DIR)/../build/ && \
 	make build-bb10-i486
-	cp ../build/OUTPUT/liblinphone-bb10-sdk/i486/bin/mediastream $(WORKING_DIR)/i486/
+	cp ../build/WORK/Build-bb10-i486/linphone/tester/.libs/liblinphone_tester $(WORKING_DIR)/i486/
 
 build: build-arm build-i486
 
 clean-arm:
-	rm -f $(WORKING_DIR)/arm/mediastream
+	rm -f $(WORKING_DIR)/arm/liblinphone_tester
 
 clean-i486:
-	rm -f $(WORKING_DIR)/i486/mediastream
+	rm -f $(WORKING_DIR)/i486/liblinphone_tester
 
 clean: clean-arm clean-i486
 
 package:
-	blackberry-nativepackager -package -devMode -debugToken $(DEBUG_TOKEN) -configuration Device-Debug mediastream.bar bar-descriptor.xml
+	blackberry-nativepackager -package -devMode -debugToken $(DEBUG_TOKEN) -configuration Device-Debug liblinphone-tester.bar bar-descriptor.xml
 
 install: package
-	blackberry-nativepackager -installApp -device $(DEVICE) -password $(PASSWORD) mediastream.bar
+	blackberry-nativepackager -installApp -device $(DEVICE) -password $(PASSWORD) liblinphone-tester.bar
 
 run: install
-	blackberry-nativepackager -launchApp -device $(DEVICE) -password $(PASSWORD) mediastream.bar
-	blackberry-deploy -terminateApp -device $(DEVICE) -password $(PASSWORD) mediastream.bar
-	ssh bb10 'sh -c "cd /accounts/1000/appdata/com.belledonne_communications.mediastream* && LD_LIBRARY_PATH=app/native/lib app/native/mediastream --help"'
+	blackberry-nativepackager -launchApp -device $(DEVICE) -password $(PASSWORD) liblinphone-tester.bar
+	blackberry-deploy -terminateApp -device $(DEVICE) -password $(PASSWORD) liblinphone-tester.bar
+	ssh bb10 'sh -c "cd /accounts/1000/appdata/com.belledonne_communications.liblinphone_tester* && LD_LIBRARY_PATH=app/native/lib app/native/liblinphone_tester --verbose"'
 
 uninstall:
-	blackberry-deploy -uninstallApp -device $(DEVICE) -password $(PASSWORD) mediastream.bar
+	blackberry-deploy -uninstallApp -device $(DEVICE) -password $(PASSWORD) liblinphone-tester.bar

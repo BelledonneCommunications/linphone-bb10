@@ -20,40 +20,46 @@
 #
 ############################################################################
 
-PWD=$(shell pwd)
+DEVICE?=169.254.0.1
+PASSWORD?=1234
+DEBUG_TOKEN?=~/.rim/debugtoken1.bar
+
+WORKING_DIR=$(shell pwd)
 
 all: build
 
 build-arm:
-	mkdir -p $(PWD)/arm && \
-	cd $(PWD)/../build/ && \
+	mkdir -p $(WORKING_DIR)/arm && \
+	cd $(WORKING_DIR)/../build/ && \
 	make build-bb10-arm
-	cp ../build/build-bb10-arm/EP_bellesip-prefix/src/EP_bellesip-build/tester/belle_sip_tester $(PWD)/arm/
+	cp ../build/WORK/Build-bb10-arm/bellesip/tester/belle_sip_tester $(WORKING_DIR)/arm/
 
 build-i486:
-	mkdir -p $(PWD)/i486 && \
-	cd $(PWD)/../build/ && \
+	mkdir -p $(WORKING_DIR)/i486 && \
+	cd $(WORKING_DIR)/../build/ && \
 	make build-bb10-i486
-	cp ../build/build-bb10-i486/EP_bellesip-prefix/src/EP_bellesip-build/tester/belle_sip_tester $(PWD)/i486/
+	cp ../build/WORK/Build-bb10-i486/bellesip/tester/belle_sip_tester $(WORKING_DIR)/i486/
 
 build: build-arm build-i486
 
 clean-arm:
-	rm -f $(PWD)/arm/belle_sip_tester
+	rm -f $(WORKING_DIR)/arm/belle_sip_tester
 
 clean-i486:
-	rm -f $(PWD)/i486/belle_sip_tester
+	rm -f $(WORKING_DIR)/i486/belle_sip_tester
 
 clean: clean-arm clean-i486
 
 package:
-	blackberry-nativepackager -package -devMode -debugToken ~/.rim/debugtoken1.bar -configuration Device-Debug bellesip-tester.bar bar-descriptor.xml
+	blackberry-nativepackager -package -devMode -debugToken $(DEBUG_TOKEN) -configuration Device-Debug bellesip-tester.bar bar-descriptor.xml
 
 install: package
-	blackberry-nativepackager -installApp -device 169.254.0.1 -password 1234 bellesip-tester.bar
+	blackberry-nativepackager -installApp -device $(DEVICE) -password $(PASSWORD) bellesip-tester.bar
 
 run: install
-	blackberry-nativepackager -launchApp -device 169.254.0.1 -password 1234 bellesip-tester.bar
+	blackberry-nativepackager -launchApp -device $(DEVICE) -password $(PASSWORD) bellesip-tester.bar
+	blackberry-deploy -terminateApp -device $(DEVICE) -password $(PASSWORD) bellesip-tester.bar
+	ssh bb10 'sh -c "cd /accounts/1000/appdata/com.belledonne_communications.bellesip_tester* && LD_LIBRARY_PATH=app/native/lib app/native/belle_sip_tester --verbose --root-ca app/native/assets/rootca.pem"'
 
 uninstall:
-	blackberry-deploy -uninstallApp -device 169.254.0.1 -password 1234 bellesip-tester.bar
+	blackberry-deploy -uninstallApp -device $(DEVICE) -password $(PASSWORD) bellesip-tester.bar
