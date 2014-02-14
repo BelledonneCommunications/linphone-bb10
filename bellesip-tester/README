@@ -1,0 +1,55 @@
+***************************************
+** BELLESIP-TESTER FOR BLACKBERRY 10 **
+***************************************
+
+It is possible to build bellesip-tester for BlackBerry 10 using two methods:
+ - using the Momentics IDE
+ - using the command line
+
+BUILDING WITH THE MOMENTICS IDE
+*******************************
+
+Here are the steps to follow:
+ - Start the momentics IDE
+ - In the "File" menu, choose "Import..."
+ - Choose "Existing Projects into Workspace" in the "General" folder and click 
+"Next >"
+ - Click "Browse..." for "Select root directory" and choose the current 
+directory (the bellesip-tester directory)
+ - Make sure that "Copy projects into workspace" is unchecked
+ - Click "Finish"
+ - Use the IDE to build, deploy and debug the project
+
+BUILDING WITH THE COMMAND LINE
+******************************
+
+In the current directory (the bellesip-tester directory), run the following 
+commands:
+
+    $ make
+    $ make run
+
+For the "make run" step to be succesful you will need to add the following 
+lines to your SSH configuration:
+
+Host bb10
+    Hostname 169.254.0.1
+    User devuser
+    IdentityFile ~/.ssh/id_rsa.blackberry
+
+Replace the IP address by the IP address of your BlackBerry 10 device and the 
+IdentityFile by the one you use to connect to your BlackBerry 10 device via 
+SSH.
+
+If your BlackBerry 10 IP address is not 169.254.0.1 you will need to change the 
+IP address in your SSH configuration as explained above, but you will also need 
+to set DEVICE=<ip_address> when using the "make run" command.
+If your BlackBerry 10 password is not 1234 you will need to set 
+PASSWORD=<password> when using the "make run" command.
+If the debug token you use is not located at ~/.rim/debugtoken1.bar you will 
+need to tell where to find it with DEBUG_TOKEN=<path_to_debug_token> with using 
+the "make run" command.
+For example, to run the program on a BlackBerry 10 device with the IP address 
+192.168.0.192 and the 5678 password, use:
+
+    $ DEVICE=192.168.0.192 PASSWORD=5678 make run
