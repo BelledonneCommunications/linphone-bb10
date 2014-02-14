@@ -128,15 +128,20 @@
         <transparent>false</transparent>
     </initialWindow>
 
+    <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/share/linphone/rootca.pem">assets/linphone/rootca.pem</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/certificates">assets/certificates</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/empty_rc">assets/empty_rc</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/marie_early_rc">assets/marie_early_rc</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/marie_no_sdp_rc">assets/marie_no_sdp_rc</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/marie_rc">assets/marie_rc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/marie_remote_404_rc">assets/marie_remote_404_rc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/marie_remote_invalid_rc">assets/marie_remote_invalid_rc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/marie_remote_rc">assets/marie_remote_rc</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/multi_account_lrc">assets/multi_account_lrc</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/pauline_alt_rc">assets/pauline_alt_rc</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/pauline_rc">assets/pauline_rc</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/pauline_rc_tcp">assets/pauline_rc_tcp</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/pauline_remote_rc">assets/pauline_remote_rc</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/pauline_wild_rc">assets/pauline_wild_rc</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/sounds">assets/sounds</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/stun_rc">assets/stun_rc</asset>
