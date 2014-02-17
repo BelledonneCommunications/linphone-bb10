@@ -31,13 +31,13 @@ all: build
 build-arm:
 	mkdir -p $(WORKING_DIR)/arm && \
 	cd $(WORKING_DIR)/../build/ && \
-	make build-bb10-arm
+	make build-bb10-arm -- $(filter -D%,$(MAKEFLAGS))
 	cp ../build/WORK/Build-bb10-arm/linphone/tester/.libs/liblinphone_tester $(WORKING_DIR)/arm/
 
 build-i486:
 	mkdir -p $(WORKING_DIR)/i486 && \
 	cd $(WORKING_DIR)/../build/ && \
-	make build-bb10-i486
+	make build-bb10-i486 -- $(filter -D%,$(MAKEFLAGS))
 	cp ../build/WORK/Build-bb10-i486/linphone/tester/.libs/liblinphone_tester $(WORKING_DIR)/i486/
 
 build: build-arm build-i486
