@@ -137,6 +137,7 @@
     </initialWindow>
 
     <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/share/linphone/rootca.pem">assets/linphone/rootca.pem</asset>
+    <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/share/sounds/linphone/rings">assets/sounds/linphone/rings</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/certificates">assets/certificates</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/empty_rc">assets/empty_rc</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/marie_early_rc">assets/marie_early_rc</asset>
