@@ -58,7 +58,9 @@
        <asset path="arm/mediastreamer2_tester" entry="true" type="Qnx/Elf">mediastreamer2_tester</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libsrtp.so.1" type="Qnx/Elf">lib/libsrtp.so.1</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libgsm.so" type="Qnx/Elf">lib/libgsm.so</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libopus.so.4" type="Qnx/Elf">lib/libopus.so.4</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
@@ -70,7 +72,9 @@
        <asset path="arm/mediastreamer2_tester" entry="true" type="Qnx/Elf">mediastreamer2_tester</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libsrtp.so.1" type="Qnx/Elf">lib/libsrtp.so.1</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libgsm.so" type="Qnx/Elf">lib/libgsm.so</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libopus.so.4" type="Qnx/Elf">lib/libopus.so.4</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
@@ -81,7 +85,9 @@
        <asset path="arm/mediastreamer2_tester" entry="true" type="Qnx/Elf">mediastreamer2_tester</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libsrtp.so.1" type="Qnx/Elf">lib/libsrtp.so.1</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libgsm.so" type="Qnx/Elf">lib/libgsm.so</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libopus.so.4" type="Qnx/Elf">lib/libopus.so.4</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
@@ -92,7 +98,9 @@
        <asset path="i486/mediastreamer2_tester" entry="true" type="Qnx/Elf">mediastreamer2_tester</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libsrtp.so.1" type="Qnx/Elf">lib/libsrtp.so.1</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
+       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libgsm.so" type="Qnx/Elf">lib/libgsm.so</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libopus.so.4" type="Qnx/Elf">lib/libopus.so.4</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libspeex.so.6" type="Qnx/Elf">lib/libspeex.so.6</asset>
        <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libspeexdsp.so.6" type="Qnx/Elf">lib/libspeexdsp.so.6</asset>
