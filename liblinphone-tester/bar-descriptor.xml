@@ -139,21 +139,8 @@
     <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/share/linphone/rootca.pem">assets/linphone/rootca.pem</asset>
     <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/share/sounds/linphone/rings">assets/sounds/linphone/rings</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/certificates">assets/certificates</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/empty_rc">assets/empty_rc</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/marie_early_rc">assets/marie_early_rc</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/marie_no_sdp_rc">assets/marie_no_sdp_rc</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/marie_rc">assets/marie_rc</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/marie_remote_404_rc">assets/marie_remote_404_rc</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/marie_remote_https_rc">assets/marie_remote_https_rc</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/marie_remote_invalid_rc">assets/marie_remote_invalid_rc</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/marie_remote_rc">assets/marie_remote_rc</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/multi_account_lrc">assets/multi_account_lrc</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/pauline_alt_rc">assets/pauline_alt_rc</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/pauline_rc">assets/pauline_rc</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/pauline_tcp_rc">assets/pauline_tcp_rc</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/pauline_wild_rc">assets/pauline_wild_rc</asset>
+    <asset path="../build/WORK/Source/EP_linphone/tester/rcfiles">assets/rcfiles</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/sounds">assets/sounds</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/stun_rc">assets/stun_rc</asset>
     <asset path="../build/WORK/Source/EP_linphone/tester/tester_hosts">assets/tester_hosts</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
