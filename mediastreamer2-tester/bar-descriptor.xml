@@ -56,31 +56,19 @@
     <configuration name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/mediastreamer2_tester" entry="true" type="Qnx/Elf">mediastreamer2_tester</asset>
-       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
-       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
-       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
     </configuration>
     <configuration name="Device-Release">
        <entryPointType>Qnx/Cascades</entryPointType>
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/mediastreamer2_tester" entry="true" type="Qnx/Elf">mediastreamer2_tester</asset>
-       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
-       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
-       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
     </configuration>
     <configuration name="Device-Profile">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/mediastreamer2_tester" entry="true" type="Qnx/Elf">mediastreamer2_tester</asset>
-       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
-       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
-       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
     </configuration>
     <configuration name="Simulator-Debug">
        <platformArchitecture>x86</platformArchitecture>
        <asset path="i486/mediastreamer2_tester" entry="true" type="Qnx/Elf">mediastreamer2_tester</asset>
-       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libmediastreamer_base.so.3" type="Qnx/Elf">lib/libmediastreamer_base.so.3</asset>
-       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libmediastreamer_voip.so.3" type="Qnx/Elf">lib/libmediastreamer_voip.so.3</asset>
-       <asset path="../build/OUTPUT/liblinphone-bb10-sdk/i486/lib/libortp.so.9" type="Qnx/Elf">lib/libortp.so.9</asset>
     </configuration>
 
     <!--  Unique author ID assigned by signing authority. Required if using debug tokens. -->
