@@ -3,3 +3,11 @@
 .assets.index
 arm/
 i486/
+LinphoneBB10/arm-p/
+LinphoneBB10/arm/
+LinphoneBB10/x86/
+LinphoneBB10/assets/liblinphone-bb10-sdk
+LinphoneBB10/assets/.assets.index
+LinphoneBB10/.settings/
+LinphoneBB10/config.pri
+LinphoneBB10/.assets.index
