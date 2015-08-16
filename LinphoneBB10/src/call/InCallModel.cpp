@@ -150,6 +150,7 @@ void InCallModel::onVideoSurfaceCreationCompleted(QString id, QString group)
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
     linphone_core_set_native_video_window_id(lc, (void*) window_group);
+    linphone_core_set_native_preview_window_id(lc, (void*) window_group);
     ms_message("[BB10] Video window id: %s and group %s", window_id, window_group);
 }
 

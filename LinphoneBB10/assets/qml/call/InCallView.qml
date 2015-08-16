@@ -73,6 +73,16 @@ Page {
                             }
                         }
                     }
+                    
+                    ForeignWindowControl {
+                        windowId: "LinphoneLocalVideoWindowId"
+                        visible: boundToWindow // becomes visible once bound to a window
+                        updatedProperties: WindowProperty.Position | WindowProperty.Size | WindowProperty.Visible
+                        horizontalAlignment: HorizontalAlignment.Right
+                        verticalAlignment: VerticalAlignment.Bottom
+                        preferredWidth: ui.sdu(26.6)
+                        preferredHeight: ui.sdu(20)
+                    }
 
                     Container {
                         layout: StackLayout {
