@@ -26,6 +26,7 @@
 #include <QObject>
 #include <QTimer>
 #include <screen/screen.h>
+#include <bb/cascades/UIOrientation>
 
 #include "linphone/linphonecore.h"
 
@@ -45,6 +46,7 @@ class InCallModel : public QObject
     Q_PROPERTY(QString callQualityIcon READ callQualityIcon NOTIFY statsUpdated)
     Q_PROPERTY(QString callSecurityIcon READ callSecurityIcon NOTIFY statsUpdated)
     Q_PROPERTY(bool areControlsVisible READ areControlsVisible NOTIFY fadeControlsUpdated)
+    Q_PROPERTY(int deviceOrientation READ deviceOrientation NOTIFY deviceOrientationChanged);
 
 public:
     InCallModel(QObject *parent = NULL);
@@ -60,11 +62,13 @@ public Q_SLOTS:
     void hangUp();
     void switchCamera();
     void togglePause();
+    void onOrientationAboutToChange(bb::cascades::UIOrientation::Type uiOrientation);
 
 Q_SIGNALS:
     void callUpdated();
     void statsUpdated();
     void fadeControlsUpdated();
+    void deviceOrientationChanged();
 
 private:
     const char *window_id;
@@ -132,6 +136,11 @@ private:
 
     QTimer *_statsTimer;
     QTimer *_controlsFadeTimer;
+
+    int deviceOrientation() const {
+        return _deviceOrientation;
+    }
+    int _deviceOrientation;
 };
 
 #endif /* INCALLMODEL_H_ */

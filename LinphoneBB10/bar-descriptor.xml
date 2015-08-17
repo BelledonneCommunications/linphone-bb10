@@ -77,13 +77,14 @@
     <category>core.media</category>
     
     <author>Belledonne Communications</author>
-    <buildIdFile>buildnum</buildIdFile>
+    <buildId>1</buildId>
 
     <!--  Unique author ID assigned by signing authority. Required if using debug tokens. -->
     <!-- <authorId>ABC1234YjsnUk235h</authorId> -->
 
     <initialWindow>
         <systemChrome>none</systemChrome>
+        <autoOrients>true</autoOrients>
     </initialWindow>
 
     <!--  The icon for the application, which should be 114x114. -->

@@ -25,6 +25,10 @@
 #include "src/linphone/LinphoneManager.h"
 #include "src/utils/Misc.h"
 
+#include <bb/cascades/OrientationSupport>
+
+using namespace bb::cascades;
+
 InCallModel::InCallModel(QObject *parent) :
         QObject(parent),
         window_id(NULL),
@@ -41,7 +45,8 @@ InCallModel::InCallModel(QObject *parent) :
         _currentCallSecurityIcon(""),
         _areControlsVisible(true),
         _statsTimer(new QTimer(this)),
-        _controlsFadeTimer(new QTimer(this))
+        _controlsFadeTimer(new QTimer(this)),
+        _deviceOrientation(0)
 {
     bool result = QObject::connect(LinphoneManager::getInstance(), SIGNAL(callStateChanged(LinphoneCall*)), this, SLOT(callStateChanged(LinphoneCall*)));
     Q_ASSERT(result);
@@ -50,6 +55,9 @@ InCallModel::InCallModel(QObject *parent) :
     Q_ASSERT(result);
 
     result = QObject::connect(_controlsFadeTimer, SIGNAL(timeout()), this, SLOT(fadeTimerTimeout()));
+    Q_ASSERT(result);
+
+    result = connect(OrientationSupport::instance(), SIGNAL(orientationAboutToChange(bb::cascades::UIOrientation::Type)), this, SLOT(onOrientationAboutToChange(bb::cascades::UIOrientation::Type)));
     Q_ASSERT(result);
 
     _statsTimer->setInterval(1000);
@@ -68,6 +76,26 @@ static LinphoneCall* getCurrentCall()
     }
 
     return call;
+}
+
+void InCallModel::onOrientationAboutToChange(UIOrientation::Type uiOrientation) {
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+
+    if (uiOrientation == UIOrientation::Landscape) {
+        _deviceOrientation = 90;
+    } else {
+        _deviceOrientation = 0;
+    }
+
+    ms_message("[BB10] device orientation about to change to %s", _deviceOrientation == 0 ? "portrait" : "landscape");
+    linphone_core_set_device_rotation(lc, _deviceOrientation);
+    emit deviceOrientationChanged();
+
+    LinphoneCall *call = getCurrentCall();
+    if (call) {
+        linphone_core_update_call(lc, call, NULL);
+    }
 }
 
 void InCallModel::statsTimerTimeout()
