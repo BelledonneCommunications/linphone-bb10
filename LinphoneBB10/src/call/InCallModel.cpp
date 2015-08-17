@@ -60,6 +60,16 @@ InCallModel::InCallModel(QObject *parent) :
     result = connect(OrientationSupport::instance(), SIGNAL(orientationAboutToChange(bb::cascades::UIOrientation::Type)), this, SLOT(onOrientationAboutToChange(bb::cascades::UIOrientation::Type)));
     Q_ASSERT(result);
 
+    UIOrientation::Type currentOrientation = OrientationSupport::instance()->orientation();
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+    if (currentOrientation == UIOrientation::Landscape) {
+        _deviceOrientation = 90;
+        emit deviceOrientationChanged();
+    }
+    ms_message("[BB10] default device orientation: %s", _deviceOrientation == 0 ? "portrait" : "landscape");
+    linphone_core_set_device_rotation(lc, _deviceOrientation);
+
     _statsTimer->setInterval(1000);
     _controlsFadeTimer->setInterval(30000);
 
