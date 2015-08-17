@@ -45,6 +45,8 @@ private:
         return _isKeyboardVisible;
     }
     bool _isKeyboardVisible;
+
+    static const int _mPixelsHeightToConsiderKeyboardVisible = 200; // This value is used to not trigger on the Passport device unless the special characters keyboard is shown
 };
 
 #endif /* BPSEVENTLISTENER_H_ */
