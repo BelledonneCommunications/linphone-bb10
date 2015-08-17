@@ -24,7 +24,6 @@
 #define MISC_H_
 
 #include <QString>
-#include <sys/siginfo.h>
 
 #include "linphone/linphonecore.h"
 

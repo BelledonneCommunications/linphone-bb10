@@ -27,6 +27,7 @@
     <!-- A universally unique application identifier. Must be unique across all BlackBerry 10 applications.
          Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
     <id>org.linphone.Linphone</id>
+    
     <configuration name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/o.le-v7-g/LinphoneBB10" entry="true" type="Qnx/Elf">LinphoneBB10</asset>
@@ -56,7 +57,6 @@
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
-    <buildId>1</buildId>
 
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
     <!-- <versionLabel></versionLabel> -->
@@ -77,6 +77,7 @@
     <category>core.media</category>
     
     <author>Belledonne Communications</author>
+    <buildIdFile>buildnum</buildIdFile>
 
     <!--  Unique author ID assigned by signing authority. Required if using debug tokens. -->
     <!-- <authorId>ABC1234YjsnUk235h</authorId> -->
@@ -106,7 +107,6 @@
     <asset path="icon_96.png">icon_96.png</asset>
     <asset path="icon_90.png">icon_90.png</asset>
     <asset public="true" path="chat_message_notification_icon.png">chat_message_notification_icon.png</asset>
-    <asset public="true" path="assets/images">images</asset>
     
     <invoke-target id="org.linphone.invoke">
 	    <type>APPLICATION</type>
@@ -118,8 +118,6 @@
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
-    <permission system="true">_sys_access_pim_unified</permission>
-    <permission system="true">_sys_manage_pimdomain_external_accounts</permission>
     <permission>post_notification</permission>
     <permission>run_when_backgrounded</permission>
     <permission>access_pimdomain_contacts</permission>

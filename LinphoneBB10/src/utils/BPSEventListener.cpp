@@ -55,11 +55,7 @@ void BPSEventListener::event(bps_event_t *event) {
             } else if (code == VIRTUALKEYBOARD_EVENT_INFO) {
                 int pixelsHeight = 0;
                 virtualkeyboard_get_height(&pixelsHeight);
-                if (pixelsHeight > _mPixelsHeightToConsiderKeyboardVisible) {
-                    _isKeyboardVisible = true;
-                } else {
-                    _isKeyboardVisible = false;
-                }
+                _isKeyboardVisible = pixelsHeight > _mPixelsHeightToConsiderKeyboardVisible;
                 emit keyboardVisibilityUpdated();
             }
         } else if (bps_event_get_domain(event) == netstatus_get_domain()) {

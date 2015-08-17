@@ -57,7 +57,7 @@ Page {
                     horizontalAlignment: HorizontalAlignment.Fill
 
                     ForeignWindowControl {
-                        windowId: "LinphoneVideoWindowId"
+                        windowId: "LinphoneVideoWindowId" // Do not change the name of this windowId
                         visible: boundToWindow // becomes visible once bound to a window
                         updatedProperties: WindowProperty.Position | WindowProperty.Size
                         horizontalAlignment: HorizontalAlignment.Fill
@@ -75,13 +75,13 @@ Page {
                     }
                     
                     ForeignWindowControl {
-                        windowId: "LinphoneLocalVideoWindowId"
+                        windowId: "LinphoneLocalVideoWindowId" // Do not change the name of this windowId
                         visible: boundToWindow // becomes visible once bound to a window
                         updatedProperties: WindowProperty.Position | WindowProperty.Size | WindowProperty.Visible
                         horizontalAlignment: HorizontalAlignment.Right
                         verticalAlignment: VerticalAlignment.Bottom
-                        preferredWidth: ui.sdu(26.6)
-                        preferredHeight: ui.sdu(20)
+                        preferredWidth: 320
+                        preferredHeight: 240
                     }
 
                     Container {
