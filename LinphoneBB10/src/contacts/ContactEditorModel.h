@@ -30,11 +30,11 @@ class ContactEditorModel : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool isNewContact READ isNewContact NOTIFY contactUpdated)
-    Q_PROPERTY(QString firstName READ firstName WRITE setFirstName NOTIFY contactUpdated)
-    Q_PROPERTY(QString lastName READ lastName WRITE setLastName NOTIFY contactUpdated)
-    Q_PROPERTY(QString sipAddress READ sipAddress WRITE setSipAddress NOTIFY contactUpdated)
-    Q_PROPERTY(QString photo READ photo NOTIFY contactUpdated)
+    Q_PROPERTY(bool isNewContact READ isNewContact NOTIFY contactUpdated);
+    Q_PROPERTY(QString firstName READ firstName WRITE setFirstName NOTIFY contactUpdated);
+    Q_PROPERTY(QString lastName READ lastName WRITE setLastName NOTIFY contactUpdated);
+    Q_PROPERTY(QString sipAddress READ sipAddress WRITE setSipAddress NOTIFY contactUpdated);
+    Q_PROPERTY(QString photo READ photo NOTIFY contactUpdated);
 
 public:
     ContactEditorModel(QObject *parent = NULL);

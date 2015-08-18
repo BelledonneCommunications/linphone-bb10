@@ -30,8 +30,8 @@ class ListEditorHelper: public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool isEditMode READ isEditMode WRITE setEditMode NOTIFY editModeUpdated)
-    Q_PROPERTY(int selectionSize READ selectionSize NOTIFY editModeUpdated)
+    Q_PROPERTY(bool isEditMode READ isEditMode WRITE setEditMode NOTIFY editModeUpdated);
+    Q_PROPERTY(int selectionSize READ selectionSize NOTIFY editModeUpdated);
 
 public:
     ListEditorHelper(bb::cascades::GroupDataModel *dataModel);

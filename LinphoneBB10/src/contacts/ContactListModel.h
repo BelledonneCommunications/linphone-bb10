@@ -37,9 +37,9 @@ class ContactListModel : public QObject
     Q_OBJECT
 
     Q_PROPERTY(ContactModel* contactModel READ contactModel CONSTANT);
-    Q_PROPERTY(bb::cascades::GroupDataModel* dataModel READ dataModel NOTIFY contactListUpdated)
-    Q_PROPERTY(bool sipFilterEnabled READ isSipFilterEnabled NOTIFY sipFilterUpdated)
-    Q_PROPERTY(QVariantList lastSelectedItemIndexPath READ lastSelectedItemIndexPath)
+    Q_PROPERTY(bb::cascades::GroupDataModel* dataModel READ dataModel NOTIFY contactListUpdated);
+    Q_PROPERTY(bool sipFilterEnabled READ isSipFilterEnabled NOTIFY sipFilterUpdated);
+    Q_PROPERTY(QVariantList lastSelectedItemIndexPath READ lastSelectedItemIndexPath);
     Q_PROPERTY(ListEditorHelper* editor READ editor CONSTANT);
 
 public:

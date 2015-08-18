@@ -38,14 +38,14 @@ class ChatModel : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString displayName READ displayName NOTIFY remoteChateeChanged)
+    Q_PROPERTY(QString displayName READ displayName NOTIFY remoteChateeChanged);
     Q_PROPERTY(QString linphoneAddress READ linphoneAddress NOTIFY remoteChateeChanged);
-    Q_PROPERTY(bb::cascades::GroupDataModel* dataModel READ dataModel NOTIFY messageHistoryChanged)
-    Q_PROPERTY(bool isNewConversation READ isNewConversation WRITE setNewConversation NOTIFY remoteChateeChanged)
-    Q_PROPERTY(bool isUploadInProgress READ isUploadInProgress NOTIFY uploadProgressChanged)
-    Q_PROPERTY(int uploadProgress READ uploadProgress NOTIFY uploadProgressChanged)
-    Q_PROPERTY(int uploadProgressState READ uploadProgressState NOTIFY uploadProgressChanged)
-    Q_PROPERTY(bool isRemoteComposing READ isRemoteComposing NOTIFY composingMessageReceived)
+    Q_PROPERTY(bb::cascades::GroupDataModel* dataModel READ dataModel NOTIFY messageHistoryChanged);
+    Q_PROPERTY(bool isNewConversation READ isNewConversation WRITE setNewConversation NOTIFY remoteChateeChanged);
+    Q_PROPERTY(bool isUploadInProgress READ isUploadInProgress NOTIFY uploadProgressChanged);
+    Q_PROPERTY(int uploadProgress READ uploadProgress NOTIFY uploadProgressChanged);
+    Q_PROPERTY(int uploadProgressState READ uploadProgressState NOTIFY uploadProgressChanged);
+    Q_PROPERTY(bool isRemoteComposing READ isRemoteComposing NOTIFY composingMessageReceived);
     Q_PROPERTY(ListEditorHelper* editor READ editor CONSTANT);
 
 public:

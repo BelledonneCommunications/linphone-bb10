@@ -31,11 +31,11 @@ class ContactModel : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString displayName READ displayName NOTIFY contactUpdated)
-    Q_PROPERTY(QString photo READ photo NOTIFY contactUpdated)
-    Q_PROPERTY(bool isSipContact READ isSipContact NOTIFY contactUpdated)
-    Q_PROPERTY(bb::cascades::GroupDataModel* dataModel READ dataModel NOTIFY contactUpdated)
-    Q_PROPERTY(int contactId READ contactId NOTIFY contactUpdated)
+    Q_PROPERTY(QString displayName READ displayName NOTIFY contactUpdated);
+    Q_PROPERTY(QString photo READ photo NOTIFY contactUpdated);
+    Q_PROPERTY(bool isSipContact READ isSipContact NOTIFY contactUpdated);
+    Q_PROPERTY(bb::cascades::GroupDataModel* dataModel READ dataModel NOTIFY contactUpdated);
+    Q_PROPERTY(int contactId READ contactId NOTIFY contactUpdated);
 
 public:
     ContactModel(QObject *parent = 0);

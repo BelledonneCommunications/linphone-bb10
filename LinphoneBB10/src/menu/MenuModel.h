@@ -31,7 +31,7 @@ class MenuModel : public QObject
 
     Q_PROPERTY(QString displayName READ displayName NOTIFY defaultAccountUpdated);
     Q_PROPERTY(QString sipUri READ sipUri NOTIFY defaultAccountUpdated);
-    Q_PROPERTY(QString photo READ photo NOTIFY defaultAccountUpdated)
+    Q_PROPERTY(QString photo READ photo NOTIFY defaultAccountUpdated);
 
 public:
     MenuModel(QObject *parent = NULL);

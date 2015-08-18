@@ -30,7 +30,7 @@ class AssistantModel : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString remoteProvisioningUrl READ remoteProvisioningUrl)
+    Q_PROPERTY(QString remoteProvisioningUrl READ remoteProvisioningUrl);
 
 public:
     AssistantModel(QObject *parent = NULL);

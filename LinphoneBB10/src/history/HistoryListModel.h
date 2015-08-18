@@ -36,9 +36,9 @@ class HistoryListModel : public QObject
     Q_OBJECT
 
     Q_PROPERTY(HistoryModel* historyModel READ historyModel CONSTANT);
-    Q_PROPERTY(bb::cascades::GroupDataModel* dataModel READ dataModel NOTIFY historyListUpdated)
-    Q_PROPERTY(bool missedFilterEnabled READ isMissedFilterEnabled NOTIFY missedFilterUpdated)
-    Q_PROPERTY(QVariantList lastSelectedItemIndexPath READ lastSelectedItemIndexPath)
+    Q_PROPERTY(bb::cascades::GroupDataModel* dataModel READ dataModel NOTIFY historyListUpdated);
+    Q_PROPERTY(bool missedFilterEnabled READ isMissedFilterEnabled NOTIFY missedFilterUpdated);
+    Q_PROPERTY(QVariantList lastSelectedItemIndexPath READ lastSelectedItemIndexPath);
     Q_PROPERTY(ListEditorHelper* editor READ editor CONSTANT);
 
 public:

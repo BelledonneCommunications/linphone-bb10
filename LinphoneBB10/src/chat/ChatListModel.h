@@ -36,7 +36,7 @@ class ChatListModel : public QObject
 
     Q_PROPERTY(ListEditorHelper* editor READ editor CONSTANT);
     Q_PROPERTY(ChatModel* chatModel READ chatModel CONSTANT);
-    Q_PROPERTY(bb::cascades::GroupDataModel* dataModel READ dataModel NOTIFY chatListUpdated)
+    Q_PROPERTY(bb::cascades::GroupDataModel* dataModel READ dataModel NOTIFY chatListUpdated);
 
 public:
     ChatListModel(QObject *parent = NULL);

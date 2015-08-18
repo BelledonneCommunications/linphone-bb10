@@ -38,7 +38,7 @@ class HistoryModel : public QObject
     Q_PROPERTY(QString photo READ photo NOTIFY historyLogUpdated);
     Q_PROPERTY(QString direction READ direction NOTIFY historyLogUpdated);
     Q_PROPERTY(QString details READ details NOTIFY historyLogUpdated);
-    Q_PROPERTY(bool isSipContact READ isSipContact NOTIFY historyLogUpdated)
+    Q_PROPERTY(bool isSipContact READ isSipContact NOTIFY historyLogUpdated);
 
 public:
     HistoryModel(QObject *parent = NULL);

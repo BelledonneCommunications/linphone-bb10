@@ -35,13 +35,13 @@ class LinphoneManager : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString registrationStatusImage READ registrationStatusImage NOTIFY registrationStatusChanged)
-    Q_PROPERTY(QString registrationStatusText READ registrationStatusText NOTIFY registrationStatusChanged)
-    Q_PROPERTY(int unreadChatMessages READ unreadChatMessages NOTIFY onUnreadCountUpdated)
-    Q_PROPERTY(int unreadMissedCalls READ unreadMissedCalls NOTIFY onUnreadCountUpdated)
-    Q_PROPERTY(QString coreVersion READ coreVersion)
-    Q_PROPERTY(QString appVersion READ appVersion)
-    Q_PROPERTY(QString blackberryVersion READ blackberryVersion)
+    Q_PROPERTY(QString registrationStatusImage READ registrationStatusImage NOTIFY registrationStatusChanged);
+    Q_PROPERTY(QString registrationStatusText READ registrationStatusText NOTIFY registrationStatusChanged);
+    Q_PROPERTY(int unreadChatMessages READ unreadChatMessages NOTIFY onUnreadCountUpdated);
+    Q_PROPERTY(int unreadMissedCalls READ unreadMissedCalls NOTIFY onUnreadCountUpdated);
+    Q_PROPERTY(QString coreVersion READ coreVersion);
+    Q_PROPERTY(QString appVersion READ appVersion);
+    Q_PROPERTY(QString blackberryVersion READ blackberryVersion);
 
 public:
     static LinphoneManager* createInstance(bb::Application *app);
