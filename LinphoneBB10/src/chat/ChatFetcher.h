@@ -25,7 +25,7 @@
 
 #include <QThread>
 #include <bb/cascades/GroupDataModel>
-#include <linphone/linphonecore.h>
+#include "linphone/linphonecore.h"
 
 class ChatFetcher : public QThread
 {

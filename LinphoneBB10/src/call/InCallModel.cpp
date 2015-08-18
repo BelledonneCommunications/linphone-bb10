@@ -57,14 +57,16 @@ InCallModel::InCallModel(QObject *parent) :
     result = QObject::connect(_controlsFadeTimer, SIGNAL(timeout()), this, SLOT(fadeTimerTimeout()));
     Q_ASSERT(result);
 
-    result = connect(OrientationSupport::instance(), SIGNAL(orientationAboutToChange(bb::cascades::UIOrientation::Type)), this, SLOT(onOrientationAboutToChange(bb::cascades::UIOrientation::Type)));
+    result = connect(OrientationSupport::instance(), SIGNAL(displayDirectionAboutToChange(bb::cascades::DisplayDirection::Type, bb::cascades::UIOrientation::Type)), this, SLOT(onOrientationAboutToChange(bb::cascades::DisplayDirection::Type, bb::cascades::UIOrientation::Type)));
     Q_ASSERT(result);
 
+    // Set the current rotation of the device
     UIOrientation::Type currentOrientation = OrientationSupport::instance()->orientation();
+    DisplayDirection::Type displayDirection = OrientationSupport::instance()->displayDirection();
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
     if (currentOrientation == UIOrientation::Landscape) {
-        _deviceOrientation = 90;
+        _deviceOrientation = displayDirection;
         emit deviceOrientationChanged();
     }
     ms_message("[BB10] default device orientation: %s", _deviceOrientation == 0 ? "portrait" : "landscape");
@@ -88,12 +90,12 @@ static LinphoneCall* getCurrentCall()
     return call;
 }
 
-void InCallModel::onOrientationAboutToChange(UIOrientation::Type uiOrientation) {
+void InCallModel::onOrientationAboutToChange(DisplayDirection::Type displayDirection, UIOrientation::Type uiOrientation) {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
 
     if (uiOrientation == UIOrientation::Landscape) {
-        _deviceOrientation = 90;
+        _deviceOrientation = displayDirection;
     } else {
         _deviceOrientation = 0;
     }

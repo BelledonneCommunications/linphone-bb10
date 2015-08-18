@@ -27,6 +27,7 @@
 #include <QTimer>
 #include <screen/screen.h>
 #include <bb/cascades/UIOrientation>
+#include <bb/cascades/DisplayDirection>
 
 #include "linphone/linphonecore.h"
 
@@ -62,7 +63,7 @@ public Q_SLOTS:
     void hangUp();
     void switchCamera();
     void togglePause();
-    void onOrientationAboutToChange(bb::cascades::UIOrientation::Type uiOrientation);
+    void onOrientationAboutToChange(bb::cascades::DisplayDirection::Type, bb::cascades::UIOrientation::Type uiOrientation);
 
 Q_SIGNALS:
     void callUpdated();

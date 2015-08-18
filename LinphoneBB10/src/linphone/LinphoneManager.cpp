@@ -26,11 +26,13 @@
 #include <bb/cascades/QmlDocument>
 #include <bb/cascades/Page>
 #include <bb/cascades/Application>
+#include <bb/device/HardwareInfo>
 
 #include "LinphoneManager.h"
 #include "src/utils/Misc.h"
 
 using namespace bb::cascades;
+using namespace bb::device;
 
 LinphoneManager::LinphoneManager(bb::Application *app)
     : QObject(app),
@@ -275,6 +277,9 @@ void LinphoneManager::createAndStartLinphoneCore()
     linphone_core_migrate_to_multi_transport(_lc);
     linphone_core_set_user_agent(_lc, "Linphone BB10", _app->applicationVersion().toUtf8().constData());
     linphone_core_set_network_reachable(_lc, true);
+
+    const HardwareInfo hi;
+    ms_set_cpu_count(hi.processorCount());
 
     linphone_core_set_ring(_lc, "app/native/assets/sounds/oldphone_mono.wav");
 

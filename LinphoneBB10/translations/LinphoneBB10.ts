@@ -425,22 +425,22 @@ please choose another one</source>
 <context>
     <name>LinphoneManager</name>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="132"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="134"/>
         <source>registered</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="136"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="138"/>
         <source>in progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="140"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="142"/>
         <source>error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="144"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="146"/>
         <source>disconnected</source>
         <translation type="unfinished"></translation>
     </message>
