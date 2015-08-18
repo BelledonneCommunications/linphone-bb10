@@ -46,7 +46,8 @@ InCallModel::InCallModel(QObject *parent) :
         _areControlsVisible(true),
         _statsTimer(new QTimer(this)),
         _controlsFadeTimer(new QTimer(this)),
-        _deviceOrientation(0)
+        _deviceOrientation(0),
+        _previewSize(QSize(0, 0))
 {
     bool result = QObject::connect(LinphoneManager::getInstance(), SIGNAL(callStateChanged(LinphoneCall*)), this, SLOT(callStateChanged(LinphoneCall*)));
     Q_ASSERT(result);
@@ -133,7 +134,9 @@ void InCallModel::statsTimerTimeout()
         _currentCallQualityIcon = "/images/statusbar/call_quality_indicator_0.png";
     }
 
-    LinphoneMediaEncryption encryption = linphone_call_params_get_media_encryption(linphone_call_get_current_params(call));
+    const LinphoneCallParams *params = linphone_call_get_current_params(call);
+
+    LinphoneMediaEncryption encryption = linphone_call_params_get_media_encryption(params);
     _currentCallSecurityIcon = "/images/statusbar/security_ko.png";
     if (encryption == LinphoneMediaEncryptionSRTP || encryption == LinphoneMediaEncryptionDTLS) {
         _currentCallSecurityIcon = "/images/statusbar/security_ok.png";
@@ -145,6 +148,10 @@ void InCallModel::statsTimerTimeout()
             _currentCallSecurityIcon = "/images/statusbar/security_pending.png";
         }
     }
+
+    MSVideoSize vsize = linphone_call_params_get_sent_video_size(params);
+    _previewSize.setWidth(vsize.width);
+    _previewSize.setHeight(vsize.height);
 
     emit statsUpdated();
 }
@@ -205,6 +212,8 @@ void InCallModel::callStateChanged(LinphoneCall *call) {
     LinphoneCallState state = linphone_call_get_state(call);
     _isPaused = state == LinphoneCallPaused;
 
+    const LinphoneCallParams *params = linphone_call_get_current_params(call);
+
     if (state == LinphoneCallIncomingReceived || state == LinphoneCallOutgoingInit) {
         if (!_statsTimer->isActive()) {
             _statsTimer->start();
@@ -245,8 +254,6 @@ void InCallModel::callStateChanged(LinphoneCall *call) {
 
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
-
-    const LinphoneCallParams *params = linphone_call_get_current_params(call);
     setVideoEnabled(linphone_call_params_video_enabled(params));
     setMicMuted(linphone_core_is_mic_muted(lc));
 

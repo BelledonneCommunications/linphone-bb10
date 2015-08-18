@@ -28,6 +28,7 @@
 #include <screen/screen.h>
 #include <bb/cascades/UIOrientation>
 #include <bb/cascades/DisplayDirection>
+#include <QSize>
 
 #include "linphone/linphonecore.h"
 
@@ -39,15 +40,16 @@ class InCallModel : public QObject
     Q_PROPERTY(QString sipUri READ sipUri NOTIFY callUpdated);
     Q_PROPERTY(QString callTime READ callTime NOTIFY statsUpdated);
     Q_PROPERTY(QString photo READ photo NOTIFY callUpdated);
-    Q_PROPERTY(bool isInCall READ isInCall NOTIFY callUpdated)
-    Q_PROPERTY(bool isVideoEnabled READ isVideoEnabled WRITE setVideoEnabled NOTIFY callUpdated)
-    Q_PROPERTY(bool isMicMuted READ isMicMuted WRITE setMicMuted NOTIFY callUpdated)
-    Q_PROPERTY(bool isSpeakerEnabled READ isSpeakerEnabled WRITE setSpeakerEnabled NOTIFY callUpdated)
-    Q_PROPERTY(bool isPaused READ isPaused NOTIFY callUpdated)
-    Q_PROPERTY(QString callQualityIcon READ callQualityIcon NOTIFY statsUpdated)
-    Q_PROPERTY(QString callSecurityIcon READ callSecurityIcon NOTIFY statsUpdated)
-    Q_PROPERTY(bool areControlsVisible READ areControlsVisible NOTIFY fadeControlsUpdated)
+    Q_PROPERTY(bool isInCall READ isInCall NOTIFY callUpdated);
+    Q_PROPERTY(bool isVideoEnabled READ isVideoEnabled WRITE setVideoEnabled NOTIFY callUpdated);
+    Q_PROPERTY(bool isMicMuted READ isMicMuted WRITE setMicMuted NOTIFY callUpdated);
+    Q_PROPERTY(bool isSpeakerEnabled READ isSpeakerEnabled WRITE setSpeakerEnabled NOTIFY callUpdated);
+    Q_PROPERTY(bool isPaused READ isPaused NOTIFY callUpdated);
+    Q_PROPERTY(QString callQualityIcon READ callQualityIcon NOTIFY statsUpdated);
+    Q_PROPERTY(QString callSecurityIcon READ callSecurityIcon NOTIFY statsUpdated);
+    Q_PROPERTY(bool areControlsVisible READ areControlsVisible NOTIFY fadeControlsUpdated);
     Q_PROPERTY(int deviceOrientation READ deviceOrientation NOTIFY deviceOrientationChanged);
+    Q_PROPERTY(QSize previewSize READ previewSize NOTIFY statsUpdated);
 
 public:
     InCallModel(QObject *parent = NULL);
@@ -142,6 +144,11 @@ private:
         return _deviceOrientation;
     }
     int _deviceOrientation;
+
+    QSize previewSize() const {
+        return _previewSize;
+    }
+    QSize _previewSize;
 };
 
 #endif /* INCALLMODEL_H_ */

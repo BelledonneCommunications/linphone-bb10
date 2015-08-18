@@ -80,8 +80,8 @@ Page {
                         updatedProperties: WindowProperty.Position | WindowProperty.Size | WindowProperty.Visible
                         horizontalAlignment: HorizontalAlignment.Right
                         verticalAlignment: VerticalAlignment.Bottom
-                        preferredWidth: inCallModel.deviceOrientation == 0 ? ui.sdu(20) : ui.sdu(26.7)
-                        preferredHeight: inCallModel.deviceOrientation == 0 ? ui.sdu(26.7) : ui.sdu(20)
+                        preferredWidth: inCallModel.previewSize.width
+                        preferredHeight: inCallModel.previewSize.height
                     }
 
                     Container {
