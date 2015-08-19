@@ -442,7 +442,7 @@ please choose another one</source>
 <context>
     <name>IncomingCallView</name>
     <message>
-        <location filename="../assets/qml/call/IncomingCallView.qml" line="42"/>
+        <location filename="../assets/qml/call/IncomingCallView.qml" line="43"/>
         <source>INCOMING CALL</source>
         <translation type="unfinished"></translation>
     </message>
@@ -514,7 +514,7 @@ please choose another one</source>
 <context>
     <name>OutgoingCallView</name>
     <message>
-        <location filename="../assets/qml/call/OutgoingCallView.qml" line="42"/>
+        <location filename="../assets/qml/call/OutgoingCallView.qml" line="43"/>
         <source>OUTGOING CALL</source>
         <translation type="unfinished"></translation>
     </message>

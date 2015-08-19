@@ -30,6 +30,7 @@ Page {
 
         StatusBar {
             isInCall: true
+            statsEnabled: false
         }
 
         Container {

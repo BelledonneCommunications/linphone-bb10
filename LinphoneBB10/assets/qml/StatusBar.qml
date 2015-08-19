@@ -23,6 +23,7 @@ Container {
     property alias messagesCountText: messagesCount.text
     property alias securityImageSource: security.imageSource
     property bool menuEnabled: true
+    property bool statsEnabled: false
     property bool isInCall: false
 
     Container {
@@ -62,6 +63,8 @@ Container {
 
             ImageButton {
                 visible: isInCall
+                enabled: statsEnabled
+                opacity: statsEnabled ? 1 : 0.2
                 defaultImageSource: inCallModel.callStatsModel.callQualityIcon
                 verticalAlignment: VerticalAlignment.Center
                 
