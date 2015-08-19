@@ -31,6 +31,7 @@ using namespace bb::cascades;
 
 InCallModel::InCallModel(QObject *parent) :
         QObject(parent),
+        _callStatsModel(new CallStatsModel(this)),
         window_id(NULL),
         window_group(NULL),
         _displayName(""),
@@ -41,8 +42,6 @@ InCallModel::InCallModel(QObject *parent) :
         _isMicMuted(false),
         _isSpeakerEnabled(false),
         _isPaused(false),
-        _currentCallQualityIcon(""),
-        _currentCallSecurityIcon(""),
         _areControlsVisible(true),
         _statsTimer(new QTimer(this)),
         _controlsFadeTimer(new QTimer(this)),
@@ -118,37 +117,14 @@ void InCallModel::statsTimerTimeout()
         return;
     }
 
+    if (_callStatsModel) {
+        _callStatsModel->updateStats(call);
+    }
+
     int duration = linphone_call_get_duration(call);
     _callTime = FormatCallDuration(duration);
 
-    float quality = linphone_call_get_current_quality(call);
-    if (quality >= 4) {
-        _currentCallQualityIcon = "/images/statusbar/call_quality_indicator_4.png";
-    } else if (quality >= 3) {
-        _currentCallQualityIcon = "/images/statusbar/call_quality_indicator_3.png";
-    } else if (quality >= 2) {
-        _currentCallQualityIcon = "/images/statusbar/call_quality_indicator_2.png";
-    } else if (quality >= 1) {
-        _currentCallQualityIcon = "/images/statusbar/call_quality_indicator_1.png";
-    } else {
-        _currentCallQualityIcon = "/images/statusbar/call_quality_indicator_0.png";
-    }
-
     const LinphoneCallParams *params = linphone_call_get_current_params(call);
-
-    LinphoneMediaEncryption encryption = linphone_call_params_get_media_encryption(params);
-    _currentCallSecurityIcon = "/images/statusbar/security_ko.png";
-    if (encryption == LinphoneMediaEncryptionSRTP || encryption == LinphoneMediaEncryptionDTLS) {
-        _currentCallSecurityIcon = "/images/statusbar/security_ok.png";
-    } else if (encryption == LinphoneMediaEncryptionZRTP) {
-        bool isAuthTokenVerified = linphone_call_get_authentication_token_verified(call);
-        if (isAuthTokenVerified) {
-            _currentCallSecurityIcon = "/images/statusbar/security_ok.png";
-        } else {
-            _currentCallSecurityIcon = "/images/statusbar/security_pending.png";
-        }
-    }
-
     MSVideoSize vsize = linphone_call_params_get_sent_video_size(params);
     MSVideoSize maxSize = ms_video_size_make(320, 240);
     if (vsize.width < vsize.height) {

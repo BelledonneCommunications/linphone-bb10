@@ -27,6 +27,7 @@
 #include "history/HistoryModel.h"
 #include "linphone/linphonecore.h"
 #include "utils/ListEditorHelper.h"
+#include "call/CallStatsModel.h"
 
 using namespace bb::cascades;
 
@@ -36,6 +37,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     qmlRegisterType<ContactModel>();
     qmlRegisterType<HistoryModel>();
     qmlRegisterType<ListEditorHelper>();
+    qmlRegisterType<CallStatsModel>();
 
     qRegisterMetaType<LinphoneCall*>("LinphoneCall*");
 

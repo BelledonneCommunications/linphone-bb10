@@ -35,5 +35,6 @@ QString FormatDateForHistoryLog(time_t time);
 QString FormatDateForChat(time_t time);
 QString FormatCallDuration(int duration);
 bool AreProxyConfigsTheSame(LinphoneProxyConfig *lpc1, LinphoneProxyConfig *lpc2);
+QString IceStateToString(LinphoneIceState ice);
 
 #endif /* MISC_H_ */

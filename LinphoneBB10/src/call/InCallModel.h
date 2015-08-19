@@ -30,6 +30,7 @@
 #include <bb/cascades/DisplayDirection>
 #include <QSize>
 
+#include "CallStatsModel.h"
 #include "linphone/linphonecore.h"
 
 class InCallModel : public QObject
@@ -45,11 +46,10 @@ class InCallModel : public QObject
     Q_PROPERTY(bool isMicMuted READ isMicMuted WRITE setMicMuted NOTIFY callUpdated);
     Q_PROPERTY(bool isSpeakerEnabled READ isSpeakerEnabled WRITE setSpeakerEnabled NOTIFY callUpdated);
     Q_PROPERTY(bool isPaused READ isPaused NOTIFY callUpdated);
-    Q_PROPERTY(QString callQualityIcon READ callQualityIcon NOTIFY statsUpdated);
-    Q_PROPERTY(QString callSecurityIcon READ callSecurityIcon NOTIFY statsUpdated);
     Q_PROPERTY(bool areControlsVisible READ areControlsVisible NOTIFY fadeControlsUpdated);
     Q_PROPERTY(int deviceOrientation READ deviceOrientation NOTIFY deviceOrientationChanged);
     Q_PROPERTY(QSize previewSize READ previewSize NOTIFY statsUpdated);
+    Q_PROPERTY(CallStatsModel* callStatsModel READ callStatsModel CONSTANT);
 
 public:
     InCallModel(QObject *parent = NULL);
@@ -76,6 +76,11 @@ Q_SIGNALS:
 private:
     const char *window_id;
     const char *window_group;
+
+    CallStatsModel *callStatsModel() const {
+        return _callStatsModel;
+    }
+    CallStatsModel *_callStatsModel;
 
     QString displayName() const {
         return _displayName;
@@ -121,16 +126,6 @@ private:
         return _isPaused;
     }
     bool _isPaused;
-
-    QString callQualityIcon() const {
-        return _currentCallQualityIcon;
-    }
-    QString _currentCallQualityIcon;
-
-    QString callSecurityIcon() const {
-        return _currentCallSecurityIcon;
-    }
-    QString _currentCallSecurityIcon;
 
     bool areControlsVisible() const {
        return _areControlsVisible;

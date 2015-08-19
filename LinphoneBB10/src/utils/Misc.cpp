@@ -114,3 +114,27 @@ bool AreProxyConfigsTheSame(LinphoneProxyConfig *lpc1, LinphoneProxyConfig *lpc2
     QString proxyConfigIdentity2(linphone_proxy_config_get_identity(lpc2));
     return QString::compare(proxyConfigIdentity1, proxyConfigIdentity2) == 0;
 }
+
+QString IceStateToString(LinphoneIceState ice) {
+    switch (ice) {
+        case LinphoneIceStateFailed:
+            return QObject::tr("Failed");
+            break;
+        case LinphoneIceStateInProgress:
+            return QObject::tr("In progress");
+            break;
+        case LinphoneIceStateHostConnection:
+            return QObject::tr("Host");
+            break;
+        case LinphoneIceStateReflexiveConnection:
+            return QObject::tr("Reflexive");
+            break;
+        case LinphoneIceStateRelayConnection:
+            return QObject::tr("Relay");
+            break;
+        case LinphoneIceStateNotActivated:
+            return QObject::tr("Not activated");
+        default:
+            break;
+    }
+}

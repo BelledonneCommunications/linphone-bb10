@@ -31,400 +31,444 @@ Page {
         StatusBar {
             isInCall: true
         }
-
+        
         Container {
             layout: DockLayout {
-
+            
             }
             verticalAlignment: VerticalAlignment.Fill
             horizontalAlignment: HorizontalAlignment.Fill
-
+            
+            CallStats {
+                id: statsMenu
+            }
+        
             Container {
-                layout: StackLayout {
-                    orientation: LayoutOrientation.TopToBottom
+                layout: DockLayout {
+                    
                 }
+                id: callPageContent
+                background: colors.colorH
                 verticalAlignment: VerticalAlignment.Fill
                 horizontalAlignment: HorizontalAlignment.Fill
-
+                
                 Container {
-                    visible: inCallModel.isVideoEnabled && ! inCallModel.isPaused
-                    layout: DockLayout {
-
-                    }
-                    layoutProperties: StackLayoutProperties {
-                        spaceQuota: 1
+                    layout: StackLayout {
+                        orientation: LayoutOrientation.TopToBottom
                     }
                     horizontalAlignment: HorizontalAlignment.Fill
-
-                    ForeignWindowControl {
-                        windowId: "LinphoneVideoWindowId" // Do not change the name of this windowId
-                        visible: boundToWindow // becomes visible once bound to a window
-                        updatedProperties: WindowProperty.Position | WindowProperty.Size
-                        horizontalAlignment: HorizontalAlignment.Fill
-                        verticalAlignment: VerticalAlignment.Fill
+                    
+                    Container {
+                        layout: DockLayout {
                         
-                        onCreationCompleted: {
-                            inCallModel.onVideoSurfaceCreationCompleted(windowId, windowGroup);
                         }
-
-                        gestureHandlers: TapHandler {
-                            onTapped: {
-                                inCallModel.switchFullScreenMode();
+                        verticalAlignment: VerticalAlignment.Fill
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        Container {
+                            layout: StackLayout {
+                                orientation: LayoutOrientation.TopToBottom
+                            }
+                            verticalAlignment: VerticalAlignment.Fill
+                            horizontalAlignment: HorizontalAlignment.Fill
+                            
+                            Container {
+                                visible: inCallModel.isVideoEnabled && ! inCallModel.isPaused
+                                layout: DockLayout {
+                                
+                                }
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: 1
+                                }
+                                horizontalAlignment: HorizontalAlignment.Fill
+                                
+                                ForeignWindowControl {
+                                    windowId: "LinphoneVideoWindowId" // Do not change the name of this windowId
+                                    visible: boundToWindow // becomes visible once bound to a window
+                                    updatedProperties: WindowProperty.Position | WindowProperty.Size
+                                    horizontalAlignment: HorizontalAlignment.Fill
+                                    verticalAlignment: VerticalAlignment.Fill
+                                    
+                                    onCreationCompleted: {
+                                        inCallModel.onVideoSurfaceCreationCompleted(windowId, windowGroup);
+                                    }
+                                    
+                                    gestureHandlers: TapHandler {
+                                        onTapped: {
+                                            inCallModel.switchFullScreenMode();
+                                        }
+                                    }
+                                }
+                                
+                                ForeignWindowControl {
+                                    windowId: "LinphoneLocalVideoWindowId" // Do not change the name of this windowId
+                                    visible: boundToWindow // becomes visible once bound to a window
+                                    updatedProperties: WindowProperty.Position | WindowProperty.Size | WindowProperty.Visible
+                                    horizontalAlignment: HorizontalAlignment.Right
+                                    verticalAlignment: VerticalAlignment.Bottom
+                                    preferredWidth: inCallModel.previewSize.width
+                                    preferredHeight: inCallModel.previewSize.height
+                                }
+                                
+                                Container {
+                                    layout: StackLayout {
+                                        orientation: LayoutOrientation.TopToBottom
+                                    }
+                                    horizontalAlignment: HorizontalAlignment.Fill
+                                    
+                                    Container {
+                                        layout: DockLayout {
+                                        
+                                        }
+                                        verticalAlignment: VerticalAlignment.Top
+                                        horizontalAlignment: HorizontalAlignment.Fill
+                                        minHeight: ui.sdu(20)
+                                        maxHeight: ui.sdu(20)
+                                        visible: inCallModel.areControlsVisible
+                                        
+                                        Container {
+                                            background: colors.colorH
+                                            opacity: 0.7
+                                            horizontalAlignment: HorizontalAlignment.Fill
+                                            verticalAlignment: VerticalAlignment.Fill
+                                        }
+                                        
+                                        Container {
+                                            layout: StackLayout {
+                                                orientation: LayoutOrientation.TopToBottom
+                                            }
+                                            verticalAlignment: VerticalAlignment.Center
+                                            horizontalAlignment: HorizontalAlignment.Center
+                                            
+                                            Label {
+                                                text: inCallModel.displayName
+                                                horizontalAlignment: HorizontalAlignment.Center
+                                                textStyle.fontSize: FontSize.XLarge
+                                                textStyle.color: colors.colorC
+                                                textStyle.base: titilliumWeb.style
+                                            }
+                                            
+                                            Label {
+                                                text: inCallModel.callTime
+                                                horizontalAlignment: HorizontalAlignment.Center
+                                                textStyle.color: colors.colorA
+                                                textStyle.base: titilliumWeb.style
+                                            }
+                                        }
+                                    }
+                                    
+                                    Container {
+                                        layout: StackLayout {
+                                            orientation: LayoutOrientation.LeftToRight
+                                        }
+                                        leftPadding: ui.sdu(5)
+                                        rightPadding: ui.sdu(5)
+                                        topPadding: ui.sdu(2)
+                                        visible: inCallModel.areControlsVisible
+                                        
+                                        ImageButton {
+                                            defaultImageSource: "asset:///images/call/camera_switch_default.png"
+                                            pressedImageSource: "asset:///images/call/camera_switch_over.png"
+                                            disabledImageSource: "asset:///images/call/camera_switch_disabled.png"
+                                            verticalAlignment: VerticalAlignment.Center
+                                            horizontalAlignment: HorizontalAlignment.Center
+                                            
+                                            onClicked: {
+                                                inCallModel.switchCamera();
+                                            }
+                                        }
+                                        
+                                        Container {
+                                            layoutProperties: StackLayoutProperties {
+                                                spaceQuota: 1
+                                            }
+                                        }
+                                        
+                                        CustomImageToggle {
+                                            imageSource: "asset:///images/call/pause_big_default.png"
+                                            selectedImageSource: "asset:///images/call/pause_big_over_selected.png"
+                                            verticalAlignment: VerticalAlignment.Center
+                                            horizontalAlignment: HorizontalAlignment.Center
+                                            selected: inCallModel.isPaused
+                                            
+                                            gestureHandlers: TapHandler {
+                                                onTapped: {
+                                                    inCallModel.togglePause();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            Container {
+                                visible: ! inCallModel.isVideoEnabled || inCallModel.isPaused
+                                layout: DockLayout {
+                                
+                                }
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: 1
+                                }
+                                horizontalAlignment: HorizontalAlignment.Fill
+                                verticalAlignment: VerticalAlignment.Fill
+                                
+                                Container {
+                                    verticalAlignment: VerticalAlignment.Center
+                                    horizontalAlignment: HorizontalAlignment.Fill
+                                    
+                                    Container {
+                                        layout: DockLayout {
+                                        
+                                        }
+                                        horizontalAlignment: HorizontalAlignment.Fill
+                                        
+                                        InCallContactAvatar {
+                                            imageSource: inCallModel.photo
+                                            horizontalAlignment: HorizontalAlignment.Center
+                                            verticalAlignment: VerticalAlignment.Center
+                                            maxWidth: ui.sdu(41)
+                                            maxHeight: ui.sdu(41)
+                                        }
+                                        
+                                        CustomImageToggle {
+                                            imageSource: "asset:///images/call/pause_big_default.png"
+                                            selectedImageSource: "asset:///images/call/pause_big_over_selected.png"
+                                            verticalAlignment: VerticalAlignment.Bottom
+                                            horizontalAlignment: HorizontalAlignment.Center
+                                            selected: inCallModel.isPaused
+                                            leftPadding: ui.sdu(50)
+                                            topPadding: ui.sdu(20)
+                                            
+                                            gestureHandlers: TapHandler {
+                                                onTapped: {
+                                                    inCallModel.togglePause();
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
+                                    Label {
+                                        text: inCallModel.displayName
+                                        horizontalAlignment: HorizontalAlignment.Center
+                                        textStyle.fontSize: FontSize.XLarge
+                                        textStyle.color: colors.colorC
+                                        textStyle.base: titilliumWeb.style
+                                    }
+                                    
+                                    Label {
+                                        text: inCallModel.callTime
+                                        horizontalAlignment: HorizontalAlignment.Center
+                                        textStyle.color: colors.colorA
+                                        textStyle.base: titilliumWeb.style
+                                    }
+                                }
+                            }
+                        }
+                        
+                        Container {
+                            layout: DockLayout {
+                            
+                            }
+                            id: numpad
+                            visible: false
+                            leftPadding: ui.sdu(2)
+                            rightPadding: ui.sdu(2)
+                            topPadding: ui.sdu(2)
+                            bottomPadding: ui.sdu(2)
+                            
+                            Container {
+                                verticalAlignment: VerticalAlignment.Fill
+                                horizontalAlignment: HorizontalAlignment.Fill
+                                background: colors.colorF
+                                opacity: 0.95
+                            }
+                            
+                            Numpad {
+                                leftPadding: ui.sdu(3)
+                                rightPadding: ui.sdu(3)
+                                topPadding: ui.sdu(3)
+                                bottomPadding: ui.sdu(3)
                             }
                         }
                     }
                     
-                    ForeignWindowControl {
-                        windowId: "LinphoneLocalVideoWindowId" // Do not change the name of this windowId
-                        visible: boundToWindow // becomes visible once bound to a window
-                        updatedProperties: WindowProperty.Position | WindowProperty.Size | WindowProperty.Visible
-                        horizontalAlignment: HorizontalAlignment.Right
-                        verticalAlignment: VerticalAlignment.Bottom
-                        preferredWidth: inCallModel.previewSize.width
-                        preferredHeight: inCallModel.previewSize.height
-                    }
-
                     Container {
                         layout: StackLayout {
-                            orientation: LayoutOrientation.TopToBottom
+                            orientation: LayoutOrientation.LeftToRight
                         }
-                        horizontalAlignment: HorizontalAlignment.Fill
-
-                        Container {
-                            layout: DockLayout {
-
+                        minHeight: ui.sdu(15)
+                        background: colors.colorF
+                        visible: inCallModel.areControlsVisible
+                        
+                        CustomToggleButton {
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
                             }
-                            verticalAlignment: VerticalAlignment.Top
-                            horizontalAlignment: HorizontalAlignment.Fill
-                            minHeight: ui.sdu(20)
-                            maxHeight: ui.sdu(20)
-                            visible: inCallModel.areControlsVisible
-
-                            Container {
-                                background: colors.colorH
-                                opacity: 0.7
-                                horizontalAlignment: HorizontalAlignment.Fill
-                                verticalAlignment: VerticalAlignment.Fill
-                            }
-
-                            Container {
-                                layout: StackLayout {
-                                    orientation: LayoutOrientation.TopToBottom
-                                }
-                                verticalAlignment: VerticalAlignment.Center
-                                horizontalAlignment: HorizontalAlignment.Center
-
-                                Label {
-                                    text: inCallModel.displayName
-                                    horizontalAlignment: HorizontalAlignment.Center
-                                    textStyle.fontSize: FontSize.XLarge
-                                    textStyle.color: colors.colorC
-                                    textStyle.base: titilliumWeb.style
-                                }
-
-                                Label {
-                                    text: inCallModel.callTime
-                                    horizontalAlignment: HorizontalAlignment.Center
-                                    textStyle.color: colors.colorA
-                                    textStyle.base: titilliumWeb.style
+                            selected: inCallModel.isVideoEnabled
+                            imageSource: "asset:///images/call/camera_default.png"
+                            selectedImageSource: "asset:///images/call/camera_selected.png"
+                            
+                            gestureHandlers: TapHandler {
+                                onTapped: {
+                                    inCallModel.isVideoEnabled = ! inCallModel.isVideoEnabled
                                 }
                             }
                         }
-
-                        Container {
-                            layout: StackLayout {
-                                orientation: LayoutOrientation.LeftToRight
+                        
+                        CustomToggleButton {
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
                             }
-                            leftPadding: ui.sdu(5)
-                            rightPadding: ui.sdu(5)
-                            topPadding: ui.sdu(2)
-                            visible: inCallModel.areControlsVisible
-
-                            ImageButton {
-                                defaultImageSource: "asset:///images/call/camera_switch_default.png"
-                                pressedImageSource: "asset:///images/call/camera_switch_over.png"
-                                disabledImageSource: "asset:///images/call/camera_switch_disabled.png"
-                                verticalAlignment: VerticalAlignment.Center
-                                horizontalAlignment: HorizontalAlignment.Center
-
-                                onClicked: {
-                                    inCallModel.switchCamera();
+                            selected: inCallModel.isMicMuted
+                            imageSource: "asset:///images/call/micro_default.png"
+                            selectedImageSource: "asset:///images/call/micro_selected.png"
+                            
+                            gestureHandlers: TapHandler {
+                                onTapped: {
+                                    inCallModel.isMicMuted = ! inCallModel.isMicMuted
                                 }
                             }
-
-                            Container {
-                                layoutProperties: StackLayoutProperties {
-                                    spaceQuota: 1
+                        }
+                        
+                        CustomToggleButton {
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                            selected: inCallModel.isSpeakerEnabled
+                            imageSource: "asset:///images/call/speaker_default.png"
+                            selectedImageSource: "asset:///images/call/speaker_selected.png"
+                            
+                            gestureHandlers: TapHandler {
+                                onTapped: {
+                                    inCallModel.isSpeakerEnabled = ! inCallModel.isSpeakerEnabled
                                 }
                             }
-
-                            CustomImageToggle {
-                                imageSource: "asset:///images/call/pause_big_default.png"
-                                selectedImageSource: "asset:///images/call/pause_big_over_selected.png"
-                                verticalAlignment: VerticalAlignment.Center
-                                horizontalAlignment: HorizontalAlignment.Center
-                                selected: inCallModel.isPaused
-
-                                gestureHandlers: TapHandler {
-                                    onTapped: {
-                                        inCallModel.togglePause();
-                                    }
+                        }
+                        
+                        CustomToggleButton {
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                            imageSource: "asset:///images/call/options_default.png"
+                            selectedImageSource: "asset:///images/call/options_selected.png"
+                            enabled: false
+                            
+                            gestureHandlers: TapHandler {
+                                onTapped: {
+                                
                                 }
                             }
                         }
                     }
-                }
-
-                Container {
-                    visible: ! inCallModel.isVideoEnabled || inCallModel.isPaused
-                    layout: DockLayout {
-
-                    }
-                    layoutProperties: StackLayoutProperties {
-                        spaceQuota: 1
-                    }
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    verticalAlignment: VerticalAlignment.Fill
-
+                    
                     Container {
-                        verticalAlignment: VerticalAlignment.Center
-                        horizontalAlignment: HorizontalAlignment.Fill
-
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        }
+                        minHeight: ui.sdu(15)
+                        visible: inCallModel.areControlsVisible
+                        
                         Container {
                             layout: DockLayout {
-
+                            
                             }
-                            horizontalAlignment: HorizontalAlignment.Fill
-
-                            InCallContactAvatar {
-                                imageSource: inCallModel.photo
-                                horizontalAlignment: HorizontalAlignment.Center
-                                verticalAlignment: VerticalAlignment.Center
-                                maxWidth: ui.sdu(41)
-                                maxHeight: ui.sdu(41)
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
                             }
-
-                            CustomImageToggle {
-                                imageSource: "asset:///images/call/pause_big_default.png"
-                                selectedImageSource: "asset:///images/call/pause_big_over_selected.png"
-                                verticalAlignment: VerticalAlignment.Bottom
-                                horizontalAlignment: HorizontalAlignment.Center
-                                selected: inCallModel.isPaused
-                                leftPadding: ui.sdu(50)
-                                topPadding: ui.sdu(20)
-
-                                gestureHandlers: TapHandler {
-                                    onTapped: {
-                                        inCallModel.togglePause();
+                            verticalAlignment: VerticalAlignment.Fill
+                            horizontalAlignment: HorizontalAlignment.Center
+                            background: colors.colorC
+                            
+                            gestureHandlers: TapHandler {
+                                onTapped: {
+                                    numpad.visible = ! numpad.visible
+                                    numpadToggle.selected = numpad.visible
+                                }
+                            }
+                            
+                            CustomTab {
+                                id: numpadToggle
+                                imageSource: selected ? "asset:///images/call/dialer_alt_back.png" : "asset:///images/footer_dialer.png"
+                                verticalAlignment: VerticalAlignment.Fill
+                                horizontalAlignment: HorizontalAlignment.Fill
+                            }
+                        }
+                        
+                        Container {
+                            layout: DockLayout {
+                            
+                            }
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 2
+                            }
+                            verticalAlignment: VerticalAlignment.Fill
+                            horizontalAlignment: HorizontalAlignment.Center
+                            background: colors.colorD
+                            
+                            onTouch: {
+                                if (event.isDown() || event.isMove()) {
+                                    background = colors.colorI
+                                } else if (event.isUp() || event.isCancel()) {
+                                    background = colors.colorD
+                                    if (event.isUp()) {
+                                        inCallModel.hangUp()
                                     }
                                 }
                             }
+                            
+                            onTouchExit: {
+                                background = colors.colorD
+                            }
+                            
+                            ImageView {
+                                imageSource: "asset:///images/call/call_hangup.png"
+                                verticalAlignment: VerticalAlignment.Center
+                                horizontalAlignment: HorizontalAlignment.Center
+                            }
                         }
-
-                        Label {
-                            text: inCallModel.displayName
+                        
+                        Container {
+                            layout: DockLayout {
+                            
+                            }
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                            verticalAlignment: VerticalAlignment.Fill
                             horizontalAlignment: HorizontalAlignment.Center
-                            textStyle.fontSize: FontSize.XLarge
-                            textStyle.color: colors.colorC
-                            textStyle.base: titilliumWeb.style
-                        }
-
-                        Label {
-                            text: inCallModel.callTime
-                            horizontalAlignment: HorizontalAlignment.Center
-                            textStyle.color: colors.colorA
-                            textStyle.base: titilliumWeb.style
-                        }
-                    }
-                }
-            }
-
-            Container {
-                layout: DockLayout {
-
-                }
-                id: numpad
-                visible: false
-                leftPadding: ui.sdu(2)
-                rightPadding: ui.sdu(2)
-                topPadding: ui.sdu(2)
-                bottomPadding: ui.sdu(2)
-
-                Container {
-                    verticalAlignment: VerticalAlignment.Fill
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    background: colors.colorF
-                    opacity: 0.95
-                }
-
-                Numpad {
-                    leftPadding: ui.sdu(3)
-                    rightPadding: ui.sdu(3)
-                    topPadding: ui.sdu(3)
-                    bottomPadding: ui.sdu(3)
-                }
-            }
-        }
-
-        Container {
-            layout: StackLayout {
-                orientation: LayoutOrientation.LeftToRight
-            }
-            minHeight: ui.sdu(15)
-            background: colors.colorF
-            visible: inCallModel.areControlsVisible
-
-            CustomToggleButton {
-                layoutProperties: StackLayoutProperties {
-                    spaceQuota: 1
-                }
-                selected: inCallModel.isVideoEnabled
-                imageSource: "asset:///images/call/camera_default.png"
-                selectedImageSource: "asset:///images/call/camera_selected.png"
-
-                gestureHandlers: TapHandler {
-                    onTapped: {
-                        inCallModel.isVideoEnabled = ! inCallModel.isVideoEnabled
-                    }
-                }
-            }
-
-            CustomToggleButton {
-                layoutProperties: StackLayoutProperties {
-                    spaceQuota: 1
-                }
-                selected: inCallModel.isMicMuted
-                imageSource: "asset:///images/call/micro_default.png"
-                selectedImageSource: "asset:///images/call/micro_selected.png"
-
-                gestureHandlers: TapHandler {
-                    onTapped: {
-                        inCallModel.isMicMuted = ! inCallModel.isMicMuted
-                    }
-                }
-            }
-
-            CustomToggleButton {
-                layoutProperties: StackLayoutProperties {
-                    spaceQuota: 1
-                }
-                selected: inCallModel.isSpeakerEnabled
-                imageSource: "asset:///images/call/speaker_default.png"
-                selectedImageSource: "asset:///images/call/speaker_selected.png"
-
-                gestureHandlers: TapHandler {
-                    onTapped: {
-                        inCallModel.isSpeakerEnabled = ! inCallModel.isSpeakerEnabled
-                    }
-                }
-            }
-
-            CustomToggleButton {
-                layoutProperties: StackLayoutProperties {
-                    spaceQuota: 1
-                }
-                imageSource: "asset:///images/call/options_default.png"
-                selectedImageSource: "asset:///images/call/options_selected.png"
-                enabled: false
-
-                gestureHandlers: TapHandler {
-                    onTapped: {
-
-                    }
-                }
-            }
-        }
-
-        Container {
-            layout: StackLayout {
-                orientation: LayoutOrientation.LeftToRight
-            }
-            minHeight: ui.sdu(15)
-            visible: inCallModel.areControlsVisible
-
-            Container {
-                layout: DockLayout {
-
-                }
-                layoutProperties: StackLayoutProperties {
-                    spaceQuota: 1
-                }
-                verticalAlignment: VerticalAlignment.Fill
-                horizontalAlignment: HorizontalAlignment.Center
-                background: colors.colorC
-
-                gestureHandlers: TapHandler {
-                    onTapped: {
-                        numpad.visible = ! numpad.visible
-                        numpadToggle.selected = numpad.visible
-                    }
-                }
-
-                CustomTab {
-                    id: numpadToggle
-                    imageSource: selected ? "asset:///images/call/dialer_alt_back.png" : "asset:///images/footer_dialer.png"
-                    verticalAlignment: VerticalAlignment.Fill
-                    horizontalAlignment: HorizontalAlignment.Fill
-                }
-            }
-
-            Container {
-                layout: DockLayout {
-
-                }
-                layoutProperties: StackLayoutProperties {
-                    spaceQuota: 2
-                }
-                verticalAlignment: VerticalAlignment.Fill
-                horizontalAlignment: HorizontalAlignment.Center
-                background: colors.colorD
-
-                onTouch: {
-                    if (event.isDown() || event.isMove()) {
-                        background = colors.colorI
-                    } else if (event.isUp() || event.isCancel()) {
-                        background = colors.colorD
-                        if (event.isUp()) {
-                            inCallModel.hangUp()
+                            background: colors.colorC
+                            
+                            gestureHandlers: TapHandler {
+                                onTapped: {
+                                    chatListModel.viewConversation(inCallModel.sipUri);
+                                    tabDelegate.source = "../chat/ChatView.qml"
+                                    inCallView.close();
+                                }
+                            }
+                            
+                            ImageView {
+                                imageSource: "asset:///images/footer_chat.png"
+                                verticalAlignment: VerticalAlignment.Center
+                                horizontalAlignment: HorizontalAlignment.Center
+                                opacity: enabled ? 1 : 0.2
+                            }
                         }
                     }
                 }
-
-                onTouchExit: {
-                    background = colors.colorD
-                }
-
-                ImageView {
-                    imageSource: "asset:///images/call/call_hangup.png"
-                    verticalAlignment: VerticalAlignment.Center
-                    horizontalAlignment: HorizontalAlignment.Center
-                }
-            }
-
-            Container {
-                layout: DockLayout {
-
-                }
-                layoutProperties: StackLayoutProperties {
-                    spaceQuota: 1
-                }
-                verticalAlignment: VerticalAlignment.Fill
-                horizontalAlignment: HorizontalAlignment.Center
-                background: colors.colorC
                 
-                gestureHandlers: TapHandler {
-                    onTapped: {
-                        chatListModel.viewConversation(inCallModel.sipUri);
-                        tabDelegate.source = "../chat/ChatView.qml"
-                        inCallView.close();
+                Container {
+                    id: callFadeContainer
+                    verticalAlignment: VerticalAlignment.Fill
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    background: colors.colorC
+                    opacity: 0
+                    
+                    onTouch: {
+                        if (callPageContent.translationX > 0) {
+                            callPageContent.translationX = 0;
+                            callFadeContainer.opacity = 0;
+                        }
                     }
-                }
-
-                ImageView {
-                    imageSource: "asset:///images/footer_chat.png"
-                    verticalAlignment: VerticalAlignment.Center
-                    horizontalAlignment: HorizontalAlignment.Center
-                    opacity: enabled ? 1 : 0.2
                 }
             }
         }

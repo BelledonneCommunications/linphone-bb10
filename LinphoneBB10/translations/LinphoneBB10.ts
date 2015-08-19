@@ -279,6 +279,44 @@ please choose another one</source>
     </message>
 </context>
 <context>
+    <name>CallStats</name>
+    <message>
+        <location filename="../assets/qml/call/CallStats.qml" line="34"/>
+        <source>Audio codec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/call/CallStats.qml" line="48"/>
+        <source>Video codec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/call/CallStats.qml" line="62"/>
+        <source>Audio bandwidth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/call/CallStats.qml" line="92"/>
+        <source>Video bandwidth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/call/CallStats.qml" line="122"/>
+        <source>Received video size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/call/CallStats.qml" line="136"/>
+        <source>Sent video size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/call/CallStats.qml" line="150"/>
+        <source>Ice connectivity</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CancelButton</name>
     <message>
         <location filename="../assets/qml/custom_controls/CancelButton.qml" line="26"/>
@@ -526,6 +564,36 @@ please choose another one</source>
     <message>
         <location filename="../src/linphone/NotificationManager.cpp" line="66"/>
         <source>Ignore call</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/Misc.cpp" line="121"/>
+        <source>Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/Misc.cpp" line="124"/>
+        <source>In progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/Misc.cpp" line="127"/>
+        <source>Host</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/Misc.cpp" line="130"/>
+        <source>Reflexive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/Misc.cpp" line="133"/>
+        <source>Relay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/Misc.cpp" line="136"/>
+        <source>Not activated</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
