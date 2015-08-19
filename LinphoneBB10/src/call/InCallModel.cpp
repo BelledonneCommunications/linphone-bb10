@@ -70,7 +70,7 @@ InCallModel::InCallModel(QObject *parent) :
         _deviceOrientation = displayDirection;
         emit deviceOrientationChanged();
     }
-    ms_message("[BB10] default device orientation: %s", _deviceOrientation == 0 ? "portrait" : "landscape");
+    ms_debug("[BB10] default device orientation: %s", _deviceOrientation == 0 ? "portrait" : "landscape");
     linphone_core_set_device_rotation(lc, _deviceOrientation);
 
     _statsTimer->setInterval(1000);
@@ -101,7 +101,7 @@ void InCallModel::onOrientationAboutToChange(DisplayDirection::Type displayDirec
         _deviceOrientation = 0;
     }
 
-    ms_message("[BB10] device orientation about to change to %s", _deviceOrientation == 0 ? "portrait" : "landscape");
+    ms_debug("[BB10] device orientation about to change to %s", _deviceOrientation == 0 ? "portrait" : "landscape");
     linphone_core_set_device_rotation(lc, _deviceOrientation);
     emit deviceOrientationChanged();
 
@@ -150,6 +150,11 @@ void InCallModel::statsTimerTimeout()
     }
 
     MSVideoSize vsize = linphone_call_params_get_sent_video_size(params);
+    MSVideoSize maxSize = ms_video_size_make(320, 240);
+    if (vsize.width < vsize.height) {
+        maxSize = ms_video_size_make(240, 320);
+    }
+    vsize = ms_video_size_min(maxSize, vsize);
     _previewSize.setWidth(vsize.width);
     _previewSize.setHeight(vsize.height);
 
@@ -198,7 +203,7 @@ void InCallModel::onVideoSurfaceCreationCompleted(QString id, QString group)
     LinphoneCore *lc = manager->getLc();
     linphone_core_set_native_video_window_id(lc, (void*) window_group);
     linphone_core_set_native_preview_window_id(lc, (void*) window_group);
-    ms_message("[BB10] Video window id: %s and group %s", window_id, window_group);
+    ms_debug("[BB10] Video window id: %s and group %s", window_id, window_group);
 }
 
 void InCallModel::callStateChanged(LinphoneCall *call) {
