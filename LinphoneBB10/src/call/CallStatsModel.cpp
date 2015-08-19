@@ -80,8 +80,8 @@ void CallStatsModel::updateStats(LinphoneCall *call)
     const LinphoneCallStats *audioStats = linphone_call_get_audio_stats(call);
     if (audioStats) {
         _iceStatus = IceStateToString(linphone_call_stats_get_ice_state(audioStats));
-        _downloadAudioBandwidth = QString("<html>&#x2191; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_download_bandwidth(audioStats), 10));
-        _uploadAudioBandwidth = QString("<html>&#x2193; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_upload_bandwidth(audioStats), 10));
+        _downloadAudioBandwidth = QString("<html>&#x2193; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_download_bandwidth(audioStats), 10));
+        _uploadAudioBandwidth = QString("<html>&#x2191; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_upload_bandwidth(audioStats), 10));
     }
 
     const LinphonePayloadType *audioPayload = linphone_call_params_get_used_audio_codec(params);
@@ -92,8 +92,8 @@ void CallStatsModel::updateStats(LinphoneCall *call)
     if (linphone_call_params_video_enabled(params)) {
         const LinphoneCallStats *videoStats = linphone_call_get_video_stats(call);
         if (videoStats) {
-            _downloadVideoBandwidth = QString("<html>&#x2191; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_download_bandwidth(videoStats), 10));
-            _uploadVideoBandwidth = QString("<html>&#x2193; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_upload_bandwidth(videoStats), 10));
+            _downloadVideoBandwidth = QString("<html>&#x2193; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_download_bandwidth(videoStats), 10));
+            _uploadVideoBandwidth = QString("<html>&#x2191; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_upload_bandwidth(videoStats), 10));
         }
 
         const LinphonePayloadType *videoPayload = linphone_call_params_get_used_video_codec(params);

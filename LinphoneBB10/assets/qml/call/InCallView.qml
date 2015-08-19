@@ -474,4 +474,13 @@ Page {
             }
         }
     }
+    
+    function callEnded(call) {
+        callPageContent.translationX = 0;
+        callFadeContainer.opacity = 0;
+    }
+    
+    onCreationCompleted: {
+        linphoneManager.callEnded.connect(callEnded);
+    }
 }
