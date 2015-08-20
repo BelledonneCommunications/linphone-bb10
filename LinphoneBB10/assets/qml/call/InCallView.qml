@@ -301,7 +301,7 @@ Page {
                         background: colors.colorF
                         visible: inCallModel.areControlsVisible
                         
-                        CustomToggleButton {
+                        CustomImageToggle {
                             layoutProperties: StackLayoutProperties {
                                 spaceQuota: 1
                             }
@@ -316,7 +316,7 @@ Page {
                             }
                         }
                         
-                        CustomToggleButton {
+                        CustomImageToggle {
                             layoutProperties: StackLayoutProperties {
                                 spaceQuota: 1
                             }
@@ -331,7 +331,7 @@ Page {
                             }
                         }
                         
-                        CustomToggleButton {
+                        CustomImageToggle {
                             layoutProperties: StackLayoutProperties {
                                 spaceQuota: 1
                             }
@@ -346,7 +346,7 @@ Page {
                             }
                         }
                         
-                        CustomToggleButton {
+                        CustomImageToggle {
                             layoutProperties: StackLayoutProperties {
                                 spaceQuota: 1
                             }
@@ -387,9 +387,10 @@ Page {
                                 }
                             }
                             
-                            CustomTab {
+                            CustomImageToggle {
                                 id: numpadToggle
-                                imageSource: selected ? "asset:///images/call/dialer_alt_back.png" : "asset:///images/footer_dialer.png"
+                                imageSource: "asset:///images/footer_dialer.png"
+                                selectedImageSource: "asset:///images/call/dialer_alt_back.png"
                                 verticalAlignment: VerticalAlignment.Fill
                                 horizontalAlignment: HorizontalAlignment.Fill
                             }

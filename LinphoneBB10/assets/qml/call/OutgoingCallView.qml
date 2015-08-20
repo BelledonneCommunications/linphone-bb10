@@ -96,7 +96,7 @@ Page {
             minHeight: ui.sdu(15)
             background: colors.colorF
             
-            CustomToggleButton {
+            CustomImageToggle {
                 layoutProperties: StackLayoutProperties {
                     spaceQuota: 1
                 }
@@ -111,7 +111,7 @@ Page {
                 }
             }
 
-            CustomToggleButton {
+            CustomImageToggle {
                 layoutProperties: StackLayoutProperties {
                     spaceQuota: 1
                 }

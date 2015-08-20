@@ -103,7 +103,7 @@ Container {
         }
         
         TopBarButton {
-            visible: inCallModel.isInCall && inCallModel.sipUri == chatListModel.chatModel.linphoneAddress
+            visible: inCallModel.isInCall && inCallModel.sipUri == chatListModel.chatModel.linphoneAddress && !chatListModel.chatModel.editor.isEditMode 
             imageSource: "asset:///images/chat/call_back.png"
             
             gestureHandlers: TapHandler {
