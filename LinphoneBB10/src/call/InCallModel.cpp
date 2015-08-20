@@ -320,7 +320,7 @@ void InCallModel::setSpeakerEnabled(const bool &enabled)
     LinphoneCall *call = getCurrentCall();
     if (call) {
         _isSpeakerEnabled = enabled;
-        MSAudioRoute route = _isSpeakerEnabled ? MSAudioRouteSpeaker : MSAudioRouteEarpiece;
+        LinphoneAudioRoute route = _isSpeakerEnabled ? LinphoneAudioRouteSpeaker : LinphoneAudioRouteEarpiece;
         linphone_call_set_audio_route(call, route);
         emit callUpdated();
     }
