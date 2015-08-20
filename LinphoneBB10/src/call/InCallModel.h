@@ -66,6 +66,7 @@ public Q_SLOTS:
     void switchCamera();
     void togglePause();
     void onOrientationAboutToChange(bb::cascades::DisplayDirection::Type, bb::cascades::UIOrientation::Type uiOrientation);
+    void updateZRTPTokenValidation(bool isTokenOk);
 
 Q_SIGNALS:
     void callUpdated();

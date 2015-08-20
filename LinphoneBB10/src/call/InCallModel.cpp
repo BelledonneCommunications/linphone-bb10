@@ -377,3 +377,10 @@ bool InCallModel::isInCall() const {
     LinphoneCore *lc = manager->getLc();
     return linphone_core_get_calls_nb(lc) > 0;
 }
+
+void InCallModel::updateZRTPTokenValidation(bool isTokenOk) {
+    LinphoneCall *call = getCurrentCall();
+    if (call) {
+        linphone_call_set_authentication_token_verified(call, isTokenOk);
+    }
+}

@@ -18,10 +18,11 @@
  */
 
 import bb.cascades 1.4
+import bb.system 1.0
 
 Container {
     property alias messagesCountText: messagesCount.text
-    property alias securityImageSource: security.imageSource
+    property alias securityImageSource: security.defaultImageSource
     property bool menuEnabled: true
     property bool statsEnabled: false
     property bool isInCall: false
@@ -67,7 +68,7 @@ Container {
                 opacity: statsEnabled ? 1 : 0.2
                 defaultImageSource: inCallModel.callStatsModel.callQualityIcon
                 verticalAlignment: VerticalAlignment.Center
-                
+
                 onClicked: {
                     if (callPageContent.translationX == 0) {
                         callPageContent.translationX = statsMenu.minWidth;
@@ -125,12 +126,32 @@ Container {
             textStyle.base: titilliumWeb.style
         }
 
-        ImageView {
+        ImageButton {
             id: security
             visible: isInCall
             verticalAlignment: VerticalAlignment.Center
-            imageSource: inCallModel.callStatsModel.callSecurityIcon
-            scalingMethod: ScalingMethod.AspectFit
+            defaultImageSource: inCallModel.callStatsModel.callSecurityIcon
+
+            attachedObjects: [
+                SystemDialog {
+                    id: zrtpDialog
+                    title: qsTr("ZRTP secured call") + Retranslate.onLanguageChanged
+                    body: inCallModel.callStatsModel.callSecurityToken
+                    confirmButton.label: qsTr("Accept") + Retranslate.onLanguageChanged
+                    cancelButton.label: qsTr("Deny") + Retranslate.onLanguageChanged
+                    dismissAutomatically: true
+                    
+                    onFinished: {
+                        inCallModel.updateZRTPTokenValidation(buttonSelection() == confirmButton);
+                    }
+                }
+            ]
+
+            onClicked: {
+                if (inCallModel.callStatsModel.callSecurityToken.length > 0) {
+                    zrtpDialog.show();
+                }
+            }
         }
     }
 }

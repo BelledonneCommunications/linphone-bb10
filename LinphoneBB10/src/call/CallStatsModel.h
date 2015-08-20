@@ -33,6 +33,7 @@ class CallStatsModel : public QObject
 
     Q_PROPERTY(QString callQualityIcon READ callQualityIcon NOTIFY statsUpdated);
     Q_PROPERTY(QString callSecurityIcon READ callSecurityIcon NOTIFY statsUpdated);
+    Q_PROPERTY(QString callSecurityToken READ callSecurityToken NOTIFY statsUpdated);
     Q_PROPERTY(QString audioCodec READ audioCodec NOTIFY statsUpdated);
     Q_PROPERTY(QString videoCodec READ videoCodec NOTIFY statsUpdated);
     Q_PROPERTY(QString downloadAudioBandwidth READ downloadAudioBandwidth NOTIFY statsUpdated);
@@ -60,6 +61,11 @@ private:
         return _currentCallSecurityIcon;
     }
     QString _currentCallSecurityIcon;
+
+    QString callSecurityToken() const {
+        return _callSecurityToken;
+    }
+    QString _callSecurityToken;
 
     QString audioCodec() const {
         return _audioCodec;

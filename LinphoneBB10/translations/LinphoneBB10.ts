@@ -317,6 +317,15 @@ please choose another one</source>
     </message>
 </context>
 <context>
+    <name>CallStatsModel</name>
+    <message>
+        <location filename="../src/call/CallStatsModel.cpp" line="73"/>
+        <source>ZRTP token is %1.
+You should only accept if you have the same token as your correspondent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CancelButton</name>
     <message>
         <location filename="../assets/qml/custom_controls/CancelButton.qml" line="26"/>
@@ -602,6 +611,24 @@ please choose another one</source>
     <message>
         <location filename="../assets/qml/settings/SettingsView.qml" line="62"/>
         <source>SETTINGS</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StatusBar</name>
+    <message>
+        <location filename="../assets/qml/StatusBar.qml" line="138"/>
+        <source>ZRTP secured call</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/StatusBar.qml" line="140"/>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/StatusBar.qml" line="141"/>
+        <source>Deny</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
