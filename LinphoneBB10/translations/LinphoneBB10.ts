@@ -79,14 +79,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
         <source>Password is too short
 (6 characters minimum)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -500,23 +500,23 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="110"/>
+        <location filename="../assets/qml/menu/Menu.qml" line="111"/>
         <source>Assistant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="125"/>
+        <location filename="../assets/qml/menu/Menu.qml" line="126"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="140"/>
+        <location filename="../assets/qml/menu/Menu.qml" line="141"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="176"/>
-        <source>Exit</source>
+        <location filename="../assets/qml/menu/Menu.qml" line="177"/>
+        <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

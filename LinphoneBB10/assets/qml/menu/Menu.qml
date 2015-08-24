@@ -76,7 +76,7 @@ Container {
                 textStyle.color: colors.colorC
                 textStyle.fontWeight: FontWeight.Bold
                 textStyle.base: titilliumWeb.style
-                textStyle.fontSize: FontSize.Large
+                textStyle.fontSize: FontSize.Medium
                 verticalAlignment: VerticalAlignment.Top
             }
             
@@ -88,6 +88,7 @@ Container {
                     text: menuModel.sipUri
                     textStyle.base: titilliumWeb.style
                     verticalAlignment: VerticalAlignment.Bottom
+                    textStyle.fontSize: FontSize.Small
                 }
             }
         }
@@ -173,7 +174,7 @@ Container {
         }
         
         Label {
-            text: qsTr("Exit") + Retranslate.onLanguageChanged
+            text: qsTr("Quit") + Retranslate.onLanguageChanged
             verticalAlignment: VerticalAlignment.Center
             textStyle.color: colors.colorH
             textStyle.base: titilliumWeb.style
