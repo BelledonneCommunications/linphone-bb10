@@ -109,6 +109,10 @@ Page {
                                     verticalAlignment: VerticalAlignment.Bottom
                                     preferredWidth: inCallModel.previewSize.width
                                     preferredHeight: inCallModel.previewSize.height
+                                    
+                                    onWindowAttached: {
+                                        inCallModel.cameraPreviewAttached(windowHandle)
+                                    }
                                 }
                                 
                                 Container {

@@ -182,6 +182,11 @@ void InCallModel::onVideoSurfaceCreationCompleted(QString id, QString group)
     ms_debug("[BB10] Video window id: %s and group %s", window_id, window_group);
 }
 
+void InCallModel::cameraPreviewAttached(screen_window_t handle) {
+    int z = -4; // -5 is the remote video
+    screen_set_window_property_iv(handle, SCREEN_PROPERTY_ZORDER, &z);
+}
+
 void InCallModel::callStateChanged(LinphoneCall *call) {
     if (!call) {
         call = getCurrentCall();

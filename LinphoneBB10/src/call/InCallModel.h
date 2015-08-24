@@ -25,10 +25,10 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QSize>
 #include <screen/screen.h>
 #include <bb/cascades/UIOrientation>
 #include <bb/cascades/DisplayDirection>
-#include <QSize>
 
 #include "CallStatsModel.h"
 #include "linphone/linphonecore.h"
@@ -67,6 +67,7 @@ public Q_SLOTS:
     void togglePause();
     void onOrientationAboutToChange(bb::cascades::DisplayDirection::Type, bb::cascades::UIOrientation::Type uiOrientation);
     void updateZRTPTokenValidation(bool isTokenOk);
+    void cameraPreviewAttached(screen_window_t handle);
 
 Q_SIGNALS:
     void callUpdated();
