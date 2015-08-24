@@ -261,7 +261,14 @@ void LinphoneManager::startLinphoneCoreIterate()
 
 void LinphoneManager::createAndStartLinphoneCore()
 {
-    OrtpLogLevel logLevel = static_cast<OrtpLogLevel>(ORTP_MESSAGE | ORTP_WARNING | ORTP_FATAL | ORTP_ERROR);
+    char* linphoneRC = QStringToChar(moveLinphoneRcToRWFolder());
+    LpConfig *lpc = lp_config_new(linphoneRC);
+
+    bool debugEnabled = lp_config_get_int(lpc, "app", "debug", 0) == 1;
+    OrtpLogLevel logLevel = static_cast<OrtpLogLevel>(ORTP_LOGLEV_END);
+    if (debugEnabled) {
+        logLevel = static_cast<OrtpLogLevel>(ORTP_MESSAGE | ORTP_WARNING | ORTP_FATAL | ORTP_ERROR);
+    }
     linphone_core_set_log_level_mask(logLevel);
 
     LinphoneCoreVTable *vtable = (LinphoneCoreVTable*) malloc(sizeof(LinphoneCoreVTable));
@@ -272,8 +279,8 @@ void LinphoneManager::createAndStartLinphoneCore()
     vtable->message_received = message_received;
     vtable->is_composing_received = composing_received;
 
-    char* linphoneRC = QStringToChar(moveLinphoneRcToRWFolder());
     _lc = linphone_core_new(vtable, linphoneRC, "app/native/assets/linphone/factory", this);
+
     linphone_core_migrate_to_multi_transport(_lc);
     linphone_core_set_user_agent(_lc, "Linphone BB10", _app->applicationVersion().toUtf8().constData());
     linphone_core_set_network_reachable(_lc, true);

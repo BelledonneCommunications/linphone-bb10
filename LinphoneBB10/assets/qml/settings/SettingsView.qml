@@ -27,8 +27,6 @@ Page {
         layout: StackLayout {
             orientation: LayoutOrientation.TopToBottom
         }
-        horizontalAlignment: HorizontalAlignment.Fill
-        verticalAlignment: VerticalAlignment.Fill
         
         StatusBar {
             menuEnabled: false
@@ -80,17 +78,21 @@ Page {
             }
         }
         
-        ScrollView {
-            horizontalAlignment: HorizontalAlignment.Center
-            verticalAlignment: VerticalAlignment.Fill
+        Container {
+            layout: DockLayout {
             
+            }
             layoutProperties: StackLayoutProperties {
                 spaceQuota: 1
             }
+            horizontalAlignment: HorizontalAlignment.Fill
+            verticalAlignment: VerticalAlignment.Fill
             
             ControlDelegate {
                 id: settingsDelegate
                 source: "SettingsHomeView.qml"
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Fill
             }
         }
     }

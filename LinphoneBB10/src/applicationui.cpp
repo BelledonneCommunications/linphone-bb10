@@ -30,6 +30,7 @@
 #include "src/linphone/LinphoneManager.h"
 #include "src/utils/ColorGallery.h"
 #include "src/utils/BPSEventListener.h"
+#include "src/settings/SettingsModel.h"
 
 using namespace bb::cascades;
 using namespace bb::platform;
@@ -65,6 +66,9 @@ ApplicationUI::ApplicationUI() :
 
     ColorGallery *colors = new ColorGallery(this);
     qml->setContextProperty("colors", colors);
+
+    SettingsModel *settingsModel = new SettingsModel(this);
+    qml->setContextProperty("settingsModel", settingsModel);
 
     MenuModel *menuModel = new MenuModel(this);
     qml->setContextProperty("menuModel", menuModel);
