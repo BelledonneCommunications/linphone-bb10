@@ -607,10 +607,68 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
+    <name>SecuritySettings</name>
+    <message>
+        <location filename="../assets/qml/settings/SecuritySettings.qml" line="19"/>
+        <source>SECURITY</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SecuritySettings.qml" line="23"/>
+        <source>Media Encryption</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsHomeView</name>
     <message>
         <location filename="../assets/qml/settings/SettingsHomeView.qml" line="38"/>
         <source>Debug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="48"/>
+        <source>AUDIO</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="68"/>
+        <source>VIDEO</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="85"/>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="96"/>
+        <source>SECURITY</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="113"/>
+        <source>Media Encryption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="117"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="140"/>
+        <source>Media encryption mandatory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="151"/>
+        <source>NETWORK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="171"/>
+        <source>ADVANCED</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

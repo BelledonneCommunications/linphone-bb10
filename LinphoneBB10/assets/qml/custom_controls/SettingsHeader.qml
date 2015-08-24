@@ -1,5 +1,5 @@
 /*
- * CustomDivider.qml
+ * SettingsHeader.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -20,8 +20,33 @@
 import bb.cascades 1.4
 
 Container {
-    preferredWidth: 1440
-    background: colors.colorE
-    minHeight: 2
-    maxHeight: 2
+    property alias text: title.text
+    
+    layout: DockLayout {
+    
+    }
+    horizontalAlignment: HorizontalAlignment.Fill
+    verticalAlignment: VerticalAlignment.Center
+    topPadding: ui.sdu(1)
+    bottomPadding: ui.sdu(1)
+    minHeight: ui.sdu(10)
+    
+    CustomDivider {
+        verticalAlignment: VerticalAlignment.Top
+    }
+    
+    Label {
+        id: title
+        text: "HEADER"
+        verticalAlignment: VerticalAlignment.Center
+        horizontalAlignment: HorizontalAlignment.Center
+        textStyle.color: colors.colorA
+        textStyle.base: titilliumWeb.style
+        textStyle.fontWeight: FontWeight.Bold
+        textStyle.fontSize: FontSize.Large
+    }
+    
+    CustomDivider {
+        verticalAlignment: VerticalAlignment.Bottom
+    }
 }

@@ -31,7 +31,12 @@ class SettingsModel : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool debugEnabled READ debugEnabled WRITE setDebugEnabled NOTIFY settingsUpdated)
+    Q_PROPERTY(bool debugEnabled READ debugEnabled WRITE setDebugEnabled NOTIFY settingsUpdated);
+
+    Q_PROPERTY(bool videoEnabled READ videoEnabled WRITE setVideoEnabled NOTIFY settingsUpdated);
+
+    Q_PROPERTY(int mediaEncryption READ mediaEncryption WRITE setMediaEncryption NOTIFY settingsUpdated);
+    Q_PROPERTY(bool mediaEncryptionMandatory READ mediaEncryptionMandatory WRITE setMediaEncryptionMandatory NOTIFY settingsUpdated);
 
 public:
     SettingsModel(QObject *parent = NULL);
@@ -46,6 +51,14 @@ private:
 
     bool debugEnabled() const;
     void setDebugEnabled(const bool& enabled);
+
+    bool videoEnabled() const;
+    void setVideoEnabled(const bool& enabled);
+
+    int mediaEncryption() const;
+    void setMediaEncryption(const int& mediaEncryption);
+    bool mediaEncryptionMandatory() const;
+    void setMediaEncryptionMandatory(const bool& enabled);
 };
 
 #endif /* SETTINGSMODEL_H_ */

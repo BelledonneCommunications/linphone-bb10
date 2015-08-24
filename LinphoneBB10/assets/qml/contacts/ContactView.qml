@@ -200,7 +200,7 @@ Container {
                                 }
                             }
 
-                            CustomDivider {
+                            CustomListDivider {
 
                             }
                         }

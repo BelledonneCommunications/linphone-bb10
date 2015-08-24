@@ -47,3 +47,29 @@ void SettingsModel::setDebugEnabled(const bool& enabled) {
 
     emit settingsUpdated();
 }
+
+bool SettingsModel::videoEnabled() const {
+    return linphone_core_video_enabled(_manager->getLc());
+}
+
+void SettingsModel::setVideoEnabled(const bool& enabled) {
+    linphone_core_enable_video(_manager->getLc(), enabled, enabled);
+}
+
+int SettingsModel::mediaEncryption() const {
+    return (int)linphone_core_get_media_encryption(_manager->getLc());
+}
+
+void SettingsModel::setMediaEncryption(const int& mediaEncryption) {
+    linphone_core_set_media_encryption(_manager->getLc(), (LinphoneMediaEncryption)mediaEncryption);
+    emit settingsUpdated();
+}
+
+bool SettingsModel::mediaEncryptionMandatory() const {
+    return linphone_core_is_media_encryption_mandatory(_manager->getLc());
+}
+
+void SettingsModel::setMediaEncryptionMandatory(const bool& enabled) {
+    linphone_core_set_media_encryption_mandatory(_manager->getLc(), enabled);
+    emit settingsUpdated();
+}

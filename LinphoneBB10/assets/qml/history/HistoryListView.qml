@@ -191,7 +191,7 @@ Container {
                         textStyle.fontSize: FontSize.Large
                     }
                     
-                    CustomDivider {
+                    CustomListDivider {
                         
                     }
                 }
@@ -264,7 +264,7 @@ Container {
                         }
                     }
                     
-                    CustomDivider {
+                    CustomListDivider {
                         
                     }
                 }

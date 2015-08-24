@@ -1,5 +1,5 @@
 /*
- * CustomDivider.qml
+ * CustomListDivider.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -21,7 +21,7 @@ import bb.cascades 1.4
 
 Container {
     preferredWidth: 1440
-    background: colors.colorE
+    background: Qt.colors.colorE
     minHeight: 2
     maxHeight: 2
 }

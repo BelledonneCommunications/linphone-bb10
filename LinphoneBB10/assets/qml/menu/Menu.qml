@@ -102,7 +102,7 @@ Container {
             background: colors.colorH
             horizontalAlignment: HorizontalAlignment.Fill
             
-            Divider {
+            CustomDivider {
             
             }
             
@@ -117,7 +117,7 @@ Container {
                 }
             }
             
-            Divider {
+            CustomDivider {
                 
             }
             
@@ -132,7 +132,7 @@ Container {
                 }
             }
             
-            Divider {
+            CustomDivider {
             
             }
             
@@ -147,7 +147,7 @@ Container {
                 }
             }
             
-            Divider {
+            CustomDivider {
             
             }
         }
