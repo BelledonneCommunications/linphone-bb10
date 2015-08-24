@@ -89,6 +89,8 @@ NavigationPane {
                                 onSourceChanged: {
                                     if (source.toString() != "asset:///qml/chat/ChatView.qml") {
                                         chatListModel.chatModel.setSelectedConversationSipAddress("");
+                                    } else {
+                                        tabs.setChatTabSelected();
                                     }
                                 }
                             }

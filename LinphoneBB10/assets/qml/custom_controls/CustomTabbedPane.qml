@@ -151,4 +151,9 @@ Container {
         if (history.selected)
             return history
     }
+    
+    function setChatTabSelected() {
+        resetAllTabsBackgroundColor();
+        chat.selected = true;
+    }
 }
