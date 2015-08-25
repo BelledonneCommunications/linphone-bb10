@@ -103,7 +103,7 @@ Page {
                                 
                                 ForeignWindowControl {
                                     windowId: "LinphoneLocalVideoWindowId" // Do not change the name of this windowId
-                                    visible: boundToWindow // becomes visible once bound to a window
+                                    visible: settingsModel.previewVisible && boundToWindow // becomes visible once bound to a window
                                     updatedProperties: WindowProperty.Position | WindowProperty.Size | WindowProperty.Visible
                                     horizontalAlignment: HorizontalAlignment.Right
                                     verticalAlignment: VerticalAlignment.Bottom
@@ -312,10 +312,13 @@ Page {
                             selected: inCallModel.isVideoEnabled
                             imageSource: "asset:///images/call/camera_default.png"
                             selectedImageSource: "asset:///images/call/camera_selected.png"
+                            enabled: settingsModel.videoEnabled
                             
                             gestureHandlers: TapHandler {
                                 onTapped: {
-                                    inCallModel.isVideoEnabled = ! inCallModel.isVideoEnabled
+                                    if (settingsModel.videoEnabled) {
+                                        inCallModel.isVideoEnabled = ! inCallModel.isVideoEnabled
+                                    }
                                 }
                             }
                         }

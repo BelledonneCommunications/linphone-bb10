@@ -33,15 +33,25 @@ class SettingsModel : public QObject
 
     Q_PROPERTY(bool debugEnabled READ debugEnabled WRITE setDebugEnabled NOTIFY settingsUpdated);
 
+    Q_PROPERTY(bool videoSupported READ videoSupported NOTIFY settingsUpdated);
     Q_PROPERTY(bool videoEnabled READ videoEnabled WRITE setVideoEnabled NOTIFY settingsUpdated);
+    Q_PROPERTY(bool previewVisible READ previewVisible WRITE setPreviewVisible NOTIFY settingsUpdated);
+    Q_PROPERTY(int preferredVideoSize READ preferredVideoSizeIndex NOTIFY settingsUpdated);
 
+    Q_PROPERTY(bool isSrtpSupported READ isSrtpSupported NOTIFY settingsUpdated);
+    Q_PROPERTY(bool isZrtpSupported READ isZrtpSupported NOTIFY settingsUpdated);
+    Q_PROPERTY(bool isDtlsSupported READ isDtlsSupported NOTIFY settingsUpdated);
     Q_PROPERTY(int mediaEncryption READ mediaEncryption WRITE setMediaEncryption NOTIFY settingsUpdated);
     Q_PROPERTY(bool mediaEncryptionMandatory READ mediaEncryptionMandatory WRITE setMediaEncryptionMandatory NOTIFY settingsUpdated);
+
+    Q_PROPERTY(QString stunServer READ stunServer WRITE setStunServer NOTIFY settingsUpdated);
+    Q_PROPERTY(bool iceEnabled READ iceEnabled WRITE setIceEnabled NOTIFY settingsUpdated);
 
 public:
     SettingsModel(QObject *parent = NULL);
 
 public Q_SLOTS:
+    void setPreferredVideoSize(const QString& videoSize);
 
 Q_SIGNALS:
     void settingsUpdated();
@@ -52,13 +62,37 @@ private:
     bool debugEnabled() const;
     void setDebugEnabled(const bool& enabled);
 
+    bool videoSupported() const;
     bool videoEnabled() const;
     void setVideoEnabled(const bool& enabled);
+    bool previewVisible() const;
+    void setPreviewVisible(const bool& visible);
+    int preferredVideoSizeIndex() const;
+
+    bool isSrtpSupported() const {
+        return _isSrtpSupported;
+    }
+    bool _isSrtpSupported;
+
+    bool isZrtpSupported() const {
+        return _isZrtpSupported;
+    }
+    bool _isZrtpSupported;
+
+    bool isDtlsSupported() const {
+        return _isDtlsSupported;
+    }
+    bool _isDtlsSupported;
 
     int mediaEncryption() const;
     void setMediaEncryption(const int& mediaEncryption);
     bool mediaEncryptionMandatory() const;
     void setMediaEncryptionMandatory(const bool& enabled);
+
+    QString stunServer() const;
+    void setStunServer(const QString& stunServer);
+    bool iceEnabled() const;
+    void setIceEnabled(const bool& enabled);
 };
 
 #endif /* SETTINGSMODEL_H_ */

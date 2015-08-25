@@ -79,14 +79,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
         <source>Password is too short
 (6 characters minimum)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -451,12 +451,12 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>InCallView</name>
     <message>
-        <location filename="../assets/qml/call/InCallView.qml" line="517"/>
+        <location filename="../assets/qml/call/InCallView.qml" line="520"/>
         <source>Deny</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/call/InCallView.qml" line="531"/>
+        <location filename="../assets/qml/call/InCallView.qml" line="534"/>
         <source>Accept</source>
         <translation type="unfinished"></translation>
     </message>
@@ -530,6 +530,20 @@ You should only accept if you have the same token as your correspondent.</source
     <message>
         <location filename="../assets/qml/menu/Menu.qml" line="177"/>
         <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NetworkSettingsView</name>
+    <message>
+        <location filename="../assets/qml/settings/NetworkSettingsView.qml" line="37"/>
+        <location filename="../assets/qml/settings/NetworkSettingsView.qml" line="49"/>
+        <source>STUN server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/NetworkSettingsView.qml" line="62"/>
+        <source>Enable ICE</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -620,15 +634,20 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
-    <name>SecuritySettings</name>
+    <name>SecuritySettingsView</name>
     <message>
-        <location filename="../assets/qml/settings/SecuritySettings.qml" line="19"/>
-        <source>SECURITY</source>
+        <location filename="../assets/qml/settings/SecuritySettingsView.qml" line="31"/>
+        <source>Media Encryption</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SecuritySettings.qml" line="23"/>
-        <source>Media Encryption</source>
+        <location filename="../assets/qml/settings/SecuritySettingsView.qml" line="35"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SecuritySettingsView.qml" line="60"/>
+        <source>Media encryption mandatory</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -645,43 +664,18 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="68"/>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="63"/>
         <source>VIDEO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="85"/>
-        <source>Enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="96"/>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="78"/>
         <source>SECURITY</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="113"/>
-        <source>Media Encryption</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="117"/>
-        <source>None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="140"/>
-        <source>Media encryption mandatory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="151"/>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="93"/>
         <source>NETWORK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="171"/>
-        <source>ADVANCED</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -690,6 +684,29 @@ You should only accept if you have the same token as your correspondent.</source
     <message>
         <location filename="../assets/qml/settings/SettingsView.qml" line="60"/>
         <source>SETTINGS</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VideoSettingsView</name>
+    <message>
+        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="31"/>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="42"/>
+        <source>Show preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="53"/>
+        <source>Preferred video size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="87"/>
+        <source>VP8</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

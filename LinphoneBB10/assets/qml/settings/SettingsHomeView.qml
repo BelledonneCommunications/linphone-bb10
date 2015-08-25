@@ -46,7 +46,6 @@ ScrollView {
         
         SettingsHeader {
             text: qsTr("AUDIO") + Retranslate.onLanguageChanged
-            visible: false
             
             gestureHandlers: TapHandler {
                 onTapped: {
@@ -55,11 +54,7 @@ ScrollView {
             }
         }
         
-        Container {
-            layout: StackLayout {
-                orientation: LayoutOrientation.TopToBottom
-            }
-            horizontalAlignment: HorizontalAlignment.Fill
+        AudioSettingsView {
             id: audioSettings
             visible: false
         }
@@ -74,22 +69,9 @@ ScrollView {
             }
         }
         
-        Container {
-            layout: StackLayout {
-                orientation: LayoutOrientation.TopToBottom
-            }
-            horizontalAlignment: HorizontalAlignment.Fill
+        VideoSettingsView {
             id: videoSettings
-            
-            SettingsToggle {
-                text: qsTr("Enabled") + Retranslate.onLanguageChanged
-                checked: settingsModel.videoEnabled
-                horizontalAlignment: HorizontalAlignment.Fill
-                
-                onToggled: {
-                    settingsModel.videoEnabled = checked;
-                }
-            }
+            visible: false
         }
         
         SettingsHeader {
@@ -102,54 +84,13 @@ ScrollView {
             }
         }
         
-        Container {
-            layout: StackLayout {
-                orientation: LayoutOrientation.TopToBottom
-            }
-            horizontalAlignment: HorizontalAlignment.Fill
+        SecuritySettingsView {
             id: securitySettings
-            
-            DropDown {
-                title: qsTr("Media Encryption") + Retranslate.onLanguageChanged
-                selectedIndex: settingsModel.mediaEncryption
-                options: [
-                    Option {
-                        text: qsTr("None") + Retranslate.onLanguageChanged
-                        value: 0
-                    },
-                    Option {
-                        text: "SRTP"
-                        value: 1
-                    },
-                    Option {
-                        text: "ZRTP"
-                        value: 2
-                    },
-                    Option {
-                        text: "DTLS"
-                        value: 3
-                        enabled: false
-                    }
-                ]
-                onSelectedIndexChanged: {
-                    settingsModel.mediaEncryption = selectedIndex
-                }
-            }
-            
-            SettingsToggle {
-                text: qsTr("Media encryption mandatory") + Retranslate.onLanguageChanged
-                checked: settingsModel.mediaEncryptionMandatory
-                horizontalAlignment: HorizontalAlignment.Fill
-                
-                onToggled: {
-                    settingsModel.mediaEncryptionMandatory = checked;
-                }
-            }
+            visible: false
         }
         
         SettingsHeader {
             text: qsTr("NETWORK") + Retranslate.onLanguageChanged
-            visible: false
             
             gestureHandlers: TapHandler {
                 onTapped: {
@@ -158,32 +99,8 @@ ScrollView {
             }
         }
         
-        Container {
-            layout: StackLayout {
-                orientation: LayoutOrientation.TopToBottom
-            }
-            horizontalAlignment: HorizontalAlignment.Fill
+        NetworkSettingsView {
             id: networkSettings
-            visible: false
-        }
-        
-        SettingsHeader {
-            text: qsTr("ADVANCED") + Retranslate.onLanguageChanged
-            visible: false
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    advancedSettings.visible = !advancedSettings.visible
-                }
-            }
-        }
-        
-        Container {
-            layout: StackLayout {
-                orientation: LayoutOrientation.TopToBottom
-            }
-            horizontalAlignment: HorizontalAlignment.Fill
-            id: advancedSettings
             visible: false
         }
     }
