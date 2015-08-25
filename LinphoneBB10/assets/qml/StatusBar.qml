@@ -132,24 +132,9 @@ Container {
             verticalAlignment: VerticalAlignment.Center
             defaultImageSource: inCallModel.callStatsModel.callSecurityIcon
 
-            attachedObjects: [
-                SystemDialog {
-                    id: zrtpDialog
-                    title: qsTr("ZRTP secured call") + Retranslate.onLanguageChanged
-                    body: inCallModel.callStatsModel.callSecurityToken
-                    confirmButton.label: qsTr("Accept") + Retranslate.onLanguageChanged
-                    cancelButton.label: qsTr("Deny") + Retranslate.onLanguageChanged
-                    dismissAutomatically: true
-                    
-                    onFinished: {
-                        inCallModel.updateZRTPTokenValidation(buttonSelection() == confirmButton);
-                    }
-                }
-            ]
-
             onClicked: {
                 if (inCallModel.callStatsModel.callSecurityToken.length > 0) {
-                    zrtpDialog.show();
+                    zrtpDialog.visible = true;
                 }
             }
         }

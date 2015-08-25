@@ -293,6 +293,9 @@ void LinphoneManager::createAndStartLinphoneCore()
     QString chatMessagesDatabase = QDir::homePath() + "/chat.db";
     linphone_core_set_chat_database_path(_lc, QStringToChar(chatMessagesDatabase));
 
+    QString zrtpCache = QDir::homePath() + "/zrtp_secrets";
+    linphone_core_set_zrtp_secrets_file(_lc, zrtpCache.toUtf8().constData());
+
     updateUnreadChatMessagesCount();
     startLinphoneCoreIterate();
 }

@@ -476,6 +476,73 @@ Page {
                         }
                     }
                 }
+                
+                Container {
+                    layout: DockLayout {
+                    
+                    }
+                    id: zrtpDialog
+                    verticalAlignment: VerticalAlignment.Fill
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    background: colors.colorC
+                    opacity: 0.9
+                    visible: false
+                    
+                    Container {
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.TopToBottom
+                        }
+                        verticalAlignment: VerticalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Center
+                        leftPadding: ui.sdu(5)
+                        rightPadding: ui.sdu(5)
+                        
+                        Label {
+                            text: inCallModel.callStatsModel.callSecurityToken
+                            textStyle.color: colors.colorH
+                            textStyle.base: titilliumWeb.style
+                            multiline: true
+                            textStyle.textAlign: TextAlign.Center
+                            horizontalAlignment: HorizontalAlignment.Center
+                        }
+                        
+                        Container {
+                            layout: StackLayout {
+                                orientation: LayoutOrientation.LeftToRight
+                            }
+                            horizontalAlignment: HorizontalAlignment.Center
+                            
+                            CustomButton {
+                                topPadding: ui.sdu(5)
+                                text: qsTr("Deny") + Retranslate.onLanguageChanged
+                                imageSource: "asset:///images/resizable_confirm_delete_button.amd"
+                                textStyle.color: colors.colorH
+                                textStyle.base: titilliumWeb.style
+                                horizontalAlignment: HorizontalAlignment.Center
+                                
+                                onButtonClicked: {
+                                    zrtpDialog.visible = false
+                                    inCallModel.updateZRTPTokenValidation(false)
+                                }
+                            }
+                            
+                            CustomButton {
+                                topPadding: ui.sdu(5)
+                                text: qsTr("Accept") + Retranslate.onLanguageChanged
+                                imageSource: "asset:///images/resizable_cancel_button.amd"
+                                textStyle.color: colors.colorC
+                                textStyle.base: titilliumWeb.style
+                                horizontalAlignment: HorizontalAlignment.Center
+                                leftMargin: ui.sdu(3)
+                                
+                                onButtonClicked: {
+                                    zrtpDialog.visible = false
+                                    inCallModel.updateZRTPTokenValidation(true)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

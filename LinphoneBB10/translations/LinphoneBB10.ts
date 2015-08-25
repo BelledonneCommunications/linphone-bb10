@@ -79,14 +79,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
-        <source>Password is too short
-(6 characters minimum)</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
+        <source>Password is too short
+(6 characters minimum)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -449,6 +449,19 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
+    <name>InCallView</name>
+    <message>
+        <location filename="../assets/qml/call/InCallView.qml" line="517"/>
+        <source>Deny</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/call/InCallView.qml" line="531"/>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IncomingCallView</name>
     <message>
         <location filename="../assets/qml/call/IncomingCallView.qml" line="43"/>
@@ -677,24 +690,6 @@ You should only accept if you have the same token as your correspondent.</source
     <message>
         <location filename="../assets/qml/settings/SettingsView.qml" line="60"/>
         <source>SETTINGS</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StatusBar</name>
-    <message>
-        <location filename="../assets/qml/StatusBar.qml" line="138"/>
-        <source>ZRTP secured call</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/StatusBar.qml" line="140"/>
-        <source>Accept</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/StatusBar.qml" line="141"/>
-        <source>Deny</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
