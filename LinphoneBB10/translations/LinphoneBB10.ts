@@ -79,14 +79,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
-        <source>Password is too short
-(6 characters minimum)</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
+        <source>Password is too short
+(6 characters minimum)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -690,23 +690,18 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>VideoSettingsView</name>
     <message>
-        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="31"/>
+        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="32"/>
         <source>Enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="42"/>
+        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="43"/>
         <source>Show preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="53"/>
+        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="54"/>
         <source>Preferred video size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="87"/>
-        <source>VP8</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

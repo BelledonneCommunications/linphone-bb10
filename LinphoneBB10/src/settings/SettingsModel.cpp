@@ -38,6 +38,13 @@ SettingsModel::SettingsModel(QObject *parent)
     }
 }
 
+void SettingsModel::setPayloadEnable(QString mime, int bitrate, bool enable) {
+    LinphonePayloadType *payload = linphone_core_find_payload_type(_manager->getLc(), mime.toUtf8().constData(), bitrate, LINPHONE_FIND_PAYLOAD_IGNORE_CHANNELS);
+    if (payload) {
+        int success = linphone_core_enable_payload_type(_manager->getLc(), payload, enable);
+    }
+}
+
 bool SettingsModel::debugEnabled() const {
     LpConfig *lpc = linphone_core_get_config(_manager->getLc());
     return lp_config_get_int(lpc, "app", "debug", 0) == 1;
@@ -53,6 +60,24 @@ void SettingsModel::setDebugEnabled(const bool& enabled) {
     LpConfig *lpc = linphone_core_get_config(_manager->getLc());
     lp_config_set_int(lpc, "app", "debug", enabled ? 1 : 0);
     lp_config_sync(lpc);
+}
+
+QVariantMap SettingsModel::audioCodecs() const {
+    QVariantMap codecs;
+
+    const MSList *payloads = linphone_core_get_audio_codecs(_manager->getLc());
+    while (payloads) {
+        PayloadType *payload = (PayloadType *) payloads->data;
+        QString codecName = QString("%1 (%2)").arg(payload->mime_type, QString::number(payload_type_get_rate(payload)));
+
+        QVariantList infos;
+        infos << linphone_core_payload_type_enabled(_manager->getLc(), payload) << payload->mime_type << payload_type_get_rate(payload);
+        codecs[codecName] = infos;
+
+        payloads = ms_list_next(payloads);
+    }
+
+    return codecs;
 }
 
 bool SettingsModel::videoSupported() const {
@@ -94,6 +119,24 @@ int SettingsModel::preferredVideoSizeIndex() const {
 
 void SettingsModel::setPreferredVideoSize(const QString& videoSize) {
     linphone_core_set_preferred_video_size_by_name(_manager->getLc(), videoSize.toLower().toUtf8().constData());
+}
+
+QVariantMap SettingsModel::videoCodecs() const {
+    QVariantMap codecs;
+
+    const MSList *payloads = linphone_core_get_video_codecs(_manager->getLc());
+    while (payloads) {
+        PayloadType *payload = (PayloadType *) payloads->data;
+        QString codecName = payload->mime_type;
+
+        QVariantList infos;
+        infos << linphone_core_payload_type_enabled(_manager->getLc(), payload) << payload->mime_type << payload_type_get_rate(payload);
+        codecs[codecName] = infos;
+
+        payloads = ms_list_next(payloads);
+    }
+
+    return codecs;
 }
 
 int SettingsModel::mediaEncryption() const {

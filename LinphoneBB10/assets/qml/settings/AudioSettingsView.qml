@@ -26,4 +26,23 @@ Container {
         orientation: LayoutOrientation.TopToBottom
     }
     horizontalAlignment: HorizontalAlignment.Fill
+    id: audioCodecsContainer
+    
+    attachedObjects: [                  
+        ComponentDefinition {                      
+            id: settingsToggle                       
+            source: "../custom_controls/CodecSettingsToggle.qml"             
+        }
+    ]
+    
+    onCreationCompleted: {
+        for (var codec in settingsModel.audioCodecs) {
+            var audioCodec = settingsToggle.createObject();
+            audioCodec.text = codec;
+            audioCodec.checked = settingsModel.audioCodecs[codec][0] == 1;
+            audioCodec.mime = settingsModel.audioCodecs[codec][1];
+            audioCodec.bitrate = settingsModel.audioCodecs[codec][2];
+            audioCodecsContainer.add(audioCodec);
+        }
+    }
 }

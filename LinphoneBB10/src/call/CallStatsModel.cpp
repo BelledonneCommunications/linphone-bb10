@@ -82,20 +82,20 @@ void CallStatsModel::updateStats(LinphoneCall *call)
     const LinphoneCallStats *audioStats = linphone_call_get_audio_stats(call);
     if (audioStats) {
         _iceStatus = IceStateToString(linphone_call_stats_get_ice_state(audioStats));
-        _downloadAudioBandwidth = QString("<html>&#x2193; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_download_bandwidth(audioStats), 10));
-        _uploadAudioBandwidth = QString("<html>&#x2191; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_upload_bandwidth(audioStats), 10));
+        _downloadAudioBandwidth = QString("<html>&#x2193; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_download_bandwidth(audioStats)));
+        _uploadAudioBandwidth = QString("<html>&#x2191; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_upload_bandwidth(audioStats)));
     }
 
     const LinphonePayloadType *audioPayload = linphone_call_params_get_used_audio_codec(params);
     if (audioPayload) {
-        _audioCodec = QString(linphone_payload_type_get_mime_type(audioPayload)) + "/" +  QString::number(linphone_payload_type_get_normal_bitrate(audioPayload), 10) + "/" + QString::number(linphone_payload_type_get_channels(audioPayload), 10);
+        _audioCodec = QString(linphone_payload_type_get_mime_type(audioPayload)) + "/" +  QString::number(payload_type_get_rate(audioPayload)) + "/" + QString::number(linphone_payload_type_get_channels(audioPayload));
     }
 
     if (linphone_call_params_video_enabled(params)) {
         const LinphoneCallStats *videoStats = linphone_call_get_video_stats(call);
         if (videoStats) {
-            _downloadVideoBandwidth = QString("<html>&#x2193; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_download_bandwidth(videoStats), 10));
-            _uploadVideoBandwidth = QString("<html>&#x2191; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_upload_bandwidth(videoStats), 10));
+            _downloadVideoBandwidth = QString("<html>&#x2193; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_download_bandwidth(videoStats)));
+            _uploadVideoBandwidth = QString("<html>&#x2191; %1 kbits/s</html>").arg(QString::number((int)linphone_call_stats_get_upload_bandwidth(videoStats)));
         }
 
         const LinphonePayloadType *videoPayload = linphone_call_params_get_used_video_codec(params);
@@ -105,11 +105,11 @@ void CallStatsModel::updateStats(LinphoneCall *call)
 
         MSVideoSize sentVideoSize = linphone_call_params_get_sent_video_size(params);
         float framerate = linphone_call_params_get_sent_framerate(params);
-        _sentVideoSize = QString("%1x%2 @ %3 fps").arg(QString::number(sentVideoSize.width, 10), QString::number(sentVideoSize.height, 10), QString::number((int)framerate, 10));
+        _sentVideoSize = QString("%1x%2 @ %3 fps").arg(QString::number(sentVideoSize.width), QString::number(sentVideoSize.height), QString::number((int)framerate));
 
         MSVideoSize receivedVideoSize = linphone_call_params_get_received_video_size(params);
         framerate = linphone_call_params_get_received_framerate(params);
-        _receivedVideoSize = QString("%1x%2 @ %3 fps").arg(QString::number(receivedVideoSize.width, 10), QString::number(receivedVideoSize.height, 10), QString::number((int)framerate, 10));
+        _receivedVideoSize = QString("%1x%2 @ %3 fps").arg(QString::number(receivedVideoSize.width), QString::number(receivedVideoSize.height), QString::number((int)framerate));
     }
 
     emit statsUpdated();

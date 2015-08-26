@@ -26,6 +26,7 @@ Container {
         orientation: LayoutOrientation.TopToBottom
     }
     horizontalAlignment: HorizontalAlignment.Fill
+    id: videoContainer
     
     SettingsToggle {
         text: qsTr("Enabled") + Retranslate.onLanguageChanged
@@ -79,14 +80,21 @@ Container {
         }
     }
     
-    CustomDivider {
-        
-    }
+    attachedObjects: [                  
+        ComponentDefinition {                      
+            id: settingsToggle                       
+            source: "../custom_controls/CodecSettingsToggle.qml"             
+        }
+    ]
     
-    SettingsToggle {
-        text: qsTr("VP8") + Retranslate.onLanguageChanged
-        checked: true
-        horizontalAlignment: HorizontalAlignment.Fill
-        enabled: false
+    onCreationCompleted: {
+        for (var codec in settingsModel.videoCodecs) {
+            var videoCodec = settingsToggle.createObject();
+            videoCodec.text = codec;
+            videoCodec.checked = settingsModel.videoCodecs[codec][0] == 1;
+            videoCodec.mime = settingsModel.videoCodecs[codec][1];
+            videoCodec.bitrate = settingsModel.videoCodecs[codec][2];
+            videoContainer.add(videoCodec);
+        }
     }
 }

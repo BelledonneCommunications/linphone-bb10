@@ -33,10 +33,13 @@ class SettingsModel : public QObject
 
     Q_PROPERTY(bool debugEnabled READ debugEnabled WRITE setDebugEnabled NOTIFY settingsUpdated);
 
+    Q_PROPERTY(QVariantMap audioCodecs READ audioCodecs);
+
     Q_PROPERTY(bool videoSupported READ videoSupported NOTIFY settingsUpdated);
     Q_PROPERTY(bool videoEnabled READ videoEnabled WRITE setVideoEnabled NOTIFY settingsUpdated);
     Q_PROPERTY(bool previewVisible READ previewVisible WRITE setPreviewVisible NOTIFY settingsUpdated);
     Q_PROPERTY(int preferredVideoSize READ preferredVideoSizeIndex NOTIFY settingsUpdated);
+    Q_PROPERTY(QVariantMap videoCodecs READ videoCodecs);
 
     Q_PROPERTY(bool isSrtpSupported READ isSrtpSupported NOTIFY settingsUpdated);
     Q_PROPERTY(bool isZrtpSupported READ isZrtpSupported NOTIFY settingsUpdated);
@@ -52,6 +55,7 @@ public:
 
 public Q_SLOTS:
     void setPreferredVideoSize(const QString& videoSize);
+    void setPayloadEnable(QString mime, int bitrate, bool enable);
 
 Q_SIGNALS:
     void settingsUpdated();
@@ -62,12 +66,15 @@ private:
     bool debugEnabled() const;
     void setDebugEnabled(const bool& enabled);
 
+    QVariantMap audioCodecs() const;
+
     bool videoSupported() const;
     bool videoEnabled() const;
     void setVideoEnabled(const bool& enabled);
     bool previewVisible() const;
     void setPreviewVisible(const bool& visible);
     int preferredVideoSizeIndex() const;
+    QVariantMap videoCodecs() const;
 
     bool isSrtpSupported() const {
         return _isSrtpSupported;
