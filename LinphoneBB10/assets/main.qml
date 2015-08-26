@@ -107,12 +107,11 @@ NavigationPane {
                         verticalAlignment: VerticalAlignment.Fill
                         horizontalAlignment: HorizontalAlignment.Fill
                         background: colors.colorC
-                        opacity: 0
+                        opacity: pageContent.translationX > 0 ? 0.9 : 0
                         
                         onTouch: {
                             if (pageContent.translationX > 0) {
                                 pageContent.translationX = 0;
-                                fadeContainer.opacity = 0;
                             }
                         }
                     }

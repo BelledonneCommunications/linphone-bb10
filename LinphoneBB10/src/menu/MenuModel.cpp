@@ -66,3 +66,42 @@ void MenuModel::setPicture(const QStringList &filePicked)
         lp_config_set_string(lp, "app", "avatar_url", _photo.toUtf8().constData());
     }
 }
+
+QVariantMap MenuModel::sipAccounts() const {
+    QVariantMap accounts;
+
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+    LinphoneProxyConfig *defaultProxyConfig = linphone_core_get_default_proxy_config(lc);
+    QString defaultProxyConfigSipUri = linphone_address_as_string_uri_only(linphone_proxy_config_get_identity_address(defaultProxyConfig));
+
+    const MSList *proxyConfigs = linphone_core_get_proxy_config_list(lc);
+    while (proxyConfigs) {
+        LinphoneProxyConfig *lpc = (LinphoneProxyConfig *) proxyConfigs->data;
+        QString sipUri = linphone_address_as_string_uri_only(linphone_proxy_config_get_identity_address(lpc));
+
+        if (defaultProxyConfigSipUri.compare(sipUri) != 0) { // The default proxy config is already displayed elsewhere
+            LinphoneRegistrationState state = linphone_proxy_config_get_state(lpc);
+            QString registerStatusImage;
+            switch (state) {
+                case LinphoneRegistrationOk:
+                    registerStatusImage = "/images/statusbar/led_connected.png";
+                    break;
+                case LinphoneRegistrationProgress:
+                    registerStatusImage = "/images/statusbar/led_inprogress.png";
+                    break;
+                case LinphoneRegistrationFailed:
+                    registerStatusImage = "/images/statusbar/led_error.png";
+                    break;
+                default:
+                    registerStatusImage = "/images/statusbar/led_disconnected.png";
+                    break;
+            }
+            accounts[sipUri] = registerStatusImage;
+        }
+
+        proxyConfigs = ms_list_next(proxyConfigs);
+    }
+
+    return accounts;
+}

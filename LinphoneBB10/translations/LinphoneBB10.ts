@@ -451,12 +451,12 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>InCallView</name>
     <message>
-        <location filename="../assets/qml/call/InCallView.qml" line="520"/>
+        <location filename="../assets/qml/call/InCallView.qml" line="519"/>
         <source>Deny</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/call/InCallView.qml" line="534"/>
+        <location filename="../assets/qml/call/InCallView.qml" line="533"/>
         <source>Accept</source>
         <translation type="unfinished"></translation>
     </message>
@@ -513,22 +513,22 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="111"/>
+        <location filename="../assets/qml/menu/Menu.qml" line="142"/>
         <source>Assistant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="126"/>
+        <location filename="../assets/qml/menu/Menu.qml" line="157"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="141"/>
+        <location filename="../assets/qml/menu/Menu.qml" line="172"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="177"/>
+        <location filename="../assets/qml/menu/Menu.qml" line="208"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>

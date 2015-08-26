@@ -41,7 +41,7 @@ SettingsModel::SettingsModel(QObject *parent)
 void SettingsModel::setPayloadEnable(QString mime, int bitrate, bool enable) {
     LinphonePayloadType *payload = linphone_core_find_payload_type(_manager->getLc(), mime.toUtf8().constData(), bitrate, LINPHONE_FIND_PAYLOAD_IGNORE_CHANNELS);
     if (payload) {
-        int success = linphone_core_enable_payload_type(_manager->getLc(), payload, enable);
+        linphone_core_enable_payload_type(_manager->getLc(), payload, enable);
     }
 }
 
@@ -68,7 +68,7 @@ QVariantMap SettingsModel::audioCodecs() const {
     const MSList *payloads = linphone_core_get_audio_codecs(_manager->getLc());
     while (payloads) {
         PayloadType *payload = (PayloadType *) payloads->data;
-        QString codecName = QString("%1 (%2)").arg(payload->mime_type, QString::number(payload_type_get_rate(payload)));
+        QString codecName = QString("%1 (%2 Hz)").arg(payload->mime_type, QString::number(payload_type_get_rate(payload)));
 
         QVariantList infos;
         infos << linphone_core_payload_type_enabled(_manager->getLc(), payload) << payload->mime_type << payload_type_get_rate(payload);

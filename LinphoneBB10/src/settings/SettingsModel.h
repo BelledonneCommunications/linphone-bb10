@@ -33,13 +33,13 @@ class SettingsModel : public QObject
 
     Q_PROPERTY(bool debugEnabled READ debugEnabled WRITE setDebugEnabled NOTIFY settingsUpdated);
 
-    Q_PROPERTY(QVariantMap audioCodecs READ audioCodecs);
+    Q_PROPERTY(QVariantMap audioCodecs READ audioCodecs NOTIFY settingsUpdated);
 
     Q_PROPERTY(bool videoSupported READ videoSupported NOTIFY settingsUpdated);
     Q_PROPERTY(bool videoEnabled READ videoEnabled WRITE setVideoEnabled NOTIFY settingsUpdated);
     Q_PROPERTY(bool previewVisible READ previewVisible WRITE setPreviewVisible NOTIFY settingsUpdated);
     Q_PROPERTY(int preferredVideoSize READ preferredVideoSizeIndex NOTIFY settingsUpdated);
-    Q_PROPERTY(QVariantMap videoCodecs READ videoCodecs);
+    Q_PROPERTY(QVariantMap videoCodecs READ videoCodecs NOTIFY settingsUpdated);
 
     Q_PROPERTY(bool isSrtpSupported READ isSrtpSupported NOTIFY settingsUpdated);
     Q_PROPERTY(bool isZrtpSupported READ isZrtpSupported NOTIFY settingsUpdated);

@@ -33,6 +33,8 @@ class MenuModel : public QObject
     Q_PROPERTY(QString sipUri READ sipUri NOTIFY defaultAccountUpdated);
     Q_PROPERTY(QString photo READ photo NOTIFY defaultAccountUpdated);
 
+    Q_PROPERTY(QVariantMap sipAccounts READ sipAccounts);
+
 public:
     MenuModel(QObject *parent = NULL);
 
@@ -58,6 +60,8 @@ private:
         return _photo;
     }
     QString _photo;
+
+    QVariantMap sipAccounts() const;
 };
 
 #endif /* MENUMODEL_H_ */

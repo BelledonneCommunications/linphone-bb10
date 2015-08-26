@@ -36,8 +36,34 @@ Container {
             onFileSelected: {
                 menuModel.setPicture(selectedFiles);
             }
+        },
+        ComponentDefinition {                      
+            id: accountMenuItem                       
+            source: "AccountSettingsMenuItem.qml"             
+        },
+        ComponentDefinition {                      
+            id: customDivider                       
+            source: "../custom_controls/CustomDivider.qml"             
         }
     ]
+    
+    function registrationStatusChanged(state) {
+        otherAccountsContainer.removeAll();
+        
+        for (var sipAccount in menuModel.sipAccounts) {
+            var account = accountMenuItem.createObject();
+            account.text = sipAccount;
+            account.imageSource = menuModel.sipAccounts[sipAccount];
+            otherAccountsContainer.add(account);
+            
+            var divider = customDivider.createObject();
+            otherAccountsContainer.add(divider);
+        }
+    }
+    
+    onCreationCompleted: {
+        linphoneManager.registrationStatusChanged.connect(registrationStatusChanged);
+    }
 
     Container {
         layout: StackLayout {
@@ -105,6 +131,11 @@ Container {
             
             CustomDivider {
             
+            }
+            
+            Container {
+                id: otherAccountsContainer
+                horizontalAlignment: HorizontalAlignment.Fill
             }
             
             MenuItem {

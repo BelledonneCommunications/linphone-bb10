@@ -54,10 +54,8 @@ Container {
                 onClicked: {
                     if (pageContent.translationX == 0) {
                         pageContent.translationX = menu.minWidth;
-                        fadeContainer.opacity = 0.9;
                     } else {
                         pageContent.translationX = 0;
-                        fadeContainer.opacity = 0;
                     }
                 }
             }
@@ -72,10 +70,8 @@ Container {
                 onClicked: {
                     if (callPageContent.translationX == 0) {
                         callPageContent.translationX = statsMenu.minWidth;
-                        callFadeContainer.opacity = 0.9;
                     } else {
                         callPageContent.translationX = 0;
-                        callFadeContainer.opacity = 0;
                     }
                 }
             }

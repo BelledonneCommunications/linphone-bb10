@@ -470,12 +470,11 @@ Page {
                     verticalAlignment: VerticalAlignment.Fill
                     horizontalAlignment: HorizontalAlignment.Fill
                     background: colors.colorC
-                    opacity: 0
+                    opacity: callPageContent.translationX > 0 ? 0.9 : 0
                     
                     onTouch: {
                         if (callPageContent.translationX > 0) {
                             callPageContent.translationX = 0;
-                            callFadeContainer.opacity = 0;
                         }
                     }
                 }
@@ -552,7 +551,6 @@ Page {
     
     function callEnded(call) {
         callPageContent.translationX = 0;
-        callFadeContainer.opacity = 0;
     }
     
     onCreationCompleted: {
