@@ -36,6 +36,10 @@ NavigationPane {
     onPopTransitionEnded: {
         page.destroy();
     }
+    
+    onPushTransitionEnded: {
+        pageContent.translationX = 0;
+    }
 
     Page {
         Container {
