@@ -36,6 +36,14 @@ under GNU Public License V2</source>
     </message>
 </context>
 <context>
+    <name>AccountSettingsView</name>
+    <message>
+        <location filename="../assets/qml/settings/AccountSettingsView.qml" line="55"/>
+        <source>ACCOUNT</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AssistantConfirmAccountActivationView</name>
     <message>
         <location filename="../assets/qml/assistant/AssistantConfirmAccountActivationView.qml" line="33"/>

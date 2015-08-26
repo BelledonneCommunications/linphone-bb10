@@ -77,7 +77,7 @@ LinphoneCore* LinphoneManager::getLc()
 }
 
 void LinphoneManager::call(QString sipUri) {
-    LinphoneAddress *addr = linphone_core_interpret_url(_lc, QStringToChar(sipUri));
+    LinphoneAddress *addr = linphone_core_interpret_url(_lc, sipUri.toUtf8().constData());
     if (addr) {
         linphone_core_invite_address(_lc, addr);
     }
@@ -261,7 +261,7 @@ void LinphoneManager::startLinphoneCoreIterate()
 
 void LinphoneManager::createAndStartLinphoneCore()
 {
-    char* linphoneRC = QStringToChar(moveLinphoneRcToRWFolder());
+    char* linphoneRC = strdup(moveLinphoneRcToRWFolder().toUtf8().data());
     LpConfig *lpc = lp_config_new(linphoneRC);
 
     bool debugEnabled = lp_config_get_int(lpc, "app", "debug", 0) == 1;
@@ -291,10 +291,10 @@ void LinphoneManager::createAndStartLinphoneCore()
     linphone_core_set_ring(_lc, "app/native/assets/sounds/oldphone_mono.wav");
 
     QString chatMessagesDatabase = QDir::homePath() + "/chat.db";
-    linphone_core_set_chat_database_path(_lc, QStringToChar(chatMessagesDatabase));
+    linphone_core_set_chat_database_path(_lc, strdup(chatMessagesDatabase.toUtf8().constData()));
 
     QString zrtpCache = QDir::homePath() + "/zrtp_secrets";
-    linphone_core_set_zrtp_secrets_file(_lc, zrtpCache.toUtf8().constData());
+    linphone_core_set_zrtp_secrets_file(_lc, strdup(zrtpCache.toUtf8().constData()));
 
     updateUnreadChatMessagesCount();
     startLinphoneCoreIterate();

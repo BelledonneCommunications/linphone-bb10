@@ -208,6 +208,10 @@ NavigationPane {
             id: about
             source: "qml/menu/AboutView.qml"
         },
+        ComponentDefinition {
+            id: accountSettings
+            source: "qml/settings/AccountSettingsView.qml"
+        },
         TextStyleDefinition {
             id: titilliumWeb
             base: SystemDefaults.TextStyles.BodyText

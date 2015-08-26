@@ -25,12 +25,6 @@
 #include "Misc.h"
 #include "src/linphone/LinphoneManager.h"
 
-char* QStringToChar(QString string)
-{
-    QByteArray byte = string.toUtf8();
-    return strdup(byte.data());
-}
-
 const char* GetDisplayNameFromLinphoneAddress(const LinphoneAddress *address)
 {
     const char *displayName = linphone_address_get_display_name(address);
@@ -39,6 +33,12 @@ const char* GetDisplayNameFromLinphoneAddress(const LinphoneAddress *address)
     if (!displayName)
         displayName = linphone_address_as_string_uri_only(address);
     return displayName;
+}
+
+const char* GetAddressFromLinphoneAddress(const LinphoneAddress *address)
+{
+    char *addr = linphone_address_as_string_uri_only(address);
+    return addr + 4;
 }
 
 QString GetTime(time_t time)

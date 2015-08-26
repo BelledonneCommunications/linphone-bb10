@@ -30,6 +30,8 @@ using namespace bb::pim::contacts;
 ContactModel::ContactModel(QObject *parent)
     : QObject(parent),
       _contactId(-1),
+      _displayName(""),
+      _photo(""),
       _isSipContact(false),
       _dataModel(new GroupDataModel(this))
 {

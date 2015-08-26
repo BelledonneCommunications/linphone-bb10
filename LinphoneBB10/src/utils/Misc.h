@@ -27,8 +27,8 @@
 
 #include "linphone/linphonecore.h"
 
-char* QStringToChar(QString string);
 const char* GetDisplayNameFromLinphoneAddress(const LinphoneAddress *address);
+const char* GetAddressFromLinphoneAddress(const LinphoneAddress *address);
 QString GetTime(time_t time);
 QString FormatDateForHistoryList(time_t time);
 QString FormatDateForHistoryLog(time_t time);

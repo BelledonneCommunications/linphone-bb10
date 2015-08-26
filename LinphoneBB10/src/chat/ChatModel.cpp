@@ -89,7 +89,7 @@ bool ChatModel::setSelectedConversationSipAddress(QString sipAddress)
 
         LinphoneManager *manager = LinphoneManager::getInstance();
         LinphoneCore *lc = manager->getLc();
-        LinphoneAddress *address = linphone_core_interpret_url(lc, QStringToChar(sipAddress));
+        LinphoneAddress *address = linphone_core_interpret_url(lc, sipAddress.toUtf8().constData());
         if (!address) {
             return false;
         }
@@ -135,7 +135,7 @@ static void onMessageStateChanged(LinphoneChatMessage *msg, LinphoneChatMessageS
 void ChatModel::sendMessage(QString message)
 {
     if (_room) {
-        LinphoneChatMessage *msg = linphone_chat_room_create_message(_room, QStringToChar(message));
+        LinphoneChatMessage *msg = linphone_chat_room_create_message(_room, message.toUtf8().constData());
         linphone_chat_room_send_message2(_room, msg, onMessageStateChanged, this);
         emit messageSent(_room, msg);
     }
@@ -364,15 +364,16 @@ void ChatModel::onFilePicked(const QStringList &filePicked)
             linphone_content_set_type(content, "image");
             linphone_content_set_subtype(content, "jpeg");
             linphone_content_set_size(content, file.size());
-            linphone_content_set_name(content, QStringToChar(infos.fileName()));
+            linphone_content_set_name(content, infos.fileName().toUtf8().constData());
             LinphoneChatMessage *message = linphone_chat_room_create_file_transfer_message(_room, content);
 
             LinphoneChatMessageCbs *cbs = linphone_chat_message_get_callbacks(message);
             linphone_chat_message_cbs_set_msg_state_changed(cbs, file_transfer_upload_state_changed);
             linphone_chat_message_cbs_set_file_transfer_progress_indication(cbs, file_transfer_upload_progress_indication);
 
-            linphone_chat_message_set_file_transfer_filepath(message, QStringToChar(localFile));
-            linphone_chat_message_set_appdata(message, QStringToChar(localFile));
+            const char *localFilePath = strdup(localFile.toUtf8().constData());
+            linphone_chat_message_set_file_transfer_filepath(message, localFilePath);
+            linphone_chat_message_set_appdata(message, localFilePath);
             linphone_chat_message_set_user_data(message, this);
             linphone_chat_room_send_chat_message(_room, message);
             emit messageSent(_room, message);
@@ -425,7 +426,7 @@ void ChatModel::downloadFile(QVariant entry)
     linphone_chat_message_cbs_set_msg_state_changed(cbs, file_transfer_download_state_changed);
     linphone_chat_message_cbs_set_file_transfer_progress_indication(cbs, file_transfer_download_progress_indication);
 
-    const char *downloadedFile = QStringToChar(file);
+    const char *downloadedFile = strdup(file.toUtf8().constData());
     linphone_chat_message_set_file_transfer_filepath(message, downloadedFile);
     linphone_chat_message_download_file(message);
 }

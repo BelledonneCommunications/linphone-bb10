@@ -172,8 +172,8 @@ void InCallModel::switchFullScreenMode()
 
 void InCallModel::onVideoSurfaceCreationCompleted(QString id, QString group)
 {
-    window_group = QStringToChar(group);
-    window_id = QStringToChar(id);
+    window_group = strdup(group.toUtf8().constData());
+    window_id = strdup(id.toUtf8().constData());
 
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
@@ -214,7 +214,7 @@ void InCallModel::callStateChanged(LinphoneCall *call) {
             _displayName = GetDisplayNameFromLinphoneAddress(addr);
             _photo = "/images/avatar.png";
         }
-        _sipUri = linphone_address_as_string_uri_only(addr);
+        _sipUri = GetAddressFromLinphoneAddress(addr);
     } else if (state == LinphoneCallEnd || state == LinphoneCallError) {
         if (_statsTimer->isActive()) {
             _statsTimer->stop();

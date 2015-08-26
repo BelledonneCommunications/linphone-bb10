@@ -48,7 +48,7 @@ void NotificationManager::notifyIncomingCall(LinphoneCall *call)
     } else {
         displayName = GetDisplayNameFromLinphoneAddress(addr);
     }
-    QString sipUri = linphone_address_as_string_uri_only(addr);
+    QString sipUri = GetAddressFromLinphoneAddress(addr);
 
     InvokeRequest invokeRequest;
     invokeRequest.setTarget("org.linphone.invoke");

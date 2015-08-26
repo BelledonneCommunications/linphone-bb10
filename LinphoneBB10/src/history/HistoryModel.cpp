@@ -53,7 +53,7 @@ void HistoryModel::setSelectedHistoryLog(LinphoneCallLog *log) {
         _photo = "/images/avatar.png";
     }
 
-    _sipUri = linphone_address_as_string_uri_only(addr);
+    _sipUri = GetAddressFromLinphoneAddress(addr);
     _linphoneAddress = linphone_address_as_string(addr);
 
     if (linphone_call_log_get_status(log) == LinphoneCallMissed) {

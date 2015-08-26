@@ -36,7 +36,7 @@ static QVariantMap LogToQVariantMap(LinphoneCallLog *log)
     entry["log"] = QVariant::fromValue<LinphoneCallLog*>(log);
 
     LinphoneAddress *addr = linphone_call_log_get_remote_address(log);
-    entry["remote"] = linphone_address_as_string_uri_only(addr);
+    entry["remote"] = GetAddressFromLinphoneAddress(addr);
 
     entry["displayName"] = GetDisplayNameFromLinphoneAddress(addr);
     entry["contactPhoto"] = "/images/avatar.png";

@@ -43,4 +43,11 @@ Container {
         scalingMethod: ScalingMethod.AspectFit
         imageSource: "asset:///images/presence/status_disconnected.png"
     }
+    
+    gestureHandlers: TapHandler {
+        onTapped: {
+            var accountPage = accountSettings.createObject();
+            navigationPane.push(accountPage);
+        }
+    }
 }

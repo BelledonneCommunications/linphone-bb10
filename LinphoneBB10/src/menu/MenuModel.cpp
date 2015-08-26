@@ -48,7 +48,7 @@ void MenuModel::updateAccount() {
     if (lpc != NULL) {
         const LinphoneAddress *identity = linphone_proxy_config_get_identity_address(lpc);
         _displayName = GetDisplayNameFromLinphoneAddress(identity);
-        _sipUri = linphone_address_as_string_uri_only(identity);
+        _sipUri = GetAddressFromLinphoneAddress(identity);
 
         emit defaultAccountUpdated();
     }
@@ -73,14 +73,13 @@ QVariantMap MenuModel::sipAccounts() const {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
     LinphoneProxyConfig *defaultProxyConfig = linphone_core_get_default_proxy_config(lc);
-    QString defaultProxyConfigSipUri = linphone_address_as_string_uri_only(linphone_proxy_config_get_identity_address(defaultProxyConfig));
 
     const MSList *proxyConfigs = linphone_core_get_proxy_config_list(lc);
     while (proxyConfigs) {
         LinphoneProxyConfig *lpc = (LinphoneProxyConfig *) proxyConfigs->data;
-        QString sipUri = linphone_address_as_string_uri_only(linphone_proxy_config_get_identity_address(lpc));
 
-        if (defaultProxyConfigSipUri.compare(sipUri) != 0) { // The default proxy config is already displayed elsewhere
+        if (!AreProxyConfigsTheSame(defaultProxyConfig, lpc)) { // The default proxy config is already displayed elsewhere
+            QString sipUri = GetAddressFromLinphoneAddress(linphone_proxy_config_get_identity_address(lpc));
             LinphoneRegistrationState state = linphone_proxy_config_get_state(lpc);
             QString registerStatusImage;
             switch (state) {
