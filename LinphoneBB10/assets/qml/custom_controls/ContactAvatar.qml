@@ -20,20 +20,12 @@
 import bb.cascades 1.4
 
 Container {
-    property int minW
-    property int maxW
-    property int minH
-    property int maxH
     property alias imageSource: contact.imageSource
-    property alias color: mask.filterColor
+    property alias filterColor: mask.filterColor
     
     layout: DockLayout {
     
     }
-    minWidth: minW
-    minHeight: minH
-    maxWidth: maxW
-    maxHeight: maxH
     
     Container {
         layout: DockLayout {

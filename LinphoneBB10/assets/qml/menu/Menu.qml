@@ -81,7 +81,7 @@ Container {
             maxWidth: ui.sdu(13)
             minWidth: ui.sdu(13)
             verticalAlignment: VerticalAlignment.Center
-            color: colors.colorF
+            filterColor: colors.colorF
             
             gestureHandlers: TapHandler {
                 onTapped: {

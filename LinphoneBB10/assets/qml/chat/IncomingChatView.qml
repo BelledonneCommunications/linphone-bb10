@@ -78,7 +78,7 @@ Container {
                     minHeight: ui.sdu(13)
                     maxWidth: ui.sdu(13)
                     minWidth: ui.sdu(13)
-                    color: Qt.colors.colorG
+                    filterColor: Qt.colors.colorG
                 }
                 
                 Container {

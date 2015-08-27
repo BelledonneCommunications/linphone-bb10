@@ -20,55 +20,25 @@
 import bb.cascades 1.4
 
 Container {
-    property int minW
-    property int maxW
-    property int minH
-    property int maxH
-    property alias imageSource: contact.imageSource
-    property alias color: mask.filterColor
+    property alias imageSource: avatar.imageSource
+    property alias filterColor: avatar.filterColor
     
     layout: DockLayout {
     
     }
-    minWidth: minW
-    minHeight: minH
-    maxWidth: maxW
-    maxHeight: maxH
     
-    Container {
-        layout: DockLayout {
-        
-        }
-        topPadding: 1
-        bottomPadding: 1
-        leftPadding: 1
-        rightPadding: 1
-        horizontalAlignment: HorizontalAlignment.Fill
-        verticalAlignment: VerticalAlignment.Fill
-        
-        ImageView {
-            id: contact
-            horizontalAlignment: HorizontalAlignment.Fill
-            verticalAlignment: VerticalAlignment.Fill
-            scalingMethod: ScalingMethod.AspectFill
-            imageSource: "asset:///images/avatar.png"
-        }
+    ContactAvatar {
+        id: avatar
+        minWidth: parent.maxWidth
+        maxWidth: parent.maxWidth
+        minHeight: parent.maxHeight
+        maxHeight: parent.maxHeight
     }
     
     ImageView {
-        id: mask
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         scalingMethod: ScalingMethod.AspectFill
-        imageSource: "asset:///images/avatar_mask.png"
-    }
-    
-    ImageView {
-        id: border
-        horizontalAlignment: HorizontalAlignment.Fill
-        verticalAlignment: VerticalAlignment.Fill
-        scalingMethod: ScalingMethod.AspectFill
-        imageSource: "asset:///images/call/avatar_incall_mask.png"
-        filterColor: colors.colorA
+        imageSource: "asset:///images/call/avatar_mask_border.png"
     }
 }

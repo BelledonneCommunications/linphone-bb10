@@ -74,7 +74,7 @@ Container {
                 
                 ContactAvatar {
                     id: photo
-                    color: Qt.colors.colorA15 
+                    filterColor: Qt.colors.colorA15 
                     imageSource: ListItemData.contactPhoto
                     maxHeight: ui.sdu(13)
                     minHeight: ui.sdu(13)
