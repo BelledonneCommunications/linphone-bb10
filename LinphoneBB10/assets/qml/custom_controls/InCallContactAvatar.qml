@@ -29,10 +29,8 @@ Container {
     
     ContactAvatar {
         id: avatar
-        minWidth: parent.maxWidth
-        maxWidth: parent.maxWidth
-        minHeight: parent.maxHeight
-        maxHeight: parent.maxHeight
+        horizontalAlignment: HorizontalAlignment.Fill
+        verticalAlignment: VerticalAlignment.Fill
     }
     
     ImageView {
