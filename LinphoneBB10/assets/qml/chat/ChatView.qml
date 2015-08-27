@@ -27,7 +27,7 @@ Container {
     attachedObjects: [
         FilePicker {
             id: filePicker
-            type: FileType.Picture
+            type: FileType.Picture + FileType.Document + FileType.Music + FileType.Video + FileType.Other
             mode: FilePickerMode.Picker
             title: qsTr("Select picture") + Retranslate.onLanguageChanged
             onFileSelected: {

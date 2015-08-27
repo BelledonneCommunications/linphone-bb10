@@ -214,7 +214,7 @@ void InCallModel::callStateChanged(LinphoneCall *call) {
             _displayName = GetDisplayNameFromLinphoneAddress(addr);
             _photo = "/images/avatar.png";
         }
-        _sipUri = GetAddressFromLinphoneAddress(addr);
+        _sipUri = linphone_address_as_string_uri_only(addr);
     } else if (state == LinphoneCallEnd || state == LinphoneCallError) {
         if (_statsTimer->isActive()) {
             _statsTimer->stop();

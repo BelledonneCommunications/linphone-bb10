@@ -616,27 +616,27 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/Misc.cpp" line="124"/>
+        <location filename="../src/utils/Misc.cpp" line="123"/>
         <source>In progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/Misc.cpp" line="127"/>
+        <location filename="../src/utils/Misc.cpp" line="125"/>
         <source>Host</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/Misc.cpp" line="130"/>
+        <location filename="../src/utils/Misc.cpp" line="127"/>
         <source>Reflexive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/Misc.cpp" line="133"/>
+        <location filename="../src/utils/Misc.cpp" line="129"/>
         <source>Relay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/Misc.cpp" line="136"/>
+        <location filename="../src/utils/Misc.cpp" line="131"/>
         <source>Not activated</source>
         <translation type="unfinished"></translation>
     </message>
