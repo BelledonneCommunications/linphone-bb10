@@ -124,6 +124,12 @@ Container {
                         }
                     }
                 }
+                
+                ImageView {
+                    imageSource: ListItemData.deliveryState
+                    verticalAlignment: VerticalAlignment.Top
+                    horizontalAlignment: HorizontalAlignment.Right
+                }
             }
             
             Container {

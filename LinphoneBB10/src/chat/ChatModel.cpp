@@ -148,6 +148,7 @@ static QVariantMap updateFileTransferInformations(QVariantMap entry, LinphoneCha
     bool isFileTransfer = content || external_body_url;
     entry["isFileTransferMessage"] = isFileTransfer;
     const char *appData = linphone_chat_message_get_appdata(message);
+
     bool isAlreadyDownloaded = appData != NULL;
     entry["isImageDownloaded"] = isAlreadyDownloaded;
     if (isFileTransfer) {
@@ -157,6 +158,21 @@ static QVariantMap updateFileTransferInformations(QVariantMap entry, LinphoneCha
             entry["imageSource"] = "file://" + QString(appData);
         }
     }
+
+    return entry;
+}
+
+static QVariantMap setMessageDeliveryState(QVariantMap entry, LinphoneChatMessage *message)
+{
+    LinphoneChatMessageState state = linphone_chat_message_get_state(message);
+    QString stateImage = "/images/chat/chat_message_not_delivered.png";
+    if (state == LinphoneChatMessageStateInProgress) {
+        stateImage = "/images/chat/chat_message_inprogress.png";
+    } else if (state == LinphoneChatMessageStateDelivered) {
+        stateImage = "/images/chat/chat_message_delivered.png";
+    }
+
+    entry["deliveryState"] = stateImage;
     return entry;
 }
 
@@ -198,6 +214,8 @@ static QVariantMap fillEntryWithMessageValues(QVariantMap entry, LinphoneChatMes
 
     entry = updateFileTransferInformations(entry, message, -1, ProgressIndicatorState::Progress);
 
+    entry = setMessageDeliveryState(entry, message);
+
     entry["selected"] = false;
     return entry;
 }
@@ -233,6 +251,7 @@ void ChatModel::updateMessage(LinphoneChatMessage *message, int downloadProgress
         if (linphone_chat_message_get_storage_id(message) == linphone_chat_message_get_storage_id(msg)) {
             QVariantList indexPath = _dataModel->findExact(entry);
             entry = updateFileTransferInformations(entry, message, downloadProgress, progressStatus);
+            entry = setMessageDeliveryState(entry, message);
             _dataModel->updateItem(indexPath, entry);
             break;
         }
