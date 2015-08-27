@@ -25,6 +25,7 @@ Container {
     CustomButton {
         text: qsTr("CANCEL") + Retranslate.onLanguageChanged
         imageSource: "asset:///images/resizable_cancel_button.amd"
+        pressedImageSource: "asset:///images/resizable_cancel_button_over.amd"
         textStyle.color: colors.colorC
         textStyle.base: titilliumWeb.style
         

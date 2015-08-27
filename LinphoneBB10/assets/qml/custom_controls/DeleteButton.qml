@@ -25,6 +25,7 @@ Container {
     CustomButton {
         text: qsTr("DELETE") + Retranslate.onLanguageChanged
         imageSource: "asset:///images/resizable_confirm_delete_button.amd"
+        pressedImageSource: "asset:///images/resizable_confirm_delete_button_over.amd"
         textStyle.color: colors.colorH
         textStyle.base: titilliumWeb.style
         

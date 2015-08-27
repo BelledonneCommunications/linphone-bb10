@@ -34,16 +34,19 @@ Container {
         NumpadDigit {
             digitValue: "1"
             imageSource: "asset:///images/dialer/numpad_1.png"
+            pressedImageSource: "asset:///images/dialer/numpad_1_over.png"
         }
         
         NumpadDigit {
             digitValue: "2"
             imageSource: "asset:///images/dialer/numpad_2.png"
+            pressedImageSource: "asset:///images/dialer/numpad_2_over.png"
         }
         
         NumpadDigit {
             digitValue: "3"
             imageSource: "asset:///images/dialer/numpad_3.png"
+            pressedImageSource: "asset:///images/dialer/numpad_3_over.png"
         }
     }
     
@@ -58,16 +61,19 @@ Container {
         NumpadDigit {
             digitValue: "4"
             imageSource: "asset:///images/dialer/numpad_4.png"
+            pressedImageSource: "asset:///images/dialer/numpad_4_over.png"
         }
         
         NumpadDigit {
             digitValue: "5"
             imageSource: "asset:///images/dialer/numpad_5.png"
+            pressedImageSource: "asset:///images/dialer/numpad_5_over.png"
         }
         
         NumpadDigit {
             digitValue: "6"
             imageSource: "asset:///images/dialer/numpad_6.png"
+            pressedImageSource: "asset:///images/dialer/numpad_6_over.png"
         }
     }
     
@@ -82,16 +88,19 @@ Container {
         NumpadDigit {
             digitValue: "7"
             imageSource: "asset:///images/dialer/numpad_7.png"
+            pressedImageSource: "asset:///images/dialer/numpad_7_over.png"
         }
         
         NumpadDigit {
             digitValue: "8"
             imageSource: "asset:///images/dialer/numpad_8.png"
+            pressedImageSource: "asset:///images/dialer/numpad_8_over.png"
         }
         
         NumpadDigit {
             digitValue: "9"
             imageSource: "asset:///images/dialer/numpad_9.png"
+            pressedImageSource: "asset:///images/dialer/numpad_9_over.png"
         }
     }
     
@@ -106,17 +115,20 @@ Container {
         NumpadDigit {
             digitValue: "*"
             imageSource: "asset:///images/dialer/numpad_star.png"
+            pressedImageSource: "asset:///images/dialer/numpad_star_over.png"
         }
         
         NumpadDigit {
             digitValue: "0"
             longPressValue: "+"
             imageSource: "asset:///images/dialer/numpad_0.png"
+            pressedImageSource: "asset:///images/dialer/numpad_0_over.png"
         }
         
         NumpadDigit {
             digitValue: "#"
             imageSource: "asset:///images/dialer/numpad_hash.png"
+            pressedImageSource: "asset:///images/dialer/numpad_hash_over.png"
         }
     }
 }

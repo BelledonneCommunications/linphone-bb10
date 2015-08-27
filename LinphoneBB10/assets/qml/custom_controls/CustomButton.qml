@@ -22,6 +22,7 @@ import bb.cascades 1.4
 Container {
     property alias text: label.text
     property alias imageSource: image.imageSource
+    property alias pressedImageSource: pressedImage.imageSource
     property alias textStyle: label.textStyle
     
     signal buttonClicked()
@@ -34,6 +35,25 @@ Container {
         id: image
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
+    }
+    
+    ImageView {
+        id: pressedImage
+        visible: !image.visible
+        horizontalAlignment: HorizontalAlignment.Fill
+        verticalAlignment: VerticalAlignment.Fill
+    }
+    
+    onTouch: {
+        if (event.isDown() || event.isMove()) {
+            image.visible = false;
+        } else if (event.isUp() || event.isCancel()) {
+            image.visible = true;
+        }
+    }
+    
+    onTouchExit: {
+        image.visible = true;
     }
     
     Container {

@@ -23,6 +23,7 @@ Container {
     property string digitValue
     property string longPressValue
     property alias imageSource: digit.imageSource
+    property alias pressedImageSource: pressedDigit.imageSource
     
     layoutProperties: StackLayoutProperties {
         spaceQuota: 1
@@ -44,18 +45,30 @@ Container {
     onTouch: {
         if (event.isDown()) {
             linphoneManager.playDtmf(digitValue);
+            digit.visible = false;
         } else if (event.isUp() || event.isCancel()) {
             linphoneManager.stopDtmf();
+            digit.visible = true;
+        } else if (event.isMove()) {
+            digit.visible = false;
         }
     }
     
     onTouchExit: {
         linphoneManager.stopDtmf();
+        digit.visible = true;
     }
 
     ImageView {
         id: digit
         horizontalAlignment: HorizontalAlignment.Center
         imageSource: "asset:///images/dialer/numpad_1.png"
+    }
+    
+    ImageView {
+        id: pressedDigit
+        visible: !digit.visible
+        horizontalAlignment: HorizontalAlignment.Center
+        imageSource: "asset:///images/dialer/numpad_1_over.png"
     }
 }

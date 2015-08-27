@@ -244,8 +244,8 @@ Container {
         ImageButton {
             verticalAlignment: VerticalAlignment.Center
             horizontalAlignment: HorizontalAlignment.Center
-            defaultImageSource: "asset:///images/chat/chat_picture_default.png"
-            pressedImageSource: "asset:///images/chat/chat_picture_over.png"
+            defaultImageSource: "asset:///images/chat/chat_attachment_default.png"
+            pressedImageSource: "asset:///images/chat/chat_attachment_over.png"
             opacity: enabled ? 1 : 0.2
             
             onClicked: {

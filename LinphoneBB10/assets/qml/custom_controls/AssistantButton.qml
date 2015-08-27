@@ -28,6 +28,7 @@ Container {
     CustomButton {
         id: button
         imageSource: "asset:///images/assistant/resizable_assistant_button.amd"
+        pressedImageSource: "asset:///images/assistant/resizable_assistant_button_over.amd"
         textStyle.color: colors.colorC
         textStyle.base: titilliumWeb.style
 

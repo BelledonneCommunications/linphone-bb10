@@ -31,8 +31,8 @@ Container {
     CustomImageToggle {
         verticalAlignment: VerticalAlignment.Top
         horizontalAlignment: HorizontalAlignment.Center
-        imageSource: "asset:///images/checkbox_default.png"
-        selectedImageSource: "asset:///images/checkbox_selected.png"
+        imageSource: "asset:///images/checkbox_unchecked.png"
+        selectedImageSource: "asset:///images/checkbox_checked.png"
         selected: ListItemData.selected
         minWidth: ui.sdu(4)
         
