@@ -24,6 +24,7 @@ Container {
     property alias inputMode: textfield.inputMode
     property alias input: textfield.input
     property alias textStyle: textfield.textStyle
+    property alias hintText: textfield.hintText
     
     signal textFieldChanging(string text)
     

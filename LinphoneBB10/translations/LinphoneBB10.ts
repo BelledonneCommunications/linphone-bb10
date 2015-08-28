@@ -545,12 +545,12 @@ You should only accept if you have the same token as your correspondent.</source
     <name>NetworkSettingsView</name>
     <message>
         <location filename="../assets/qml/settings/NetworkSettingsView.qml" line="37"/>
-        <location filename="../assets/qml/settings/NetworkSettingsView.qml" line="49"/>
+        <location filename="../assets/qml/settings/NetworkSettingsView.qml" line="52"/>
         <source>STUN server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/NetworkSettingsView.qml" line="62"/>
+        <location filename="../assets/qml/settings/NetworkSettingsView.qml" line="64"/>
         <source>Enable ICE</source>
         <translation type="unfinished"></translation>
     </message>
