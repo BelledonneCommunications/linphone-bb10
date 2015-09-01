@@ -28,7 +28,6 @@ Container {
     minHeight: ui.sdu(10)
     leftPadding: ui.sdu(2)
     bottomMargin: 2
-    background: Color.White
     horizontalAlignment: HorizontalAlignment.Fill
     
     Label {

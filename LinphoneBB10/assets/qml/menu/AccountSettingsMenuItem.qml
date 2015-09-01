@@ -29,6 +29,7 @@ Container {
     horizontalAlignment: HorizontalAlignment.Fill
     maxWidth: ui.sdu(75)
     rightPadding: ui.sdu(2)
+    background: colors.colorG
     
     MenuItem {
         id: menuItem
