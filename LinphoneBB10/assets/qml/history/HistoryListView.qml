@@ -274,7 +274,7 @@ Container {
         onTriggered: {
             if (indexPath.length > 1 && !historyListModel.editor.isEditMode) {
                 var selectedItem = dataModel.data(indexPath);
-                linphoneManager.call(selectedItem.remote);
+                linphoneManager.call(selectedItem.linphoneAddress);
             }
         }
         

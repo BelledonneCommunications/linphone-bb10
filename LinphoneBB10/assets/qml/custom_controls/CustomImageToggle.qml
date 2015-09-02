@@ -37,7 +37,6 @@ Container {
         horizontalAlignment: HorizontalAlignment.Center
         verticalAlignment: VerticalAlignment.Center
         scalingMethod: ScalingMethod.AspectFit
-        imageSource: "asset:///images/hub_icon.png"
     }
     
     ImageView {
@@ -46,6 +45,5 @@ Container {
         horizontalAlignment: HorizontalAlignment.Center
         verticalAlignment: VerticalAlignment.Center
         scalingMethod: ScalingMethod.AspectFit
-        imageSource: "asset:///images/hub_icon.png"
     }
 }

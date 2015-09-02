@@ -46,8 +46,6 @@ Container {
     CustomImageToggle {
         id: image
         selected: selection.visible
-        imageSource: "asset:///images/hub_icon.png"
-        selectedImageSource: "asset:///images/hub_icon.png"
         horizontalAlignment: HorizontalAlignment.Center
         verticalAlignment: VerticalAlignment.Center
     }

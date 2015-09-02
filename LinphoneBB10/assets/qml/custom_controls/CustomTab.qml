@@ -44,7 +44,6 @@ Container {
             id: tabImage
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-            imageSource: "asset:///images/hub_icon.png"
         }
         
         Container {
