@@ -1,0 +1,38 @@
+The following guidelines always assume you are in the root directory of the git repository you cloned (one folder above the one this file is in).
+
+Getting started:
+
+0- Requierements:
+  * To build the Blackbbery 10 application, you must have the Momentics IDE installed with at least the 10.3.1.995 Blackberry 10 Native SDK installed
+
+1- Compile Blackberry 10 liblinphone SDK:
+  * Go into the build directory
+  * ./prepare.py [-l] <bb10-arm | bb10-i486>
+  * make -C WORK/bb10-arm/cmake
+
+2- Move/Copy the requiered SDK files to the assets folder:
+  * <cp -R | mv> build/OUTPUT/liblinphone-bb10-sdk/arm/include LinphoneBB10/assets/liblinphone-bb10-sdk/arm/
+  * <cp -R | mv> build/OUTPUT/liblinphone-bb10-sdk/arm/lib LinphoneBB10/assets/liblinphone-bb10-sdk/arm/
+
+3- Import the project in Momentics IDE:
+  * File -> Import -> Blackberry -> Existing Code as Blackberry C/C++ Makefile Project
+    # Set the code location to the directory this file is in
+    # Choose C++ as language
+  * Edit the bar-descriptor.xml file (in the Source tab) and remove the following lines:
+    <configuration name="Device-Coverage">       <platformArchitecture>armle-v7</platformArchitecture>
+</configuration>
+    <configuration name="Simulator-Profile">       <platformArchitecture>x86</platformArchitecture>
+</configuration>
+    <configuration name="Simulator-Coverage">       <platformArchitecture>x86</platformArchitecture>
+</configuration>
+  * Go to the project properties, C/C++ General category, Paths and Symbols section, Source Location tab:
+    # Add a new folder "/LinphoneBB10/src"
+    # Delete the previous source folder "/LinphoneBB10"
+
+4- Build the project
+
+/!\ Known issues:
+- If you encounter the following issue:
+C:/bbndk/target_10_3_1_995/qnx6/armle-v7/lib/crt1S.o: In function `LPIC0':
+(.text+0x9c): undefined reference to `main'
+Check you correctly followed the step 3.2 in the above Getting Started tutorial
