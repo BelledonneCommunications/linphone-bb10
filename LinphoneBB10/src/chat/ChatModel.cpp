@@ -167,9 +167,11 @@ static QVariantMap setMessageDeliveryState(QVariantMap entry, LinphoneChatMessag
     LinphoneChatMessageState state = linphone_chat_message_get_state(message);
     QString stateImage = "/images/chat/chat_message_not_delivered.png";
     if (state == LinphoneChatMessageStateInProgress) {
-        stateImage = "/images/chat/chat_message_inprogress.png";
+        //stateImage = "/images/chat/chat_message_inprogress.png";
+        stateImage = ""; // Show a spinner instead of an icon
     } else if (state == LinphoneChatMessageStateDelivered) {
-        stateImage = "/images/chat/chat_message_delivered.png";
+        //stateImage = "/images/chat/chat_message_delivered.png";
+        stateImage = ""; // Don't display any icon for delivered state for now
     }
 
     entry["deliveryState"] = stateImage;
