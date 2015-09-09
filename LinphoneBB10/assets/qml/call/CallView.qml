@@ -31,6 +31,7 @@ Page {
         StatusBar {
             isInCall: true
             statsEnabled: true
+            visible: inCallModel.areControlsVisible
         }
         
         Container {

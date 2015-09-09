@@ -79,14 +79,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
         <source>Password is too short
 (6 characters minimum)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -344,12 +344,12 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>CallView</name>
     <message>
-        <location filename="../assets/qml/call/CallView.qml" line="519"/>
+        <location filename="../assets/qml/call/CallView.qml" line="520"/>
         <source>Deny</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/call/CallView.qml" line="533"/>
+        <location filename="../assets/qml/call/CallView.qml" line="534"/>
         <source>Accept</source>
         <translation type="unfinished"></translation>
     </message>
