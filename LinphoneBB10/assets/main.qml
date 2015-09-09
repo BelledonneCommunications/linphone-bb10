@@ -21,7 +21,7 @@ import bb.cascades 1.4
 
 import "qml"
 import "qml/custom_controls"
-import "qml/menu"
+import "qml/sidemenu"
 import "qml/contacts"
 import "qml/chat"
 import "qml/call"
@@ -58,8 +58,8 @@ NavigationPane {
                 verticalAlignment: VerticalAlignment.Fill
                 horizontalAlignment: HorizontalAlignment.Fill
 
-                Menu {
-                    id: menu
+                SideMenu {
+                    id: sideMenu
                 }
 
                 Container {
@@ -91,7 +91,7 @@ NavigationPane {
                                 source: "qml/DialerView.qml"
                                 
                                 onSourceChanged: {
-                                    if (source.toString() != "asset:///qml/chat/ChatView.qml") {
+                                    if (source.toString() != "asset:///qml/chat/ChatConversationView.qml") {
                                         chatListModel.chatModel.setSelectedConversationSipAddress("");
                                     } else {
                                         tabs.setChatTabSelected();
@@ -100,7 +100,7 @@ NavigationPane {
                             }
                         }
 
-                        CustomTabbedPane {
+                        TabBar {
                             id: tabs
                             visible: !bps.isKeyboardVisible
                         }
@@ -178,21 +178,21 @@ NavigationPane {
         Sheet {
             id: incomingCallView
             peekEnabled: false
-            content: IncomingCallView {
+            content: CallIncomingView {
 
             }
         },
         Sheet {
             id: inCallView
             peekEnabled: false
-            content: InCallView {
+            content: CallView {
 
             }
         },
         Sheet {
             id: outgoingCallView
             peekEnabled: false
-            content: OutgoingCallView {
+            content: CallOutgoingView {
 
             }
         },
@@ -206,11 +206,11 @@ NavigationPane {
         },
         ComponentDefinition {
             id: about
-            source: "qml/menu/AboutView.qml"
+            source: "qml/sidemenu/AboutView.qml"
         },
         ComponentDefinition {
             id: accountSettings
-            source: "qml/settings/AccountSettingsView.qml"
+            source: "qml/settings/SettingsAccountView.qml"
         },
         TextStyleDefinition {
             id: titilliumWeb

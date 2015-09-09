@@ -1,5 +1,5 @@
 /*
- * InCallModel.cpp
+ * CallModel.cpp
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -20,7 +20,7 @@
  *      Author: Sylvain Berfini
  */
 
-#include "InCallModel.h"
+#include "CallModel.h"
 #include "src/contacts/ContactFetcher.h"
 #include "src/linphone/LinphoneManager.h"
 #include "src/utils/Misc.h"
@@ -29,11 +29,11 @@
 
 using namespace bb::cascades;
 
-InCallModel::InCallModel(QObject *parent) :
+CallModel::CallModel(QObject *parent) :
         QObject(parent),
-        _callStatsModel(new CallStatsModel(this)),
         window_id(NULL),
         window_group(NULL),
+        _callStatsModel(new CallStatsModel(this)),
         _displayName(""),
         _sipUri(""),
         _callTime(""),
@@ -90,7 +90,7 @@ static LinphoneCall* getCurrentCall()
     return call;
 }
 
-void InCallModel::onOrientationAboutToChange(DisplayDirection::Type displayDirection, UIOrientation::Type uiOrientation) {
+void CallModel::onOrientationAboutToChange(DisplayDirection::Type displayDirection, UIOrientation::Type uiOrientation) {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
 
@@ -110,7 +110,7 @@ void InCallModel::onOrientationAboutToChange(DisplayDirection::Type displayDirec
     }
 }
 
-void InCallModel::statsTimerTimeout()
+void CallModel::statsTimerTimeout()
 {
     LinphoneCall *call = getCurrentCall();
     if (!call) {
@@ -137,7 +137,7 @@ void InCallModel::statsTimerTimeout()
     emit statsUpdated();
 }
 
-void InCallModel::fadeTimerTimeout()
+void CallModel::fadeTimerTimeout()
 {
     _areControlsVisible = false;
     emit fadeControlsUpdated();
@@ -145,7 +145,7 @@ void InCallModel::fadeTimerTimeout()
     _controlsFadeTimer->stop();
 }
 
-void InCallModel::resetFadeTimer()
+void CallModel::resetFadeTimer()
 {
     _areControlsVisible = true;
     emit fadeControlsUpdated();
@@ -156,7 +156,7 @@ void InCallModel::resetFadeTimer()
     _controlsFadeTimer->start();
 }
 
-void InCallModel::switchFullScreenMode()
+void CallModel::switchFullScreenMode()
 {
     if (_areControlsVisible) {
         _controlsFadeTimer->stop();
@@ -170,7 +170,7 @@ void InCallModel::switchFullScreenMode()
     emit fadeControlsUpdated();
 }
 
-void InCallModel::onVideoSurfaceCreationCompleted(QString id, QString group)
+void CallModel::onVideoSurfaceCreationCompleted(QString id, QString group)
 {
     window_group = strdup(group.toUtf8().constData());
     window_id = strdup(id.toUtf8().constData());
@@ -182,12 +182,12 @@ void InCallModel::onVideoSurfaceCreationCompleted(QString id, QString group)
     ms_debug("[BB10] Video window id: %s and group %s", window_id, window_group);
 }
 
-void InCallModel::cameraPreviewAttached(screen_window_t handle) {
+void CallModel::cameraPreviewAttached(screen_window_t handle) {
     int z = -4; // -5 is the remote video
     screen_set_window_property_iv(handle, SCREEN_PROPERTY_ZORDER, &z);
 }
 
-void InCallModel::callStateChanged(LinphoneCall *call) {
+void CallModel::callStateChanged(LinphoneCall *call) {
     if (!call) {
         call = getCurrentCall();
     }
@@ -246,7 +246,7 @@ void InCallModel::callStateChanged(LinphoneCall *call) {
     emit callUpdated();
 }
 
-void InCallModel::accept() {
+void CallModel::accept() {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
     LinphoneCall *call = getCurrentCall();
@@ -255,7 +255,7 @@ void InCallModel::accept() {
     }
 }
 
-void InCallModel::hangUp()
+void CallModel::hangUp()
 {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
@@ -265,7 +265,7 @@ void InCallModel::hangUp()
     }
 }
 
-void InCallModel::setVideoEnabled(const bool &enabled)
+void CallModel::setVideoEnabled(const bool &enabled)
 {
     if (enabled == _isVideoEnabled) {
         return;
@@ -301,7 +301,7 @@ void InCallModel::setVideoEnabled(const bool &enabled)
     emit callUpdated();
 }
 
-void InCallModel::setMicMuted(const bool &muted)
+void CallModel::setMicMuted(const bool &muted)
 {
     if (muted == _isMicMuted) {
         return;
@@ -316,7 +316,7 @@ void InCallModel::setMicMuted(const bool &muted)
     emit callUpdated();
 }
 
-void InCallModel::setSpeakerEnabled(const bool &enabled)
+void CallModel::setSpeakerEnabled(const bool &enabled)
 {
     if (enabled == _isSpeakerEnabled) {
         return;
@@ -331,7 +331,7 @@ void InCallModel::setSpeakerEnabled(const bool &enabled)
     }
 }
 
-void InCallModel::switchCamera()
+void CallModel::switchCamera()
 {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
@@ -358,7 +358,7 @@ void InCallModel::switchCamera()
     }
 }
 
-void InCallModel::togglePause()
+void CallModel::togglePause()
 {
     LinphoneCall *call = getCurrentCall();
     if (!call) {
@@ -377,13 +377,13 @@ void InCallModel::togglePause()
     }
 }
 
-bool InCallModel::isInCall() const {
+bool CallModel::isInCall() const {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
     return linphone_core_get_calls_nb(lc) > 0;
 }
 
-void InCallModel::updateZRTPTokenValidation(bool isTokenOk) {
+void CallModel::updateZRTPTokenValidation(bool isTokenOk) {
     LinphoneCall *call = getCurrentCall();
     if (call) {
         linphone_call_set_authentication_token_verified(call, isTokenOk);

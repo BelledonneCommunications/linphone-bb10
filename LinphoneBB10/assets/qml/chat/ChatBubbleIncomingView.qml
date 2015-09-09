@@ -1,5 +1,5 @@
 /*
- * OutgoingChatView.qml
+ * ChatBubbleIncomingView.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -25,9 +25,9 @@ Container {
     property alias imageSource: photo.imageSource
     
     id: itemRoot
-    leftPadding: ui.sdu(2)
-    rightPadding: Qt.editor.isEditMode ? ui.sdu(2) : ui.sdu(10)
+    leftPadding: ui.sdu(10)
     bottomPadding: ui.sdu(1)
+    rightPadding: ui.sdu(2)
     topPadding: ui.sdu(1)
     preferredWidth: ui.sdu(120)
     
@@ -48,16 +48,15 @@ Container {
         layout: StackLayout {
             orientation: LayoutOrientation.LeftToRight
         }
-        horizontalAlignment: Qt.editor.isEditMode ? HorizontalAlignment.Right : HorizontalAlignment.Left
+        horizontalAlignment: HorizontalAlignment.Right
         
         Container {
             layout: DockLayout {
                 
             }
-
             Container {
-                background: Qt.colors.colorA
-                opacity: 0.15
+                background: Qt.colors.colorG
+                opacity: 1
                 verticalAlignment: VerticalAlignment.Fill
                 horizontalAlignment: HorizontalAlignment.Fill
             }
@@ -74,17 +73,17 @@ Container {
                 
                 ContactAvatar {
                     id: photo
-                    filterColor: Qt.colors.colorA15 
                     imageSource: ListItemData.contactPhoto
                     maxHeight: ui.sdu(13)
                     minHeight: ui.sdu(13)
                     maxWidth: ui.sdu(13)
                     minWidth: ui.sdu(13)
+                    filterColor: Qt.colors.colorG
                 }
                 
                 Container {
                     layout: DockLayout {
-                    
+                        
                     }
                     verticalAlignment: VerticalAlignment.Fill
                     leftPadding: ui.sdu(2)
@@ -92,7 +91,7 @@ Container {
                     Label {
                         text: ListItemData.timeAndFrom
                         textStyle.base: Qt.titilliumWeb.style
-                        textStyle.color: Qt.colors.colorA
+                        textStyle.color: Qt.colors.colorC
                         verticalAlignment: VerticalAlignment.Top
                     }
                     
@@ -111,7 +110,7 @@ Container {
                         
                         ImageView {
                             imageSource: ListItemData.imageSource
-                            visible: ListItemData.isFileTransferMessage
+                            visible: ListItemData.isFileTransferMessage && ListItemData.isImageDownloaded
                             scalingMethod: ScalingMethod.AspectFit
                             maxWidth: ui.sdu(30)
                             maxHeight: ui.sdu(30)
@@ -122,27 +121,39 @@ Container {
                                 }
                             }
                         }
+                        
+                        DownloadButton {
+                            visible: ListItemData.isFileTransferMessage && !ListItemData.isImageDownloaded && ListItemData.downloadProgress < 0
+                            
+                            onDownloadClicked: {
+                                itemRoot.ListItem.view.downloadFile(ListItemData.message);
+                            }
+                        }
+                        
+                        ProgressIndicator {
+                            visible: ListItemData.isFileTransferMessage && !ListItemData.isImageDownloaded && ListItemData.downloadProgress >= 0
+                            fromValue: 0
+                            toValue: 100
+                            value: ListItemData.downloadProgress
+                            maxWidth: ui.sdu(30)
+                            verticalAlignment: VerticalAlignment.Center
+                            state: ListItemData.downloadProgressState
+                        }
                     }
-                }
-                
-                ImageView {
-                    imageSource: ListItemData.deliveryState
-                    verticalAlignment: VerticalAlignment.Top
-                    horizontalAlignment: HorizontalAlignment.Right
                 }
             }
             
             Container {
-                background: Qt.colors.colorA
+                background: Qt.colors.colorC
                 minHeight: 2
                 maxHeight: 2
                 verticalAlignment: VerticalAlignment.Bottom
                 horizontalAlignment: HorizontalAlignment.Fill
             }
         }
-
+        
         CustomCheckBox {
-            
+        
         }
     }
 }

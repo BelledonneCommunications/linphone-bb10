@@ -1,5 +1,5 @@
 /*
- * IncomingCallView.qml
+ * CallOutgoingView.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -27,20 +27,20 @@ Page {
         layout: StackLayout {
             orientation: LayoutOrientation.TopToBottom
         }
-        
+
         StatusBar {
             isInCall: true
             statsEnabled: false
         }
-        
+
         Container {
             horizontalAlignment: HorizontalAlignment.Fill
             background: colors.colorF
             topPadding: ui.sdu(2)
             bottomPadding: ui.sdu(2)
-            
+
             Label {
-                text: qsTr("INCOMING CALL") + Retranslate.onLanguageChanged
+                text: qsTr("OUTGOING CALL") + Retranslate.onLanguageChanged
                 horizontalAlignment: HorizontalAlignment.Center
                 textStyle.color: colors.colorA
                 textStyle.fontWeight: FontWeight.Bold
@@ -48,7 +48,7 @@ Page {
                 textStyle.fontSize: FontSize.XLarge
             }
         }
-        
+
         Container {
             layout: DockLayout {
             
@@ -57,19 +57,18 @@ Page {
                 spaceQuota: 1
             }
             horizontalAlignment: HorizontalAlignment.Fill
-            
+
             Container {
                 verticalAlignment: VerticalAlignment.Center
                 horizontalAlignment: HorizontalAlignment.Center
                 
                 InCallContactAvatar {
-                    id: avatar
                     imageSource: inCallModel.photo
                     horizontalAlignment: HorizontalAlignment.Center
                     maxHeight: ui.sdu(41)
                     maxWidth: ui.sdu(41)
                 }
-                
+    
                 Label {
                     text: inCallModel.displayName
                     horizontalAlignment: HorizontalAlignment.Center
@@ -77,7 +76,7 @@ Page {
                     textStyle.color: colors.colorC
                     textStyle.base: titilliumWeb.style
                 }
-                
+    
                 Label {
                     text: inCallModel.sipUri
                     horizontalAlignment: HorizontalAlignment.Center
@@ -86,7 +85,7 @@ Page {
                 }
             }
         }
-        
+
         Container {
             layout: StackLayout {
                 orientation: LayoutOrientation.LeftToRight
@@ -95,13 +94,44 @@ Page {
                 spaceQuota: 0.13
             }
             minHeight: ui.sdu(15)
+            background: colors.colorF
             
+            CustomImageToggle {
+                layoutProperties: StackLayoutProperties {
+                    spaceQuota: 1
+                }
+                imageSource: "asset:///images/call/micro_default.png"
+                selectedImageSource: "asset:///images/call/micro_selected.png"
+                selected: inCallModel.isSpeakerEnabled
+                
+                gestureHandlers: TapHandler {
+                    onTapped: {
+                        inCallModel.isSpeakerEnabled = ! inCallModel.isSpeakerEnabled
+                    }
+                }
+            }
+
+            CustomImageToggle {
+                layoutProperties: StackLayoutProperties {
+                    spaceQuota: 1
+                }
+                imageSource: "asset:///images/call/speaker_default.png"
+                selectedImageSource: "asset:///images/call/speaker_selected.png"
+                selected: inCallModel.isMicMuted
+                
+                gestureHandlers: TapHandler {
+                    onTapped: {
+                        inCallModel.isMicMuted = ! inCallModel.isMicMuted
+                    }
+                }
+            }
+
             Container {
                 layout: DockLayout {
                 
                 }
                 layoutProperties: StackLayoutProperties {
-                    spaceQuota: 1
+                    spaceQuota: 2
                 }
                 verticalAlignment: VerticalAlignment.Fill
                 background: colors.colorD
@@ -111,60 +141,23 @@ Page {
                         background = colors.colorI
                     } else if (event.isUp() || event.isCancel()) {
                         background = colors.colorD
+                        if (event.isUp()) {
+                            inCallModel.hangUp()
+                        }
                     }
                 }
                 
                 onTouchExit: {
                     background = colors.colorD
                 }
-                
-                gestureHandlers: TapHandler {
-                    onTapped: {
-                        inCallModel.hangUp()
-                    }
-                }
-                
+
                 ImageView {
                     imageSource: "asset:///images/call/call_hangup.png"
                     horizontalAlignment: HorizontalAlignment.Center
                     verticalAlignment: VerticalAlignment.Center
                 }
             }
-            
-            Container {
-                layout: DockLayout {
-                
-                }
-                layoutProperties: StackLayoutProperties {
-                    spaceQuota: 1
-                }
-                verticalAlignment: VerticalAlignment.Fill
-                background: colors.colorA
-                
-                onTouch: {
-                    if (event.isDown() || event.isMove()) {
-                        background = colors.colorL
-                    } else if (event.isUp() || event.isCancel()) {
-                        background = colors.colorA
-                    }
-                }
-                
-                onTouchExit: {
-                    background = colors.colorA
-                }
-                
-                gestureHandlers: TapHandler {
-                    onTapped: {
-                        inCallModel.accept()
-                    }
-                }
-                
-                ImageView {
-                    imageSource: "asset:///images/call/call_audio_start.png"
-                    horizontalAlignment: HorizontalAlignment.Center
-                    verticalAlignment: VerticalAlignment.Center
-                }
-            }
+
         }
     }
 }

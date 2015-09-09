@@ -1,5 +1,5 @@
 /*
- * CustomTabbedPane.qml
+ * TabBar.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -26,7 +26,7 @@ Container {
         orientation: LayoutOrientation.LeftToRight
     }
 
-    CustomTab {
+    TabBarItem {
         id: history
         imageSource: "asset:///images/footer_history.png"
         verticalAlignment: VerticalAlignment.Fill
@@ -53,7 +53,7 @@ Container {
         }
     }
 
-    CustomTab {
+    TabBarItem {
         id: contacts
         imageSource: "asset:///images/footer_contacts.png"
         verticalAlignment: VerticalAlignment.Fill
@@ -78,7 +78,7 @@ Container {
         }
     }
 
-    CustomTab {
+    TabBarItem {
         id: dialer
         imageSource: "asset:///images/footer_dialer.png"
         verticalAlignment: VerticalAlignment.Fill
@@ -104,7 +104,7 @@ Container {
         }
     }
 
-    CustomTab {
+    TabBarItem {
         id: chat
         imageSource: "asset:///images/footer_chat.png"
         verticalAlignment: VerticalAlignment.Fill

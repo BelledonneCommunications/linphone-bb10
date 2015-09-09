@@ -1,5 +1,5 @@
 /*
- * SettingsHomeView.qml
+ * HomeSettingsView.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  * 
  * This program is free software; you can redistribute it and/or
@@ -54,7 +54,7 @@ ScrollView {
             }
         }
         
-        AudioSettingsView {
+        SettingsAudioView {
             id: audioSettings
             visible: false
         }
@@ -69,7 +69,7 @@ ScrollView {
             }
         }
         
-        VideoSettingsView {
+        SettingsVideoView {
             id: videoSettings
             visible: false
         }
@@ -84,7 +84,7 @@ ScrollView {
             }
         }
         
-        SecuritySettingsView {
+        SettingsSecurityView {
             id: securitySettings
             visible: false
         }
@@ -99,7 +99,7 @@ ScrollView {
             }
         }
         
-        NetworkSettingsView {
+        SettingsNetworkView {
             id: networkSettings
             visible: false
         }

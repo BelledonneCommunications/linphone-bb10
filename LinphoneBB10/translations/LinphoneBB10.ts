@@ -4,77 +4,69 @@
 <context>
     <name>AboutView</name>
     <message>
-        <location filename="../assets/qml/menu/AboutView.qml" line="57"/>
+        <location filename="../assets/qml/sidemenu/AboutView.qml" line="57"/>
         <source>ABOUT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/AboutView.qml" line="87"/>
+        <location filename="../assets/qml/sidemenu/AboutView.qml" line="87"/>
         <source>Linphone (rfc 3261) compatible phone
 under GNU Public License V2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/AboutView.qml" line="96"/>
+        <location filename="../assets/qml/sidemenu/AboutView.qml" line="96"/>
         <source>&lt;html&gt;&lt;a href=&quot;https://www.linphone.org&quot;&gt;Linphone.org website&lt;/a&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/AboutView.qml" line="104"/>
+        <location filename="../assets/qml/sidemenu/AboutView.qml" line="104"/>
         <source>&lt;html&gt;&lt;a href=&quot;https://www.linphone.org/user-guide.html&quot;&gt;Instructions&lt;/a&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/AboutView.qml" line="112"/>
+        <location filename="../assets/qml/sidemenu/AboutView.qml" line="112"/>
         <source>© 2015 Belledonne Communications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/menu/AboutView.qml" line="124"/>
+        <location filename="../assets/qml/sidemenu/AboutView.qml" line="124"/>
         <source>If you encounter an issue, please provide us the following values along with a description of the problem.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>AccountSettingsView</name>
+    <name>AssistantCreateAccountActivationView</name>
     <message>
-        <location filename="../assets/qml/settings/AccountSettingsView.qml" line="55"/>
-        <source>ACCOUNT</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>AssistantConfirmAccountActivationView</name>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantConfirmAccountActivationView.qml" line="33"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountActivationView.qml" line="33"/>
         <source>You account isn&apos;t activated yet
 Click on the link in the email we sent you</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantConfirmAccountActivationView.qml" line="55"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountActivationView.qml" line="55"/>
         <source>CREATE AN ACCOUNT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantConfirmAccountActivationView.qml" line="64"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountActivationView.qml" line="64"/>
         <source>2/2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantConfirmAccountActivationView.qml" line="83"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountActivationView.qml" line="83"/>
         <source>Activate your account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantConfirmAccountActivationView.qml" line="91"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountActivationView.qml" line="91"/>
         <source>An email has been sent to the email address you gave us.
 You have to click in the link inside it to activate your account.
 Once it is done, click on the button below to complete your account setup.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantConfirmAccountActivationView.qml" line="101"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountActivationView.qml" line="101"/>
         <source>FINALIZE CONFIGURATION</source>
         <translation type="unfinished"></translation>
     </message>
@@ -87,14 +79,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
-        <source>Password is too short
-(6 characters minimum)</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
+        <source>Password is too short
+(6 characters minimum)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -152,63 +144,73 @@ please choose another one</source>
     </message>
 </context>
 <context>
-    <name>AssistantHomeView</name>
+    <name>AssistantLinphoneLoginView</name>
     <message>
-        <location filename="../assets/qml/assistant/AssistantHomeView.qml" line="35"/>
-        <source>WELCOME</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantHomeView.qml" line="47"/>
-        <source>CREATE A LINPHONE ACCOUNT</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantHomeView.qml" line="62"/>
-        <source>I HAVE A LINPHONE ACCOUNT</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantHomeView.qml" line="77"/>
-        <source>I HAVE A SIP ACCOUNT</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantHomeView.qml" line="92"/>
-        <source>REMOTE PROVISIONING</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>AssistantLinphoneAccountView</name>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantLinphoneAccountView.qml" line="33"/>
+        <location filename="../assets/qml/assistant/AssistantLinphoneLoginView.qml" line="33"/>
         <source>CONFIGURE LINPHONE ACCOUNT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantLinphoneAccountView.qml" line="56"/>
+        <location filename="../assets/qml/assistant/AssistantLinphoneLoginView.qml" line="56"/>
         <source>USERNAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantLinphoneAccountView.qml" line="80"/>
+        <location filename="../assets/qml/assistant/AssistantLinphoneLoginView.qml" line="80"/>
         <source>PASSWORD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantLinphoneAccountView.qml" line="104"/>
+        <location filename="../assets/qml/assistant/AssistantLinphoneLoginView.qml" line="104"/>
         <source>DISPLAY NAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantLinphoneAccountView.qml" line="124"/>
+        <location filename="../assets/qml/assistant/AssistantLinphoneLoginView.qml" line="124"/>
         <source>CONFIGURE ACCOUNT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantLinphoneAccountView.qml" line="129"/>
+        <location filename="../assets/qml/assistant/AssistantLinphoneLoginView.qml" line="129"/>
         <source>Please fill in your username</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AssistantLoginView</name>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantLoginView.qml" line="33"/>
+        <source>CONFIGURE SIP ACCOUNT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantLoginView.qml" line="56"/>
+        <source>USERNAME</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantLoginView.qml" line="80"/>
+        <source>PASSWORD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantLoginView.qml" line="104"/>
+        <source>DOMAIN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantLoginView.qml" line="128"/>
+        <source>DISPLAY NAME</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantLoginView.qml" line="148"/>
+        <source>CONFIGURE ACCOUNT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantLoginView.qml" line="153"/>
+        <source>Please fill in at least your username and the domain</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -236,44 +238,6 @@ please choose another one</source>
     </message>
 </context>
 <context>
-    <name>AssistantSipAccountView</name>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantSipAccountView.qml" line="33"/>
-        <source>CONFIGURE SIP ACCOUNT</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantSipAccountView.qml" line="56"/>
-        <source>USERNAME</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantSipAccountView.qml" line="80"/>
-        <source>PASSWORD</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantSipAccountView.qml" line="104"/>
-        <source>DOMAIN</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantSipAccountView.qml" line="128"/>
-        <source>DISPLAY NAME</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantSipAccountView.qml" line="148"/>
-        <source>CONFIGURE ACCOUNT</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantSipAccountView.qml" line="153"/>
-        <source>Please fill in at least your username and the domain</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>AssistantView</name>
     <message>
         <location filename="../assets/qml/assistant/AssistantView.qml" line="60"/>
@@ -283,6 +247,50 @@ please choose another one</source>
     <message>
         <location filename="../assets/qml/assistant/AssistantView.qml" line="129"/>
         <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AssistantWelcomeView</name>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantWelcomeView.qml" line="35"/>
+        <source>WELCOME</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantWelcomeView.qml" line="47"/>
+        <source>CREATE A LINPHONE ACCOUNT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantWelcomeView.qml" line="62"/>
+        <source>I HAVE A LINPHONE ACCOUNT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantWelcomeView.qml" line="77"/>
+        <source>I HAVE A SIP ACCOUNT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantWelcomeView.qml" line="92"/>
+        <source>REMOTE PROVISIONING</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CallIncomingView</name>
+    <message>
+        <location filename="../assets/qml/call/CallIncomingView.qml" line="43"/>
+        <source>INCOMING CALL</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CallOutgoingView</name>
+    <message>
+        <location filename="../assets/qml/call/CallOutgoingView.qml" line="43"/>
+        <source>OUTGOING CALL</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -334,10 +342,62 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
+    <name>CallView</name>
+    <message>
+        <location filename="../assets/qml/call/CallView.qml" line="519"/>
+        <source>Deny</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/call/CallView.qml" line="533"/>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CancelButton</name>
     <message>
         <location filename="../assets/qml/custom_controls/CancelButton.qml" line="26"/>
         <source>CANCEL</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatBubbleIncomingView</name>
+    <message>
+        <location filename="../assets/qml/chat/ChatBubbleIncomingView.qml" line="36"/>
+        <source>Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/chat/ChatBubbleIncomingView.qml" line="38"/>
+        <source>Copy to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatBubbleOutgoingView</name>
+    <message>
+        <location filename="../assets/qml/chat/ChatBubbleOutgoingView.qml" line="36"/>
+        <source>Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/chat/ChatBubbleOutgoingView.qml" line="38"/>
+        <source>Copy to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChatConversationView</name>
+    <message>
+        <location filename="../assets/qml/chat/ChatConversationView.qml" line="32"/>
+        <source>Select file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/chat/ChatConversationView.qml" line="157"/>
+        <source>Are you sure you want to delete the selected messages?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -350,51 +410,38 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
-    <name>ChatView</name>
+    <name>ContactDetailsView</name>
     <message>
-        <location filename="../assets/qml/chat/ChatView.qml" line="32"/>
-        <source>Select picture</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/chat/ChatView.qml" line="157"/>
-        <source>Are you sure you want to delete the selected messages?</source>
+        <location filename="../assets/qml/contacts/ContactDetailsView.qml" line="73"/>
+        <source>Are you sure you want to delete this contact?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ContactEditView</name>
+    <name>ContactEditorView</name>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditView.qml" line="33"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="33"/>
         <source>Select picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditView.qml" line="77"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="77"/>
         <source>Are you sure you want to delete this contact?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditView.qml" line="127"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="127"/>
         <source>Last Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditView.qml" line="155"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="155"/>
         <source>First Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditView.qml" line="183"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="183"/>
         <source>SIP Address</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ContactView</name>
-    <message>
-        <location filename="../assets/qml/contacts/ContactView.qml" line="73"/>
-        <source>Are you sure you want to delete this contact?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -457,40 +504,6 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
-    <name>InCallView</name>
-    <message>
-        <location filename="../assets/qml/call/InCallView.qml" line="519"/>
-        <source>Deny</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/call/InCallView.qml" line="533"/>
-        <source>Accept</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IncomingCallView</name>
-    <message>
-        <location filename="../assets/qml/call/IncomingCallView.qml" line="43"/>
-        <source>INCOMING CALL</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IncomingChatView</name>
-    <message>
-        <location filename="../assets/qml/chat/IncomingChatView.qml" line="36"/>
-        <source>Message</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/chat/IncomingChatView.qml" line="38"/>
-        <source>Copy to clipboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>LinphoneManager</name>
     <message>
         <location filename="../src/linphone/LinphoneManager.cpp" line="134"/>
@@ -510,69 +523,6 @@ You should only accept if you have the same token as your correspondent.</source
     <message>
         <location filename="../src/linphone/LinphoneManager.cpp" line="146"/>
         <source>disconnected</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Menu</name>
-    <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="35"/>
-        <source>Select picture</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="142"/>
-        <source>Assistant</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="157"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="172"/>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/menu/Menu.qml" line="208"/>
-        <source>Quit</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NetworkSettingsView</name>
-    <message>
-        <location filename="../assets/qml/settings/NetworkSettingsView.qml" line="37"/>
-        <location filename="../assets/qml/settings/NetworkSettingsView.qml" line="52"/>
-        <source>STUN server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/settings/NetworkSettingsView.qml" line="64"/>
-        <source>Enable ICE</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>OutgoingCallView</name>
-    <message>
-        <location filename="../assets/qml/call/OutgoingCallView.qml" line="43"/>
-        <source>OUTGOING CALL</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>OutgoingChatView</name>
-    <message>
-        <location filename="../assets/qml/chat/OutgoingChatView.qml" line="36"/>
-        <source>Message</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/chat/OutgoingChatView.qml" line="38"/>
-        <source>Copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -642,20 +592,10 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
-    <name>SecuritySettingsView</name>
+    <name>SettingsAccountView</name>
     <message>
-        <location filename="../assets/qml/settings/SecuritySettingsView.qml" line="31"/>
-        <source>Media Encryption</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/settings/SecuritySettingsView.qml" line="35"/>
-        <source>None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/settings/SecuritySettingsView.qml" line="60"/>
-        <source>Media encryption mandatory</source>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="55"/>
+        <source>ACCOUNT</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -688,6 +628,56 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
+    <name>SettingsNetworkView</name>
+    <message>
+        <location filename="../assets/qml/settings/SettingsNetworkView.qml" line="37"/>
+        <location filename="../assets/qml/settings/SettingsNetworkView.qml" line="52"/>
+        <source>STUN server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsNetworkView.qml" line="64"/>
+        <source>Enable ICE</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsSecurityView</name>
+    <message>
+        <location filename="../assets/qml/settings/SettingsSecurityView.qml" line="31"/>
+        <source>Media Encryption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsSecurityView.qml" line="35"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsSecurityView.qml" line="60"/>
+        <source>Media encryption mandatory</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsVideoView</name>
+    <message>
+        <location filename="../assets/qml/settings/SettingsVideoView.qml" line="32"/>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsVideoView.qml" line="43"/>
+        <source>Show preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsVideoView.qml" line="54"/>
+        <source>Preferred video size</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsView</name>
     <message>
         <location filename="../assets/qml/settings/SettingsView.qml" line="60"/>
@@ -696,20 +686,30 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
-    <name>VideoSettingsView</name>
+    <name>SideMenu</name>
     <message>
-        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="32"/>
-        <source>Enabled</source>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="35"/>
+        <source>Select picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="43"/>
-        <source>Show preview</source>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="142"/>
+        <source>Assistant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/VideoSettingsView.qml" line="54"/>
-        <source>Preferred video size</source>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="157"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="172"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="208"/>
+        <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

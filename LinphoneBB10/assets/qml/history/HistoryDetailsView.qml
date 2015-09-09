@@ -1,5 +1,5 @@
 /*
- * HistoryView.qml
+ * HistoryDetailsView.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -136,8 +136,8 @@ Container {
 
                     onClicked: {
                         chatListModel.viewConversation(historyListModel.historyModel.linphoneAddress);
-                        chatListModel.chatModel.setPreviousPage("../history/HistoryView.qml");
-                        tabDelegate.source = "../chat/ChatView.qml";
+                        chatListModel.chatModel.setPreviousPage("../history/HistoryDetailsView.qml");
+                        tabDelegate.source = "../chat/ChatConversationView.qml";
                     }
                 }
             }

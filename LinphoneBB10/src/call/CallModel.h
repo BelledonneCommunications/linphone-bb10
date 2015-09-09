@@ -1,5 +1,5 @@
 /*
- * InCallModel.h
+ * CallModel.h
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -20,8 +20,8 @@
  *      Author: Sylvain Berfini
  */
 
-#ifndef INCALLMODEL_H_
-#define INCALLMODEL_H_
+#ifndef CALLMODEL_H_
+#define CALLMODEL_H_
 
 #include <QObject>
 #include <QTimer>
@@ -33,7 +33,7 @@
 #include "CallStatsModel.h"
 #include "linphone/linphonecore.h"
 
-class InCallModel : public QObject
+class CallModel : public QObject
 {
     Q_OBJECT
 
@@ -52,7 +52,7 @@ class InCallModel : public QObject
     Q_PROPERTY(CallStatsModel* callStatsModel READ callStatsModel CONSTANT);
 
 public:
-    InCallModel(QObject *parent = NULL);
+    CallModel(QObject *parent = NULL);
 
 public Q_SLOTS:
     void onVideoSurfaceCreationCompleted(QString id, QString group);
@@ -148,4 +148,4 @@ private:
     QSize _previewSize;
 };
 
-#endif /* INCALLMODEL_H_ */
+#endif /* CALLMODEL_H_ */

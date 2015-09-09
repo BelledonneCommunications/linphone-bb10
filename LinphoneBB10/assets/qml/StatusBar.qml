@@ -53,7 +53,7 @@ Container {
 
                 onClicked: {
                     if (pageContent.translationX == 0) {
-                        pageContent.translationX = menu.minWidth;
+                        pageContent.translationX = sideMenu.minWidth;
                     } else {
                         pageContent.translationX = 0;
                     }

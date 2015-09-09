@@ -50,7 +50,7 @@ Container {
                 onTapped: {
                     chatListModel.newConversation();
                     chatListModel.chatModel.setPreviousPage("ChatListView.qml");
-                    tabDelegate.source = "ChatView.qml"
+                    tabDelegate.source = "ChatConversationView.qml"
                 }
             }
         }
@@ -286,7 +286,7 @@ Container {
                 if (indexPath.length && !chatListModel.editor.isEditMode) {
                     chatListModel.viewConversation(indexPath);
                     chatListModel.chatModel.setPreviousPage("ChatListView.qml");
-                    tabDelegate.source = "ChatView.qml";
+                    tabDelegate.source = "ChatConversationView.qml";
                 }
             }
         }

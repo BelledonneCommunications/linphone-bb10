@@ -1,5 +1,5 @@
 /*
- * MenuModel.cpp
+ * SideMenuModel.cpp
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -20,11 +20,11 @@
  *      Author: Sylvain Berfini
  */
 
-#include "MenuModel.h"
+#include "SideMenuModel.h"
 #include "src/linphone/LinphoneManager.h"
 #include "src/utils/Misc.h"
 
-MenuModel::MenuModel(QObject *parent)
+SideMenuModel::SideMenuModel(QObject *parent)
     : QObject(parent),
       _displayName(""),
       _sipUri(""),
@@ -37,7 +37,7 @@ MenuModel::MenuModel(QObject *parent)
     updateAccount();
 }
 
-void MenuModel::updateAccount() {
+void SideMenuModel::updateAccount() {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
 
@@ -54,7 +54,7 @@ void MenuModel::updateAccount() {
     }
 }
 
-void MenuModel::setPicture(const QStringList &filePicked)
+void SideMenuModel::setPicture(const QStringList &filePicked)
 {
     if (filePicked.size() > 0) {
         _photo = "file:///" + filePicked.first();
@@ -67,7 +67,7 @@ void MenuModel::setPicture(const QStringList &filePicked)
     }
 }
 
-QVariantMap MenuModel::sipAccounts() const {
+QVariantMap SideMenuModel::sipAccounts() const {
     QVariantMap accounts;
 
     LinphoneManager *manager = LinphoneManager::getInstance();

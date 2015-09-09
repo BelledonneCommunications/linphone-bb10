@@ -280,7 +280,7 @@ Container {
         
         function viewHistory(indexPath, log) {
             historyListModel.viewHistory(indexPath, log);
-            tabDelegate.source = "HistoryView.qml"
+            tabDelegate.source = "HistoryDetailsView.qml"
         }
 
         function itemType(data, indexPath) {

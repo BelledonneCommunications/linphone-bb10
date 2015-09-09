@@ -46,7 +46,7 @@ ScrollView {
     
     function isAccountCreated(yesno) {
         if (yesno) {
-            assistantDelegate.source = "AssistantConfirmAccountActivationView.qml";
+            assistantDelegate.source = "AssistantCreateAccountActivationView.qml";
         } else {
             showDialog(qsTr("Account creation failed\r\n,please try again later") + Retranslate.onLanguageChanged)
         }

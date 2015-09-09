@@ -1,5 +1,5 @@
 /*
-* AssistantConfirmAccountActivationView.qml
+* AssistantCreateAccountActivationView.qml
 * Copyright (C) 2015  Belledonne Communications, Grenoble, France
 *
 * This program is free software; you can redistribute it and/or

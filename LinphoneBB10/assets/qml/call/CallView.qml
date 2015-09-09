@@ -1,5 +1,5 @@
 /*
- * InCallView.qml
+ * CallView.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -450,7 +450,7 @@ Page {
                             gestureHandlers: TapHandler {
                                 onTapped: {
                                     chatListModel.viewConversation(inCallModel.sipUri);
-                                    tabDelegate.source = "../chat/ChatView.qml"
+                                    tabDelegate.source = "../chat/ChatConversationView.qml"
                                     inCallView.close();
                                 }
                             }

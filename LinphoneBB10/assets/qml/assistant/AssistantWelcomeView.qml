@@ -1,5 +1,5 @@
 /*
- * AssistantHomeView.qml
+ * AssistantWelcomeView.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -48,7 +48,7 @@ ScrollView {
                 minW: ui.sdu(70)
     
                 onClicked: {
-                    assistantModel.setPreviousPage("AssistantHomeView.qml");
+                    assistantModel.setPreviousPage("AssistantWelcomeView.qml");
                     assistantDelegate.source = "AssistantCreateAccountView.qml"
                 }
             }
@@ -63,8 +63,8 @@ ScrollView {
                 minW: ui.sdu(70)
     
                 onClicked: {
-                    assistantModel.setPreviousPage("AssistantHomeView.qml");
-                    assistantDelegate.source = "AssistantLinphoneAccountView.qml"
+                    assistantModel.setPreviousPage("AssistantWelcomeView.qml");
+                    assistantDelegate.source = "AssistantLinphoneLoginView.qml"
                 }
             }
         }
@@ -78,8 +78,8 @@ ScrollView {
                 minW: ui.sdu(70)
     
                 onClicked: {
-                    assistantModel.setPreviousPage("AssistantHomeView.qml");
-                    assistantDelegate.source = "AssistantSipAccountView.qml"
+                    assistantModel.setPreviousPage("AssistantWelcomeView.qml");
+                    assistantDelegate.source = "AssistantLoginView.qml"
                 }
             }
         }
@@ -93,7 +93,7 @@ ScrollView {
                 minW: ui.sdu(70)
     
                 onClicked: {
-                    assistantModel.setPreviousPage("AssistantHomeView.qml");
+                    assistantModel.setPreviousPage("AssistantWelcomeView.qml");
                     assistantDelegate.source = "AssistantRemoteProvisioningView.qml"
                 }
             }

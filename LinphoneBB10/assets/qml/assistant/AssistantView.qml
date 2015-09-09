@@ -90,7 +90,7 @@ Page {
             
             ControlDelegate {
                 id: assistantDelegate
-                source: "AssistantHomeView.qml"
+                source: "AssistantWelcomeView.qml"
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
             }

@@ -23,10 +23,10 @@
 #include "src/contacts/ContactListModel.h"
 #include "src/contacts/ContactEditorModel.h"
 #include "src/chat/ChatListModel.h"
-#include "src/call/InCallModel.h"
+#include "src/call/CallModel.h"
 #include "src/history/HistoryListModel.h"
 #include "src/assistant/AssistantModel.h"
-#include "src/menu/MenuModel.h"
+#include "src/sidemenu/SideMenuModel.h"
 #include "src/linphone/LinphoneManager.h"
 #include "src/utils/ColorGallery.h"
 #include "src/utils/BPSEventListener.h"
@@ -70,7 +70,7 @@ ApplicationUI::ApplicationUI() :
     SettingsModel *settingsModel = new SettingsModel(this);
     qml->setContextProperty("settingsModel", settingsModel);
 
-    MenuModel *menuModel = new MenuModel(this);
+    SideMenuModel *menuModel = new SideMenuModel(this);
     qml->setContextProperty("menuModel", menuModel);
 
     ContactListModel *contactListModel = new ContactListModel(this);
@@ -82,7 +82,7 @@ ApplicationUI::ApplicationUI() :
     ChatListModel *chatListModel = new ChatListModel(this);
     qml->setContextProperty("chatListModel", chatListModel);
 
-    InCallModel *inCallModel = new InCallModel(this);
+    CallModel *inCallModel = new CallModel(this);
     qml->setContextProperty("inCallModel", inCallModel);
 
     HistoryListModel *historyListModel = new HistoryListModel(this);

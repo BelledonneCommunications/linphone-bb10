@@ -1,5 +1,5 @@
 /*
- * ContactView.qml
+ * ContactDetailsView.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -82,8 +82,8 @@ Container {
             gestureHandlers: TapHandler {
                 onTapped: {
                     contactEditorModel.setSelectedContactId(contactListModel.contactModel.contactId);
-                    contactEditorModel.setPreviousPage("ContactView.qml");
-                    tabDelegate.source = "ContactEditView.qml";
+                    contactEditorModel.setPreviousPage("ContactDetailsView.qml");
+                    tabDelegate.source = "ContactEditorView.qml";
                 }
             }
         }
@@ -193,8 +193,8 @@ Container {
 
                                         onClicked: {
                                             Qt.chatListModel.viewConversation(ListItemData.phoneOrSipAddress);
-                                            Qt.chatListModel.chatModel.setPreviousPage("../contacts/ContactView.qml");
-                                            Qt.tabDelegate.source = "../chat/ChatView.qml";
+                                            Qt.chatListModel.chatModel.setPreviousPage("../contacts/ContactDetailsView.qml");
+                                            Qt.tabDelegate.source = "../chat/ChatConversationView.qml";
                                         }
                                     }
                                 }

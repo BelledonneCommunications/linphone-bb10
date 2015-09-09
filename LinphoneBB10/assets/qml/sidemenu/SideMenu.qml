@@ -1,5 +1,5 @@
 /*
- * Menu.qml
+ * SideMenu.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -38,8 +38,8 @@ Container {
             }
         },
         ComponentDefinition {                      
-            id: accountMenuItem                       
-            source: "AccountSettingsMenuItem.qml"             
+            id: sideMenuAccountItem                       
+            source: "SideMenuAccountItem.qml"             
         },
         ComponentDefinition {                      
             id: customDivider                       
@@ -51,7 +51,7 @@ Container {
         otherAccountsContainer.removeAll();
         
         for (var sipAccount in menuModel.sipAccounts) {
-            var account = accountMenuItem.createObject();
+            var account = sideMenuAccountItem.createObject();
             account.text = sipAccount;
             account.imageSource = menuModel.sipAccounts[sipAccount];
             otherAccountsContainer.add(account);
@@ -138,7 +138,7 @@ Container {
                 horizontalAlignment: HorizontalAlignment.Fill
             }
             
-            MenuItem {
+            SideMenuItem {
                 text: qsTr("Assistant") + Retranslate.onLanguageChanged
                 
                 gestureHandlers: TapHandler {
@@ -153,7 +153,7 @@ Container {
                 
             }
             
-            MenuItem {
+            SideMenuItem {
                 text: qsTr("Settings") + Retranslate.onLanguageChanged
                 
                 gestureHandlers: TapHandler {
@@ -168,7 +168,7 @@ Container {
             
             }
             
-            MenuItem {
+            SideMenuItem {
                 text: qsTr("About") + Retranslate.onLanguageChanged
                 
                 gestureHandlers: TapHandler {

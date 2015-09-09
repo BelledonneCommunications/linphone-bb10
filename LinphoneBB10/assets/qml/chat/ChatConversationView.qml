@@ -1,5 +1,5 @@
 /*
- * ChatView.qml
+ * ChatConversationView.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -29,7 +29,7 @@ Container {
             id: filePicker
             type: FileType.Picture + FileType.Document + FileType.Music + FileType.Video + FileType.Other
             mode: FilePickerMode.Picker
-            title: qsTr("Select picture") + Retranslate.onLanguageChanged
+            title: qsTr("Select file") + Retranslate.onLanguageChanged
             onFileSelected: {
                 chatListModel.chatModel.onFilePicked(selectedFiles);
                 sendMessage.enabled = true;
@@ -216,7 +216,7 @@ Container {
             ListItemComponent {
                 type: "outgoing_item"
 
-                OutgoingChatView {
+                ChatBubbleOutgoingView {
                     
                 }
             },
@@ -224,7 +224,7 @@ Container {
             ListItemComponent {
                 type: "incoming_item"
 
-                IncomingChatView {
+                ChatBubbleIncomingView {
                     
                 }
             }

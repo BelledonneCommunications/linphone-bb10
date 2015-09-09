@@ -1,5 +1,5 @@
 /*
- * MenuModel.h
+ * SideMenuModel.h
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -20,12 +20,12 @@
  *      Author: Sylvain Berfini
  */
 
-#ifndef MENUMODEL_H_
-#define MENUMODEL_H_
+#ifndef SIDEMENUMODEL_H_
+#define SIDEMENUMODEL_H_
 
 #include <QObject>
 
-class MenuModel : public QObject
+class SideMenuModel : public QObject
 {
     Q_OBJECT
 
@@ -36,7 +36,7 @@ class MenuModel : public QObject
     Q_PROPERTY(QVariantMap sipAccounts READ sipAccounts);
 
 public:
-    MenuModel(QObject *parent = NULL);
+    SideMenuModel(QObject *parent = NULL);
 
 public Q_SLOTS:
     void updateAccount();
@@ -64,4 +64,4 @@ private:
     QVariantMap sipAccounts() const;
 };
 
-#endif /* MENUMODEL_H_ */
+#endif /* SIDEMENUMODEL_H_ */

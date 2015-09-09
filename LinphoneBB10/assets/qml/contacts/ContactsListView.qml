@@ -90,7 +90,7 @@ Container {
                 onTapped: {
                     contactEditorModel.setSelectedContactId(-1);
                     contactEditorModel.setPreviousPage("ContactsListView.qml");
-                    tabDelegate.source = "ContactEditView.qml";
+                    tabDelegate.source = "ContactEditorView.qml";
                 }
             }
         }
@@ -247,7 +247,7 @@ Container {
                 if (indexPath.length > 1 && !contactListModel.editor.isEditMode) {
                     contactListModel.setSelectedContact(indexPath)
                     contactListModel.viewContact();
-                    tabDelegate.source = "ContactView.qml"
+                    tabDelegate.source = "ContactDetailsView.qml"
                 }
             }
 
