@@ -240,12 +240,12 @@ please choose another one</source>
 <context>
     <name>AssistantView</name>
     <message>
-        <location filename="../assets/qml/assistant/AssistantView.qml" line="60"/>
+        <location filename="../assets/qml/assistant/AssistantView.qml" line="63"/>
         <source>ASSISTANT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantView.qml" line="129"/>
+        <location filename="../assets/qml/assistant/AssistantView.qml" line="132"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
@@ -680,7 +680,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>SettingsView</name>
     <message>
-        <location filename="../assets/qml/settings/SettingsView.qml" line="60"/>
+        <location filename="../assets/qml/settings/SettingsView.qml" line="55"/>
         <source>SETTINGS</source>
         <translation type="unfinished"></translation>
     </message>

@@ -41,11 +41,14 @@ Page {
 
             TopBarButton {
                 imageSource: "asset:///images/back.png"
-                visibility: assistantDelegate.source.toString() != "asset:///qml/assistant/AssistantHomeView.qml"
+                visibility: assistantDelegate.source.toString() != "asset:///qml/assistant/AssistantWelcomeView.qml"
+                enabled: visibility
 
                 gestureHandlers: TapHandler {
                     onTapped: {
-                        assistantDelegate.source = assistantModel.getPreviousPage()
+                        if (parent.enabled) {
+                            assistantDelegate.source = assistantModel.getPreviousPage()
+                        }
                     }
                 }
             }

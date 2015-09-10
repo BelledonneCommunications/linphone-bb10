@@ -39,14 +39,9 @@ Page {
             minHeight: ui.sdu(15)
             background: colors.colorF
             
-            TopBarButton {
-                imageSource: "asset:///images/back.png"
-                visibility: settingsDelegate.source.toString() != "asset:///qml/settings/SettingsHomeView.qml"
-                
-                gestureHandlers: TapHandler {
-                    onTapped: {
-                        settingsDelegate.source = assistantModel.getPreviousPage()
-                    }
+            Container {
+                layoutProperties: StackLayoutProperties {
+                    spaceQuota: 1
                 }
             }
             
