@@ -25,8 +25,8 @@ Container {
     property alias imageSource: photo.imageSource
     
     id: itemRoot
-    leftPadding: ui.sdu(2)
-    rightPadding: Qt.editor.isEditMode ? ui.sdu(2) : ui.sdu(10)
+    leftPadding: ui.sdu(10)
+    rightPadding: ui.sdu(2)
     bottomPadding: ui.sdu(1)
     topPadding: ui.sdu(1)
     preferredWidth: ui.sdu(120)
@@ -48,7 +48,7 @@ Container {
         layout: StackLayout {
             orientation: LayoutOrientation.LeftToRight
         }
-        horizontalAlignment: Qt.editor.isEditMode ? HorizontalAlignment.Right : HorizontalAlignment.Left
+        horizontalAlignment: HorizontalAlignment.Right
         
         Container {
             layout: DockLayout {
