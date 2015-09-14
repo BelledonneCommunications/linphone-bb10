@@ -146,7 +146,7 @@ void ChatListModel::deleteItems(QList<QVariantList> indexPaths)
             continue;
         }
 
-        LinphoneChatRoom *room = linphone_core_get_or_create_chat_room(lc, addr.toUtf8().constData());
+        LinphoneChatRoom *room = linphone_core_get_chat_room(lc, linphone_address_new(addr.toUtf8().constData()));
         linphone_chat_room_delete_history(room);
         linphone_chat_room_destroy(room);
 

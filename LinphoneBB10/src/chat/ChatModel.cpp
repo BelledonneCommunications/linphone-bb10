@@ -94,7 +94,7 @@ bool ChatModel::setSelectedConversationSipAddress(QString sipAddress)
             return false;
         }
 
-        _room = linphone_core_get_or_create_chat_room(lc, linphone_address_as_string_uri_only(address));
+        _room = linphone_core_get_chat_room(lc, address);
         if (_room) {
             ContactFound contact = ContactFetcher::getInstance()->findContact(linphone_address_get_username(address));
             if (contact.id >= 0) {

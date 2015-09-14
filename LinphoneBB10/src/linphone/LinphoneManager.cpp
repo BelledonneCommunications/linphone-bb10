@@ -292,6 +292,8 @@ void LinphoneManager::createAndStartLinphoneCore()
 
     QString chatMessagesDatabase = QDir::homePath() + "/chat.db";
     linphone_core_set_chat_database_path(_lc, strdup(chatMessagesDatabase.toUtf8().constData()));
+    QString historyLogsDatabase = QDir::homePath() + "/history.db";
+    linphone_core_set_call_logs_database_path(_lc, strdup(historyLogsDatabase.toUtf8().constData()));
 
     QString zrtpCache = QDir::homePath() + "/zrtp_secrets";
     linphone_core_set_zrtp_secrets_file(_lc, strdup(zrtpCache.toUtf8().constData()));
@@ -315,7 +317,7 @@ static void countUnreadChatMessages(void *item, void *user_data)
 void LinphoneManager::updateUnreadChatMessagesCount()
 {
     _unreadChatMessages = 0;
-    MSList *rooms = linphone_core_get_chat_rooms(_lc);
+    const MSList *rooms = linphone_core_get_chat_rooms(_lc);
     ms_list_for_each2(rooms, countUnreadChatMessages, this);
     emit onUnreadCountUpdated();
     updateAppIconBadge();

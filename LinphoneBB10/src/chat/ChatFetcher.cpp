@@ -96,7 +96,7 @@ void ChatFetcher::run()
     if (manager) {
         LinphoneCore *lc = manager->getLc();
         if (lc) {
-            MSList* rooms = linphone_core_get_chat_rooms(lc);
+            const MSList* rooms = linphone_core_get_chat_rooms(lc);
             ms_list_for_each2(rooms, addChatRoomToListModel, this);
         }
     }
