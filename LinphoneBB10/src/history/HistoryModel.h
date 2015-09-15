@@ -38,9 +38,9 @@ class HistoryModel : public QObject
     Q_PROPERTY(QString photo READ photo NOTIFY historyLogUpdated);
     Q_PROPERTY(bool isSipContact READ isSipContact NOTIFY historyLogUpdated);
 
-    Q_PROPERTY(QVariantList incomingLogs READ incomingLogs);
-    Q_PROPERTY(QVariantList outgoingLogs READ outgoingLogs);
-    Q_PROPERTY(QVariantList missedLogs READ missedLogs);
+    Q_PROPERTY(QVariantList incomingLogs READ incomingLogs NOTIFY historyLogUpdated);
+    Q_PROPERTY(QVariantList outgoingLogs READ outgoingLogs NOTIFY historyLogUpdated);
+    Q_PROPERTY(QVariantList missedLogs READ missedLogs NOTIFY historyLogUpdated);
 
 public:
     HistoryModel(QObject *parent = NULL);

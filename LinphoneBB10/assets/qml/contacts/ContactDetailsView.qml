@@ -25,15 +25,27 @@ Container {
     layout: StackLayout {
         orientation: LayoutOrientation.TopToBottom
     }
+    
+    attachedObjects: [
+        ComponentDefinition {
+            id: contactDetailsNumber                
+            source: "ContactDetailsNumber.qml"
+        }
+    ]
 
     onCreationCompleted: {
-        // This is a needed hack since listeItemComponents are created in a different context,
-        // so colors and fonts aren't available
-        Qt.colors = colors
-        Qt.titilliumWeb = titilliumWeb
-        Qt.linphoneManager = linphoneManager
-        Qt.chatListModel = chatListModel
-        Qt.tabDelegate = tabDelegate
+        fillContactNumbers();
+    }
+    
+    function fillContactNumbers() {
+        contactNumbers.removeAll();
+        
+        for (var number in contactListModel.contactModel.numbersAndAddresses) {
+            var item = contactDetailsNumber.createObject();
+            item.label = contactListModel.contactModel.numbersAndAddresses[number];
+            item.number = number;
+            contactNumbers.add(item);
+        }
     }
 
     Container {
@@ -128,84 +140,11 @@ Container {
                 textStyle.base: titilliumWeb.style
             }
 
-            ListView {
-                dataModel: contactListModel.contactModel.dataModel
-                preferredHeight: contactListModel.contactModel.dataModel.size() * 400
-
-                listItemComponents: [
-                    ListItemComponent {
-                        type: "item"
-
-                        Container {
-                            layout: StackLayout {
-                                orientation: LayoutOrientation.TopToBottom
-                            }
-
-                            Container {
-                                layout: StackLayout {
-                                    orientation: LayoutOrientation.TopToBottom
-                                }
-                                background: Qt.colors.colorH
-                                topPadding: ui.sdu(2)
-                                bottomPadding: ui.sdu(2)
-                                leftPadding: ui.sdu(2)
-                                rightPadding: ui.sdu(2)
-                                horizontalAlignment: HorizontalAlignment.Fill
-
-                                Label {
-                                    text: ListItemData.label
-                                    textStyle.color: Qt.colors.colorD
-                                    textStyle.fontSize: FontSize.Small
-                                    textStyle.base: Qt.titilliumWeb.style
-                                    horizontalAlignment: HorizontalAlignment.Center
-                                }
-
-                                Label {
-                                    text: ListItemData.phoneOrSipAddress
-                                    textStyle.color: Qt.colors.colorC
-                                    textStyle.fontSize: FontSize.Large
-                                    textStyle.base: Qt.titilliumWeb.style
-                                    horizontalAlignment: HorizontalAlignment.Center
-                                }
-
-                                Container {
-                                    layout: StackLayout {
-                                        orientation: LayoutOrientation.LeftToRight
-                                    }
-                                    horizontalAlignment: HorizontalAlignment.Center
-
-                                    ImageButton {
-                                        verticalAlignment: VerticalAlignment.Center
-                                        defaultImageSource: "asset:///images/call_start_body_default.png"
-                                        pressedImageSource: "asset:///images/call_start_body_over.png"
-                                        disabledImageSource: "asset:///images/call_start_body_disabled.png"
-
-                                        onClicked: {
-                                            Qt.linphoneManager.call(ListItemData.phoneOrSipAddress);
-                                        }
-                                    }
-
-                                    ImageButton {
-                                        verticalAlignment: VerticalAlignment.Center
-                                        defaultImageSource: "asset:///images/chat_start_body_default.png"
-                                        pressedImageSource: "asset:///images/chat_start_body_over.png"
-                                        disabledImageSource: "asset:///images/chat_start_body_disabled.png"
-
-                                        onClicked: {
-                                            Qt.chatListModel.viewConversation(ListItemData.phoneOrSipAddress);
-                                            Qt.chatListModel.chatModel.setPreviousPage("../contacts/ContactDetailsView.qml");
-                                            Qt.tabDelegate.source = "../chat/ChatConversationView.qml";
-                                        }
-                                    }
-                                }
-                            }
-
-                            CustomListDivider {
-
-                            }
-                        }
-                    }
-                ]
+            Container {
+                layout: StackLayout {
+                    orientation: LayoutOrientation.TopToBottom
+                }
+                id: contactNumbers
             }
         }
     }

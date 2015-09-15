@@ -24,7 +24,6 @@
 #include "ContactFetcher.h"
 #include <bb/pim/contacts/Contact>
 
-using namespace bb::cascades;
 using namespace bb::pim::contacts;
 
 ContactModel::ContactModel(QObject *parent)
@@ -32,10 +31,8 @@ ContactModel::ContactModel(QObject *parent)
       _contactId(-1),
       _displayName(""),
       _photo(""),
-      _isSipContact(false),
-      _dataModel(new GroupDataModel(this))
+      _isSipContact(false)
 {
-    _dataModel->setGrouping(ItemGrouping::None);
     bool result = connect(ContactFetcher::getInstance()->getContactService(), SIGNAL(contactsChanged(QList<int>)), SLOT(contactsChanged(QList<int>)));
     Q_ASSERT(result);
 }
@@ -60,7 +57,7 @@ void ContactModel::updateContact()
         _photo = "/images/avatar.png";
     }
 
-    _dataModel->clear();
+    _numbersAndAddresses.clear();
     _isSipContact = false;
 
     QList<ContactAttribute> attrs = contact.attributes();
@@ -71,9 +68,7 @@ void ContactModel::updateContact()
                 _isSipContact = true;
             }
 
-            entry["phoneOrSipAddress"] = attr.value();
-            entry["label"] = attr.attributeDisplayLabel();
-            _dataModel->insert(entry);
+            _numbersAndAddresses[attr.value()] = attr.attributeDisplayLabel();
         }
     }
 
