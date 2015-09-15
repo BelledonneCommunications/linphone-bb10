@@ -36,9 +36,11 @@ class HistoryModel : public QObject
     Q_PROPERTY(QString sipUri READ sipUri NOTIFY historyLogUpdated);
     Q_PROPERTY(QString linphoneAddress READ linphoneAddress NOTIFY historyLogUpdated);
     Q_PROPERTY(QString photo READ photo NOTIFY historyLogUpdated);
-    Q_PROPERTY(QString direction READ direction NOTIFY historyLogUpdated);
-    Q_PROPERTY(QString details READ details NOTIFY historyLogUpdated);
     Q_PROPERTY(bool isSipContact READ isSipContact NOTIFY historyLogUpdated);
+
+    Q_PROPERTY(QVariantList incomingLogs READ incomingLogs);
+    Q_PROPERTY(QVariantList outgoingLogs READ outgoingLogs);
+    Q_PROPERTY(QVariantList missedLogs READ missedLogs);
 
 public:
     HistoryModel(QObject *parent = NULL);
@@ -68,20 +70,25 @@ private:
     }
     QString _photo;
 
-    QString direction() const {
-        return _direction;
-    }
-    QString _direction;
-
-    QString details() const {
-        return _details;
-    }
-    QString _details;
-
     bool isSipContact() const {
         return _isSipContact;
     }
     bool _isSipContact;
+
+    QVariantList incomingLogs() const {
+        return _incomingLogs;
+    }
+    QVariantList _incomingLogs;
+
+    QVariantList outgoingLogs() const {
+        return _outgoingLogs;
+    }
+    QVariantList _outgoingLogs;
+
+    QVariantList missedLogs() const {
+        return _missedLogs;
+    }
+    QVariantList _missedLogs;
 
     LinphoneCallLog *_selectedHistoryLog;
 };

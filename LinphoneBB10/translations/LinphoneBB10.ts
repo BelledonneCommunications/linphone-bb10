@@ -79,14 +79,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
-        <source>Password is too short
-(6 characters minimum)</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
+        <source>Password is too short
+(6 characters minimum)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -478,28 +478,28 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
-    <name>HistoryListView</name>
+    <name>HistoryDetailsView</name>
     <message>
-        <location filename="../assets/qml/history/HistoryListView.qml" line="159"/>
-        <source>Are you sure you want to delete the selected logs?</source>
+        <location filename="../assets/qml/history/HistoryDetailsView.qml" line="164"/>
+        <source>INCOMING CALLS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/history/HistoryDetailsView.qml" line="192"/>
+        <source>OUTGOING CALLS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/history/HistoryDetailsView.qml" line="220"/>
+        <source>MISSED CALLS</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>HistoryModel</name>
+    <name>HistoryListView</name>
     <message>
-        <location filename="../src/history/HistoryModel.cpp" line="60"/>
-        <source>MISSED CALL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/history/HistoryModel.cpp" line="64"/>
-        <source>INCOMING CALL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/history/HistoryModel.cpp" line="66"/>
-        <source>OUTGOING CALL</source>
+        <location filename="../assets/qml/history/HistoryListView.qml" line="159"/>
+        <source>Are you sure you want to delete the selected logs?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

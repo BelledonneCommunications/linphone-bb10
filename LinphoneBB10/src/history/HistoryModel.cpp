@@ -30,8 +30,6 @@ HistoryModel::HistoryModel(QObject *parent)
       _sipUri(""),
       _linphoneAddress(""),
       _photo(""),
-      _direction(""),
-      _details(""),
       _isSipContact(false),
       _selectedHistoryLog(NULL)
 {
@@ -42,6 +40,7 @@ void HistoryModel::setSelectedHistoryLog(LinphoneCallLog *log) {
     if (!log) {
         return;
     }
+    _selectedHistoryLog = log;
 
     LinphoneAddress *addr = linphone_call_log_get_remote_address(log);
     ContactFound contact = ContactFetcher::getInstance()->findContact(linphone_address_get_username(addr));
@@ -56,22 +55,36 @@ void HistoryModel::setSelectedHistoryLog(LinphoneCallLog *log) {
     _sipUri = GetAddressFromLinphoneAddress(addr);
     _linphoneAddress = linphone_address_as_string(addr);
 
-    if (linphone_call_log_get_status(log) == LinphoneCallMissed) {
-        _direction = tr("MISSED CALL");
-    } else {
-        LinphoneCallDir direction = linphone_call_log_get_dir(log);
-        if (direction == LinphoneCallIncoming) {
-            _direction = tr("INCOMING CALL");
-        } else {
-            _direction = tr("OUTGOING CALL");
-        }
-    }
+    _incomingLogs.clear();
+    _outgoingLogs.clear();
+    _missedLogs.clear();
 
-    time_t start = linphone_call_log_get_start_date(log);
-    int duration = linphone_call_log_get_duration(log);
-    QString date = FormatDateForHistoryLog(start);
-    QString time = FormatCallDuration(duration);
-    _details = date + " - " + time;
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+    const MSList *callLogs = linphone_core_get_call_history_for_address(lc, linphone_call_log_get_remote_address(_selectedHistoryLog));
+
+    while (callLogs) {
+        LinphoneCallLog *callLog = (LinphoneCallLog *) callLogs->data;
+
+        time_t start = linphone_call_log_get_start_date(callLog);
+        int duration = linphone_call_log_get_duration(callLog);
+        QString date = FormatDateForHistoryLog(start);
+        QString time = FormatCallDuration(duration);
+        QString displayValue = date + " - " + time;
+
+        if (linphone_call_log_get_status(callLog) == LinphoneCallMissed) {
+            _missedLogs.append(displayValue);
+        } else {
+            LinphoneCallDir direction = linphone_call_log_get_dir(callLog);
+            if (direction == LinphoneCallIncoming) {
+                _incomingLogs.append(displayValue);
+            } else {
+                _outgoingLogs.append(displayValue);
+            }
+        }
+
+        callLogs = ms_list_next(callLogs);
+    }
 
     _isSipContact = true;
     emit historyLogUpdated();
