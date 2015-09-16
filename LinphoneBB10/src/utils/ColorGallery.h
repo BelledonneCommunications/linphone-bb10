@@ -43,6 +43,7 @@ class ColorGallery : public QObject
     Q_PROPERTY(bb::cascades::Color colorJ READ colorJ CONSTANT);
     Q_PROPERTY(bb::cascades::Color colorK READ colorK CONSTANT);
     Q_PROPERTY(bb::cascades::Color colorL READ colorL CONSTANT);
+    Q_PROPERTY(bb::cascades::Color colorM READ colorM CONSTANT);
 
 public:
     ColorGallery(QObject *parent = NULL) : QObject(parent) { }
@@ -87,6 +88,9 @@ private:
     }
     bb::cascades::Color colorL() const {
         return bb::cascades::Color::fromARGB(0xff96c11f);
+    }
+    bb::cascades::Color colorM() const {
+        return bb::cascades::Color::fromARGB(0xffc20000);
     }
 };
 

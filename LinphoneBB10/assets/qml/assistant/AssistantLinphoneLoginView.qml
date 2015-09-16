@@ -101,7 +101,7 @@ ScrollView {
     
                 Label {
                     verticalAlignment: VerticalAlignment.Top
-                    text: qsTr("DISPLAY NAME") + Retranslate.onLanguageChanged
+                    text: qsTr("DISPLAY NAME (optional)") + Retranslate.onLanguageChanged
                     textStyle.color: colors.colorD
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style

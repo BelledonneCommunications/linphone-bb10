@@ -79,14 +79,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
         <source>Password is too short
 (6 characters minimum)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -162,7 +162,7 @@ please choose another one</source>
     </message>
     <message>
         <location filename="../assets/qml/assistant/AssistantLinphoneLoginView.qml" line="104"/>
-        <source>DISPLAY NAME</source>
+        <source>DISPLAY NAME (optional)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -200,7 +200,7 @@ please choose another one</source>
     </message>
     <message>
         <location filename="../assets/qml/assistant/AssistantLoginView.qml" line="128"/>
-        <source>DISPLAY NAME</source>
+        <source>DISPLAY NAME (optional)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

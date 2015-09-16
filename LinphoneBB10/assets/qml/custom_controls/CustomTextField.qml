@@ -33,7 +33,7 @@ Container {
     }
     
     ImageView {
-        imageSource: "asset:///images/contacts/resizable_textfield.amd"
+        imageSource: "asset:///images/resizable_textfield.amd"
         verticalAlignment: VerticalAlignment.Fill
         horizontalAlignment: HorizontalAlignment.Fill
     }
