@@ -79,14 +79,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
-        <source>Password is too short
-(6 characters minimum)</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
+        <source>Password is too short
+(6 characters minimum)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -396,7 +396,7 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/chat/ChatConversationView.qml" line="157"/>
+        <location filename="../assets/qml/chat/ChatConversationView.qml" line="170"/>
         <source>Are you sure you want to delete the selected messages?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -404,7 +404,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>ChatListView</name>
     <message>
-        <location filename="../assets/qml/chat/ChatListView.qml" line="112"/>
+        <location filename="../assets/qml/chat/ChatListView.qml" line="125"/>
         <source>Are you sure you want to delete the selected conversations?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -448,7 +448,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>ContactsListView</name>
     <message>
-        <location filename="../assets/qml/contacts/ContactsListView.qml" line="139"/>
+        <location filename="../assets/qml/contacts/ContactsListView.qml" line="160"/>
         <source>Are you sure you want to delete the selected contacts?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -498,7 +498,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>HistoryListView</name>
     <message>
-        <location filename="../assets/qml/history/HistoryListView.qml" line="159"/>
+        <location filename="../assets/qml/history/HistoryListView.qml" line="166"/>
         <source>Are you sure you want to delete the selected logs?</source>
         <translation type="unfinished"></translation>
     </message>

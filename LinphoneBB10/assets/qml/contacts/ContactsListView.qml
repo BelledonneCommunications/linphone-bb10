@@ -53,6 +53,7 @@ Container {
             imageSource: "asset:///images/contacts/contacts_all_default.png"
             selectedImageSource: "asset:///images/contacts/contacts_all_selected.png"
             selected: !contactListModel.sipFilterEnabled
+            visible: !contactListModel.editor.isEditMode
             
             gestureHandlers: TapHandler {
                 onTapped: {
@@ -68,6 +69,7 @@ Container {
             imageSource: "asset:///images/contacts/contacts_sip_default.png"
             selected: contactListModel.sipFilterEnabled
             selectedImageSource: "asset:///images/contacts/contacts_sip_selected.png"
+            visible: !contactListModel.editor.isEditMode
             
             gestureHandlers: TapHandler {
                 onTapped: {
@@ -75,8 +77,26 @@ Container {
                 }
             }
         }
+        
+        TopBarButton {
+            imageSource: "asset:///images/cancel_edit.png"
+            visible: contactListModel.editor.isEditMode
+            
+            gestureHandlers: TapHandler {
+                onTapped: {
+                    contactListModel.editor.isEditMode = false
+                }
+            }
+        }
 
         Container {
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: 1
+            }
+        }
+        
+        Container {
+            visible: contactListModel.editor.isEditMode
             layoutProperties: StackLayoutProperties {
                 spaceQuota: 1
             }
@@ -131,6 +151,7 @@ Container {
         TopBarButton {
             imageSource: "asset:///images/delete.png"
             visible: contactListModel.editor.isEditMode
+            enabled: contactListModel.editor.selectionSize != 0
             
             gestureHandlers: TapHandler {
                 onTapped: {
@@ -139,8 +160,6 @@ Container {
                         actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected contacts?") + Retranslate.onLanguageChanged
                         confirmAction.deleteClicked.connect(onDelete)
                         cancelAction.cancelClicked.connect(onCancel)
-                    } else {
-                        contactListModel.editor.isEditMode = false
                     }
                 }
             }

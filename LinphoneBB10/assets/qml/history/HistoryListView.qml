@@ -54,6 +54,7 @@ Container {
             selectedImageSource: "asset:///images/history/history_all_selected.png"
             selected: !historyListModel.missedFilterEnabled
             background: colors.colorF
+            visible: !historyListModel.editor.isEditMode
             
             onTouch: {
                 if (event.isDown() || event.isMove()) {
@@ -82,6 +83,7 @@ Container {
             imageSource: "asset:///images/history/history_missed_default.png"
             selectedImageSource: "asset:///images/history/history_missed_selected.png"
             background: colors.colorF
+            visible: !historyListModel.editor.isEditMode
             
             onTouch: {
                 if (event.isDown() || event.isMove()) {
@@ -102,17 +104,21 @@ Container {
             }
         }
         
-        Container {
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: 1
+        TopBarButton {
+            imageSource: "asset:///images/cancel_edit.png"
+            visible: historyListModel.editor.isEditMode
+            
+            gestureHandlers: TapHandler {
+                onTapped: {
+                    historyListModel.editor.isEditMode = false
+                }
             }
         }
         
         Container {
             layoutProperties: StackLayoutProperties {
-                spaceQuota: 1
+                spaceQuota: 2
             }
-            visible: !historyListModel.editor.isEditMode
         }
         
         TopBarButton {
@@ -151,6 +157,7 @@ Container {
         TopBarButton {
             imageSource: "asset:///images/delete.png"
             visible: historyListModel.editor.isEditMode
+            enabled: historyListModel.editor.selectionSize != 0
             
             gestureHandlers: TapHandler {
                 onTapped: {
@@ -159,8 +166,6 @@ Container {
                         actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected logs?") + Retranslate.onLanguageChanged
                         confirmAction.deleteClicked.connect(onDelete)
                         cancelAction.cancelClicked.connect(onCancel)
-                    } else {
-                        historyListModel.editor.isEditMode = false
                     }
                 }
             }

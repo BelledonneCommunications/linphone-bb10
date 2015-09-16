@@ -31,6 +31,7 @@ Container {
     }
     verticalAlignment: VerticalAlignment.Fill
     background: colors.colorF
+    opacity: enabled ? 1 : 0.2
     
     onTouch: {
         if (image.visible) {

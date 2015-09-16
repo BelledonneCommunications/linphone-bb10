@@ -45,12 +45,24 @@ Container {
 
         TopBarButton {
             imageSource: "asset:///images/chat/chat_add.png"
+            visible: !chatListModel.editor.isEditMode
             
             gestureHandlers: TapHandler {
                 onTapped: {
                     chatListModel.newConversation();
                     chatListModel.chatModel.setPreviousPage("ChatListView.qml");
                     tabDelegate.source = "ChatConversationView.qml"
+                }
+            }
+        }
+        
+        TopBarButton {
+            imageSource: "asset:///images/cancel_edit.png"
+            visible: chatListModel.editor.isEditMode
+            
+            gestureHandlers: TapHandler {
+                onTapped: {
+                    chatListModel.editor.isEditMode = false
                 }
             }
         }
@@ -104,6 +116,7 @@ Container {
         TopBarButton {
             imageSource: "asset:///images/delete.png"
             visible: chatListModel.editor.isEditMode
+            enabled: chatListModel.editor.selectionSize != 0
             
             gestureHandlers: TapHandler {
                 onTapped: {
@@ -112,8 +125,6 @@ Container {
                         actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected conversations?") + Retranslate.onLanguageChanged
                         confirmAction.deleteClicked.connect(onDelete)
                         cancelAction.cancelClicked.connect(onCancel)
-                    } else {
-                        chatListModel.editor.isEditMode = false
                     }
                 }
             }

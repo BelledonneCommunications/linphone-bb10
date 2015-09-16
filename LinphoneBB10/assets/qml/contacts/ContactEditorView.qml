@@ -51,7 +51,7 @@ Container {
         horizontalAlignment: HorizontalAlignment.Fill
 
         TopBarButton {
-            imageSource: "asset:///images/back.png"
+            imageSource: "asset:///images/cancel_edit.png"
 
             gestureHandlers: TapHandler {
                 onTapped: {
