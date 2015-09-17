@@ -77,26 +77,9 @@ Container {
                 }
             }
         }
-        
-        TopBarButton {
-            imageSource: "asset:///images/cancel_edit.png"
-            visible: contactListModel.editor.isEditMode
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    contactListModel.editor.isEditMode = false
-                }
-            }
-        }
 
         Container {
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: 1
-            }
-        }
-        
-        Container {
-            visible: contactListModel.editor.isEditMode
+            visible: !contactEditorModel.editor.isEditMode
             layoutProperties: StackLayoutProperties {
                 spaceQuota: 1
             }
@@ -126,42 +109,23 @@ Container {
             }
         }
         
-        TopBarButton {
-            imageSource: "asset:///images/select_all.png"
-            visible: contactListModel.editor.isEditMode && contactListModel.editor.selectionSize == 0
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    contactListModel.editor.selectAll(true);
-                }
-            }
-        }
-        
-        TopBarButton {
-            imageSource: "asset:///images/deselect_all.png"
-            visible: contactListModel.editor.isEditMode && contactListModel.editor.selectionSize != 0
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    contactListModel.editor.selectAll(false);
-                }
-            }
-        }
-        
-        TopBarButton {
-            imageSource: "asset:///images/delete.png"
+        TopBarEditListControls {
             visible: contactListModel.editor.isEditMode
-            enabled: contactListModel.editor.selectionSize != 0
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    if (contactListModel.editor.selectionSize != 0) {
-                        actionConfirmationScreen.visible = true
-                        actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected contacts?") + Retranslate.onLanguageChanged
-                        confirmAction.deleteClicked.connect(onDelete)
-                        cancelAction.cancelClicked.connect(onCancel)
-                    }
-                }
+            selectionEmpty: contactListModel.editor.selectionSize == 0
+            onCancelEdit: {
+                contactListModel.editor.isEditMode = false;
+            }
+            onSelectAll: {
+                contactListModel.editor.selectAll(true);
+            }
+            onDeselectAll: {
+                contactListModel.editor.selectAll(false);
+            }
+            onDeleteSelected: {
+                actionConfirmationScreen.visible = true;
+                actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected contacts?") + Retranslate.onLanguageChanged;
+                confirmAction.deleteClicked.connect(onDelete);
+                cancelAction.cancelClicked.connect(onCancel);
             }
         }
     }

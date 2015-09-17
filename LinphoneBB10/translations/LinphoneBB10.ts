@@ -396,7 +396,7 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/chat/ChatConversationView.qml" line="170"/>
+        <location filename="../assets/qml/chat/ChatConversationView.qml" line="142"/>
         <source>Are you sure you want to delete the selected messages?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -404,7 +404,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>ChatListView</name>
     <message>
-        <location filename="../assets/qml/chat/ChatListView.qml" line="125"/>
+        <location filename="../assets/qml/chat/ChatListView.qml" line="90"/>
         <source>Are you sure you want to delete the selected conversations?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -448,7 +448,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>ContactsListView</name>
     <message>
-        <location filename="../assets/qml/contacts/ContactsListView.qml" line="160"/>
+        <location filename="../assets/qml/contacts/ContactsListView.qml" line="126"/>
         <source>Are you sure you want to delete the selected contacts?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -498,7 +498,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>HistoryListView</name>
     <message>
-        <location filename="../assets/qml/history/HistoryListView.qml" line="166"/>
+        <location filename="../assets/qml/history/HistoryListView.qml" line="139"/>
         <source>Are you sure you want to delete the selected logs?</source>
         <translation type="unfinished"></translation>
     </message>

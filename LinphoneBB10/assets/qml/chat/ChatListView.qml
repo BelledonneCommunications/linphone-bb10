@@ -55,29 +55,11 @@ Container {
                 }
             }
         }
-        
-        TopBarButton {
-            imageSource: "asset:///images/cancel_edit.png"
-            visible: chatListModel.editor.isEditMode
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    chatListModel.editor.isEditMode = false
-                }
-            }
-        }
 
         Container {
             layoutProperties: StackLayoutProperties {
-                spaceQuota: 2
+                spaceQuota: 3
             }
-        }
-        
-        Container {
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: 1
-            }
-            visible: !chatListModel.editor.isEditMode
         }
 
         TopBarButton {
@@ -91,42 +73,23 @@ Container {
             }
         }
         
-        TopBarButton {
-            imageSource: "asset:///images/select_all.png"
-            visible: chatListModel.editor.isEditMode && chatListModel.editor.selectionSize == 0
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    chatListModel.editor.selectAll(true);
-                }
-            }
-        }
-        
-        TopBarButton {
-            imageSource: "asset:///images/deselect_all.png"
-            visible: chatListModel.editor.isEditMode && chatListModel.editor.selectionSize != 0
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    chatListModel.editor.selectAll(false);
-                }
-            }
-        }
-        
-        TopBarButton {
-            imageSource: "asset:///images/delete.png"
+        TopBarEditListControls {
             visible: chatListModel.editor.isEditMode
-            enabled: chatListModel.editor.selectionSize != 0
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    if (chatListModel.editor.selectionSize != 0) {
-                        actionConfirmationScreen.visible = true
-                        actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected conversations?") + Retranslate.onLanguageChanged
-                        confirmAction.deleteClicked.connect(onDelete)
-                        cancelAction.cancelClicked.connect(onCancel)
-                    }
-                }
+            selectionEmpty: chatListModel.editor.selectionSize == 0
+            onCancelEdit: {
+                chatListModel.editor.isEditMode = false;
+            }
+            onSelectAll: {
+                chatListModel.editor.selectAll(true);
+            }
+            onDeselectAll: {
+                chatListModel.editor.selectAll(false);
+            }
+            onDeleteSelected: {
+                actionConfirmationScreen.visible = true;
+                actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected conversations?") + Retranslate.onLanguageChanged;
+                confirmAction.deleteClicked.connect(onDelete);
+                cancelAction.cancelClicked.connect(onCancel);
             }
         }
     }

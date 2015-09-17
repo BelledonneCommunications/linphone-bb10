@@ -104,18 +104,8 @@ Container {
             }
         }
         
-        TopBarButton {
-            imageSource: "asset:///images/cancel_edit.png"
-            visible: historyListModel.editor.isEditMode
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    historyListModel.editor.isEditMode = false
-                }
-            }
-        }
-        
         Container {
+            visible: !historyListModel.editor.isEditMode
             layoutProperties: StackLayoutProperties {
                 spaceQuota: 2
             }
@@ -132,42 +122,23 @@ Container {
             }
         }
         
-        TopBarButton {
-            imageSource: "asset:///images/select_all.png"
-            visible: historyListModel.editor.isEditMode && historyListModel.editor.selectionSize == 0
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    historyListModel.editor.selectAll(true);
-                }
-            }
-        }
-        
-        TopBarButton {
-            imageSource: "asset:///images/deselect_all.png"
-            visible: historyListModel.editor.isEditMode && historyListModel.editor.selectionSize != 0
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    historyListModel.editor.selectAll(false);
-                }
-            }
-        }
-        
-        TopBarButton {
-            imageSource: "asset:///images/delete.png"
+        TopBarEditListControls {
             visible: historyListModel.editor.isEditMode
-            enabled: historyListModel.editor.selectionSize != 0
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    if (historyListModel.editor.selectionSize != 0) {
-                        actionConfirmationScreen.visible = true
-                        actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected logs?") + Retranslate.onLanguageChanged
-                        confirmAction.deleteClicked.connect(onDelete)
-                        cancelAction.cancelClicked.connect(onCancel)
-                    }
-                }
+            selectionEmpty: historyListModel.editor.selectionSize == 0
+            onCancelEdit: {
+                historyListModel.editor.isEditMode = false;
+            }
+            onSelectAll: {
+                historyListModel.editor.selectAll(true);
+            }
+            onDeselectAll: {
+                historyListModel.editor.selectAll(false);
+            }
+            onDeleteSelected: {
+                actionConfirmationScreen.visible = true;
+                actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected logs?") + Retranslate.onLanguageChanged;
+                confirmAction.deleteClicked.connect(onDelete);
+                cancelAction.cancelClicked.connect(onCancel);
             }
         }
     }

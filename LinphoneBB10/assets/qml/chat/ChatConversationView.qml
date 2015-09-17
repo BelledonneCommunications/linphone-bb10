@@ -71,17 +71,6 @@ Container {
                 }
             }
         }
-        
-        TopBarButton {
-            imageSource: "asset:///images/cancel_edit.png"
-            visible: chatListModel.chatModel.editor.isEditMode
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    chatListModel.chatModel.editor.isEditMode = false
-                }
-            }
-        }
 
         Container {
             layout: DockLayout {
@@ -136,42 +125,23 @@ Container {
             }
         }
         
-        TopBarButton {
-            imageSource: "asset:///images/select_all.png"
-            visible: chatListModel.chatModel.editor.isEditMode && chatListModel.chatModel.editor.selectionSize == 0
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    chatListModel.chatModel.editor.selectAll(true);
-                }
-            }
-        }
-        
-        TopBarButton {
-            imageSource: "asset:///images/deselect_all.png"
-            visible: chatListModel.chatModel.editor.isEditMode && chatListModel.chatModel.editor.selectionSize != 0
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    chatListModel.chatModel.editor.selectAll(false);
-                }
-            }
-        }
-        
-        TopBarButton {
-            imageSource: "asset:///images/delete.png"
+        TopBarEditListControls {
             visible: chatListModel.chatModel.editor.isEditMode
-            enabled: chatListModel.chatModel.editor.selectionSize != 0
-            
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    if (chatListModel.chatModel.editor.selectionSize != 0) {
-                        actionConfirmationScreen.visible = true
-                        actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected messages?") + Retranslate.onLanguageChanged
-                        confirmAction.deleteClicked.connect(onDelete)
-                        cancelAction.cancelClicked.connect(onCancel)
-                    }
-                }
+            selectionEmpty: chatListModel.chatModel.editor.selectionSize == 0
+            onCancelEdit: {
+                chatListModel.chatModel.editor.isEditMode = false;
+            }
+            onSelectAll: {
+                chatListModel.chatModel.editor.selectAll(true);
+            }
+            onDeselectAll: {
+                chatListModel.chatModel.editor.selectAll(false);
+            }
+            onDeleteSelected: {
+                actionConfirmationScreen.visible = true;
+                actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected messages?") + Retranslate.onLanguageChanged;
+                confirmAction.deleteClicked.connect(onDelete);
+                cancelAction.cancelClicked.connect(onCancel);
             }
         }
         
