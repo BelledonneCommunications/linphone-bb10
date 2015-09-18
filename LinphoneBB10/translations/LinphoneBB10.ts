@@ -342,19 +342,6 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
-    <name>CallView</name>
-    <message>
-        <location filename="../assets/qml/call/CallView.qml" line="520"/>
-        <source>Deny</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/call/CallView.qml" line="534"/>
-        <source>Accept</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>CancelButton</name>
     <message>
         <location filename="../assets/qml/custom_controls/CancelButton.qml" line="26"/>
@@ -710,6 +697,19 @@ You should only accept if you have the same token as your correspondent.</source
     <message>
         <location filename="../assets/qml/sidemenu/SideMenu.qml" line="208"/>
         <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ZrtpDialog</name>
+    <message>
+        <location filename="../assets/qml/call/ZrtpDialog.qml" line="60"/>
+        <source>Deny</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/call/ZrtpDialog.qml" line="74"/>
+        <source>Accept</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
