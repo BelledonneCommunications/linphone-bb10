@@ -248,9 +248,13 @@ Container {
         ]
 
         onTriggered: {
-            if (indexPath.length > 1 && !historyListModel.editor.isEditMode) {
+            if (indexPath.length > 1) {
                 var selectedItem = dataModel.data(indexPath);
-                linphoneManager.call(selectedItem.linphoneAddress);
+                if (historyListModel.editor.isEditMode) {
+                    Qt.editor.updateSelection(indexPath, !selectedItem.selected);
+                } else {
+                    linphoneManager.call(selectedItem.linphoneAddress);
+                }
             }
         }
         

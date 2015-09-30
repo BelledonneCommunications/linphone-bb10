@@ -227,10 +227,15 @@ Container {
             ]
 
             onTriggered: {
-                if (indexPath.length > 1 && !contactListModel.editor.isEditMode) {
-                    contactListModel.setSelectedContact(indexPath)
-                    contactListModel.viewContact();
-                    tabDelegate.source = "ContactDetailsView.qml"
+                if (indexPath.length > 1) {
+                    if (contactListModel.editor.isEditMode) {
+                        var selectedItem = dataModel.data(indexPath);
+                        Qt.editor.updateSelection(indexPath, !selectedItem.selected);
+                    } else {
+                        contactListModel.setSelectedContact(indexPath)
+                        contactListModel.viewContact();
+                        tabDelegate.source = "ContactDetailsView.qml"
+                    }
                 }
             }
 

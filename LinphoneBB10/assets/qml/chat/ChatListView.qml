@@ -257,10 +257,15 @@ Container {
             ]
 
             onTriggered: {
-                if (indexPath.length && !chatListModel.editor.isEditMode) {
-                    chatListModel.viewConversation(indexPath);
-                    chatListModel.chatModel.setPreviousPage("ChatListView.qml");
-                    tabDelegate.source = "ChatConversationView.qml";
+                if (indexPath.length) {
+                    if (chatListModel.editor.isEditMode) {
+                        var selectedItem = dataModel.data(indexPath);
+                        Qt.editor.updateSelection(indexPath, !selectedItem.selected);
+                    } else {
+                        chatListModel.viewConversation(indexPath);
+                        chatListModel.chatModel.setPreviousPage("ChatListView.qml");
+                        tabDelegate.source = "ChatConversationView.qml";
+                    }
                 }
             }
         }
