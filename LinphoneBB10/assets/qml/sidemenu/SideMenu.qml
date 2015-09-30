@@ -72,6 +72,7 @@ Container {
         background: colors.colorF
         leftPadding: ui.sdu(2)
         minHeight: ui.sdu(21)
+        maxWidth: ui.sdu(75)
         horizontalAlignment: HorizontalAlignment.Fill
 
         ContactAvatar {
@@ -94,6 +95,9 @@ Container {
             layout: DockLayout {
                 
             }
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: 1
+            }
             verticalAlignment: VerticalAlignment.Center
             leftPadding: ui.sdu(1)
 
@@ -107,14 +111,27 @@ Container {
             }
             
             Container {
+                layout: StackLayout {
+                    orientation: LayoutOrientation.LeftToRight
+                }
                 topPadding: ui.sdu(6)
+                rightPadding: ui.sdu(2)
                 
                 Label {
+                    layoutProperties: StackLayoutProperties {
+                        spaceQuota: 1
+                    }
                     textStyle.color: colors.colorA
                     text: menuModel.sipUri
                     textStyle.base: titilliumWeb.style
-                    verticalAlignment: VerticalAlignment.Bottom
                     textStyle.fontSize: FontSize.Small
+                    verticalAlignment: VerticalAlignment.Center
+                }
+                
+                ImageView {
+                    scalingMethod: ScalingMethod.AspectFit
+                    imageSource: linphoneManager.registrationStatusImage
+                    verticalAlignment: VerticalAlignment.Center
                 }
             }
         }

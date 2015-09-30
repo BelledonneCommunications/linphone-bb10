@@ -680,22 +680,22 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="142"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="159"/>
         <source>Assistant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="157"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="174"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="172"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="189"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="208"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="225"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>

@@ -31,7 +31,7 @@ Container {
     rightPadding: ui.sdu(2)
     background: colors.colorG
     
-    MenuItem {
+    SideMenuItem {
         id: menuItem
         layoutProperties: StackLayoutProperties {
             spaceQuota: 1
