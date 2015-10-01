@@ -28,6 +28,15 @@ Container {
     horizontalAlignment: HorizontalAlignment.Fill
     id: audioCodecsContainer
     
+    SettingsToggle {
+        checked: settingsModel.adaptiveRateControl
+        text: qsTr("Adaptive rate control") + Retranslate.onLanguageChanged
+        
+        onToggled: {
+            settingsModel.adaptiveRateControl = checked
+        }
+    }
+    
     SettingsSubHeader {
         text: qsTr("Codecs") + Retranslate.onLanguageChanged
     }

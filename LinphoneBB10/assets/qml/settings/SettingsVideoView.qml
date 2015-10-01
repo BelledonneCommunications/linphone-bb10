@@ -88,7 +88,7 @@ Container {
             Option {
                 text: "CIF"
                 value: "cif"
-            },
+            }/*,
             Option {
                 text: "QVGA"
                 value: "qcif"
@@ -96,7 +96,7 @@ Container {
             Option {
                 text: "QCIF"
                 value: "qvga"
-            }
+            }*/
         ]
         onSelectedValueChanged: {
             settingsModel.setPreferredVideoSize(selectedOption.value)

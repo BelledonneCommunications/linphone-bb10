@@ -61,6 +61,14 @@ void SettingsModel::setDebugEnabled(const bool& enabled) {
     lp_config_sync(lpc);
 }
 
+bool SettingsModel::adaptiveRateControl() const {
+    return linphone_core_adaptive_rate_control_enabled(_manager->getLc());
+}
+
+void SettingsModel::setAdaptiveRateControl(const bool& enabled) {
+    linphone_core_enable_adaptive_rate_control(_manager->getLc(), enabled);
+}
+
 QVariantMap SettingsModel::audioCodecs() const {
     QVariantMap codecs;
 

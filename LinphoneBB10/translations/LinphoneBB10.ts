@@ -79,14 +79,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
         <source>Password is too short
 (6 characters minimum)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -589,7 +589,12 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>SettingsAudioView</name>
     <message>
-        <location filename="../assets/qml/settings/SettingsAudioView.qml" line="32"/>
+        <location filename="../assets/qml/settings/SettingsAudioView.qml" line="33"/>
+        <source>Adaptive rate control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAudioView.qml" line="41"/>
         <source>Codecs</source>
         <translation type="unfinished"></translation>
     </message>

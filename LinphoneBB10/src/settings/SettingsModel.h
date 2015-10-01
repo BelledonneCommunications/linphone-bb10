@@ -33,6 +33,7 @@ class SettingsModel : public QObject
 
     Q_PROPERTY(bool debugEnabled READ debugEnabled WRITE setDebugEnabled NOTIFY settingsUpdated);
 
+    Q_PROPERTY(bool adaptiveRateControl READ adaptiveRateControl WRITE setAdaptiveRateControl NOTIFY settingsUpdated);
     Q_PROPERTY(QVariantMap audioCodecs READ audioCodecs NOTIFY settingsUpdated);
 
     Q_PROPERTY(bool videoSupported READ videoSupported NOTIFY settingsUpdated);
@@ -69,6 +70,8 @@ private:
     bool debugEnabled() const;
     void setDebugEnabled(const bool& enabled);
 
+    bool adaptiveRateControl() const;
+    void setAdaptiveRateControl(const bool& enabled);
     QVariantMap audioCodecs() const;
 
     bool videoSupported() const;
