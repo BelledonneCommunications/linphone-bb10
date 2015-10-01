@@ -49,7 +49,6 @@ Container {
                 spaceQuota: 2
             }
             text: settingsModel.stunServer
-            hintText: qsTr("STUN server") + Retranslate.onLanguageChanged
             verticalAlignment: VerticalAlignment.Center
             input.keyLayout: KeyLayout.EmailAddress
             inputMode: TextFieldInputMode.EmailAddress

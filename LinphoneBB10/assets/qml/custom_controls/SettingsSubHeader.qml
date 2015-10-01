@@ -36,7 +36,6 @@ Container {
         text: "Sub Header"
         verticalAlignment: VerticalAlignment.Center
         horizontalAlignment: HorizontalAlignment.Left
-        leftPadding: ui.sdu(2)
         textStyle.color: colors.colorA
         textStyle.base: titilliumWeb.style
     }

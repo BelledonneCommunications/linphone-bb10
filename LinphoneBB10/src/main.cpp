@@ -22,12 +22,13 @@
 #include <QTranslator>
 #include <Qt/qdeclarativedebug.h>
 
-#include "contacts/ContactModel.h"
-#include "chat/ChatModel.h"
-#include "history/HistoryModel.h"
 #include "linphone/linphonecore.h"
-#include "utils/ListEditorHelper.h"
-#include "call/CallStatsModel.h"
+#include "src/contacts/ContactModel.h"
+#include "src/chat/ChatModel.h"
+#include "src/history/HistoryModel.h"
+#include "src/utils/ListEditorHelper.h"
+#include "src/call/CallStatsModel.h"
+#include "src/settings/AccountSettingsModel.h"
 
 using namespace bb::cascades;
 
@@ -38,6 +39,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     qmlRegisterType<HistoryModel>();
     qmlRegisterType<ListEditorHelper>();
     qmlRegisterType<CallStatsModel>();
+    qmlRegisterType<AccountSettingsModel>();
 
     qRegisterMetaType<LinphoneCall*>("LinphoneCall*");
 

@@ -25,11 +25,14 @@
 
 #include <QObject>
 
+#include "AccountSettingsModel.h"
 #include "src/linphone/LinphoneManager.h"
 
 class SettingsModel : public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(AccountSettingsModel* accountSettingsModel READ accountSettingsModel CONSTANT);
 
     Q_PROPERTY(bool debugEnabled READ debugEnabled WRITE setDebugEnabled NOTIFY settingsUpdated);
 
@@ -66,6 +69,11 @@ Q_SIGNALS:
 
 private:
     LinphoneManager *_manager;
+
+    AccountSettingsModel *accountSettingsModel() const {
+        return _accountSettingsModel;
+    }
+    AccountSettingsModel *_accountSettingsModel;
 
     bool debugEnabled() const;
     void setDebugEnabled(const bool& enabled);

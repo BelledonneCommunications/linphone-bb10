@@ -47,6 +47,7 @@ Container {
     
     gestureHandlers: TapHandler {
         onTapped: {
+            settingsModel.accountSettingsModel.setSelectedAccount(menuItem.text);
             var accountPage = accountSettings.createObject();
             navigationPane.push(accountPage);
         }

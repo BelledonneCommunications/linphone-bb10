@@ -25,6 +25,7 @@
 SettingsModel::SettingsModel(QObject *parent)
     : QObject(parent),
       _manager(LinphoneManager::getInstance()),
+      _accountSettingsModel(new AccountSettingsModel(this)),
       _isSrtpSupported(false),
       _isZrtpSupported(false),
       _isDtlsSupported(false)

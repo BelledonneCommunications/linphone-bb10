@@ -585,6 +585,71 @@ You should only accept if you have the same token as your correspondent.</source
         <source>ACCOUNT</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="100"/>
+        <source>SIP account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="110"/>
+        <source>Username</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="138"/>
+        <source>Auth userid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="166"/>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="193"/>
+        <source>Domain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="221"/>
+        <source>Display Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="243"/>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="254"/>
+        <source>Transport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="291"/>
+        <source>Proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="313"/>
+        <source>Outbound proxy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="318"/>
+        <source>AVPF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="323"/>
+        <source>Manage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="327"/>
+        <source>Use as default</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsAudioView</name>
@@ -631,17 +696,16 @@ You should only accept if you have the same token as your correspondent.</source
     <name>SettingsNetworkView</name>
     <message>
         <location filename="../assets/qml/settings/SettingsNetworkView.qml" line="37"/>
-        <location filename="../assets/qml/settings/SettingsNetworkView.qml" line="52"/>
         <source>STUN server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsNetworkView.qml" line="64"/>
+        <location filename="../assets/qml/settings/SettingsNetworkView.qml" line="63"/>
         <source>Enable ICE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsNetworkView.qml" line="75"/>
+        <location filename="../assets/qml/settings/SettingsNetworkView.qml" line="74"/>
         <source>Use random ports (instead of 5060/5061)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -713,22 +777,22 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="159"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="167"/>
         <source>Assistant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="174"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="182"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="189"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="197"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="225"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="233"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>

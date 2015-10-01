@@ -100,6 +100,14 @@ Container {
             }
             verticalAlignment: VerticalAlignment.Center
             leftPadding: ui.sdu(1)
+            
+            gestureHandlers: TapHandler {
+                onTapped: {
+                    settingsModel.accountSettingsModel.selectDefaultProxy();
+                    var accountPage = accountSettings.createObject();
+                    navigationPane.push(accountPage);
+                }
+            }
 
             Label {
                 text: menuModel.displayName

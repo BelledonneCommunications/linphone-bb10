@@ -96,6 +96,237 @@ Page {
                     leftPadding: ui.sdu(1)
                     rightPadding: ui.sdu(1)
                     
+                    SettingsSubHeader {
+                        text: qsTr("SIP account") + Retranslate.onLanguageChanged
+                    }
+                    
+                    Container {
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        }
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        Label {
+                            text: qsTr("Username") + Retranslate.onLanguageChanged
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                            horizontalAlignment: HorizontalAlignment.Left
+                            verticalAlignment: VerticalAlignment.Center
+                            textStyle.base: titilliumWeb.style
+                        
+                        }
+                        
+                        CustomTextField {
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 2
+                            }
+                            verticalAlignment: VerticalAlignment.Center
+                            input.keyLayout: KeyLayout.Alphanumeric
+                            inputMode: TextFieldInputMode.Default
+                            text: settingsModel.accountSettingsModel.username
+                        }
+                    }
+                    
+                    Container {
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        }
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        Label {
+                            text: qsTr("Auth userid") + Retranslate.onLanguageChanged
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                            horizontalAlignment: HorizontalAlignment.Left
+                            verticalAlignment: VerticalAlignment.Center
+                            textStyle.base: titilliumWeb.style
+                        
+                        }
+                        
+                        CustomTextField {
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 2
+                            }
+                            verticalAlignment: VerticalAlignment.Center
+                            input.keyLayout: KeyLayout.Alphanumeric
+                            inputMode: TextFieldInputMode.Default
+                            text: settingsModel.accountSettingsModel.authid
+                        }
+                    }
+                    
+                    Container {
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        }
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        Label {
+                            text: qsTr("Password") + Retranslate.onLanguageChanged
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                            horizontalAlignment: HorizontalAlignment.Left
+                            verticalAlignment: VerticalAlignment.Center
+                            textStyle.base: titilliumWeb.style
+                        
+                        }
+                        
+                        CustomTextField {
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 2
+                            }
+                            verticalAlignment: VerticalAlignment.Center
+                            input.keyLayout: KeyLayout.Alphanumeric
+                            inputMode: TextFieldInputMode.Password
+                        }
+                    }
+                    
+                    Container {
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        }
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        Label {
+                            text: qsTr("Domain") + Retranslate.onLanguageChanged
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                            horizontalAlignment: HorizontalAlignment.Left
+                            verticalAlignment: VerticalAlignment.Center
+                            textStyle.base: titilliumWeb.style
+                        
+                        }
+                        
+                        CustomTextField {
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 2
+                            }
+                            verticalAlignment: VerticalAlignment.Center
+                            input.keyLayout: KeyLayout.EmailAddress
+                            inputMode: TextFieldInputMode.EmailAddress
+                            text: settingsModel.accountSettingsModel.domain
+                        }
+                    }
+                    
+                    Container {
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        }
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        Label {
+                            text: qsTr("Display Name") + Retranslate.onLanguageChanged
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                            horizontalAlignment: HorizontalAlignment.Left
+                            verticalAlignment: VerticalAlignment.Center
+                            textStyle.base: titilliumWeb.style
+                        
+                        }
+                        
+                        CustomTextField {
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 2
+                            }
+                            verticalAlignment: VerticalAlignment.Center
+                            input.keyLayout: KeyLayout.Contact
+                            inputMode: TextFieldInputMode.Text
+                            text: settingsModel.accountSettingsModel.displayName
+                        }
+                    }
+                    
+                    SettingsSubHeader {
+                        text: qsTr("Advanced") + Retranslate.onLanguageChanged
+                    }
+                    
+                    
+                    Container {
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        }
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        Label {
+                            text: qsTr("Transport") + Retranslate.onLanguageChanged
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                            horizontalAlignment: HorizontalAlignment.Left
+                            verticalAlignment: VerticalAlignment.Center
+                            textStyle.base: titilliumWeb.style
+                        
+                        }
+                        
+                        SegmentedControl {
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 2
+                            }
+                            selectedIndex: settingsModel.accountSettingsModel.transportIndex
+                            Option {
+                                text: "UDP"
+                                value: "udp"
+                            }
+                            Option {
+                                text: "TCP"
+                                value: "tcp"
+                            }
+                            Option {
+                                text: "TLS"
+                                value: "tls"
+                            }
+                        }
+                    }
+                    
+                    Container {
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        }
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        Label {
+                            text: qsTr("Proxy") + Retranslate.onLanguageChanged
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                            horizontalAlignment: HorizontalAlignment.Left
+                            verticalAlignment: VerticalAlignment.Center
+                            textStyle.base: titilliumWeb.style
+                        
+                        }
+                        
+                        CustomTextField {
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 2
+                            }
+                            verticalAlignment: VerticalAlignment.Center
+                            input.keyLayout: KeyLayout.EmailAddress
+                            inputMode: TextFieldInputMode.EmailAddress
+                            text: settingsModel.accountSettingsModel.proxy
+                        }
+                    }
+                    
+                    SettingsToggle {
+                        text: qsTr("Outbound proxy") + Retranslate.onLanguageChanged
+                        checked: settingsModel.accountSettingsModel.outboundProxy
+                    }
+                    
+                    SettingsToggle {
+                        text: qsTr("AVPF") + Retranslate.onLanguageChanged
+                        checked: settingsModel.accountSettingsModel.avpf
+                    }
+                    
+                    SettingsSubHeader {
+                        text: qsTr("Manage") + Retranslate.onLanguageChanged
+                    }
+                    
+                    SettingsToggle {
+                        text: qsTr("Use as default") + Retranslate.onLanguageChanged
+                        checked: settingsModel.accountSettingsModel.defaultProxy
+                    }
                 }
             }
         }

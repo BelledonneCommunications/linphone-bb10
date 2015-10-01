@@ -77,25 +77,25 @@ Container {
         selectedIndex: settingsModel.preferredVideoSize
         enabled: settingsModel.videoSupported && settingsModel.videoEnabled
         options: [
-            Option {
+            /*Option {
                 text: "720p"
                 value: "720p"
-            },
+            },*/
             Option {
                 text: "VGA"
                 value: "vga"
             },
-            Option {
+            /*Option {
                 text: "CIF"
                 value: "cif"
-            }/*,
+            },*/
             Option {
                 text: "QVGA"
-                value: "qcif"
-            },
+                value: "qvga"
+            }/*,
             Option {
                 text: "QCIF"
-                value: "qvga"
+                value: "qcif"
             }*/
         ]
         onSelectedValueChanged: {
