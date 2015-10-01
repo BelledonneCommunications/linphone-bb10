@@ -103,6 +103,10 @@ Container {
         }
     }
     
+    SettingsSubHeader {
+        text: qsTr("Codecs") + Retranslate.onLanguageChanged
+    }
+    
     attachedObjects: [                  
         ComponentDefinition {                      
             id: settingsToggle                       

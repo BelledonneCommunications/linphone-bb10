@@ -28,6 +28,10 @@ Container {
     horizontalAlignment: HorizontalAlignment.Fill
     id: audioCodecsContainer
     
+    SettingsSubHeader {
+        text: qsTr("Codecs") + Retranslate.onLanguageChanged
+    }
+    
     attachedObjects: [                  
         ComponentDefinition {                      
             id: settingsToggle                       

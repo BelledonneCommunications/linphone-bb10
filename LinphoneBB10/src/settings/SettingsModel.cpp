@@ -34,7 +34,6 @@ SettingsModel::SettingsModel(QObject *parent)
         _isSrtpSupported = linphone_core_media_encryption_supported(lc, LinphoneMediaEncryptionSRTP);
         _isZrtpSupported = linphone_core_media_encryption_supported(lc, LinphoneMediaEncryptionZRTP);
         _isDtlsSupported = linphone_core_media_encryption_supported(lc, LinphoneMediaEncryptionDTLS);
-        emit settingsUpdated();
     }
 }
 
@@ -43,7 +42,6 @@ void SettingsModel::setPayloadEnable(QString mime, int bitrate, bool enable) {
     if (payload) {
         linphone_core_enable_payload_type(_manager->getLc(), payload, enable);
     }
-    emit settingsUpdated();
 }
 
 bool SettingsModel::debugEnabled() const {
@@ -61,7 +59,6 @@ void SettingsModel::setDebugEnabled(const bool& enabled) {
     LpConfig *lpc = linphone_core_get_config(_manager->getLc());
     lp_config_set_int(lpc, "app", "debug", enabled ? 1 : 0);
     lp_config_sync(lpc);
-    emit settingsUpdated();
 }
 
 QVariantMap SettingsModel::audioCodecs() const {
@@ -101,7 +98,6 @@ bool SettingsModel::previewVisible() const {
 
 void SettingsModel::setPreviewVisible(const bool& visible) {
     linphone_core_enable_video_preview(_manager->getLc(), visible);
-    emit settingsUpdated();
 }
 
 bool SettingsModel::outgoingVideoCalls() const {
@@ -117,7 +113,6 @@ void SettingsModel::setOutgoingVideoCalls(const bool& enabled) {
     policy.automatically_accept = incomingVideoCalls();
     policy.automatically_initiate = enabled;
     linphone_core_set_video_policy(_manager->getLc(), &policy);
-    emit settingsUpdated();
 }
 
 bool SettingsModel::incomingVideoCalls() const {
@@ -133,7 +128,6 @@ void SettingsModel::setIncomingVideoCalls(const bool& enabled) {
     policy.automatically_accept = enabled;
     policy.automatically_initiate = outgoingVideoCalls();
     linphone_core_set_video_policy(_manager->getLc(), &policy);
-    emit settingsUpdated();
 }
 
 int SettingsModel::preferredVideoSizeIndex() const {
@@ -155,7 +149,6 @@ int SettingsModel::preferredVideoSizeIndex() const {
 
 void SettingsModel::setPreferredVideoSize(const QString& videoSize) {
     linphone_core_set_preferred_video_size_by_name(_manager->getLc(), videoSize.toLower().toUtf8().constData());
-    emit settingsUpdated();
 }
 
 QVariantMap SettingsModel::videoCodecs() const {
@@ -182,7 +175,6 @@ int SettingsModel::mediaEncryption() const {
 
 void SettingsModel::setMediaEncryption(const int& mediaEncryption) {
     linphone_core_set_media_encryption(_manager->getLc(), (LinphoneMediaEncryption)mediaEncryption);
-    emit settingsUpdated();
 }
 
 bool SettingsModel::mediaEncryptionMandatory() const {
@@ -191,7 +183,6 @@ bool SettingsModel::mediaEncryptionMandatory() const {
 
 void SettingsModel::setMediaEncryptionMandatory(const bool& enabled) {
     linphone_core_set_media_encryption_mandatory(_manager->getLc(), enabled);
-    emit settingsUpdated();
 }
 
 QString SettingsModel::stunServer() const {
@@ -219,7 +210,6 @@ void SettingsModel::setIceEnabled(const bool& enabled) {
         }
     }
     linphone_core_set_firewall_policy(_manager->getLc(), policy);
-    emit settingsUpdated();
 }
 
 bool SettingsModel::randomPorts() const {
@@ -238,5 +228,4 @@ void SettingsModel::setRandomPorts(const bool& enabled) {
         transports.tls_port = 5061;
     }
     linphone_core_set_sip_transports(_manager->getLc(), &transports);
-    emit settingsUpdated();
 }

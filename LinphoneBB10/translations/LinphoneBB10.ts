@@ -587,6 +587,14 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
+    <name>SettingsAudioView</name>
+    <message>
+        <location filename="../assets/qml/settings/SettingsAudioView.qml" line="32"/>
+        <source>Codecs</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsHomeView</name>
     <message>
         <location filename="../assets/qml/settings/SettingsHomeView.qml" line="38"/>
@@ -676,6 +684,11 @@ You should only accept if you have the same token as your correspondent.</source
     <message>
         <location filename="../assets/qml/settings/SettingsVideoView.qml" line="76"/>
         <source>Preferred video size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsVideoView.qml" line="107"/>
+        <source>Codecs</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
