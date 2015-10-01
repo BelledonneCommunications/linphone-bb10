@@ -70,4 +70,14 @@ Container {
             settingsModel.iceEnabled = checked;
         }
     }
+    
+    SettingsToggle {
+        text: qsTr("Use random ports (instead of 5060/5061)") + Retranslate.onLanguageChanged
+        checked: settingsModel.randomPorts
+        horizontalAlignment: HorizontalAlignment.Fill
+        
+        onToggled: {
+            settingsModel.randomPorts = checked;
+        }
+    }
 }

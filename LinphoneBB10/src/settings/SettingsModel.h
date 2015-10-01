@@ -51,6 +51,7 @@ class SettingsModel : public QObject
 
     Q_PROPERTY(QString stunServer READ stunServer WRITE setStunServer NOTIFY settingsUpdated);
     Q_PROPERTY(bool iceEnabled READ iceEnabled WRITE setIceEnabled NOTIFY settingsUpdated);
+    Q_PROPERTY(bool randomPorts READ randomPorts WRITE setRandomPorts NOTIFY settingsUpdated);
 
 public:
     SettingsModel(QObject *parent = NULL);
@@ -106,6 +107,8 @@ private:
     void setStunServer(const QString& stunServer);
     bool iceEnabled() const;
     void setIceEnabled(const bool& enabled);
+    bool randomPorts() const;
+    void setRandomPorts(const bool& enabled);
 };
 
 #endif /* SETTINGSMODEL_H_ */

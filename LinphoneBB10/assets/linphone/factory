@@ -9,9 +9,6 @@ register_only_when_network_is_up=1
 auto_net_state_mon=0
 keepalive_period=30000
 ping_with_options=0
-sip_port=-1
-sip_tcp_port=-1
-sip_tls_port=-1
 
 [rtp]
 audio_jitt_comp=60
@@ -26,7 +23,6 @@ playback_dev_id=QSA: voice
 
 [video]
 displaytype=MSBB10Display
-device=BB10Camera: BB10 Front Camera
 
 [sip]
 root_ca=app/native/assets/linphone/rootca.pem
@@ -34,5 +30,3 @@ root_ca=app/native/assets/linphone/rootca.pem
 [misc]
 history_max_size=30
 log_collection_upload_server_url=https://www.linphone.org:444/lft.php
-file_transfer_server_url=https://www.linphone.org:444/lft.php
-max_calls=1

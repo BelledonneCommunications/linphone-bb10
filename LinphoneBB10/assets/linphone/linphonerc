@@ -6,6 +6,9 @@ firewall_policy=ice
 
 [sip]
 default_proxy=0
+sip_port=-1
+sip_tcp_port=-1
+sip_tls_port=-1
 
 [rtp]
 audio_rtp_port=7076
@@ -17,3 +20,7 @@ display=1
 automatically_initiate=1
 automatically_accept=1
 size=vga
+device=BB10Camera: BB10 Front Camera
+
+[misc]
+file_transfer_server_url=https://www.linphone.org:444/lft.php

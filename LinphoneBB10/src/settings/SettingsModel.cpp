@@ -43,6 +43,7 @@ void SettingsModel::setPayloadEnable(QString mime, int bitrate, bool enable) {
     if (payload) {
         linphone_core_enable_payload_type(_manager->getLc(), payload, enable);
     }
+    emit settingsUpdated();
 }
 
 bool SettingsModel::debugEnabled() const {
@@ -60,6 +61,7 @@ void SettingsModel::setDebugEnabled(const bool& enabled) {
     LpConfig *lpc = linphone_core_get_config(_manager->getLc());
     lp_config_set_int(lpc, "app", "debug", enabled ? 1 : 0);
     lp_config_sync(lpc);
+    emit settingsUpdated();
 }
 
 QVariantMap SettingsModel::audioCodecs() const {
@@ -153,6 +155,7 @@ int SettingsModel::preferredVideoSizeIndex() const {
 
 void SettingsModel::setPreferredVideoSize(const QString& videoSize) {
     linphone_core_set_preferred_video_size_by_name(_manager->getLc(), videoSize.toLower().toUtf8().constData());
+    emit settingsUpdated();
 }
 
 QVariantMap SettingsModel::videoCodecs() const {
@@ -179,6 +182,7 @@ int SettingsModel::mediaEncryption() const {
 
 void SettingsModel::setMediaEncryption(const int& mediaEncryption) {
     linphone_core_set_media_encryption(_manager->getLc(), (LinphoneMediaEncryption)mediaEncryption);
+    emit settingsUpdated();
 }
 
 bool SettingsModel::mediaEncryptionMandatory() const {
@@ -187,6 +191,7 @@ bool SettingsModel::mediaEncryptionMandatory() const {
 
 void SettingsModel::setMediaEncryptionMandatory(const bool& enabled) {
     linphone_core_set_media_encryption_mandatory(_manager->getLc(), enabled);
+    emit settingsUpdated();
 }
 
 QString SettingsModel::stunServer() const {
@@ -195,6 +200,7 @@ QString SettingsModel::stunServer() const {
 
 void SettingsModel::setStunServer(const QString& stunServer) {
     linphone_core_set_stun_server(_manager->getLc(), stunServer.toUtf8().constData());
+    emit settingsUpdated();
 }
 
 bool SettingsModel::iceEnabled() const {
@@ -213,4 +219,24 @@ void SettingsModel::setIceEnabled(const bool& enabled) {
         }
     }
     linphone_core_set_firewall_policy(_manager->getLc(), policy);
+    emit settingsUpdated();
+}
+
+bool SettingsModel::randomPorts() const {
+    LCSipTransports transports;
+    linphone_core_get_sip_transports(_manager->getLc(), &transports);
+    return transports.udp_port == LC_SIP_TRANSPORT_RANDOM && transports.tcp_port == LC_SIP_TRANSPORT_RANDOM && transports.tls_port == LC_SIP_TRANSPORT_RANDOM;
+}
+
+void SettingsModel::setRandomPorts(const bool& enabled) {
+    LCSipTransports transports;
+    linphone_core_get_sip_transports(_manager->getLc(), &transports);
+    if (enabled) {
+        transports.udp_port = transports.tcp_port = transports.tls_port = LC_SIP_TRANSPORT_RANDOM;
+    } else {
+        transports.udp_port = transports.tcp_port = 5060;
+        transports.tls_port = 5061;
+    }
+    linphone_core_set_sip_transports(_manager->getLc(), &transports);
+    emit settingsUpdated();
 }
