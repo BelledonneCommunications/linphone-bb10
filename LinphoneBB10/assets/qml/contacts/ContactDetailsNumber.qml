@@ -28,10 +28,16 @@ Container {
     layout: StackLayout {
         orientation: LayoutOrientation.TopToBottom
     }
+    leftPadding: ui.sdu(1)
+    rightPadding: ui.sdu(1)
+    
+    CustomListDivider {
+        
+    }
     
     Container {
-        layout: StackLayout {
-            orientation: LayoutOrientation.TopToBottom
+        layout: DockLayout {
+            
         }
         background: colors.colorH
         topPadding: ui.sdu(2)
@@ -46,14 +52,20 @@ Container {
             textStyle.fontSize: FontSize.Small
             textStyle.base: titilliumWeb.style
             horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Top
         }
         
-        Label {
-            id: number
-            textStyle.color: colors.colorC
-            textStyle.fontSize: FontSize.Large
-            textStyle.base: titilliumWeb.style
+        Container {
             horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Top
+            topPadding: ui.sdu(5)
+            
+            Label {
+                id: number
+                textStyle.color: colors.colorC
+                textStyle.fontSize: FontSize.Large
+                textStyle.base: titilliumWeb.style
+            }
         }
         
         Container {
@@ -61,6 +73,8 @@ Container {
                 orientation: LayoutOrientation.LeftToRight
             }
             horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            topPadding: ui.sdu(15)
             
             ImageButton {
                 verticalAlignment: VerticalAlignment.Center
@@ -86,9 +100,5 @@ Container {
                 }
             }
         }
-    }
-    
-    CustomListDivider {
-    
     }
 }
