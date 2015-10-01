@@ -26,6 +26,9 @@ Container {
     property bool menuEnabled: true
     property bool statsEnabled: false
     property bool isInCall: false
+    
+    signal menuOpened();
+    signal menuClosed();
 
     Container {
         layout: StackLayout {
@@ -54,8 +57,10 @@ Container {
                 onClicked: {
                     if (pageContent.translationX == 0) {
                         pageContent.translationX = sideMenu.minWidth;
+                        menuOpened();
                     } else {
                         pageContent.translationX = 0;
+                        menuClosed();
                     }
                 }
             }

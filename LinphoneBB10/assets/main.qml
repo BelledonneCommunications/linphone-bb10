@@ -48,6 +48,7 @@ NavigationPane {
             }
 
             StatusBar {
+                id: statusbar
                 visible: !bps.isKeyboardVisible
             }
 

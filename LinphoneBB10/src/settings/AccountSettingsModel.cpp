@@ -131,3 +131,11 @@ bool AccountSettingsModel::avpf() const {
 bool AccountSettingsModel::defaultProxy() const {
     return linphone_core_get_default_proxy_config(LinphoneManager::getInstance()->getLc()) == _proxyConfig;
 }
+
+void AccountSettingsModel::setDefaultProxy(const bool& yes) {
+    if (!_proxyConfig || !yes) {
+        return;
+    }
+    linphone_core_set_default_proxy_config(LinphoneManager::getInstance()->getLc(), _proxyConfig);
+    emit accountUpdated();
+}

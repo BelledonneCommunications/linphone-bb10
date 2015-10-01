@@ -326,6 +326,11 @@ Page {
                     SettingsToggle {
                         text: qsTr("Use as default") + Retranslate.onLanguageChanged
                         checked: settingsModel.accountSettingsModel.defaultProxy
+                        enabled: !settingsModel.accountSettingsModel.defaultProxy
+                        
+                        onToggled: {
+                            settingsModel.accountSettingsModel.defaultProxy = checked
+                        }
                     }
                 }
             }

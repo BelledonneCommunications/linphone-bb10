@@ -52,4 +52,18 @@ Container {
             navigationPane.push(accountPage);
         }
     }
+    
+    function displaySipAccountsOtherThanDefaultOne() {
+        otherAccountsContainer.removeAll();
+        
+        for (var sipAccount in menuModel.sipAccounts) {
+            if (sipAccount == menuItem.text) {
+                accountRegistrationIcon.imageSource = menuModel.sipAccounts[sipAccount];
+            }
+        }
+    }
+    
+    onCreationCompleted: {
+        linphoneManager.registrationStatusChanged.connect(registrationStatusChanged);
+    }
 }

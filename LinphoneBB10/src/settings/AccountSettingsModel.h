@@ -41,7 +41,7 @@ class AccountSettingsModel : public QObject
     Q_PROPERTY(bool outboundProxy READ outboundProxy NOTIFY accountUpdated);
     Q_PROPERTY(bool avpf READ avpf NOTIFY accountUpdated);
 
-    Q_PROPERTY(bool defaultProxy READ defaultProxy NOTIFY accountUpdated);
+    Q_PROPERTY(bool defaultProxy READ defaultProxy WRITE setDefaultProxy NOTIFY accountUpdated);
 
 public:
     AccountSettingsModel(QObject *parent = NULL);
@@ -69,6 +69,7 @@ private:
     bool avpf() const;
 
     bool defaultProxy() const;
+    void setDefaultProxy(const bool& yes);
 };
 
 #endif /* ACCOUNTSETTINGSMODEL_H_ */

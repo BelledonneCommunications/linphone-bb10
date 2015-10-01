@@ -47,7 +47,7 @@ Container {
         }
     ]
     
-    function registrationStatusChanged(state) {
+    function displaySipAccountsOtherThanDefaultOne() {
         otherAccountsContainer.removeAll();
         
         for (var sipAccount in menuModel.sipAccounts) {
@@ -61,8 +61,13 @@ Container {
         }
     }
     
+    function updateSideMenuAccountsDisplay() {
+        menuModel.updateAccount();
+    }
+    
     onCreationCompleted: {
-        linphoneManager.registrationStatusChanged.connect(registrationStatusChanged);
+        settingsModel.accountSettingsModel.accountUpdated.connect(updateSideMenuAccountsDisplay);
+        statusbar.menuOpened.connect(displaySipAccountsOtherThanDefaultOne);
     }
 
     Container {

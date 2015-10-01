@@ -777,22 +777,22 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="167"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="172"/>
         <source>Assistant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="182"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="187"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="197"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="202"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="233"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="238"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>

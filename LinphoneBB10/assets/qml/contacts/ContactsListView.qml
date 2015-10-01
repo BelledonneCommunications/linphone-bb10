@@ -79,7 +79,7 @@ Container {
         }
 
         Container {
-            visible: !contactEditorModel.editor.isEditMode
+            visible: !contactListModel.editor.isEditMode
             layoutProperties: StackLayoutProperties {
                 spaceQuota: 1
             }
