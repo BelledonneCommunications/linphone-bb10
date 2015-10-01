@@ -87,9 +87,9 @@ Container {
             }
             onDeleteSelected: {
                 actionConfirmationScreen.visible = true;
-                actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected conversations?") + Retranslate.onLanguageChanged;
-                confirmAction.deleteClicked.connect(onDelete);
-                cancelAction.cancelClicked.connect(onCancel);
+                actionConfirmationScreen.text = qsTr("Are you sure you want to delete the selected conversations?") + Retranslate.onLanguageChanged;
+                actionConfirmationScreen.confirmActionClicked.connect(onDelete);
+                actionConfirmationScreen.cancelActionClicked.connect(onCancel);
             }
         }
     }
@@ -272,13 +272,11 @@ Container {
     }
     
     function onDelete() {
-        actionConfirmationScreen.visible = false
         chatListModel.editor.deleteSelection()
         chatListModel.editor.isEditMode = false
     }
     
     function onCancel() {
-        actionConfirmationScreen.visible = false
         chatListModel.editor.isEditMode = false
     }
 }

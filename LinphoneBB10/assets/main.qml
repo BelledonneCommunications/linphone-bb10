@@ -122,54 +122,8 @@ NavigationPane {
                     }
                 }
 
-                Container {
-                    layout: DockLayout {
-
-                    }
+                ConfirmationDialog {
                     id: actionConfirmationScreen
-                    verticalAlignment: VerticalAlignment.Fill
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    background: colors.colorC
-                    opacity: 0.9
-                    visible: false
-
-                    Container {
-                        layout: StackLayout {
-                            orientation: LayoutOrientation.TopToBottom
-                        }
-                        verticalAlignment: VerticalAlignment.Center
-                        horizontalAlignment: HorizontalAlignment.Center
-                        leftPadding: ui.sdu(5)
-                        rightPadding: ui.sdu(5)
-
-                        Label {
-                            id: actionConfirmationMessage
-                            textStyle.color: colors.colorH
-                            textStyle.base: titilliumWeb.style
-                            multiline: true
-                            textStyle.textAlign: TextAlign.Center
-                        }
-
-                        Container {
-                            layout: StackLayout {
-                                orientation: LayoutOrientation.LeftToRight
-                            }
-                            horizontalAlignment: HorizontalAlignment.Center
-                            topPadding: ui.sdu(7)
-
-                            CancelButton {
-                                id: cancelAction
-                                onCancelClicked: {
-                                    actionConfirmationScreen.visible = false
-                                }
-                            }
-
-                            DeleteButton {
-                                id: confirmAction
-                                leftMargin: ui.sdu(3)
-                            }
-                        }
-                    }
                 }
             }
         }

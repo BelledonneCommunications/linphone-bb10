@@ -82,8 +82,8 @@ Container {
             gestureHandlers: TapHandler {
                 onTapped: {
                     actionConfirmationScreen.visible = true
-                    actionConfirmationMessage.text = qsTr("Are you sure you want to delete this contact?") + Retranslate.onLanguageChanged
-                    confirmAction.deleteClicked.connect(onDelete)
+                    actionConfirmationScreen.text = qsTr("Are you sure you want to delete this contact?") + Retranslate.onLanguageChanged
+                    actionConfirmationScreen.confirmActionClicked.connect(onDelete);
                 }
             }
         }
@@ -150,7 +150,6 @@ Container {
     }
 
     function onDelete() {
-        actionConfirmationScreen.visible = false
         contactListModel.contactModel.deleteContact()
         tabDelegate.source = "ContactsListView.qml"
     }

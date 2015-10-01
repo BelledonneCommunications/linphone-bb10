@@ -136,9 +136,9 @@ Container {
             }
             onDeleteSelected: {
                 actionConfirmationScreen.visible = true;
-                actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected logs?") + Retranslate.onLanguageChanged;
-                confirmAction.deleteClicked.connect(onDelete);
-                cancelAction.cancelClicked.connect(onCancel);
+                actionConfirmationScreen.text = qsTr("Are you sure you want to delete the selected logs?") + Retranslate.onLanguageChanged;
+                actionConfirmationScreen.confirmActionClicked.connect(onDelete);
+                actionConfirmationScreen.cancelActionClicked.connect(onCancel);
             }
         }
     }
@@ -273,13 +273,11 @@ Container {
     }
     
     function onDelete() {
-        actionConfirmationScreen.visible = false
         historyListModel.editor.deleteSelection()
         historyListModel.editor.isEditMode = false
     }
     
     function onCancel() {
-        actionConfirmationScreen.visible = false
         historyListModel.editor.isEditMode = false
     }
 }

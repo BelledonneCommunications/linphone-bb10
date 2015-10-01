@@ -123,9 +123,9 @@ Container {
             }
             onDeleteSelected: {
                 actionConfirmationScreen.visible = true;
-                actionConfirmationMessage.text = qsTr("Are you sure you want to delete the selected contacts?") + Retranslate.onLanguageChanged;
-                confirmAction.deleteClicked.connect(onDelete);
-                cancelAction.cancelClicked.connect(onCancel);
+                actionConfirmationScreen.text = qsTr("Are you sure you want to delete the selected contacts?") + Retranslate.onLanguageChanged;
+                actionConfirmationScreen.confirmActionClicked.connect(onDelete);
+                actionConfirmationScreen.cancelActionClicked.connect(onCancel);
             }
         }
     }
@@ -250,13 +250,11 @@ Container {
     }
     
     function onDelete() {
-        actionConfirmationScreen.visible = false
         contactListModel.editor.deleteSelection()
         contactListModel.editor.isEditMode = false
     }
     
     function onCancel() {
-        actionConfirmationScreen.visible = false
         contactListModel.editor.isEditMode = false
     }
 }

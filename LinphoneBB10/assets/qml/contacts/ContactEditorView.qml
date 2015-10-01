@@ -73,9 +73,9 @@ Container {
             gestureHandlers: TapHandler {
                 onTapped: {
                     if (!contactEditorModel.isNewContact) {
-                        actionConfirmationScreen.visible = true
-                        actionConfirmationMessage.text = qsTr("Are you sure you want to delete this contact?") + Retranslate.onLanguageChanged
-                        confirmAction.deleteClicked.connect(onDelete)
+                        actionConfirmationScreen.visible = true;
+                        actionConfirmationScreen.text = qsTr("Are you sure you want to delete this contact?") + Retranslate.onLanguageChanged;
+                        actionConfirmationScreen.confirmActionClicked.connect(onDelete);
                     }
                 }
             }
