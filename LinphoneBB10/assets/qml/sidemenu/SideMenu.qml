@@ -108,9 +108,11 @@ Container {
             
             gestureHandlers: TapHandler {
                 onTapped: {
-                    settingsModel.accountSettingsModel.selectDefaultProxy();
-                    var accountPage = accountSettings.createObject();
-                    navigationPane.push(accountPage);
+                    if (menuModel.sipUri.length > 0) {
+                        settingsModel.accountSettingsModel.selectDefaultProxy();
+                        var accountPage = accountSettings.createObject();
+                        navigationPane.push(accountPage);
+                    }
                 }
             }
 

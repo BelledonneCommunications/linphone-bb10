@@ -49,9 +49,12 @@ void SideMenuModel::updateAccount() {
         const LinphoneAddress *identity = linphone_proxy_config_get_identity_address(lpc);
         _displayName = GetDisplayNameFromLinphoneAddress(identity);
         _sipUri = GetAddressFromLinphoneAddress(identity);
-
-        emit defaultAccountUpdated();
+    } else {
+        _displayName = "";
+        _sipUri = "";
     }
+
+    emit defaultAccountUpdated();
 }
 
 void SideMenuModel::setPicture(const QStringList &filePicked)

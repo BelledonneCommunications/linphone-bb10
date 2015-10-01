@@ -44,8 +44,7 @@ Page {
                 
                 gestureHandlers: TapHandler {
                     onTapped: {
-                        settingsModel.accountSettingsModel.deleteAccount();
-                        navigationPane.pop();
+                        dialogContainer.visible = true;
                     }
                 }
             }
@@ -351,6 +350,62 @@ Page {
                         
                         onToggled: {
                             settingsModel.accountSettingsModel.defaultProxy = checked
+                        }
+                    }
+                }
+            }
+            
+            Container {
+                layout: DockLayout {
+                
+                }
+                id: dialogContainer
+                verticalAlignment: VerticalAlignment.Fill
+                horizontalAlignment: HorizontalAlignment.Fill
+                background: colors.colorC
+                opacity: 0.9
+                visible: false
+                
+                Container {
+                    layout: StackLayout {
+                        orientation: LayoutOrientation.TopToBottom
+                    }
+                    verticalAlignment: VerticalAlignment.Center
+                    horizontalAlignment: HorizontalAlignment.Center
+                    leftPadding: ui.sdu(5)
+                    rightPadding: ui.sdu(5)
+                    
+                    Label {
+                        text: qsTr("Are you sure you want to delete this account?") + Retranslate.onLanguageChanged
+                        textStyle.color: colors.colorH
+                        textStyle.base: titilliumWeb.style
+                        multiline: true
+                        textStyle.textAlign: TextAlign.Center
+                        horizontalAlignment: HorizontalAlignment.Center
+                    }
+                    
+                    Container {
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        }
+                        horizontalAlignment: HorizontalAlignment.Center
+                        topPadding: ui.sdu(7)
+                        
+                        CancelButton {
+                            id: cancelAction
+                            onCancelClicked: {
+                                dialogContainer.visible = false;
+                            }
+                        }
+                        
+                        DeleteButton {
+                            id: confirmAction
+                            leftMargin: ui.sdu(3)
+                            onDeleteClicked: {
+                                dialogContainer.visible = false;
+                                settingsModel.accountSettingsModel.deleteAccount();
+                                navigationPane.pop();
+                            }
                         }
                     }
                 }

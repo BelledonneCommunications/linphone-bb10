@@ -54,6 +54,10 @@ void AccountSettingsModel::setSelectedAccount(QString sipUri) {
 
 void AccountSettingsModel::selectDefaultProxy() {
     _proxyConfig = linphone_core_get_default_proxy_config(LinphoneManager::getInstance()->getLc());
+    if (!_proxyConfig) {
+        return;
+    }
+
     const LinphoneAddress *addr = linphone_proxy_config_get_identity_address(_proxyConfig);
     _authInfo = linphone_core_find_auth_info(LinphoneManager::getInstance()->getLc(), NULL, linphone_address_get_username(addr), linphone_address_get_domain(addr));
     if (_proxyConfig && _authInfo) {
