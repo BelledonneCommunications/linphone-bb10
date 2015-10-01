@@ -39,9 +39,14 @@ Page {
             minHeight: ui.sdu(15)
             background: colors.colorF
             
-            Container {
-                layoutProperties: StackLayoutProperties {
-                    spaceQuota: 1
+            TopBarButton {
+                imageSource: "asset:///images/contacts/delete.png"
+                
+                gestureHandlers: TapHandler {
+                    onTapped: {
+                        settingsModel.accountSettingsModel.deleteAccount();
+                        navigationPane.pop();
+                    }
                 }
             }
             
@@ -125,6 +130,10 @@ Page {
                             input.keyLayout: KeyLayout.Alphanumeric
                             inputMode: TextFieldInputMode.Default
                             text: settingsModel.accountSettingsModel.username
+                            
+                            onTextChanged: {
+                                settingsModel.accountSettingsModel.username = text
+                            }
                         }
                     }
                     
@@ -153,6 +162,10 @@ Page {
                             input.keyLayout: KeyLayout.Alphanumeric
                             inputMode: TextFieldInputMode.Default
                             text: settingsModel.accountSettingsModel.authid
+                            
+                            onTextChanged: {
+                                settingsModel.accountSettingsModel.authid = text
+                            }
                         }
                     }
                     
@@ -208,6 +221,10 @@ Page {
                             input.keyLayout: KeyLayout.EmailAddress
                             inputMode: TextFieldInputMode.EmailAddress
                             text: settingsModel.accountSettingsModel.domain
+                            
+                            onTextChanged: {
+                                settingsModel.accountSettingsModel.domain = text
+                            }
                         }
                     }
                     
@@ -236,6 +253,10 @@ Page {
                             input.keyLayout: KeyLayout.Contact
                             inputMode: TextFieldInputMode.Text
                             text: settingsModel.accountSettingsModel.displayName
+                            
+                            onTextChanged: {
+                                settingsModel.accountSettingsModel.displayName = text
+                            }
                         }
                     }
                     

@@ -31,10 +31,10 @@ class AccountSettingsModel : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString username READ username NOTIFY accountUpdated);
-    Q_PROPERTY(QString authid READ authid NOTIFY accountUpdated);
-    Q_PROPERTY(QString domain READ domain NOTIFY accountUpdated);
-    Q_PROPERTY(QString displayName READ displayName NOTIFY accountUpdated);
+    Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY accountUpdated);
+    Q_PROPERTY(QString authid READ authid WRITE setAuthid NOTIFY accountUpdated);
+    Q_PROPERTY(QString domain READ domain WRITE setDomain NOTIFY accountUpdated);
+    Q_PROPERTY(QString displayName READ displayName WRITE setDisplayName NOTIFY accountUpdated);
 
     Q_PROPERTY(int transportIndex READ transportIndex NOTIFY accountUpdated);
     Q_PROPERTY(QString proxy READ proxy NOTIFY accountUpdated);
@@ -49,6 +49,7 @@ public:
 public Q_SLOTS:
     void setSelectedAccount(QString sipUri);
     void selectDefaultProxy();
+    void deleteAccount();
 
 Q_SIGNALS:
     void accountUpdated();
@@ -58,10 +59,15 @@ private:
     const LinphoneAuthInfo *_authInfo;
 
     QString username() const;
+    void setUsername(const QString& username);
     QString authid() const;
-    QString password() const;
+    void setAuthid(const QString& authid);
+    //QString password() const;
+    //void setPassword(const QString& password);
     QString domain() const;
+    void setDomain(const QString& domain);
     QString displayName() const;
+    void setDisplayName(const QString& displayName);
 
     int transportIndex() const;
     QString proxy() const;

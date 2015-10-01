@@ -68,11 +68,42 @@ QString AccountSettingsModel::username() const {
     return linphone_auth_info_get_username(_authInfo);
 }
 
+void AccountSettingsModel::setUsername(const QString& username) {
+    if (!_authInfo || !_proxyConfig) {
+        return;
+    }
+    LinphoneAuthInfo *ai = linphone_auth_info_clone(_authInfo);
+    linphone_auth_info_set_username(ai, username.toUtf8().constData());
+    linphone_core_remove_auth_info(LinphoneManager::getInstance()->getLc(), _authInfo);
+    linphone_core_add_auth_info(LinphoneManager::getInstance()->getLc(), ai);
+    _authInfo = ai;
+
+    const char *identity = linphone_proxy_config_get_identity(_proxyConfig);
+    LinphoneAddress *addr = linphone_core_create_address(LinphoneManager::getInstance()->getLc(), identity);
+    linphone_address_set_username(addr, username.toUtf8().constData());
+
+    linphone_proxy_config_edit(_proxyConfig);
+    linphone_proxy_config_set_identity_address(_proxyConfig, addr);
+    linphone_proxy_config_done(_proxyConfig);
+    linphone_address_destroy(addr);
+}
+
 QString AccountSettingsModel::authid() const {
     if (!_authInfo) {
         return NULL;
     }
     return linphone_auth_info_get_userid(_authInfo);
+}
+
+void AccountSettingsModel::setAuthid(const QString& authid) {
+    if (!_authInfo) {
+        return;
+    }
+    LinphoneAuthInfo *ai = linphone_auth_info_clone(_authInfo);
+    linphone_auth_info_set_userid(ai, authid.toUtf8().constData());
+    linphone_core_remove_auth_info(LinphoneManager::getInstance()->getLc(), _authInfo);
+    linphone_core_add_auth_info(LinphoneManager::getInstance()->getLc(), ai);
+    _authInfo = ai;
 }
 
 QString AccountSettingsModel::domain() const {
@@ -82,12 +113,46 @@ QString AccountSettingsModel::domain() const {
     return linphone_auth_info_get_domain(_authInfo);
 }
 
+void AccountSettingsModel::setDomain(const QString& domain) {
+    if (!_authInfo || !_proxyConfig) {
+        return;
+    }
+    LinphoneAuthInfo *ai = linphone_auth_info_clone(_authInfo);
+    linphone_auth_info_set_domain(ai, domain.toUtf8().constData());
+    linphone_core_remove_auth_info(LinphoneManager::getInstance()->getLc(), _authInfo);
+    linphone_core_add_auth_info(LinphoneManager::getInstance()->getLc(), ai);
+    _authInfo = ai;
+
+    const char *identity = linphone_proxy_config_get_identity(_proxyConfig);
+    LinphoneAddress *addr = linphone_core_create_address(LinphoneManager::getInstance()->getLc(), identity);
+    linphone_address_set_domain(addr, domain.toUtf8().constData());
+
+    linphone_proxy_config_edit(_proxyConfig);
+    linphone_proxy_config_set_identity_address(_proxyConfig, addr);
+    linphone_proxy_config_done(_proxyConfig);
+    linphone_address_destroy(addr);
+}
+
 QString AccountSettingsModel::displayName() const {
     if (!_proxyConfig) {
         return NULL;
     }
     const LinphoneAddress *addr = linphone_proxy_config_get_identity_address(_proxyConfig);
     return linphone_address_get_display_name(addr);
+}
+
+void AccountSettingsModel::setDisplayName(const QString& displayName) {
+    if (!_proxyConfig) {
+        return;
+    }
+    const char *identity = linphone_proxy_config_get_identity(_proxyConfig);
+    LinphoneAddress *addr = linphone_core_create_address(LinphoneManager::getInstance()->getLc(), identity);
+    linphone_address_set_display_name(addr, displayName.toUtf8().constData());
+
+    linphone_proxy_config_edit(_proxyConfig);
+    linphone_proxy_config_set_identity_address(_proxyConfig, addr);
+    linphone_proxy_config_done(_proxyConfig);
+    linphone_address_destroy(addr);
 }
 
 int AccountSettingsModel::transportIndex() const {
@@ -137,5 +202,15 @@ void AccountSettingsModel::setDefaultProxy(const bool& yes) {
         return;
     }
     linphone_core_set_default_proxy_config(LinphoneManager::getInstance()->getLc(), _proxyConfig);
+    emit accountUpdated();
+}
+
+void AccountSettingsModel::deleteAccount() {
+    if (_proxyConfig) {
+        linphone_core_remove_proxy_config(LinphoneManager::getInstance()->getLc(), _proxyConfig);
+    }
+    if (_authInfo) {
+        linphone_core_remove_auth_info(LinphoneManager::getInstance()->getLc(), _authInfo);
+    }
     emit accountUpdated();
 }
