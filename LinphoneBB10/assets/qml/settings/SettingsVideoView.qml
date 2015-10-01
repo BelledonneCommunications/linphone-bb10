@@ -50,9 +50,32 @@ Container {
         }
     }
     
+    SettingsToggle {
+        text: qsTr("Initiate video calls") + Retranslate.onLanguageChanged
+        checked: settingsModel.outgoingVideoCalls
+        horizontalAlignment: HorizontalAlignment.Fill
+        enabled: settingsModel.videoSupported && settingsModel.videoEnabled
+        
+        onToggled: {
+            settingsModel.outgoingVideoCalls = checked;
+        }
+    }
+    
+    SettingsToggle {
+        text: qsTr("Accept incoming video requests") + Retranslate.onLanguageChanged
+        checked: settingsModel.incomingVideoCalls
+        horizontalAlignment: HorizontalAlignment.Fill
+        enabled: settingsModel.videoSupported && settingsModel.videoEnabled
+        
+        onToggled: {
+            settingsModel.incomingVideoCalls = checked;
+        }
+    }
+    
     DropDown {
         title: qsTr("Preferred video size") + Retranslate.onLanguageChanged
         selectedIndex: settingsModel.preferredVideoSize
+        enabled: settingsModel.videoSupported && settingsModel.videoEnabled
         options: [
             Option {
                 text: "720p"

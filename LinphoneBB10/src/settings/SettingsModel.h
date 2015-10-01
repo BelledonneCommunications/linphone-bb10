@@ -38,6 +38,8 @@ class SettingsModel : public QObject
     Q_PROPERTY(bool videoSupported READ videoSupported NOTIFY settingsUpdated);
     Q_PROPERTY(bool videoEnabled READ videoEnabled WRITE setVideoEnabled NOTIFY settingsUpdated);
     Q_PROPERTY(bool previewVisible READ previewVisible WRITE setPreviewVisible NOTIFY settingsUpdated);
+    Q_PROPERTY(bool outgoingVideoCalls READ outgoingVideoCalls WRITE setOutgoingVideoCalls NOTIFY settingsUpdated);
+    Q_PROPERTY(bool incomingVideoCalls READ incomingVideoCalls WRITE setIncomingVideoCalls NOTIFY settingsUpdated);
     Q_PROPERTY(int preferredVideoSize READ preferredVideoSizeIndex NOTIFY settingsUpdated);
     Q_PROPERTY(QVariantMap videoCodecs READ videoCodecs NOTIFY settingsUpdated);
 
@@ -73,6 +75,10 @@ private:
     void setVideoEnabled(const bool& enabled);
     bool previewVisible() const;
     void setPreviewVisible(const bool& visible);
+    bool outgoingVideoCalls() const;
+    void setOutgoingVideoCalls(const bool& enabled);
+    bool incomingVideoCalls() const;
+    void setIncomingVideoCalls(const bool& enabled);
     int preferredVideoSizeIndex() const;
     QVariantMap videoCodecs() const;
 

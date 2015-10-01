@@ -90,6 +90,7 @@ bool SettingsModel::videoEnabled() const {
 
 void SettingsModel::setVideoEnabled(const bool& enabled) {
     linphone_core_enable_video(_manager->getLc(), enabled, enabled);
+    emit settingsUpdated();
 }
 
 bool SettingsModel::previewVisible() const {
@@ -98,6 +99,39 @@ bool SettingsModel::previewVisible() const {
 
 void SettingsModel::setPreviewVisible(const bool& visible) {
     linphone_core_enable_video_preview(_manager->getLc(), visible);
+    emit settingsUpdated();
+}
+
+bool SettingsModel::outgoingVideoCalls() const {
+    const LinphoneVideoPolicy *policy = linphone_core_get_video_policy(_manager->getLc());
+    if (!policy) {
+        return false;
+    }
+    return policy->automatically_initiate;
+}
+
+void SettingsModel::setOutgoingVideoCalls(const bool& enabled) {
+    LinphoneVideoPolicy policy;
+    policy.automatically_accept = incomingVideoCalls();
+    policy.automatically_initiate = enabled;
+    linphone_core_set_video_policy(_manager->getLc(), &policy);
+    emit settingsUpdated();
+}
+
+bool SettingsModel::incomingVideoCalls() const {
+    const LinphoneVideoPolicy *policy = linphone_core_get_video_policy(_manager->getLc());
+    if (!policy) {
+        return false;
+    }
+    return policy->automatically_accept;
+}
+
+void SettingsModel::setIncomingVideoCalls(const bool& enabled) {
+    LinphoneVideoPolicy policy;
+    policy.automatically_accept = enabled;
+    policy.automatically_initiate = outgoingVideoCalls();
+    linphone_core_set_video_policy(_manager->getLc(), &policy);
+    emit settingsUpdated();
 }
 
 int SettingsModel::preferredVideoSizeIndex() const {
