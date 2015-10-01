@@ -217,7 +217,7 @@ Container {
                                     }
                                     
                                     CustomCheckBox {
-                                    
+                                        enabled: false // This is because clicking on it will also trigger a click on the row, that will do the checkbox toggle
                                     }
                                 }
 

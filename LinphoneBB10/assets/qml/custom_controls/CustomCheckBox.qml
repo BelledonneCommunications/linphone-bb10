@@ -27,6 +27,7 @@ Container {
     horizontalAlignment: HorizontalAlignment.Center
     visible: Qt.editor.isEditMode
     leftPadding: ui.sdu(1)
+    id: checkbox
     
     CustomImageToggle {
         verticalAlignment: VerticalAlignment.Top
@@ -38,7 +39,9 @@ Container {
         
         gestureHandlers: TapHandler {
             onTapped: {
-                Qt.editor.updateSelection(itemRoot.ListItem.indexPath, !ListItemData.selected);
+                if (checkbox.enabled) {
+                    Qt.editor.updateSelection(itemRoot.ListItem.indexPath, !ListItemData.selected);
+                }
             }
         }
     }
