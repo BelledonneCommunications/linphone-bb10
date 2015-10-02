@@ -31,19 +31,13 @@ Container {
     bottomPadding: ui.sdu(1)
     minHeight: ui.sdu(10)
     
-    CustomDivider {
-        verticalAlignment: VerticalAlignment.Top
-    }
-    
     Label {
         id: title
-        text: "HEADER"
+        text: "Header"
         verticalAlignment: VerticalAlignment.Center
-        horizontalAlignment: HorizontalAlignment.Center
+        horizontalAlignment: HorizontalAlignment.Left
         textStyle.color: colors.colorA
         textStyle.base: titilliumWeb.style
-        textStyle.fontWeight: FontWeight.Bold
-        textStyle.fontSize: FontSize.Large
     }
     
     CustomDivider {

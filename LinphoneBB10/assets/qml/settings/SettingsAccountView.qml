@@ -100,7 +100,7 @@ Page {
                     leftPadding: ui.sdu(1)
                     rightPadding: ui.sdu(1)
                     
-                    SettingsSubHeader {
+                    SettingsHeader {
                         text: qsTr("SIP account") + Retranslate.onLanguageChanged
                     }
                     
@@ -263,7 +263,7 @@ Page {
                         }
                     }
                     
-                    SettingsSubHeader {
+                    SettingsHeader {
                         text: qsTr("Advanced") + Retranslate.onLanguageChanged
                     }
                     
@@ -359,7 +359,7 @@ Page {
                         }
                     }
                     
-                    SettingsSubHeader {
+                    SettingsHeader {
                         text: qsTr("Manage") + Retranslate.onLanguageChanged
                     }
                     

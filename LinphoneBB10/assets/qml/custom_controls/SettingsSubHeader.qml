@@ -36,8 +36,9 @@ Container {
         text: "Sub Header"
         verticalAlignment: VerticalAlignment.Center
         horizontalAlignment: HorizontalAlignment.Left
-        textStyle.color: colors.colorA
+        textStyle.color: colors.colorB
         textStyle.base: titilliumWeb.style
+        textStyle.fontSize: FontSize.Small
     }
     
     CustomDivider {
