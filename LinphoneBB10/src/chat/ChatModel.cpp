@@ -141,7 +141,7 @@ void ChatModel::sendMessage(QString message)
     }
 }
 
-static QVariantMap updateFileTransferInformations(QVariantMap entry, LinphoneChatMessage *message, int downloadProgress, int progressStatus)
+static QVariantMap updateFileTransferInformations(QVariantMap entry, LinphoneChatMessage *message, int downloadProgress, int downloadOffset, int downloadTotal, int progressStatus)
 {
     const LinphoneContent *content = linphone_chat_message_get_file_transfer_information(message);
     const char *external_body_url = linphone_chat_message_get_external_body_url(message);
@@ -152,6 +152,7 @@ static QVariantMap updateFileTransferInformations(QVariantMap entry, LinphoneCha
     bool isAlreadyDownloaded = appData != NULL;
     entry["isImageDownloaded"] = isAlreadyDownloaded;
     if (isFileTransfer) {
+        entry["downloadProgressText"] = SizeToString(downloadOffset) + " / " + SizeToString(downloadTotal);
         entry["downloadProgress"] = downloadProgress;
         entry["downloadProgressState"] = progressStatus;
         if (isAlreadyDownloaded) {
@@ -214,7 +215,7 @@ static QVariantMap fillEntryWithMessageValues(QVariantMap entry, LinphoneChatMes
     }
     entry["timeAndFrom"] = timeAndFrom;
 
-    entry = updateFileTransferInformations(entry, message, -1, ProgressIndicatorState::Progress);
+    entry = updateFileTransferInformations(entry, message, -1, -1, -1, ProgressIndicatorState::Progress);
 
     entry = setMessageDeliveryState(entry, message);
 
@@ -246,13 +247,13 @@ void ChatModel::updateMessagesList()
     }
 }
 
-void ChatModel::updateMessage(LinphoneChatMessage *message, int downloadProgress, int progressStatus)
+void ChatModel::updateMessage(LinphoneChatMessage *message, int downloadProgress, int downloadOffset, int downloadTotal, int progressStatus)
 {
     foreach (QVariantMap entry, _dataModel->toListOfMaps()) {
         LinphoneChatMessage *msg = entry.value("message").value<LinphoneChatMessage*>();
         if (linphone_chat_message_get_storage_id(message) == linphone_chat_message_get_storage_id(msg)) {
             QVariantList indexPath = _dataModel->findExact(entry);
-            entry = updateFileTransferInformations(entry, message, downloadProgress, progressStatus);
+            entry = updateFileTransferInformations(entry, message, downloadProgress, downloadOffset, downloadTotal, progressStatus);
             entry = setMessageDeliveryState(entry, message);
             _dataModel->updateItem(indexPath, entry);
             break;
@@ -337,6 +338,7 @@ void ChatModel::uploadProgressStatusChanged(bool isUploadInProgress, bool error)
 void ChatModel::uploadProgressValueChanged(int progress)
 {
     _uploadProgress = progress;
+
     if (progress == 100) {
         _uploadProgressState = ProgressIndicatorState::Complete;
     }
@@ -409,10 +411,10 @@ static void file_transfer_download_state_changed(LinphoneChatMessage *message, L
     switch (state) {
     case LinphoneChatMessageStateFileTransferDone:
         linphone_chat_message_set_appdata(message, linphone_chat_message_get_file_transfer_filepath(message));
-        thiz->updateMessage(message, 100, ProgressIndicatorState::Complete);
+        thiz->updateMessage(message, 100, 100, 100, ProgressIndicatorState::Complete);
         break;
     case LinphoneChatMessageStateFileTransferError:
-        thiz->updateMessage(message, 0, ProgressIndicatorState::Error);
+        thiz->updateMessage(message, 0, 0, 0, ProgressIndicatorState::Error);
         break;
     case LinphoneChatMessageStateInProgress:
     default:
@@ -423,7 +425,7 @@ static void file_transfer_download_state_changed(LinphoneChatMessage *message, L
 static void file_transfer_download_progress_indication(LinphoneChatMessage *message, const LinphoneContent* content, size_t offset, size_t total)
 {
     ChatModel *thiz = (ChatModel *)linphone_chat_message_get_user_data(message);
-    thiz->updateMessage(message, offset * 100 / total, ProgressIndicatorState::Progress);
+    thiz->updateMessage(message, offset * 100 / total, offset, total, ProgressIndicatorState::Progress);
 
     Q_UNUSED(content);
 }

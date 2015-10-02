@@ -53,7 +53,7 @@ public:
     void uploadProgressValueChanged(int progress);
     void uploadProgressStatusChanged(bool isUploadInProgress, bool error);
     void addMessageToList(LinphoneChatMessage *message);
-    void updateMessage(LinphoneChatMessage *message, int downloadProgress = -1, int progressStatus = 0);
+    void updateMessage(LinphoneChatMessage *message, int downloadProgress = -1, int downloadOffset = -1, int downloadTotal = -1, int progressStatus = 0);
 
 Q_SIGNALS:
     void messagesRead(QString sipAddress);

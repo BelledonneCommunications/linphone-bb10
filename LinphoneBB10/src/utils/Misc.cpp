@@ -21,6 +21,7 @@
  */
 
 #include <QDateTime>
+#include <math.h>
 
 #include "Misc.h"
 #include "src/linphone/LinphoneManager.h"
@@ -132,4 +133,15 @@ QString IceStateToString(LinphoneIceState ice) {
         default:
             return "";
     }
+}
+
+QString SizeToString(int size, bool si) {
+    char buffer[16];
+    int unit = si ? 1000 : 1024;
+
+    if (size < unit) return size + " B";
+    int exp = (int) (log(size) / log(unit));
+    const char *ext = si ? "kMGTPE" : "KMGTPE";
+    sprintf(buffer, "%.1f %c%sB", size / pow(unit, exp), ext[exp-1], si ? "" : "i");
+    return buffer;
 }

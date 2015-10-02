@@ -130,14 +130,28 @@ Container {
                             }
                         }
                         
-                        ProgressIndicator {
+                        Container {
+                            layout: StackLayout {
+                                orientation: LayoutOrientation.TopToBottom
+                            }
+                            
                             visible: ListItemData.isFileTransferMessage && !ListItemData.isImageDownloaded && ListItemData.downloadProgress >= 0
-                            fromValue: 0
-                            toValue: 100
-                            value: ListItemData.downloadProgress
-                            maxWidth: ui.sdu(30)
                             verticalAlignment: VerticalAlignment.Center
-                            state: ListItemData.downloadProgressState
+                            
+                            Label {
+                                text: ListItemData.downloadProgressText
+                                textStyle.base: Qt.titilliumWeb.style
+                                textStyle.color: Qt.colors.colorD
+                                textStyle.fontSize: FontSize.XSmall
+                            }
+                            
+                            ProgressIndicator {
+                                fromValue: 0
+                                toValue: 100
+                                value: ListItemData.downloadProgress
+                                maxWidth: ui.sdu(30)
+                                state: ListItemData.downloadProgressState
+                            }
                         }
                     }
                 }
