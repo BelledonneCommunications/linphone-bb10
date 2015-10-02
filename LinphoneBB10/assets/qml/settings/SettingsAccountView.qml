@@ -126,8 +126,8 @@ Page {
                                 spaceQuota: 2
                             }
                             verticalAlignment: VerticalAlignment.Center
-                            input.keyLayout: KeyLayout.Alphanumeric
-                            inputMode: TextFieldInputMode.Default
+                            input.keyLayout: KeyLayout.Contact
+                            inputMode: TextFieldInputMode.EmailAddress
                             text: settingsModel.accountSettingsModel.username
                             
                             onTextChanged: {
@@ -158,8 +158,8 @@ Page {
                                 spaceQuota: 2
                             }
                             verticalAlignment: VerticalAlignment.Center
-                            input.keyLayout: KeyLayout.Alphanumeric
-                            inputMode: TextFieldInputMode.Default
+                            input.keyLayout: KeyLayout.Contact
+                            inputMode: TextFieldInputMode.EmailAddress
                             text: settingsModel.accountSettingsModel.authid
                             
                             onTextChanged: {
@@ -192,6 +192,10 @@ Page {
                             verticalAlignment: VerticalAlignment.Center
                             input.keyLayout: KeyLayout.Alphanumeric
                             inputMode: TextFieldInputMode.Password
+                            
+                            onTextChanged: {
+                                settingsModel.accountSettingsModel.password = text
+                            }
                         }
                     }
                     
@@ -298,6 +302,10 @@ Page {
                                 text: "TLS"
                                 value: "tls"
                             }
+                            
+                            onSelectedIndexChanged: {
+                                settingsModel.accountSettingsModel.transportIndex = selectedIndex
+                            }
                         }
                     }
                     
@@ -326,17 +334,29 @@ Page {
                             input.keyLayout: KeyLayout.EmailAddress
                             inputMode: TextFieldInputMode.EmailAddress
                             text: settingsModel.accountSettingsModel.proxy
+                            
+                            onTextChanged: {
+                                settingsModel.accountSettingsModel.proxy = text
+                            }
                         }
                     }
                     
                     SettingsToggle {
                         text: qsTr("Outbound proxy") + Retranslate.onLanguageChanged
                         checked: settingsModel.accountSettingsModel.outboundProxy
+                        
+                        onToggled: {
+                            settingsModel.accountSettingsModel.outboundProxy = checked
+                        }
                     }
                     
                     SettingsToggle {
                         text: qsTr("AVPF") + Retranslate.onLanguageChanged
                         checked: settingsModel.accountSettingsModel.avpf
+                        
+                        onToggled: {
+                            settingsModel.accountSettingsModel.avpf = checked
+                        }
                     }
                     
                     SettingsSubHeader {

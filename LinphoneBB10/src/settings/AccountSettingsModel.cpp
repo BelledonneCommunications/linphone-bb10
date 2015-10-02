@@ -110,6 +110,17 @@ void AccountSettingsModel::setAuthid(const QString& authid) {
     _authInfo = ai;
 }
 
+void AccountSettingsModel::setPassword(const QString& password) {
+    if (!_authInfo) {
+        return;
+    }
+    LinphoneAuthInfo *ai = linphone_auth_info_clone(_authInfo);
+    linphone_auth_info_set_passwd(ai, password.toUtf8().constData());
+    linphone_core_remove_auth_info(LinphoneManager::getInstance()->getLc(), _authInfo);
+    linphone_core_add_auth_info(LinphoneManager::getInstance()->getLc(), ai);
+    _authInfo = ai;
+}
+
 QString AccountSettingsModel::domain() const {
     if (!_authInfo) {
         return NULL;
@@ -164,16 +175,42 @@ int AccountSettingsModel::transportIndex() const {
         return -1;
     }
 
-    const char *transport = linphone_proxy_config_get_transport(_proxyConfig);
-    if (strcmp(transport, "udp") == 0) {
+    const char *proxy = linphone_proxy_config_get_server_addr(_proxyConfig);
+    LinphoneAddress *addr = linphone_core_create_address(LinphoneManager::getInstance()->getLc(), proxy);
+    LinphoneTransportType transport = linphone_address_get_transport(addr);
+    if (transport == LinphoneTransportUdp) {
         return 0;
-    } else if (strcmp(transport, "tcp") == 0) {
+    } else if (transport == LinphoneTransportTcp) {
         return 1;
-    } else if (strcmp(transport, "tls") == 0) {
+    } else if (transport == LinphoneTransportTls) {
         return 2;
     }
 
     return -1;
+}
+
+void AccountSettingsModel::setTransportIndex(const int& transport) {
+    if (!_proxyConfig) {
+        return;
+    }
+
+    const char *proxy = linphone_proxy_config_get_server_addr(_proxyConfig);
+    LinphoneAddress *addr = linphone_core_create_address(LinphoneManager::getInstance()->getLc(), proxy);
+    if (transport == 0) {
+        linphone_address_set_transport(addr, LinphoneTransportUdp);
+    } else if (transport == 1) {
+        linphone_address_set_transport(addr, LinphoneTransportTcp);
+    } else if (transport == 2) {
+        linphone_address_set_transport(addr, LinphoneTransportTls);
+    }
+    linphone_proxy_config_edit(_proxyConfig);
+    linphone_proxy_config_set_server_addr(_proxyConfig, linphone_address_as_string(addr));
+    if (outboundProxy()) {
+        linphone_proxy_config_set_route(_proxyConfig, linphone_address_as_string(addr));
+    }
+    linphone_address_destroy(addr);
+    linphone_proxy_config_done(_proxyConfig);
+    emit accountUpdated();
 }
 
 QString AccountSettingsModel::proxy() const {
@@ -183,6 +220,22 @@ QString AccountSettingsModel::proxy() const {
     return linphone_proxy_config_get_server_addr(_proxyConfig);
 }
 
+void AccountSettingsModel::setProxy(const QString& proxy) {
+    if (!_proxyConfig) {
+        return;
+    }
+
+    linphone_proxy_config_edit(_proxyConfig);
+    LinphoneAddress *addr = linphone_core_create_address(LinphoneManager::getInstance()->getLc(), proxy.toUtf8().constData());
+    linphone_proxy_config_set_server_addr(_proxyConfig, linphone_address_as_string(addr));
+    if (outboundProxy()) {
+        linphone_proxy_config_set_route(_proxyConfig, linphone_address_as_string(addr));
+    }
+    linphone_address_destroy(addr);
+    linphone_proxy_config_done(_proxyConfig);
+    emit accountUpdated();
+}
+
 bool AccountSettingsModel::outboundProxy() const {
     if (!_proxyConfig) {
         return false;
@@ -190,11 +243,35 @@ bool AccountSettingsModel::outboundProxy() const {
     return linphone_proxy_config_get_route(_proxyConfig) != NULL;
 }
 
+void AccountSettingsModel::setOutboundProxy(const bool& yes) {
+    if (!_proxyConfig) {
+        return;
+    }
+
+    linphone_proxy_config_edit(_proxyConfig);
+    if (yes) {
+        linphone_proxy_config_set_route(_proxyConfig, linphone_proxy_config_get_server_addr(_proxyConfig));
+    } else {
+        linphone_proxy_config_set_route(_proxyConfig, NULL);
+    }
+    linphone_proxy_config_done(_proxyConfig);
+}
+
 bool AccountSettingsModel::avpf() const {
     if (!_proxyConfig) {
         return false;
     }
     return linphone_proxy_config_avpf_enabled(_proxyConfig);
+}
+
+void AccountSettingsModel::setAvpf(const bool& yes) {
+    if (!_proxyConfig) {
+        return;
+    }
+
+    linphone_proxy_config_edit(_proxyConfig);
+    linphone_proxy_config_enable_avpf(_proxyConfig, yes);
+    linphone_proxy_config_done(_proxyConfig);
 }
 
 bool AccountSettingsModel::defaultProxy() const {

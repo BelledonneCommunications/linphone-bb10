@@ -581,7 +581,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>SettingsAccountView</name>
     <message>
-        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="360"/>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="380"/>
         <source>Are you sure you want to delete this account?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -611,47 +611,47 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="205"/>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="209"/>
         <source>Domain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="237"/>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="241"/>
         <source>Display Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="263"/>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="267"/>
         <source>Advanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="274"/>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="278"/>
         <source>Transport</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="311"/>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="319"/>
         <source>Proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="333"/>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="345"/>
         <source>Outbound proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="338"/>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="354"/>
         <source>AVPF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="343"/>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="363"/>
         <source>Manage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="347"/>
+        <location filename="../assets/qml/settings/SettingsAccountView.qml" line="367"/>
         <source>Use as default</source>
         <translation type="unfinished"></translation>
     </message>
