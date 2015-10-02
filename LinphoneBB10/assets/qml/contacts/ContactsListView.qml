@@ -129,6 +129,18 @@ Container {
             }
         }
     }
+    
+    CustomTextField {
+        leftPadding: ui.sdu(2)
+        rightPadding: ui.sdu(2)
+        topPadding: ui.sdu(1)
+        bottomPadding: ui.sdu(1)
+        hintText: qsTr("Contact search") + Retranslate.onLanguageChanged
+        
+        onTextFieldChanging: {
+            contactListModel.contactSearchFilter = text
+        }
+    }
 
     Container {
         layoutProperties: StackLayoutProperties {

@@ -34,6 +34,8 @@ ContactListModel::ContactListModel(QObject *parent) :
         _selectedContactId(-1),
         _allContactsDataModel(new GroupDataModel(this)),
         _sipContactsDataModel(new GroupDataModel(this)),
+        _searchContactsDataModel(new GroupDataModel(this)),
+        _searchFilter(""),
         _listEditorHelper(new ListEditorHelper(_allContactsDataModel)),
         _isSipFilterEnabled(false),
         _contactModel(new ContactModel(this))
@@ -46,6 +48,9 @@ ContactListModel::ContactListModel(QObject *parent) :
 
     _sipContactsDataModel->setGrouping(ItemGrouping::ByFirstChar);
     _sipContactsDataModel->setSortingKeys(sortingKeys);
+
+    _searchContactsDataModel->setGrouping(ItemGrouping::ByFirstChar);
+    _searchContactsDataModel->setSortingKeys(sortingKeys);
 
     ContactService *contactService = _contactFetcher->getContactService();
     // It is not needed to list for contactsAdded signal, because it will also trigger the contactsChanged one which is enough for us.
@@ -166,13 +171,16 @@ void ContactListModel::contactFetched(QVariantMap entry, bool isSipContact, bool
 void ContactListModel::setSipFilter(bool enable)
 {
     _isSipFilterEnabled = enable;
-
-    if (_listEditorHelper) {
-        _listEditorHelper->setDataModel(dataModel());
-    }
-
     emit sipFilterUpdated();
-    emit contactListUpdated();
+
+    if (_searchFilter.length() > 0) {
+        setContactSearchFilter(_searchFilter);
+    } else {
+        if (_listEditorHelper) {
+            _listEditorHelper->setDataModel(dataModel());
+        }
+        emit contactListUpdated();
+    }
 }
 
 void ContactListModel::resetLastSelectedItemPath()
@@ -187,4 +195,24 @@ void ContactListModel::deleteItems(QList<QVariantList> indexPaths)
         ContactId id = entry.value("contactId").toInt();
         _contactFetcher->getContactService()->deleteContact(id);
     }
+}
+
+void ContactListModel::setContactSearchFilter(const QString& filter) {
+    _searchFilter = filter;
+
+    if (_searchFilter.length() > 0) {
+        GroupDataModel *contacts = isSipFilterEnabled() ? _sipContactsDataModel : _allContactsDataModel;
+        _searchContactsDataModel->clear();
+
+        foreach (QVariantMap variant, contacts->toListOfMaps()) {
+            if (variant.value("displayName").toString().contains(_searchFilter, Qt::CaseInsensitive)) {
+                _searchContactsDataModel->insert(variant);
+            }
+        }
+    }
+
+    if (_listEditorHelper) {
+        _listEditorHelper->setDataModel(dataModel());
+    }
+    emit contactListUpdated();
 }

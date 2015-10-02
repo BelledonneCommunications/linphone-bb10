@@ -41,6 +41,7 @@ class ContactListModel : public QObject
     Q_PROPERTY(bool sipFilterEnabled READ isSipFilterEnabled NOTIFY sipFilterUpdated);
     Q_PROPERTY(QVariantList lastSelectedItemIndexPath READ lastSelectedItemIndexPath);
     Q_PROPERTY(ListEditorHelper* editor READ editor CONSTANT);
+    Q_PROPERTY(QString contactSearchFilter WRITE setContactSearchFilter NOTIFY contactListUpdated)
 
 public:
     ContactListModel(QObject *parent = NULL);
@@ -71,6 +72,9 @@ private:
     QVariantList _lastSelectedItemIndexPath;
 
     bb::cascades::GroupDataModel* dataModel() const {
+        if (_searchFilter.length() > 0) {
+            return _searchContactsDataModel;
+        }
         if (isSipFilterEnabled()) {
             return _sipContactsDataModel;
         }
@@ -79,6 +83,10 @@ private:
 
     bb::cascades::GroupDataModel* _allContactsDataModel;
     bb::cascades::GroupDataModel* _sipContactsDataModel;
+    bb::cascades::GroupDataModel* _searchContactsDataModel;
+
+    void setContactSearchFilter(const QString& filter);
+    QString _searchFilter;
 
     ListEditorHelper *editor() const {
         return _listEditorHelper;
