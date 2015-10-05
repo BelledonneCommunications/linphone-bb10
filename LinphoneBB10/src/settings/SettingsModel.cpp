@@ -102,11 +102,11 @@ void SettingsModel::setVideoEnabled(const bool& enabled) {
 }
 
 bool SettingsModel::previewVisible() const {
-    return linphone_core_video_preview_enabled(_manager->getLc());
+    return linphone_core_self_view_enabled(_manager->getLc());
 }
 
 void SettingsModel::setPreviewVisible(const bool& visible) {
-    linphone_core_enable_video_preview(_manager->getLc(), visible);
+    linphone_core_enable_self_view(_manager->getLc(), visible);
 }
 
 bool SettingsModel::outgoingVideoCalls() const {
