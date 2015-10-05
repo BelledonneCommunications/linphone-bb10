@@ -21,6 +21,7 @@
 #include <QLocale>
 #include <QTranslator>
 #include <Qt/qdeclarativedebug.h>
+#include<bb/device/DisplayInfo>
 
 #include "linphone/linphonecore.h"
 #include "src/contacts/ContactModel.h"
@@ -42,6 +43,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     qmlRegisterType<AccountSettingsModel>();
 
     qRegisterMetaType<LinphoneCall*>("LinphoneCall*");
+    qmlRegisterType<bb::device::DisplayInfo>("bb.displayInfo", 1, 0, "DisplayInfo");
 
     Application app(argc, argv);
     app.setMenuEnabled(false);

@@ -60,12 +60,27 @@ Page {
                     }
                     horizontalAlignment: HorizontalAlignment.Fill
                     
-                    CallVideoView {
-                        visible: inCallModel.isVideoEnabled && !inCallModel.isPaused
-                    }
-                    
-                    CallAudioView {
-                        visible: !inCallModel.isVideoEnabled || inCallModel.isPaused
+                    Container {
+                        layout: DockLayout {
+                            
+                        }
+                        layoutProperties: StackLayoutProperties {
+                            spaceQuota: 1
+                        }
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        CallVideoView {
+                            visible: inCallModel.isVideoEnabled && !inCallModel.isPaused
+                        }
+                        
+                        CallAudioView {
+                            visible: !inCallModel.isVideoEnabled || inCallModel.isPaused
+                        }
+                        
+                        CallOptionsMenuBar {
+                            id: optionsMenu
+                            menuVisible: false
+                        }
                     }
                     
                     CallControlBar {

@@ -83,11 +83,11 @@ Container {
         }
         imageSource: "asset:///images/call/options_default.png"
         selectedImageSource: "asset:///images/call/options_selected.png"
-        enabled: false
+        selected: optionsMenu.menuVisible
         
         gestureHandlers: TapHandler {
             onTapped: {
-            
+                optionsMenu.menuVisible = !optionsMenu.menuVisible
             }
         }
     }
