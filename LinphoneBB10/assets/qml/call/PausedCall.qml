@@ -22,6 +22,7 @@ import bb.cascades 1.4
 import "../custom_controls"
 
 Container {
+    property string addr
     property string displayName
     property string callTime
     property string photo
@@ -86,7 +87,7 @@ Container {
     
             gestureHandlers: TapHandler {
                 onTapped: {
-                    
+                    inCallModel.resumeCall(addr);
                 }
             }
         }

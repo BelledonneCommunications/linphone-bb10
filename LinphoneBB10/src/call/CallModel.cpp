@@ -374,6 +374,19 @@ void CallModel::togglePause()
     }
 }
 
+void CallModel::resumeCall(QString address) {
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+    LinphoneCall *call = linphone_core_find_call_from_uri(lc, address.toUtf8().constData());
+
+    if (lc && call) {
+        LinphoneCallState state = linphone_call_get_state(call);
+        if (state == LinphoneCallPaused) {
+            linphone_core_resume_call(lc, call);
+        }
+    }
+}
+
 bool CallModel::isInCall() const {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();

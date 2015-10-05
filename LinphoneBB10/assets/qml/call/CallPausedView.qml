@@ -39,6 +39,7 @@ Container {
         
         for (var call in inCallModel.pausedCalls) {
             var item = pausedCall.createObject();
+            item.addr = call;
             item.displayName = inCallModel.pausedCalls[call][0];
             item.photo = inCallModel.pausedCalls[call][1]
             //item.callTime = inCallModel.pausedCalls[call][2];

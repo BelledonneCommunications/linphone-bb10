@@ -73,6 +73,7 @@ public Q_SLOTS:
     void hangUp();
     void switchCamera();
     void togglePause();
+    void resumeCall(QString address);
     void onOrientationAboutToChange(bb::cascades::DisplayDirection::Type, bb::cascades::UIOrientation::Type uiOrientation);
     void updateZRTPTokenValidation(bool isTokenOk);
     void cameraPreviewAttached(screen_window_t handle);
