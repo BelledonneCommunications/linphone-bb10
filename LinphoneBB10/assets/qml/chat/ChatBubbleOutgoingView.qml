@@ -122,6 +122,37 @@ Container {
                                 }
                             }
                         }
+                        
+                        /*CancelButton {
+                            visible: ListItemData.isFileTransferMessage && ListItemData.transferProgress > 0
+                            
+                            onCancelClicked: {
+                                itemRoot.ListItem.view.cancelUpload(ListItemData.message);
+                            }
+                        }*/
+                        
+                        Container {
+                            layout: StackLayout {
+                                orientation: LayoutOrientation.TopToBottom
+                            }
+                            visible: ListItemData.isFileTransferMessage && !ListItemData.isTransferComplete && ListItemData.transferProgress > 0
+                            verticalAlignment: VerticalAlignment.Center
+                            
+                            Label {
+                                text: ListItemData.transferProgressText
+                                textStyle.base: Qt.titilliumWeb.style
+                                textStyle.color: Qt.colors.colorD
+                                textStyle.fontSize: FontSize.XSmall
+                            }
+                            
+                            ProgressIndicator {
+                                fromValue: 0
+                                toValue: 100
+                                value: ListItemData.transferProgress
+                                maxWidth: ui.sdu(30)
+                                state: ListItemData.transferProgressState
+                            }
+                        }
                     }
                 }
                 

@@ -110,7 +110,7 @@ Container {
                         
                         ImageView {
                             imageSource: ListItemData.imageSource
-                            visible: ListItemData.isFileTransferMessage && ListItemData.isImageDownloaded
+                            visible: ListItemData.isFileTransferMessage && ListItemData.isTransferComplete
                             scalingMethod: ScalingMethod.AspectFit
                             maxWidth: ui.sdu(30)
                             maxHeight: ui.sdu(30)
@@ -123,7 +123,7 @@ Container {
                         }
                         
                         DownloadButton {
-                            visible: ListItemData.isFileTransferMessage && !ListItemData.isImageDownloaded && ListItemData.downloadProgress < 0
+                            visible: ListItemData.isFileTransferMessage && !ListItemData.isTransferComplete && ListItemData.transferProgress < 0
                             
                             onDownloadClicked: {
                                 itemRoot.ListItem.view.downloadFile(ListItemData.message);
@@ -134,12 +134,11 @@ Container {
                             layout: StackLayout {
                                 orientation: LayoutOrientation.TopToBottom
                             }
-                            
-                            visible: ListItemData.isFileTransferMessage && !ListItemData.isImageDownloaded && ListItemData.downloadProgress >= 0
+                            visible: ListItemData.isFileTransferMessage && !ListItemData.isTransferComplete && ListItemData.transferProgress > 0
                             verticalAlignment: VerticalAlignment.Center
                             
                             Label {
-                                text: ListItemData.downloadProgressText
+                                text: ListItemData.transferProgressText
                                 textStyle.base: Qt.titilliumWeb.style
                                 textStyle.color: Qt.colors.colorD
                                 textStyle.fontSize: FontSize.XSmall
@@ -148,9 +147,9 @@ Container {
                             ProgressIndicator {
                                 fromValue: 0
                                 toValue: 100
-                                value: ListItemData.downloadProgress
+                                value: ListItemData.transferProgress
                                 maxWidth: ui.sdu(30)
-                                state: ListItemData.downloadProgressState
+                                state: ListItemData.transferProgressState
                             }
                         }
                     }

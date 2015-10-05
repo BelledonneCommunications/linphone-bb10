@@ -39,15 +39,12 @@ ChatModel::ChatModel(QObject *parent)
       _displayName(""),
       _linphoneAddress(""),
       _isNewConversation(true),
-      _isUploadInProgress(false),
-      _uploadProgress(0),
-      _uploadProgressState(ProgressIndicatorState::Progress),
       _isRemoteComposing(false),
       _room(NULL)
 {
     _dataModel->setGrouping(ItemGrouping::None);
     QStringList sortingKeys;
-    sortingKeys << "id";
+    sortingKeys << "time" << "id";
     _dataModel->setSortingKeys(sortingKeys);
 
     LinphoneManager *manager = LinphoneManager::getInstance();
@@ -141,7 +138,7 @@ void ChatModel::sendMessage(QString message)
     }
 }
 
-static QVariantMap updateFileTransferInformations(QVariantMap entry, LinphoneChatMessage *message, int downloadProgress, int downloadOffset, int downloadTotal, int progressStatus)
+static QVariantMap updateFileTransferInformations(QVariantMap entry, LinphoneChatMessage *message, int transferProgress, int transferOffset, int transferTotal, int progressStatus)
 {
     const LinphoneContent *content = linphone_chat_message_get_file_transfer_information(message);
     const char *external_body_url = linphone_chat_message_get_external_body_url(message);
@@ -150,11 +147,11 @@ static QVariantMap updateFileTransferInformations(QVariantMap entry, LinphoneCha
     const char *appData = linphone_chat_message_get_appdata(message);
 
     bool isAlreadyDownloaded = appData != NULL;
-    entry["isImageDownloaded"] = isAlreadyDownloaded;
+    entry["isTransferComplete"] = linphone_chat_message_is_outgoing(message) ? transferOffset == transferTotal : isAlreadyDownloaded;
     if (isFileTransfer) {
-        entry["downloadProgressText"] = SizeToString(downloadOffset) + " / " + SizeToString(downloadTotal);
-        entry["downloadProgress"] = downloadProgress;
-        entry["downloadProgressState"] = progressStatus;
+        entry["transferProgressText"] = SizeToString(transferOffset) + " / " + SizeToString(transferTotal);
+        entry["transferProgress"] = transferProgress;
+        entry["transferProgressState"] = progressStatus;
         if (isAlreadyDownloaded) {
             entry["imageSource"] = "file://" + QString(appData);
         }
@@ -166,13 +163,12 @@ static QVariantMap updateFileTransferInformations(QVariantMap entry, LinphoneCha
 static QVariantMap setMessageDeliveryState(QVariantMap entry, LinphoneChatMessage *message)
 {
     LinphoneChatMessageState state = linphone_chat_message_get_state(message);
-    QString stateImage = "/images/chat/chat_message_not_delivered.png";
+    QString stateImage = "";
     if (state == LinphoneChatMessageStateInProgress) {
-        //stateImage = "/images/chat/chat_message_inprogress.png";
-        stateImage = ""; // Show a spinner instead of an icon
-    } else if (state == LinphoneChatMessageStateDelivered) {
-        //stateImage = "/images/chat/chat_message_delivered.png";
-        stateImage = ""; // Don't display any icon for delivered state for now
+        stateImage = "/images/chat/chat_message_inprogress.png";
+        //stateImage = ""; // Show a spinner instead of an icon, but right now this is not possible easily
+    } else if (state == LinphoneChatMessageStateNotDelivered || state == LinphoneChatMessageStateFileTransferError) {
+        stateImage = "/images/chat/chat_message_not_delivered.png";
     }
 
     entry["deliveryState"] = stateImage;
@@ -188,6 +184,7 @@ static QVariantMap fillEntryWithMessageValues(QVariantMap entry, LinphoneChatMes
     entry["text"] = QString::fromUtf8(text);
 
     time_t time = linphone_chat_message_get_time(message);
+    entry["time"] = time;
     const LinphoneAddress* fromAddr = linphone_chat_message_get_from_address(message);
     QString from = GetDisplayNameFromLinphoneAddress(fromAddr);
     QString date = FormatDateForChat(time);
@@ -247,13 +244,13 @@ void ChatModel::updateMessagesList()
     }
 }
 
-void ChatModel::updateMessage(LinphoneChatMessage *message, int downloadProgress, int downloadOffset, int downloadTotal, int progressStatus)
+void ChatModel::updateMessage(LinphoneChatMessage *message, int transferProgress, int transferOffset, int transferTotal, int progressStatus)
 {
     foreach (QVariantMap entry, _dataModel->toListOfMaps()) {
         LinphoneChatMessage *msg = entry.value("message").value<LinphoneChatMessage*>();
         if (linphone_chat_message_get_storage_id(message) == linphone_chat_message_get_storage_id(msg)) {
             QVariantList indexPath = _dataModel->findExact(entry);
-            entry = updateFileTransferInformations(entry, message, downloadProgress, downloadOffset, downloadTotal, progressStatus);
+            entry = updateFileTransferInformations(entry, message, transferProgress, transferOffset, transferTotal, progressStatus);
             entry = setMessageDeliveryState(entry, message);
             _dataModel->updateItem(indexPath, entry);
             break;
@@ -319,30 +316,8 @@ void ChatModel::openPicture(QString file)
     invokeManager.invoke(invokeRequest);
 }
 
-void ChatModel::uploadProgressStatusChanged(bool isUploadInProgress, bool error)
-{
-    _uploadProgress = 0;
-    _isUploadInProgress = isUploadInProgress;
-    if (isUploadInProgress) {
-        _uploadProgressState = ProgressIndicatorState::Progress;
-    } else {
-        if (error) {
-            _uploadProgressState = ProgressIndicatorState::Error;
-        } else {
-            _uploadProgressState = ProgressIndicatorState::Complete;
-        }
-    }
-    emit uploadProgressChanged();
-}
-
-void ChatModel::uploadProgressValueChanged(int progress)
-{
-    _uploadProgress = progress;
-
-    if (progress == 100) {
-        _uploadProgressState = ProgressIndicatorState::Complete;
-    }
-    emit uploadProgressChanged();
+void ChatModel::emitSendMessageSignal(LinphoneChatRoom *room, LinphoneChatMessage *lastMessage) {
+    emit messageSent(room, lastMessage);
 }
 
 static void file_transfer_upload_state_changed(LinphoneChatMessage *message, LinphoneChatMessageState state) {
@@ -350,13 +325,13 @@ static void file_transfer_upload_state_changed(LinphoneChatMessage *message, Lin
 
     switch (state) {
     case LinphoneChatMessageStateFileTransferError:
-        thiz->uploadProgressStatusChanged(false, true);
+        thiz->updateMessage(message, 0, 0, 0, ProgressIndicatorState::Error);
         break;
     case LinphoneChatMessageStateFileTransferDone:
-        thiz->uploadProgressStatusChanged(false, false);
+        thiz->updateMessage(message, 100, 100, 100, ProgressIndicatorState::Complete);
         break;
     case LinphoneChatMessageStateInProgress:
-        thiz->addMessageToList(message);
+        thiz->emitSendMessageSignal(linphone_chat_message_get_chat_room(message), message);
         break;
     default:
         thiz->updateMessage(message);
@@ -367,7 +342,7 @@ static void file_transfer_upload_state_changed(LinphoneChatMessage *message, Lin
 static void file_transfer_upload_progress_indication(LinphoneChatMessage *message, const LinphoneContent* content, size_t offset, size_t total)
 {
     ChatModel *thiz = (ChatModel *)linphone_chat_message_get_user_data(message);
-    thiz->uploadProgressValueChanged(offset * 100 / total);
+    thiz->updateMessage(message, offset * 100 / total, offset, total, ProgressIndicatorState::Progress);
 
     Q_UNUSED(content);
 }
@@ -399,8 +374,8 @@ void ChatModel::onFilePicked(const QStringList &filePicked)
             linphone_chat_message_set_appdata(message, localFilePath);
             linphone_chat_message_set_user_data(message, this);
             linphone_chat_room_send_chat_message(_room, message);
-            emit messageSent(_room, message);
-            uploadProgressStatusChanged(true, false);
+
+            addMessageToList(message);
         }
     }
 }

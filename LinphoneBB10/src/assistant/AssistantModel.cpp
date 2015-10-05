@@ -63,7 +63,7 @@ AssistantModel::AssistantModel(QObject *parent)
     _accountCreatorCbs = linphone_account_creator_get_callbacks(_accountCreator);
     linphone_account_creator_cbs_set_existence_tested(_accountCreatorCbs, test_account_existence_cb);
     linphone_account_creator_cbs_set_validation_tested(_accountCreatorCbs, test_account_validation_cb);
-    linphone_account_creator_cbs_set_validated(_accountCreatorCbs, account_validate_cb);
+    linphone_account_creator_cbs_set_create_account(_accountCreatorCbs, account_validate_cb);
 }
 
 void AssistantModel::configureAccount(QString username, QString password, QString domain, QString displayName)
@@ -118,7 +118,7 @@ void AssistantModel::createLinphoneAccount(QString username, QString password, Q
     linphone_account_creator_set_route(_accountCreator, _defaultSipDomain);
     linphone_account_creator_set_email(_accountCreator, email.toUtf8().constData());
 
-    linphone_account_creator_validate(_accountCreator);
+    linphone_account_creator_create_account(_accountCreator);
 }
 
 void AssistantModel::isUsernameAvailable(QString username)

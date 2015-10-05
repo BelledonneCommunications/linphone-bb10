@@ -42,18 +42,14 @@ class ChatModel : public QObject
     Q_PROPERTY(QString linphoneAddress READ linphoneAddress NOTIFY remoteChateeChanged);
     Q_PROPERTY(bb::cascades::GroupDataModel* dataModel READ dataModel NOTIFY messageHistoryChanged);
     Q_PROPERTY(bool isNewConversation READ isNewConversation WRITE setNewConversation NOTIFY remoteChateeChanged);
-    Q_PROPERTY(bool isUploadInProgress READ isUploadInProgress NOTIFY uploadProgressChanged);
-    Q_PROPERTY(int uploadProgress READ uploadProgress NOTIFY uploadProgressChanged);
-    Q_PROPERTY(int uploadProgressState READ uploadProgressState NOTIFY uploadProgressChanged);
     Q_PROPERTY(bool isRemoteComposing READ isRemoteComposing NOTIFY composingMessageReceived);
     Q_PROPERTY(ListEditorHelper* editor READ editor CONSTANT);
 
 public:
     ChatModel(QObject *parent = NULL);
-    void uploadProgressValueChanged(int progress);
-    void uploadProgressStatusChanged(bool isUploadInProgress, bool error);
     void addMessageToList(LinphoneChatMessage *message);
-    void updateMessage(LinphoneChatMessage *message, int downloadProgress = -1, int downloadOffset = -1, int downloadTotal = -1, int progressStatus = 0);
+    void updateMessage(LinphoneChatMessage *message, int transferProgress = -1, int transferOffset = -1, int transferTotal = -1, int progressStatus = 0);
+    void emitSendMessageSignal(LinphoneChatRoom *room, LinphoneChatMessage *lastMessage);
 
 Q_SIGNALS:
     void messagesRead(QString sipAddress);
@@ -61,7 +57,6 @@ Q_SIGNALS:
     void messagesDeleted(LinphoneChatRoom *room, LinphoneChatMessage *lastMessage);
 
     void messageHistoryChanged();
-    void uploadProgressChanged();
     void composingMessageReceived();
     void remoteChateeChanged();
 
@@ -117,21 +112,6 @@ private:
         emit remoteChateeChanged();
     }
     bool _isNewConversation;
-
-    bool isUploadInProgress() const {
-        return _isUploadInProgress;
-    }
-    bool _isUploadInProgress;
-
-    int uploadProgress() const {
-        return _uploadProgress;
-    }
-    int _uploadProgress;
-
-    int uploadProgressState() const {
-        return _uploadProgressState;
-    }
-    int _uploadProgressState;
 
     bool isRemoteComposing() const {
         return _isRemoteComposing;

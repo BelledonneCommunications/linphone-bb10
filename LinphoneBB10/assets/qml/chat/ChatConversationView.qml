@@ -278,29 +278,6 @@ Container {
         }
     }
     
-    Container {
-        layout: StackLayout {
-            orientation: LayoutOrientation.LeftToRight
-        }
-        minHeight: ui.sdu(15)
-        horizontalAlignment: HorizontalAlignment.Fill
-        verticalAlignment: VerticalAlignment.Center
-        background: colors.colorF
-        visible: chatListModel.chatModel.isUploadInProgress
-        
-        ProgressIndicator {
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: 1
-            }
-            fromValue: 0
-            toValue: 100
-            value: chatListModel.chatModel.uploadProgress
-            state: chatListModel.chatModel.uploadProgressState
-            verticalAlignment: VerticalAlignment.Center
-            horizontalAlignment: HorizontalAlignment.Center
-        }
-    }
-    
     function sendMessage() {
         var success = true;
         if (chatListModel.chatModel.isNewConversation && newConversationSipAddress.text.length > 0) {
