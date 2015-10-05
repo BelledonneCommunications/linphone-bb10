@@ -160,6 +160,23 @@ Container {
                     imageSource: ListItemData.deliveryState
                     verticalAlignment: VerticalAlignment.Top
                     horizontalAlignment: HorizontalAlignment.Right
+                    
+                    animations: [
+                        RotateTransition {
+                            id: inProgressRotateAnimation
+                            toAngleZ: 360
+                            duration: 2000
+                            repeatCount: AnimationRepeatCount.Forever
+                        }
+                    ]
+                    
+                    onImageSourceChanged: {
+                        if (ListItemData.inProgress) {
+                            inProgressRotateAnimation.play();
+                        } else {
+                            inProgressRotateAnimation.stop();
+                        }
+                    }
                 }
             }
             
