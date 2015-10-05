@@ -224,7 +224,6 @@ void CallModel::callStateChanged(LinphoneCall *call) {
         _isSpeakerEnabled = false;
         _isMicMuted = false;
         _isVideoEnabled = false;
-        linphone_call_set_user_data(call, NULL);
     } else if (state == LinphoneCallStreamsRunning) {
         if (_isVideoEnabled) {
             if (!_controlsFadeTimer->isActive()) {
