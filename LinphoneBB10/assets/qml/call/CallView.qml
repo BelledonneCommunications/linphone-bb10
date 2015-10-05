@@ -60,54 +60,12 @@ Page {
                     }
                     horizontalAlignment: HorizontalAlignment.Fill
                     
-                    Container {
-                        layout: DockLayout {
-                        
-                        }
-                        verticalAlignment: VerticalAlignment.Fill
-                        horizontalAlignment: HorizontalAlignment.Fill
-                        
-                        Container {
-                            layout: StackLayout {
-                                orientation: LayoutOrientation.TopToBottom
-                            }
-                            verticalAlignment: VerticalAlignment.Fill
-                            horizontalAlignment: HorizontalAlignment.Fill
-                            
-                            CallVideoView {
-                                visible: inCallModel.isVideoEnabled && !inCallModel.isPaused
-                            }
-                            
-                            CallAudioView {
-                                visible: !inCallModel.isVideoEnabled || inCallModel.isPaused
-                            }
-                        }
-                        
-                        Container {
-                            layout: DockLayout {
-                            
-                            }
-                            id: numpad
-                            visible: false
-                            leftPadding: ui.sdu(2)
-                            rightPadding: ui.sdu(2)
-                            topPadding: ui.sdu(2)
-                            bottomPadding: ui.sdu(2)
-                            
-                            Container {
-                                verticalAlignment: VerticalAlignment.Fill
-                                horizontalAlignment: HorizontalAlignment.Fill
-                                background: colors.colorF
-                                opacity: 0.95
-                            }
-                            
-                            Numpad {
-                                leftPadding: ui.sdu(3)
-                                rightPadding: ui.sdu(3)
-                                topPadding: ui.sdu(3)
-                                bottomPadding: ui.sdu(3)
-                            }
-                        }
+                    CallVideoView {
+                        visible: inCallModel.isVideoEnabled && !inCallModel.isPaused
+                    }
+                    
+                    CallAudioView {
+                        visible: !inCallModel.isVideoEnabled || inCallModel.isPaused
                     }
                     
                     CallControlBar {
@@ -130,6 +88,32 @@ Page {
                         if (callPageContent.translationX > 0) {
                             callPageContent.translationX = 0;
                         }
+                    }
+                }
+                
+                Container {
+                    layout: DockLayout {
+                    
+                    }
+                    id: numpad
+                    visible: false
+                    leftPadding: ui.sdu(2)
+                    rightPadding: ui.sdu(2)
+                    topPadding: ui.sdu(2)
+                    bottomPadding: ui.sdu(2)
+                    
+                    Container {
+                        verticalAlignment: VerticalAlignment.Fill
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        background: colors.colorF
+                        opacity: 0.95
+                    }
+                    
+                    Numpad {
+                        leftPadding: ui.sdu(3)
+                        rightPadding: ui.sdu(3)
+                        topPadding: ui.sdu(3)
+                        bottomPadding: ui.sdu(3)
                     }
                 }
                 
