@@ -102,11 +102,16 @@ Container {
     }
 
     ScrollView {
+        horizontalAlignment: HorizontalAlignment.Fill
+        verticalAlignment: VerticalAlignment.Fill
+        
         Container {
             layout: StackLayout {
                 orientation: LayoutOrientation.TopToBottom
             }
             topPadding: ui.sdu(2)
+            horizontalAlignment: HorizontalAlignment.Fill
+            verticalAlignment: VerticalAlignment.Fill
 
             Container {
                 layout: StackLayout {
