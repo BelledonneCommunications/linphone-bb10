@@ -41,14 +41,22 @@ class CallModel : public QObject
     Q_PROPERTY(QString sipUri READ sipUri NOTIFY callUpdated);
     Q_PROPERTY(QString callTime READ callTime NOTIFY statsUpdated);
     Q_PROPERTY(QString photo READ photo NOTIFY callUpdated);
+
     Q_PROPERTY(bool isInCall READ isInCall NOTIFY callUpdated);
     Q_PROPERTY(bool isVideoEnabled READ isVideoEnabled WRITE setVideoEnabled NOTIFY callUpdated);
     Q_PROPERTY(bool isMicMuted READ isMicMuted WRITE setMicMuted NOTIFY callUpdated);
     Q_PROPERTY(bool isSpeakerEnabled READ isSpeakerEnabled WRITE setSpeakerEnabled NOTIFY callUpdated);
-    Q_PROPERTY(bool isPaused READ isPaused NOTIFY callUpdated);
     Q_PROPERTY(bool areControlsVisible READ areControlsVisible NOTIFY fadeControlsUpdated);
+    Q_PROPERTY(bool isInConference READ isInConference NOTIFY conferenceUpdated);
+    Q_PROPERTY(int runningCallsCount READ runningCallsCount NOTIFY callUpdated);
+    Q_PROPERTY(QVariantMap pausedCalls READ pausedCalls NOTIFY callUpdated);
+
     Q_PROPERTY(int deviceOrientation READ deviceOrientation NOTIFY deviceOrientationChanged);
     Q_PROPERTY(QSize previewSize READ previewSize NOTIFY statsUpdated);
+    Q_PROPERTY(bool isCallTransferAllowed READ isCallTransferAllowed NOTIFY callUpdated);
+    Q_PROPERTY(bool isMultiCallAllowed READ isMultiCallAllowed NOTIFY callUpdated);
+    Q_PROPERTY(bool isConferenceAllowed READ isConferenceAllowed NOTIFY callUpdated);
+
     Q_PROPERTY(CallStatsModel* callStatsModel READ callStatsModel CONSTANT);
 
 public:
@@ -71,6 +79,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void callUpdated();
+    void conferenceUpdated();
     void statsUpdated();
     void fadeControlsUpdated();
     void deviceOrientationChanged();
@@ -124,11 +133,6 @@ private:
     void setSpeakerEnabled(const bool &enabled);
     bool _isSpeakerEnabled;
 
-    bool isPaused() const {
-        return _isPaused;
-    }
-    bool _isPaused;
-
     bool areControlsVisible() const {
        return _areControlsVisible;
    }
@@ -146,6 +150,18 @@ private:
         return _previewSize;
     }
     QSize _previewSize;
+
+    bool isCallTransferAllowed() const;
+
+    bool isMultiCallAllowed() const;
+
+    bool isConferenceAllowed() const;
+
+    bool isInConference() const;
+
+    int runningCallsCount() const;
+
+    QVariantMap pausedCalls() const;
 };
 
 #endif /* CALLMODEL_H_ */

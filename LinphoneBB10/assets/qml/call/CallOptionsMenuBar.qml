@@ -43,7 +43,7 @@ Container {
         minHeight: ui.sdu(15)
         minWidth: displayInfo.pixelSize.width / 4
         imageSource: "asset:///images/call/options_start_conference.png"
-        enabled: false
+        enabled: inCallModel.isConferenceAllowed
         gestureHandlers: TapHandler {
             onTapped: {
                 
@@ -55,7 +55,7 @@ Container {
         minHeight: ui.sdu(15)
         minWidth: displayInfo.pixelSize.width / 4
         imageSource: "asset:///images/call/options_add_call.png"
-        enabled: false
+        enabled: inCallModel.isMultiCallAllowed
         gestureHandlers: TapHandler {
             onTapped: {
                 
@@ -67,7 +67,7 @@ Container {
         minHeight: ui.sdu(15)
         minWidth: displayInfo.pixelSize.width / 4
         imageSource: "asset:///images/call/options_transfer_call.png"
-        enabled: false
+        enabled: inCallModel.isCallTransferAllowed
         gestureHandlers: TapHandler {
             onTapped: {
                 

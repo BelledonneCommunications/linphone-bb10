@@ -70,11 +70,19 @@ Page {
                         horizontalAlignment: HorizontalAlignment.Fill
                         
                         CallVideoView {
-                            visible: inCallModel.isVideoEnabled && !inCallModel.isPaused
+                            visible: inCallModel.isVideoEnabled && !inCallModel.isInConference && inCallModel.runningCallsCount > 0
                         }
                         
                         CallAudioView {
-                            visible: !inCallModel.isVideoEnabled || inCallModel.isPaused
+                            visible: !inCallModel.isVideoEnabled && !inCallModel.isInConference && inCallModel.runningCallsCount > 0
+                        }
+                        
+                        /*CallConferenceView {
+                            visible: inCallModel.isInConference
+                        }*/
+                        
+                        CallPausedView {
+                            
                         }
                         
                         CallOptionsMenuBar {

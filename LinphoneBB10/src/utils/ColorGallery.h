@@ -32,6 +32,7 @@ class ColorGallery : public QObject
 
     Q_PROPERTY(bb::cascades::Color colorA READ colorA CONSTANT);
     Q_PROPERTY(bb::cascades::Color colorA15 READ colorA15 CONSTANT);
+    Q_PROPERTY(bb::cascades::Color colorA50 READ colorA50 CONSTANT);
     Q_PROPERTY(bb::cascades::Color colorB READ colorB CONSTANT);
     Q_PROPERTY(bb::cascades::Color colorC READ colorC CONSTANT);
     Q_PROPERTY(bb::cascades::Color colorD READ colorD CONSTANT);
@@ -55,6 +56,9 @@ private:
     }
     bb::cascades::Color colorA15() const {
         return bb::cascades::Color::fromARGB(0xffffe7d9); // This is the color resulting of colorA with 15% opacity above a white background
+    }
+    bb::cascades::Color colorA50() const {
+        return bb::cascades::Color::fromARGB(0xffffae7f); // This is the color resulting of colorA with 50% opacity above a white background
     }
     bb::cascades::Color colorB() const {
         return bb::cascades::Color::fromARGB(0xff000000);
