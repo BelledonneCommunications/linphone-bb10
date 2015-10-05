@@ -62,7 +62,6 @@ void ContactModel::updateContact()
 
     QList<ContactAttribute> attrs = contact.attributes();
     foreach (ContactAttribute attr, attrs) {
-        QVariantMap entry;
         if (attr.kind() == AttributeKind::VideoChat || attr.kind() == AttributeKind::Phone) {
             if (attr.kind() == AttributeKind::VideoChat) {
                 _isSipContact = true;

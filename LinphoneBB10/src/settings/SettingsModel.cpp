@@ -142,17 +142,17 @@ void SettingsModel::setIncomingVideoCalls(const bool& enabled) {
 int SettingsModel::preferredVideoSizeIndex() const {
     const char *videoSize = linphone_core_get_preferred_video_size_name(_manager->getLc());
 
-    if (strcmp(videoSize, "720p") == 0) {
+    if (strcmp(videoSize, "vga") == 0) {
         return 0;
-    } else if (strcmp(videoSize, "vga") == 0) {
+    } else if (strcmp(videoSize, "qvga") == 0) {
         return 1;
-    } else if (strcmp(videoSize, "cif") == 0) {
+    }/* else if (strcmp(videoSize, "cif") == 0) {
         return 2;
     } else if (strcmp(videoSize, "qvga") == 0) {
         return 3;
     } else if (strcmp(videoSize, "qcif") == 0) {
         return 4;
-    }
+    }*/
     return -1;
 }
 
