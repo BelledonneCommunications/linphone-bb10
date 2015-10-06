@@ -89,6 +89,37 @@ Page {
                             id: optionsMenu
                             menuVisible: false
                         }
+                        
+                        Container {
+                            layout: DockLayout {
+                            
+                            }
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                            horizontalAlignment: HorizontalAlignment.Fill
+                            verticalAlignment: VerticalAlignment.Fill
+                            id: numpad
+                            visible: false
+                            leftPadding: ui.sdu(2)
+                            rightPadding: ui.sdu(2)
+                            topPadding: ui.sdu(2)
+                            bottomPadding: ui.sdu(2)
+                            
+                            Container {
+                                verticalAlignment: VerticalAlignment.Fill
+                                horizontalAlignment: HorizontalAlignment.Fill
+                                background: colors.colorF
+                                opacity: 0.95
+                            }
+                            
+                            Numpad {
+                                leftPadding: ui.sdu(3)
+                                rightPadding: ui.sdu(3)
+                                topPadding: ui.sdu(3)
+                                bottomPadding: ui.sdu(3)
+                            }
+                        }
                     }
                     
                     CallControlBar {
@@ -111,32 +142,6 @@ Page {
                         if (callPageContent.translationX > 0) {
                             callPageContent.translationX = 0;
                         }
-                    }
-                }
-                
-                Container {
-                    layout: DockLayout {
-                    
-                    }
-                    id: numpad
-                    visible: false
-                    leftPadding: ui.sdu(2)
-                    rightPadding: ui.sdu(2)
-                    topPadding: ui.sdu(2)
-                    bottomPadding: ui.sdu(2)
-                    
-                    Container {
-                        verticalAlignment: VerticalAlignment.Fill
-                        horizontalAlignment: HorizontalAlignment.Fill
-                        background: colors.colorF
-                        opacity: 0.95
-                    }
-                    
-                    Numpad {
-                        leftPadding: ui.sdu(3)
-                        rightPadding: ui.sdu(3)
-                        topPadding: ui.sdu(3)
-                        bottomPadding: ui.sdu(3)
                     }
                 }
                 
