@@ -131,7 +131,7 @@ Container {
                     disabledImageSource: "asset:///images/call_start_body_disabled.png"
 
                     onClicked: {
-                        linphoneManager.call(historyListModel.historyModel.linphoneAddress);
+                        newOutgoingCallOrCallTransfer(historyListModel.historyModel.linphoneAddress);
                     }
                 }
                 

@@ -98,7 +98,7 @@ Container {
 
             gestureHandlers: TapHandler {
                 onTapped: {
-                    linphoneManager.call(chatListModel.chatModel.linphoneAddress);
+                    chatListModel.viewConversation(chatListModel.chatModel.linphoneAddress);
                 }
             }
         }

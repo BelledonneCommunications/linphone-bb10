@@ -206,15 +206,7 @@ Container {
             gestureHandlers: TapHandler {
                 onTapped: {
                     if (inputNumber.text.length > 0) {
-                        if (inCallModel.dialerCallButtonMode == 1) {
-                            linphoneManager.transferCall(inputNumber.text);
-                            inCallModel.dialerCallButtonMode = 0;
-                            inCallView.open();
-                        } else if (inCallModel.dialerCallButtonMode == 2) {
-                            //TODO
-                        } else {
-                            linphoneManager.call(inputNumber.text);
-                        }
+                        newOutgoingCallOrCallTransfer(inputNumber.text);
                     } else {
                         inputNumber.text = historyListModel.getLatestOutgoingCallAddress();
                     }

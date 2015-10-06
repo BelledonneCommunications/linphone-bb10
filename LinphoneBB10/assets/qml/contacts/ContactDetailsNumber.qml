@@ -83,7 +83,7 @@ Container {
                 disabledImageSource: "asset:///images/call_start_body_disabled.png"
                 
                 onClicked: {
-                    linphoneManager.call(number.text);
+                    newOutgoingCallOrCallTransfer(number.text);
                 }
             }
             

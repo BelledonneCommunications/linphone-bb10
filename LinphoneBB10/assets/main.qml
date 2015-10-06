@@ -200,6 +200,16 @@ NavigationPane {
     function outgoingCallInit(call) {
         outgoingCallView.open();
     }
+    
+    function newOutgoingCallOrCallTransfer(number) {
+        if (inCallModel.dialerCallButtonMode == 1) { // 0 is default, 1 is transfer, 2 is add call
+            linphoneManager.transferCall(number);
+            inCallModel.dialerCallButtonMode = 0;
+            inCallView.open();
+        } else {
+            linphoneManager.call(number);
+        }
+    }
 
     onCreationCompleted: {
         linphoneManager.incomingCallReceived.connect(incomingCallReceived);

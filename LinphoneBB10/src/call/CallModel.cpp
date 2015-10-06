@@ -417,9 +417,20 @@ bool CallModel::isMultiCallAllowed() const {
 }
 
 bool CallModel::isConferenceAllowed() const {
+    int count = 0;
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
-    return linphone_core_get_calls_nb(lc) > 1;
+    const MSList *calls = linphone_core_get_calls(lc);
+
+    while (calls) {
+        LinphoneCall *call = (LinphoneCall*)calls->data;
+        if (call && !linphone_call_is_in_conference(call)) {
+            count++;
+        }
+        calls = ms_list_next(calls);
+    }
+
+    return count > 1;
 }
 
 bool CallModel::isInConference() const {
@@ -428,7 +439,7 @@ bool CallModel::isInConference() const {
     return linphone_core_is_in_conference(lc);
 }
 
-int CallModel::runningCallsCount() const {
+int CallModel::runningCallsNotInAnyConferenceCount() const {
     int count = 0;
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
@@ -436,7 +447,7 @@ int CallModel::runningCallsCount() const {
 
     while (calls) {
         LinphoneCall *call = (LinphoneCall*)calls->data;
-        if (linphone_call_get_state(call) != LinphoneCallPaused) {
+        if (call && linphone_call_get_state(call) != LinphoneCallPaused && !linphone_call_is_in_conference(call)) {
             count++;
         }
         calls = ms_list_next(calls);

@@ -254,7 +254,7 @@ Container {
                 if (historyListModel.editor.isEditMode) {
                     Qt.editor.updateSelection(indexPath, !selectedItem.selected);
                 } else {
-                    linphoneManager.call(selectedItem.linphoneAddress);
+                    newOutgoingCallOrCallTransfer(selectedItem.linphoneAddress);
                 }
             }
         }
