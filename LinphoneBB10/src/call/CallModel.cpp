@@ -455,7 +455,7 @@ QVariantMap CallModel::pausedCalls() const {
         if (linphone_call_get_state(call) == LinphoneCallPaused) {
             const LinphoneAddress *addr = linphone_call_get_remote_address(call);
             QVariantList params = _callsInformation[linphone_address_as_string_uri_only(addr)].toList();
-            //params << linphone_call_get_duration(call);
+            params << FormatCallDuration(linphone_call_get_duration(call));
 
             pausedCalls[linphone_address_as_string_uri_only(addr)] = params;
         }
