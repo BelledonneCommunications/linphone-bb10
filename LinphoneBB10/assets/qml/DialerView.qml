@@ -1,17 +1,17 @@
 /*
  * DialerView.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
- *
+ * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -70,7 +70,7 @@ Container {
                 disabledImageSource: "asset:///images/dialer/backspace_default.png"
                 opacity: inputNumber.text.length > 0 ? 1 : 0.2
                 enabled: inputNumber.text.length > 0
-                
+
                 gestureHandlers: [
                     TapHandler {
                         onTapped: {
@@ -99,7 +99,7 @@ Container {
             orientation: LayoutOrientation.LeftToRight
         }
         minHeight: ui.sdu(15)
-        visible: !bps.isKeyboardVisible
+        visible: ! bps.isKeyboardVisible
 
         Container {
             layout: DockLayout {
@@ -110,7 +110,8 @@ Container {
             }
             background: colors.colorF
             verticalAlignment: VerticalAlignment.Fill
-            
+            visible: ! inCallModel.isInCall
+
             onTouch: {
                 if (addToContact.opacity == 1) { // Button is enabled, otherwise it is disabled
                     if (event.isDown() || event.isMove()) {
@@ -120,11 +121,11 @@ Container {
                     }
                 }
             }
-            
+
             onTouchExit: {
                 background = colors.colorF
             }
-            
+
             gestureHandlers: TapHandler {
                 onTapped: {
                     if (addToContact.opacity == 1) { // Button is enabled, otherwise it is disabled
@@ -148,6 +149,43 @@ Container {
 
             }
             layoutProperties: StackLayoutProperties {
+                spaceQuota: 3
+            }
+            background: colors.colorF
+            verticalAlignment: VerticalAlignment.Fill
+            visible: inCallModel.isInCall
+
+            onTouch: {
+                if (event.isDown() || event.isMove()) {
+                    background = colors.colorE
+                } else if (event.isUp() || event.isCancel()) {
+                    background = colors.colorF
+                }
+            }
+
+            onTouchExit: {
+                background = colors.colorF
+            }
+
+            gestureHandlers: TapHandler {
+                onTapped: {
+                    inCallModel.dialerCallButtonMode = 0;
+                    inCallView.open();
+                }
+            }
+
+            ImageView {
+                horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment: VerticalAlignment.Center
+                imageSource: "asset:///images/dialer/call_back.png"
+            }
+        }
+
+        Container {
+            layout: DockLayout {
+
+            }
+            layoutProperties: StackLayoutProperties {
                 spaceQuota: 5
             }
             background: colors.colorA
@@ -160,15 +198,21 @@ Container {
                     background = colors.colorA
                 }
             }
-            
+
             onTouchExit: {
                 background = colors.colorA
             }
-            
+
             gestureHandlers: TapHandler {
                 onTapped: {
                     if (inputNumber.text.length > 0) {
-                        linphoneManager.call(inputNumber.text);
+                        if (inCallModel.dialerCallButtonMode == 1) {
+                            //TODO
+                        } else if (inCallModel.dialerCallButtonMode == 2) {
+                            //TODO
+                        } else {
+                            linphoneManager.call(inputNumber.text);
+                        }
                     } else {
                         inputNumber.text = historyListModel.getLatestOutgoingCallAddress();
                     }
@@ -178,7 +222,7 @@ Container {
             ImageView {
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
-                imageSource: "asset:///images/dialer/call_audio_start.png"
+                imageSource: inCallModel.dialerCallButtonMode == 1 ? "asset:///images/dialer/call_transfer.png" : inCallModel.dialerCallButtonMode == 2 ? "asset:///images/dialer/call_add.png" : "asset:///images/dialer/call_audio_start.png"
             }
         }
     }

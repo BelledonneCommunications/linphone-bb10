@@ -44,6 +44,7 @@ CallModel::CallModel(QObject *parent) :
         _areControlsVisible(true),
         _statsTimer(new QTimer(this)),
         _controlsFadeTimer(new QTimer(this)),
+        _dialerCallButtonMode(0),
         _deviceOrientation(0),
         _previewSize(QSize(0, 0))
 {

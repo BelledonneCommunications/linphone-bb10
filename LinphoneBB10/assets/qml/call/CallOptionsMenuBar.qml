@@ -46,7 +46,7 @@ Container {
         enabled: inCallModel.isConferenceAllowed
         gestureHandlers: TapHandler {
             onTapped: {
-                
+                //TODO
             }
         }
     }
@@ -58,7 +58,9 @@ Container {
         enabled: inCallModel.isMultiCallAllowed
         gestureHandlers: TapHandler {
             onTapped: {
-                
+                inCallModel.dialerCallButtonMode = 2;
+                tabDelegate.source = "../DialerView.qml"
+                inCallView.close();
             }
         }
     }
@@ -70,7 +72,9 @@ Container {
         enabled: inCallModel.isCallTransferAllowed
         gestureHandlers: TapHandler {
             onTapped: {
-                
+                inCallModel.dialerCallButtonMode = 1;
+                tabDelegate.source = "../DialerView.qml"
+                inCallView.close();
             }
         }
     }

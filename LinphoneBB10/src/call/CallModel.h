@@ -50,9 +50,11 @@ class CallModel : public QObject
     Q_PROPERTY(bool isInConference READ isInConference NOTIFY conferenceUpdated);
     Q_PROPERTY(int runningCallsCount READ runningCallsCount NOTIFY callUpdated);
     Q_PROPERTY(QVariantMap pausedCalls READ pausedCalls NOTIFY callUpdated);
+    Q_PROPERTY(int dialerCallButtonMode READ dialerCallButtonMode WRITE setDialerCallButtonMode NOTIFY nextNewCallActionUpdated);
 
     Q_PROPERTY(int deviceOrientation READ deviceOrientation NOTIFY deviceOrientationChanged);
     Q_PROPERTY(QSize previewSize READ previewSize NOTIFY statsUpdated);
+
     Q_PROPERTY(bool isCallTransferAllowed READ isCallTransferAllowed NOTIFY callUpdated);
     Q_PROPERTY(bool isMultiCallAllowed READ isMultiCallAllowed NOTIFY callUpdated);
     Q_PROPERTY(bool isConferenceAllowed READ isConferenceAllowed NOTIFY callUpdated);
@@ -84,6 +86,7 @@ Q_SIGNALS:
     void statsUpdated();
     void fadeControlsUpdated();
     void deviceOrientationChanged();
+    void nextNewCallActionUpdated();
 
 private:
     const char *window_id;
@@ -142,6 +145,15 @@ private:
 
     QTimer *_statsTimer;
     QTimer *_controlsFadeTimer;
+
+    int dialerCallButtonMode() const {
+        return _dialerCallButtonMode;
+    }
+    void setDialerCallButtonMode(const int& mode) {
+        _dialerCallButtonMode = mode;
+        emit nextNewCallActionUpdated();
+    }
+    int _dialerCallButtonMode;
 
     int deviceOrientation() const {
         return _deviceOrientation;
