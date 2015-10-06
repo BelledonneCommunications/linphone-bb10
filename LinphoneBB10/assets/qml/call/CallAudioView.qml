@@ -54,7 +54,6 @@ Container {
                 selectedImageSource: "asset:///images/call/pause_big_over_selected.png"
                 verticalAlignment: VerticalAlignment.Bottom
                 horizontalAlignment: HorizontalAlignment.Center
-                selected: inCallModel.isPaused
                 leftPadding: ui.sdu(50)
                 topPadding: ui.sdu(20)
                 

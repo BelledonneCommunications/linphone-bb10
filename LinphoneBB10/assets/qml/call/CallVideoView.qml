@@ -141,7 +141,6 @@ Container {
                 selectedImageSource: "asset:///images/call/pause_big_over_selected.png"
                 verticalAlignment: VerticalAlignment.Center
                 horizontalAlignment: HorizontalAlignment.Center
-                selected: inCallModel.isPaused
 
                 gestureHandlers: TapHandler {
                     onTapped: {
