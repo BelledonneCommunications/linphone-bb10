@@ -88,6 +88,7 @@ Q_SIGNALS:
 private:
     const char *window_id;
     const char *window_group;
+    QVariantMap _callsInformation;
 
     CallStatsModel *callStatsModel() const {
         return _callStatsModel;

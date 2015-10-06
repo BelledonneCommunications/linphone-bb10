@@ -197,13 +197,13 @@ void CallModel::callStateChanged(LinphoneCall *call) {
     LinphoneCallState state = linphone_call_get_state(call);
 
     const LinphoneCallParams *params = linphone_call_get_current_params(call);
+    const LinphoneAddress *addr = linphone_call_get_remote_address(call);
 
     if (state == LinphoneCallIncomingReceived || state == LinphoneCallOutgoingInit) {
         if (!_statsTimer->isActive()) {
             _statsTimer->start();
         }
 
-        const LinphoneAddress *addr = linphone_call_get_remote_address(call);
         ContactFound contact = ContactFetcher::getInstance()->findContact(linphone_address_get_username(addr));
         if (contact.id >= 0) {
             _displayName = contact.displayName;
@@ -213,6 +213,10 @@ void CallModel::callStateChanged(LinphoneCall *call) {
             _photo = "/images/avatar.png";
         }
         _sipUri = linphone_address_as_string_uri_only(addr);
+
+        QVariantList params;
+        params << _displayName << _photo;
+        _callsInformation[_sipUri] = params;
     } else if (state == LinphoneCallEnd || state == LinphoneCallError) {
         if (_statsTimer->isActive()) {
             _statsTimer->stop();
@@ -224,6 +228,7 @@ void CallModel::callStateChanged(LinphoneCall *call) {
         _isSpeakerEnabled = false;
         _isMicMuted = false;
         _isVideoEnabled = false;
+        _callsInformation[linphone_address_as_string_uri_only(addr)].clear();
     } else if (state == LinphoneCallStreamsRunning) {
         if (_isVideoEnabled) {
             if (!_controlsFadeTimer->isActive()) {
@@ -449,15 +454,7 @@ QVariantMap CallModel::pausedCalls() const {
         LinphoneCall *call = (LinphoneCall*) calls->data;
         if (linphone_call_get_state(call) == LinphoneCallPaused) {
             const LinphoneAddress *addr = linphone_call_get_remote_address(call);
-            QVariantList params;
-
-            //TODO: find a way to not compute these values each time
-            ContactFound contact = ContactFetcher::getInstance()->findContact(linphone_address_get_username(addr));
-            if (contact.id >= 0) {
-                params << contact.displayName << contact.picturePath;
-            } else {
-                params << GetDisplayNameFromLinphoneAddress(addr) << "/images/avatar.png";
-            }
+            QVariantList params = _callsInformation[linphone_address_as_string_uri_only(addr)].toList();
             //params << linphone_call_get_duration(call);
 
             pausedCalls[linphone_address_as_string_uri_only(addr)] = params;
