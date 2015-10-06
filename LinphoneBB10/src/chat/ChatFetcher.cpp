@@ -72,24 +72,6 @@ static QVariantMap fillEntry(LinphoneChatRoom *room, LinphoneChatMessage *lastMe
     return entry;
 }
 
-static void addChatRoomToListModel(void *item, void *user_data)
-{
-    ChatFetcher *model = (ChatFetcher *)user_data;
-    LinphoneChatRoom *room = (LinphoneChatRoom *)item;
-    if (room == NULL || model == NULL)
-        return;
-
-    QVariantMap entry;
-    if (linphone_chat_room_get_history_size(room) > 0) {
-        MSList *history = linphone_chat_room_get_history(room, 1);
-        LinphoneChatMessage *lastMessage = (LinphoneChatMessage *)ms_list_nth_data(history, 0);
-        if (lastMessage) {
-            entry = fillEntry(room, lastMessage, entry);
-            emit model->emitChatFetched(entry);
-        }
-    }
-}
-
 void ChatFetcher::run()
 {
     LinphoneManager *manager = LinphoneManager::getInstance();
@@ -97,7 +79,19 @@ void ChatFetcher::run()
         LinphoneCore *lc = manager->getLc();
         if (lc) {
             const MSList* rooms = linphone_core_get_chat_rooms(lc);
-            ms_list_for_each2(rooms, addChatRoomToListModel, this);
+            while (rooms) {
+                LinphoneChatRoom *room = (LinphoneChatRoom*) rooms->data;
+                QVariantMap entry;
+                if (linphone_chat_room_get_history_size(room) > 0) {
+                    MSList *history = linphone_chat_room_get_history(room, 1);
+                    LinphoneChatMessage *lastMessage = (LinphoneChatMessage *)ms_list_nth_data(history, 0);
+                    if (lastMessage) {
+                        entry = fillEntry(room, lastMessage, entry);
+                        emit chatFetched(entry);
+                    }
+                }
+                rooms = ms_list_next(rooms);
+            }
         }
     }
 }
@@ -141,9 +135,4 @@ void ChatFetcher::updateChatReadCount(QString sipAddress, GroupDataModel *dataMo
             return;
         }
     }
-}
-
-void ChatFetcher::emitChatFetched(QVariantMap chat)
-{
-    emit chatFetched(chat);
 }

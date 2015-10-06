@@ -61,7 +61,7 @@ void HistoryModel::setSelectedHistoryLog(LinphoneCallLog *log) {
 
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
-    const MSList *callLogs = linphone_core_get_call_history_for_address(lc, linphone_call_log_get_remote_address(_selectedHistoryLog));
+    MSList *callLogs = linphone_core_get_call_history_for_address(lc, linphone_call_log_get_remote_address(_selectedHistoryLog));
 
     while (callLogs) {
         LinphoneCallLog *callLog = (LinphoneCallLog *) callLogs->data;
@@ -85,6 +85,7 @@ void HistoryModel::setSelectedHistoryLog(LinphoneCallLog *log) {
 
         callLogs = ms_list_next(callLogs);
     }
+    ms_list_free_with_data(callLogs, (void (*)(void*))linphone_call_log_unref);
 
     _isSipContact = true;
     emit historyLogUpdated();

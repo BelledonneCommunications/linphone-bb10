@@ -146,16 +146,16 @@ void HistoryListModel::deleteItems(QList<QVariantList> indexPaths)
 
 QString HistoryListModel::getLatestOutgoingCallAddress()
 {
+    QString result = "";
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
-    const MSList *logs = linphone_core_get_call_logs(lc);
-    while (logs) {
-        LinphoneCallLog *log = (LinphoneCallLog *)logs->data;
-        if (linphone_call_log_get_dir(log) == LinphoneCallOutgoing) {
-            LinphoneAddress *addr = linphone_call_log_get_remote_address(log);
-            return QString(linphone_address_as_string_uri_only(addr));
-        }
-        logs = ms_list_next(logs);
+    LinphoneCallLog *log = linphone_core_get_last_outgoing_call_log(lc);
+
+    if (log) {
+        LinphoneAddress *addr = linphone_call_log_get_remote_address(log);
+        result = linphone_address_as_string_uri_only(addr);
+        linphone_call_log_unref(log);
     }
-    return QString("");
+
+    return result;
 }

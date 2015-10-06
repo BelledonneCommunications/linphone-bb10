@@ -69,17 +69,6 @@ static QVariantMap LogToQVariantMap(LinphoneCallLog *log)
     return entry;
 }
 
-static void addCallLogToListModels(void *item, void *user_data)
-{
-    HistoryFetcher *model = (HistoryFetcher *) user_data;
-    LinphoneCallLog *log = (LinphoneCallLog *) item;
-    if (log == NULL || model == NULL)
-        return;
-
-    QVariantMap entry = LogToQVariantMap(log);
-    model->emitHistoryFetched(entry, linphone_call_log_get_status(log) == LinphoneCallMissed);
-}
-
 void HistoryFetcher::run()
 {
     LinphoneManager *manager = LinphoneManager::getInstance();
@@ -87,12 +76,12 @@ void HistoryFetcher::run()
         LinphoneCore *lc = manager->getLc();
         if (lc) {
             const MSList* logs = linphone_core_get_call_logs(lc);
-            ms_list_for_each2(logs, addCallLogToListModels, this);
+            while (logs) {
+                LinphoneCallLog *log = (LinphoneCallLog *)logs->data;
+                QVariantMap entry = LogToQVariantMap(log);
+                emit historyFetched(entry, linphone_call_log_get_status(log) == LinphoneCallMissed);
+                logs = ms_list_next(logs);
+            }
         }
     }
-}
-
-void HistoryFetcher::emitHistoryFetched(QVariantMap history, bool isMissed)
-{
-    emit historyFetched(history, isMissed);
 }

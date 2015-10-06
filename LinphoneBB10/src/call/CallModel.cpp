@@ -438,7 +438,7 @@ int CallModel::runningCallsCount() const {
         if (linphone_call_get_state(call) != LinphoneCallPaused) {
             count++;
         }
-        calls = calls->next;
+        calls = ms_list_next(calls);
     }
 
     return count;
@@ -459,7 +459,7 @@ QVariantMap CallModel::pausedCalls() const {
 
             pausedCalls[linphone_address_as_string_uri_only(addr)] = params;
         }
-        calls = calls->next;
+        calls = ms_list_next(calls);
     }
 
     return pausedCalls;
