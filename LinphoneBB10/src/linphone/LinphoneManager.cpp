@@ -83,6 +83,13 @@ void LinphoneManager::call(QString sipUri) {
     }
 }
 
+void LinphoneManager::transferCall(QString toSipUri) {
+    LinphoneCall *call = linphone_core_get_current_call(_lc);
+    if (call) {
+        linphone_core_transfer_call(_lc, call, toSipUri.toUtf8().constData());
+    }
+}
+
 void LinphoneManager::refreshRegisters() {
     linphone_core_refresh_registers(_lc);
 }

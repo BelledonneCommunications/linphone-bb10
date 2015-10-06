@@ -79,14 +79,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
         <source>Password is too short
 (6 characters minimum)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -498,22 +498,22 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>LinphoneManager</name>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="134"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="141"/>
         <source>registered</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="138"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="145"/>
         <source>in progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="142"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="149"/>
         <source>error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="146"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="153"/>
         <source>disconnected</source>
         <translation type="unfinished"></translation>
     </message>

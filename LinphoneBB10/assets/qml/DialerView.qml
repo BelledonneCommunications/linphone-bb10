@@ -207,7 +207,9 @@ Container {
                 onTapped: {
                     if (inputNumber.text.length > 0) {
                         if (inCallModel.dialerCallButtonMode == 1) {
-                            //TODO
+                            linphoneManager.transferCall(inputNumber.text);
+                            inCallModel.dialerCallButtonMode = 0;
+                            inCallView.open();
                         } else if (inCallModel.dialerCallButtonMode == 2) {
                             //TODO
                         } else {
