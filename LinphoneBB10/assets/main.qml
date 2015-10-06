@@ -206,5 +206,11 @@ NavigationPane {
         linphoneManager.callConnected.connect(callConnected);
         linphoneManager.callEnded.connect(callEnded);
         linphoneManager.outgoingCallInit.connect(outgoingCallInit);
+        
+        if (linphoneManager.shouldStartWizardWhenAppStarts()) {
+            var assistantPage = assistant.createObject();
+            navigationPane.push(assistantPage);
+            linphoneManager.firstLaunchSuccessful();
+        }
     }
 }

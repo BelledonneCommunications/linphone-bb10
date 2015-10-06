@@ -367,3 +367,19 @@ void LinphoneManager::destroy()
 void LinphoneManager::exit() {
     _app->exit(0);
 }
+
+void LinphoneManager::firstLaunchSuccessful() {
+    if (!_lc)
+        return;
+
+    LpConfig *conf = linphone_core_get_config(_lc);
+    lp_config_set_int(conf, "app", "first_start_successful", 1);
+}
+
+bool LinphoneManager::shouldStartWizardWhenAppStarts() {
+    if (!_lc)
+        return false;
+
+    LpConfig *conf = linphone_core_get_config(_lc);
+    return lp_config_get_int(conf, "app", "first_start_successful", 0) == 0;
+}

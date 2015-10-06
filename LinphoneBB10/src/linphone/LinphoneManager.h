@@ -76,6 +76,8 @@ public Q_SLOTS:
     void playDtmf(QString character);
     void stopDtmf();
     void exit();
+    void firstLaunchSuccessful();
+    bool shouldStartWizardWhenAppStarts();
 
 Q_SIGNALS:
     void messageReceived(LinphoneChatRoom *room, LinphoneChatMessage *message);
