@@ -79,14 +79,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
-        <source>Password is too short
-(6 characters minimum)</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
+        <source>Password is too short
+(6 characters minimum)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -522,13 +522,13 @@ You should only accept if you have the same token as your correspondent.</source
     <name>QObject</name>
     <message>
         <location filename="../src/history/CustomHistoryGroupDataModel.cpp" line="41"/>
-        <location filename="../src/utils/Misc.cpp" line="60"/>
+        <location filename="../src/utils/Misc.cpp" line="63"/>
         <source>TODAY</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/history/CustomHistoryGroupDataModel.cpp" line="43"/>
-        <location filename="../src/utils/Misc.cpp" line="62"/>
+        <location filename="../src/utils/Misc.cpp" line="65"/>
         <source>YESTERDAY</source>
         <translation type="unfinished"></translation>
     </message>
@@ -553,32 +553,32 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/Misc.cpp" line="122"/>
+        <location filename="../src/utils/Misc.cpp" line="125"/>
         <source>Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/Misc.cpp" line="124"/>
+        <location filename="../src/utils/Misc.cpp" line="127"/>
         <source>In progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/Misc.cpp" line="126"/>
+        <location filename="../src/utils/Misc.cpp" line="129"/>
         <source>Host</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/Misc.cpp" line="128"/>
+        <location filename="../src/utils/Misc.cpp" line="131"/>
         <source>Reflexive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/Misc.cpp" line="130"/>
+        <location filename="../src/utils/Misc.cpp" line="133"/>
         <source>Relay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/Misc.cpp" line="132"/>
+        <location filename="../src/utils/Misc.cpp" line="135"/>
         <source>Not activated</source>
         <translation type="unfinished"></translation>
     </message>

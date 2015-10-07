@@ -33,11 +33,9 @@ CallModel::CallModel(QObject *parent) :
         QObject(parent),
         window_id(NULL),
         window_group(NULL),
+        _pausedCallsDataModel(new GroupDataModel(this)),
         _callStatsModel(new CallStatsModel(this)),
-        _displayName(""),
-        _sipUri(""),
-        _callTime(""),
-        _photo(""),
+        _currentCall(NULL),
         _isVideoEnabled(false),
         _isMicMuted(false),
         _isSpeakerEnabled(false),
@@ -46,8 +44,12 @@ CallModel::CallModel(QObject *parent) :
         _controlsFadeTimer(new QTimer(this)),
         _dialerCallButtonMode(0),
         _deviceOrientation(0),
-        _previewSize(QSize(0, 0))
+        _previewSize(QSize(0, 0)),
+        _mediaInProgress(false)
 {
+    _pausedCallsDataModel->setGrouping(ItemGrouping::None);
+    _pausedCallsDataModel->setSortedAscending(false);
+
     bool result = QObject::connect(LinphoneManager::getInstance(), SIGNAL(callStateChanged(LinphoneCall*)), this, SLOT(callStateChanged(LinphoneCall*)));
     Q_ASSERT(result);
 
@@ -82,12 +84,99 @@ static LinphoneCall* getCurrentCall()
 {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
+    if (linphone_core_get_calls_nb(lc) == 0) {
+        return NULL;
+    }
+
     LinphoneCall *call = linphone_core_get_current_call(lc);
     if (!call) {
         call = (LinphoneCall *) ms_list_nth_data(linphone_core_get_calls(lc), 0);
     }
 
     return call;
+}
+
+void CallModel::callStateChanged(LinphoneCall *call) {
+    if (!call) {
+        call = getCurrentCall();
+    }
+    if (!call) {
+        return;
+    }
+
+    LinphoneCallState state = linphone_call_get_state(call);
+
+    const LinphoneCallParams *params = linphone_call_get_current_params(call);
+    const LinphoneAddress *addr = linphone_call_get_remote_address(call);
+    QString sipUri = linphone_address_as_string_uri_only(addr);
+
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+
+    if (state == LinphoneCallIncomingReceived || state == LinphoneCallOutgoingInit) {
+        if (!_statsTimer->isActive()) {
+            _statsTimer->start();
+        }
+
+        ContactFound contact = ContactFetcher::getInstance()->findContact(linphone_address_get_username(addr));
+        QString displayName, photo, sipUri;
+        if (contact.id >= 0) {
+            displayName = contact.displayName;
+            photo = contact.picturePath;
+        } else {
+            displayName = GetDisplayNameFromLinphoneAddress(addr);
+            photo = "/images/avatar.png";
+        }
+
+        LinphoneCallModel *model = new LinphoneCallModel(this, call, GetAddressFromLinphoneAddress(addr), displayName, photo);
+        linphone_call_set_user_data(call, model);
+        _currentCall = model;
+        emit currentCallChanged();
+    } else if (state == LinphoneCallEnd || state == LinphoneCallError) {
+        LinphoneCallModel *model = (LinphoneCallModel *)linphone_call_get_user_data(call);
+        delete(model);
+        linphone_call_set_user_data(call, NULL);
+
+        pausedCalls();
+
+        if (linphone_core_get_calls_nb(lc) == 0) {
+            if (_statsTimer->isActive()) {
+                _statsTimer->stop();
+            }
+            if (_controlsFadeTimer->isActive()) {
+                _controlsFadeTimer->stop();
+            }
+
+            _isSpeakerEnabled = false;
+            _isMicMuted = false;
+            _isVideoEnabled = false;
+        }
+    } else if (state == LinphoneCallStreamsRunning) {
+        if (_isVideoEnabled) {
+            if (!_controlsFadeTimer->isActive()) {
+                _controlsFadeTimer->start();
+            }
+        } else {
+            if (_controlsFadeTimer->isActive())
+                _controlsFadeTimer->stop();
+        }
+
+        LinphoneCall *call = getCurrentCall();
+        if (call) {
+            _mediaInProgress = linphone_call_media_in_progress(call);
+            emit mediaInProgressUpdated();
+        }
+
+        LinphoneCallModel *model = (LinphoneCallModel *)linphone_call_get_user_data(call);
+        _currentCall = model;
+        emit currentCallChanged();
+    } else if (state == LinphoneCallResuming || state == LinphoneCallPaused) {
+        pausedCalls();
+    }
+    setVideoEnabled(linphone_call_params_video_enabled(params));
+    setMicMuted(linphone_core_is_mic_muted(lc));
+
+    emit callStateChanged();
 }
 
 void CallModel::onOrientationAboutToChange(DisplayDirection::Type displayDirection, UIOrientation::Type uiOrientation) {
@@ -120,9 +209,6 @@ void CallModel::statsTimerTimeout()
     if (_callStatsModel) {
         _callStatsModel->updateStats(call);
     }
-
-    int duration = linphone_call_get_duration(call);
-    _callTime = FormatCallDuration(duration);
 
     const LinphoneCallParams *params = linphone_call_get_current_params(call);
     MSVideoSize vsize = linphone_call_params_get_sent_video_size(params);
@@ -187,68 +273,6 @@ void CallModel::cameraPreviewAttached(screen_window_t handle) {
     screen_set_window_property_iv(handle, SCREEN_PROPERTY_ZORDER, &z);
 }
 
-void CallModel::callStateChanged(LinphoneCall *call) {
-    if (!call) {
-        call = getCurrentCall();
-    }
-    if (!call) {
-        return;
-    }
-
-    LinphoneCallState state = linphone_call_get_state(call);
-
-    const LinphoneCallParams *params = linphone_call_get_current_params(call);
-    const LinphoneAddress *addr = linphone_call_get_remote_address(call);
-
-    if (state == LinphoneCallIncomingReceived || state == LinphoneCallOutgoingInit) {
-        if (!_statsTimer->isActive()) {
-            _statsTimer->start();
-        }
-
-        ContactFound contact = ContactFetcher::getInstance()->findContact(linphone_address_get_username(addr));
-        if (contact.id >= 0) {
-            _displayName = contact.displayName;
-            _photo = contact.picturePath;
-        } else {
-            _displayName = GetDisplayNameFromLinphoneAddress(addr);
-            _photo = "/images/avatar.png";
-        }
-        _sipUri = linphone_address_as_string_uri_only(addr);
-
-        QVariantList params;
-        params << _displayName << _photo;
-        _callsInformation[_sipUri] = params;
-    } else if (state == LinphoneCallEnd || state == LinphoneCallError) {
-        if (_statsTimer->isActive()) {
-            _statsTimer->stop();
-        }
-        if (_controlsFadeTimer->isActive()) {
-            _controlsFadeTimer->stop();
-        }
-
-        _isSpeakerEnabled = false;
-        _isMicMuted = false;
-        _isVideoEnabled = false;
-        _callsInformation[linphone_address_as_string_uri_only(addr)].clear();
-    } else if (state == LinphoneCallStreamsRunning) {
-        if (_isVideoEnabled) {
-            if (!_controlsFadeTimer->isActive()) {
-                _controlsFadeTimer->start();
-            }
-        } else {
-            if (_controlsFadeTimer->isActive())
-                _controlsFadeTimer->stop();
-        }
-    }
-
-    LinphoneManager *manager = LinphoneManager::getInstance();
-    LinphoneCore *lc = manager->getLc();
-    setVideoEnabled(linphone_call_params_video_enabled(params));
-    setMicMuted(linphone_core_is_mic_muted(lc));
-
-    emit callUpdated();
-}
-
 void CallModel::accept() {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
@@ -300,8 +324,6 @@ void CallModel::setVideoEnabled(const bool &enabled)
         linphone_call_params_enable_video(params, enabled);
         linphone_core_update_call(lc, call, params);
     }
-
-    emit callUpdated();
 }
 
 void CallModel::setMicMuted(const bool &muted)
@@ -316,7 +338,7 @@ void CallModel::setMicMuted(const bool &muted)
     LinphoneCore *lc = manager->getLc();
     linphone_core_mute_mic(lc, muted);
 
-    emit callUpdated();
+    emit callControlsUpdated();
 }
 
 void CallModel::setSpeakerEnabled(const bool &enabled)
@@ -330,7 +352,7 @@ void CallModel::setSpeakerEnabled(const bool &enabled)
         _isSpeakerEnabled = enabled;
         LinphoneAudioRoute route = _isSpeakerEnabled ? LinphoneAudioRouteSpeaker : LinphoneAudioRouteEarpiece;
         linphone_call_set_audio_route(call, route);
-        emit callUpdated();
+        emit callControlsUpdated();
     }
 }
 
@@ -361,7 +383,7 @@ void CallModel::switchCamera()
     }
 }
 
-void CallModel::togglePause()
+void CallModel::pauseCurrentCall()
 {
     LinphoneCall *call = getCurrentCall();
     if (!call) {
@@ -372,23 +394,20 @@ void CallModel::togglePause()
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
     if (lc) {
-        if (state == LinphoneCallPaused) {
-            linphone_core_resume_call(lc, call);
-        } else if (state == LinphoneCallStreamsRunning || state == LinphoneCallPausedByRemote) {
+        if (state == LinphoneCallStreamsRunning || state == LinphoneCallPausedByRemote) {
             linphone_core_pause_call(lc, call);
         }
     }
 }
 
-void CallModel::resumeCall(QString address) {
+void CallModel::resumeCall(const LinphoneCallModel*& callModel) {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
-    LinphoneCall *call = linphone_core_find_call_from_uri(lc, address.toUtf8().constData());
 
-    if (lc && call) {
-        LinphoneCallState state = linphone_call_get_state(call);
+    if (lc && callModel) {
+        LinphoneCallState state = linphone_call_get_state(callModel->_call);
         if (state == LinphoneCallPaused) {
-            linphone_core_resume_call(lc, call);
+            linphone_core_resume_call(lc, callModel->_call);
         }
     }
 }
@@ -456,23 +475,29 @@ int CallModel::runningCallsNotInAnyConferenceCount() const {
     return count;
 }
 
-QVariantMap CallModel::pausedCalls() const {
-    QVariantMap pausedCalls;
+void CallModel::pausedCalls() {
+    if (_pausedCallsDataModel == NULL) {
+        return;
+    }
+    _pausedCallsDataModel->clear();
+
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
     const MSList *calls = linphone_core_get_calls(lc);
 
     while (calls) {
         LinphoneCall *call = (LinphoneCall*) calls->data;
-        if (linphone_call_get_state(call) == LinphoneCallPaused) {
-            const LinphoneAddress *addr = linphone_call_get_remote_address(call);
-            QVariantList params = _callsInformation[linphone_address_as_string_uri_only(addr)].toList();
-            params << FormatCallDuration(linphone_call_get_duration(call));
-
-            pausedCalls[linphone_address_as_string_uri_only(addr)] = params;
+        if (call && linphone_call_get_state(call) == LinphoneCallPaused) {
+            QVariantMap entry;
+            LinphoneCallModel *model = (LinphoneCallModel *)linphone_call_get_user_data(call);
+            entry["call"] = QVariant::fromValue<LinphoneCallModel*>(model);
+            entry["displayName"] = model->displayName();
+            entry["photo"] = model->photo();
+            entry["callTime"] = model->callTime();
+            _pausedCallsDataModel->insert(entry);
         }
         calls = ms_list_next(calls);
     }
 
-    return pausedCalls;
+    emit pausedCallsUpdated();
 }

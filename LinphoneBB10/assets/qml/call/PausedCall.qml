@@ -18,24 +18,21 @@
  */
 
 import bb.cascades 1.4
+import org.linphone 1.0
 
 import "../custom_controls"
 
 Container {
-    property string addr
-    property string displayName
-    property string callTime
-    property string photo
-
     layout: DockLayout {
         
     }
+    id: itemRoot
     maxHeight: ui.sdu(15)
     
     Container {
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
-        background: colors.colorA
+        background: Qt.colors.colorA
         opacity: 0.5
     }
     
@@ -50,8 +47,8 @@ Container {
         bottomPadding: ui.sdu(1)
 
         ContactAvatar {
-            imageSource: photo
-            filterColor: colors.colorA50
+            imageSource: ListItemData.photo
+            filterColor: Qt.colors.colorA50
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
             maxWidth: ui.sdu(13)
@@ -62,33 +59,30 @@ Container {
             layoutProperties: StackLayoutProperties {
                 spaceQuota: 1
             }
-            text: displayName
+            text: ListItemData.displayName
             verticalAlignment: VerticalAlignment.Center
             textStyle.fontSize: FontSize.XLarge
-            textStyle.color: colors.colorH
-            textStyle.base: titilliumWeb.style
+            textStyle.color: Qt.colors.colorH
+            textStyle.base: Qt.titilliumWeb.style
         }
     
         Label {
-            text: callTime
+            text: ListItemData.callTime
             verticalAlignment: VerticalAlignment.Center
-            textStyle.color: colors.colorH
-            textStyle.base: titilliumWeb.style
+            textStyle.color: Qt.colors.colorH
+            textStyle.base: Qt.titilliumWeb.style
         }
     
-        CustomImageToggle {
+        ImageButton {
             maxWidth: ui.sdu(10)
             maxHeight: ui.sdu(10)
-            imageSource: "asset:///images/call/pause_big_default.png"
-            selectedImageSource: "asset:///images/call/pause_big_over_selected.png"
+            defaultImageSource: "asset:///images/call/pause_big_over_selected.png"
+            pressedImageSource: "asset:///images/call/pause_big_default.png"
             verticalAlignment: VerticalAlignment.Center
             horizontalAlignment: HorizontalAlignment.Right
-            selected: true
-    
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    inCallModel.resumeCall(addr);
-                }
+            
+            onClicked: {
+                itemRoot.ListItem.view.resumeCall(ListItemData.call);
             }
         }
     }

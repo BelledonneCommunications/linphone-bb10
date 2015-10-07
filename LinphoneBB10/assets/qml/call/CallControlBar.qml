@@ -36,7 +36,7 @@ Container {
         selected: inCallModel.isVideoEnabled
         imageSource: "asset:///images/call/camera_default.png"
         selectedImageSource: "asset:///images/call/camera_selected.png"
-        enabled: settingsModel.videoEnabled
+        enabled: settingsModel.videoEnabled && !inCallModel.mediaInProgress
         
         gestureHandlers: TapHandler {
             onTapped: {

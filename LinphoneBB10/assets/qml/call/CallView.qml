@@ -70,20 +70,21 @@ Page {
                         horizontalAlignment: HorizontalAlignment.Fill
                         
                         CallVideoView {
-                            visible: inCallModel.isVideoEnabled && !inCallModel.isInConference && inCallModel.runningCallsNotInAnyConferenceCount > 0
+                            visible: callAudioView.visible && inCallModel.isVideoEnabled
                         }
                         
                         CallAudioView {
-                            visible: !inCallModel.isVideoEnabled && !inCallModel.isInConference && inCallModel.runningCallsNotInAnyConferenceCount > 0
+                            id: callAudioView
+                            visible: !inCallModel.isInConference && inCallModel.runningCallsNotInAnyConferenceCount > 0
+                        }
+                        
+                        CallPausedView {
+                            
                         }
                         
                         /*CallConferenceView {
                             visible: inCallModel.isInConference
                         }*/
-                        
-                        CallPausedView {
-                            
-                        }
                         
                         CallOptionsMenuBar {
                             id: optionsMenu
@@ -153,7 +154,9 @@ Page {
     }
     
     function callEnded(call) {
-        callPageContent.translationX = 0;
+        if (!inCallModel.isInCall) {
+            callPageContent.translationX = 0;
+        }
     }
     
     onCreationCompleted: {

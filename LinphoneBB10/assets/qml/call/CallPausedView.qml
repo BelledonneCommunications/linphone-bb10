@@ -20,34 +20,42 @@
 import bb.cascades 1.4
 
 Container {
-    layout: StackLayout {
-        orientation: LayoutOrientation.BottomToTop
-    }
-    id: pausedCallsContainer
     horizontalAlignment: HorizontalAlignment.Fill
     verticalAlignment: VerticalAlignment.Bottom
     
-    attachedObjects: [
-        ComponentDefinition {
-            id: pausedCall                
-            source: "PausedCall.qml"
-        }
-    ]
-    
-    function displayPausedCalls() {
-        pausedCallsContainer.removeAll();
-        
-        for (var call in inCallModel.pausedCalls) {
-            var item = pausedCall.createObject();
-            item.addr = call;
-            item.displayName = inCallModel.pausedCalls[call][0];
-            item.photo = inCallModel.pausedCalls[call][1]
-            item.callTime = inCallModel.pausedCalls[call][2];
-            pausedCallsContainer.add(item);
-        }
+    onCreationCompleted: {
+        // This is a needed hack since listeItemComponents are created in a different context,
+        // so colors and fonts aren't available
+        Qt.colors = colors
+        Qt.titilliumWeb = titilliumWeb
     }
     
-    onCreationCompleted: {
-        inCallModel.callUpdated.connect(displayPausedCalls);
+    ListView {
+        layout: StackListLayout {
+            headerMode: ListHeaderMode.None
+            orientation: LayoutOrientation.BottomToTop
+        }
+        dataModel: inCallModel.pausedCallsDataModel
+        stickToEdgePolicy: ListViewStickToEdgePolicy.End
+        scrollIndicatorMode: ScrollIndicatorMode.None
+        preferredHeight: inCallModel.pausedCallsDataModel.childCount(0) * ui.sdu(15) // To ensure the height of the listview is the strict required to not overlap over any other control (that would cause it to be not clickable)
+        
+        function itemType(data, indexPath) {
+            return "paused_call";
+        }
+        
+        function resumeCall(callModel) {
+            inCallModel.resumeCall(callModel);
+        }
+        
+        listItemComponents: [
+            ListItemComponent {
+                type: "paused_call"
+                
+                PausedCall {
+                
+                }
+            }
+        ]
     }
 }

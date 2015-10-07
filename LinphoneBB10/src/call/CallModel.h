@@ -29,35 +29,37 @@
 #include <screen/screen.h>
 #include <bb/cascades/UIOrientation>
 #include <bb/cascades/DisplayDirection>
+#include <bb/cascades/GroupDataModel>
 
 #include "CallStatsModel.h"
+#include "LinphoneCallModel.h"
 #include "linphone/linphonecore.h"
+
+// Needed to be able to use the type in QML
+Q_DECLARE_METATYPE(LinphoneCallModel*);
 
 class CallModel : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bb::cascades::GroupDataModel* pausedCallsDataModel READ pausedCallsDataModel NOTIFY pausedCallsUpdated);
+    Q_PROPERTY(LinphoneCallModel* currentCall READ currentCall NOTIFY currentCallChanged);
 
-    Q_PROPERTY(QString displayName READ displayName NOTIFY callUpdated);
-    Q_PROPERTY(QString sipUri READ sipUri NOTIFY callUpdated);
-    Q_PROPERTY(QString callTime READ callTime NOTIFY statsUpdated);
-    Q_PROPERTY(QString photo READ photo NOTIFY callUpdated);
-
-    Q_PROPERTY(bool isInCall READ isInCall NOTIFY callUpdated);
-    Q_PROPERTY(bool isVideoEnabled READ isVideoEnabled WRITE setVideoEnabled NOTIFY callUpdated);
-    Q_PROPERTY(bool isMicMuted READ isMicMuted WRITE setMicMuted NOTIFY callUpdated);
-    Q_PROPERTY(bool isSpeakerEnabled READ isSpeakerEnabled WRITE setSpeakerEnabled NOTIFY callUpdated);
+    Q_PROPERTY(bool mediaInProgress READ mediaInProgress NOTIFY mediaInProgressUpdated);
+    Q_PROPERTY(bool isInCall READ isInCall NOTIFY callStateChanged);
+    Q_PROPERTY(bool isVideoEnabled READ isVideoEnabled WRITE setVideoEnabled NOTIFY callStateChanged);
+    Q_PROPERTY(bool isMicMuted READ isMicMuted WRITE setMicMuted NOTIFY callControlsUpdated);
+    Q_PROPERTY(bool isSpeakerEnabled READ isSpeakerEnabled WRITE setSpeakerEnabled NOTIFY callControlsUpdated);
     Q_PROPERTY(bool areControlsVisible READ areControlsVisible NOTIFY fadeControlsUpdated);
     Q_PROPERTY(bool isInConference READ isInConference NOTIFY conferenceUpdated);
-    Q_PROPERTY(int runningCallsNotInAnyConferenceCount READ runningCallsNotInAnyConferenceCount NOTIFY callUpdated);
-    Q_PROPERTY(QVariantMap pausedCalls READ pausedCalls NOTIFY callUpdated);
+    Q_PROPERTY(int runningCallsNotInAnyConferenceCount READ runningCallsNotInAnyConferenceCount NOTIFY callStateChanged);
     Q_PROPERTY(int dialerCallButtonMode READ dialerCallButtonMode WRITE setDialerCallButtonMode NOTIFY nextNewCallActionUpdated);
 
     Q_PROPERTY(int deviceOrientation READ deviceOrientation NOTIFY deviceOrientationChanged);
     Q_PROPERTY(QSize previewSize READ previewSize NOTIFY statsUpdated);
 
-    Q_PROPERTY(bool isCallTransferAllowed READ isCallTransferAllowed NOTIFY callUpdated);
-    Q_PROPERTY(bool isMultiCallAllowed READ isMultiCallAllowed NOTIFY callUpdated);
-    Q_PROPERTY(bool isConferenceAllowed READ isConferenceAllowed NOTIFY callUpdated);
+    Q_PROPERTY(bool isCallTransferAllowed READ isCallTransferAllowed NOTIFY callStateChanged);
+    Q_PROPERTY(bool isMultiCallAllowed READ isMultiCallAllowed NOTIFY callStateChanged);
+    Q_PROPERTY(bool isConferenceAllowed READ isConferenceAllowed NOTIFY callStateChanged);
 
     Q_PROPERTY(CallStatsModel* callStatsModel READ callStatsModel CONSTANT);
 
@@ -65,24 +67,34 @@ public:
     CallModel(QObject *parent = NULL);
 
 public Q_SLOTS:
-    void onVideoSurfaceCreationCompleted(QString id, QString group);
     void callStateChanged(LinphoneCall *call);
     void statsTimerTimeout();
+
+    void accept();
+    void hangUp();
+
+    void pausedCalls();
+    void pauseCurrentCall();
+    void resumeCall(const LinphoneCallModel*& callModel);
+
+    void onVideoSurfaceCreationCompleted(QString id, QString group);
     void fadeTimerTimeout();
     void resetFadeTimer();
     void switchFullScreenMode();
-    void accept();
-    void hangUp();
     void switchCamera();
-    void togglePause();
-    void resumeCall(QString address);
-    void onOrientationAboutToChange(bb::cascades::DisplayDirection::Type, bb::cascades::UIOrientation::Type uiOrientation);
-    void updateZRTPTokenValidation(bool isTokenOk);
     void cameraPreviewAttached(screen_window_t handle);
 
+    void updateZRTPTokenValidation(bool isTokenOk);
+
+    void onOrientationAboutToChange(bb::cascades::DisplayDirection::Type, bb::cascades::UIOrientation::Type uiOrientation);
+
 Q_SIGNALS:
-    void callUpdated();
+    void currentCallChanged();
+    void callStateChanged();
+    void pausedCallsUpdated();
     void conferenceUpdated();
+    void mediaInProgressUpdated();
+    void callControlsUpdated();
     void statsUpdated();
     void fadeControlsUpdated();
     void deviceOrientationChanged();
@@ -91,32 +103,21 @@ Q_SIGNALS:
 private:
     const char *window_id;
     const char *window_group;
-    QVariantMap _callsInformation;
+
+    bb::cascades::GroupDataModel* pausedCallsDataModel() const {
+        return _pausedCallsDataModel;
+    }
+    bb::cascades::GroupDataModel* _pausedCallsDataModel;
 
     CallStatsModel *callStatsModel() const {
         return _callStatsModel;
     }
     CallStatsModel *_callStatsModel;
 
-    QString displayName() const {
-        return _displayName;
+    LinphoneCallModel* currentCall() const {
+        return _currentCall;
     }
-    QString _displayName;
-
-    QString sipUri() const {
-        return _sipUri;
-    }
-    QString _sipUri;
-
-    QString callTime() const {
-        return _callTime;
-    }
-    QString _callTime;
-
-    QString photo() const {
-        return _photo;
-    }
-    QString _photo;
+    LinphoneCallModel* _currentCall;
 
     bool isInCall() const;
 
@@ -140,8 +141,8 @@ private:
 
     bool areControlsVisible() const {
        return _areControlsVisible;
-   }
-   bool _areControlsVisible;
+    }
+    bool _areControlsVisible;
 
     QTimer *_statsTimer;
     QTimer *_controlsFadeTimer;
@@ -175,7 +176,10 @@ private:
 
     int runningCallsNotInAnyConferenceCount() const;
 
-    QVariantMap pausedCalls() const;
+    bool mediaInProgress() const {
+       return _mediaInProgress;
+    }
+    bool _mediaInProgress;
 };
 
 #endif /* CALLMODEL_H_ */

@@ -28,6 +28,9 @@
 
 const char* GetDisplayNameFromLinphoneAddress(const LinphoneAddress *address)
 {
+    if (!address)
+        return NULL;
+
     const char *displayName = linphone_address_get_display_name(address);
     if (!displayName)
         displayName = linphone_address_get_username(address);

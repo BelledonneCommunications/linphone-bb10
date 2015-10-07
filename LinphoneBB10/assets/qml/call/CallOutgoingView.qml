@@ -63,14 +63,14 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Center
                 
                 InCallContactAvatar {
-                    imageSource: inCallModel.photo
+                    imageSource: inCallModel.currentCall.photo
                     horizontalAlignment: HorizontalAlignment.Center
                     maxHeight: ui.sdu(41)
                     maxWidth: ui.sdu(41)
                 }
     
                 Label {
-                    text: inCallModel.displayName
+                    text: inCallModel.currentCall.displayName
                     horizontalAlignment: HorizontalAlignment.Center
                     textStyle.fontSize: FontSize.XLarge
                     textStyle.color: colors.colorC
@@ -78,7 +78,7 @@ Page {
                 }
     
                 Label {
-                    text: inCallModel.sipUri
+                    text: inCallModel.currentCall.sipUri
                     horizontalAlignment: HorizontalAlignment.Center
                     textStyle.color: colors.colorA
                     textStyle.base: titilliumWeb.style
