@@ -48,8 +48,8 @@ Container {
         }
 
         Container {
-            layout: StackLayout {
-                orientation: LayoutOrientation.TopToBottom
+            layout: DockLayout {
+                
             }
             verticalAlignment: VerticalAlignment.Center
             horizontalAlignment: HorizontalAlignment.Center
@@ -62,11 +62,16 @@ Container {
                 textStyle.base: titilliumWeb.style
             }
 
-            Label {
-                text: inCallModel.currentCall.callTime
+            Container {
                 horizontalAlignment: HorizontalAlignment.Center
-                textStyle.color: colors.colorA
-                textStyle.base: titilliumWeb.style
+                topPadding: ui.sdu(8)
+                
+                Label {
+                    text: inCallModel.currentCall.callTime
+                    horizontalAlignment: HorizontalAlignment.Center
+                    textStyle.color: colors.colorA
+                    textStyle.base: titilliumWeb.style
+                }
             }
         }
     }

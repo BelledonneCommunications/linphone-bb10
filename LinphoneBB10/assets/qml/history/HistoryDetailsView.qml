@@ -102,19 +102,32 @@ Container {
                 }
             }
             
-            Label {
-                text: historyListModel.historyModel.displayName
+            Container {
+                layout: DockLayout {
+                    
+                }
                 horizontalAlignment: HorizontalAlignment.Center
-                textStyle.fontSize: FontSize.XLarge
-                textStyle.color: colors.colorC
-                textStyle.base: titilliumWeb.style
-            }
+
+                Label {
+                    text: historyListModel.historyModel.displayName
+                    horizontalAlignment: HorizontalAlignment.Center
+                    textStyle.fontSize: FontSize.XLarge
+                    textStyle.color: colors.colorC
+                    textStyle.base: titilliumWeb.style
+                }
+
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Center
+                    verticalAlignment: VerticalAlignment.Top
+                    topPadding: ui.sdu(8)
             
-            Label {
-                text: historyListModel.historyModel.sipUri
-                horizontalAlignment: HorizontalAlignment.Center
-                textStyle.color: colors.colorA
-                textStyle.base: titilliumWeb.style
+                    Label {
+                        text: historyListModel.historyModel.sipUri
+                        horizontalAlignment: HorizontalAlignment.Center
+                        textStyle.color: colors.colorA
+                        textStyle.base: titilliumWeb.style
+                    }
+                }
             }
             
             Container {
@@ -123,6 +136,7 @@ Container {
                 }
                 horizontalAlignment: HorizontalAlignment.Center
                 bottomPadding: ui.sdu(2)
+                topPadding: ui.sdu(2)
                 
                 ImageButton {
                     verticalAlignment: VerticalAlignment.Center

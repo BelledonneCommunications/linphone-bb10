@@ -69,19 +69,33 @@ Page {
                     maxWidth: ui.sdu(41)
                 }
     
-                Label {
-                    text: inCallModel.currentCall.displayName
+                Container {
+                    layout: DockLayout {
+                    
+                    }
+                    verticalAlignment: VerticalAlignment.Center
                     horizontalAlignment: HorizontalAlignment.Center
-                    textStyle.fontSize: FontSize.XLarge
-                    textStyle.color: colors.colorC
-                    textStyle.base: titilliumWeb.style
-                }
-    
-                Label {
-                    text: inCallModel.currentCall.sipUri
-                    horizontalAlignment: HorizontalAlignment.Center
-                    textStyle.color: colors.colorA
-                    textStyle.base: titilliumWeb.style
+                    topPadding: ui.sdu(2)
+                    
+                    Label {
+                        text: inCallModel.currentCall.displayName
+                        horizontalAlignment: HorizontalAlignment.Center
+                        textStyle.fontSize: FontSize.XLarge
+                        textStyle.color: colors.colorC
+                        textStyle.base: titilliumWeb.style
+                    }
+                    
+                    Container {
+                        horizontalAlignment: HorizontalAlignment.Center
+                        topPadding: ui.sdu(8)
+                        
+                        Label {
+                            text: inCallModel.currentCall.sipUri
+                            horizontalAlignment: HorizontalAlignment.Center
+                            textStyle.color: colors.colorA
+                            textStyle.base: titilliumWeb.style
+                        }
+                    }
                 }
             }
         }
