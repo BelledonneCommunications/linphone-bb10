@@ -36,6 +36,14 @@ under GNU Public License V2</source>
     </message>
 </context>
 <context>
+    <name>AllCallsPausedView</name>
+    <message>
+        <location filename="../assets/qml/call/AllCallsPausedView.qml" line="58"/>
+        <source>No current call</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AssistantCreateAccountActivationView</name>
     <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountActivationView.qml" line="33"/>

@@ -97,7 +97,11 @@ Page {
                             visible: currentCallHeader.visible
                         }
                         
-                        CallPausedView {
+                        AllCallsPausedView {
+                            visible: !inCallModel.isInConference && inCallModel.runningCallsNotInAnyConferenceCount == 0
+                        }
+                        
+                        PausedCallsView {
                             
                         }
                         
