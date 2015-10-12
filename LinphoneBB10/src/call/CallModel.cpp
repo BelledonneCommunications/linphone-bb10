@@ -170,11 +170,8 @@ void CallModel::callStateChanged(LinphoneCall *call) {
                 _controlsFadeTimer->stop();
         }
 
-        LinphoneCall *call = getCurrentCall();
-        if (call) {
-            _mediaInProgress = linphone_call_media_in_progress(call);
-            emit mediaInProgressUpdated();
-        }
+        _mediaInProgress = linphone_call_media_in_progress(call);
+        emit mediaInProgressUpdated();
 
         _currentCall = (LinphoneCallModel *)linphone_call_get_user_data(call);
         emit currentCallChanged();
@@ -306,10 +303,13 @@ void CallModel::cameraPreviewAttached(screen_window_t handle) {
 void CallModel::accept(LinphoneCallModel *callModel) {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
-    LinphoneCall *call = callModel->_call;
 
-    if (call) {
-        linphone_core_accept_call(lc, call);
+    if (callModel) {
+        LinphoneCall *call = callModel->_call;
+
+        if (call) {
+            linphone_core_accept_call(lc, call);
+        }
     }
 }
 
@@ -317,10 +317,13 @@ void CallModel::hangUp(LinphoneCallModel *callModel)
 {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
-    LinphoneCall *call = callModel->_call;
 
-    if (call) {
-        linphone_core_terminate_call(lc, call);
+    if (callModel) {
+        LinphoneCall *call = callModel->_call;
+
+        if (call) {
+            linphone_core_terminate_call(lc, call);
+        }
     }
 }
 
