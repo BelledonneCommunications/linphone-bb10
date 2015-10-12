@@ -193,6 +193,7 @@ NavigationPane {
 
     function callEnded(call) {
         if (!inCallModel.isInCall) {
+            inCallModel.dialerCallButtonMode = 0;
             inCallView.close();
         }
         outgoingCallView.close();

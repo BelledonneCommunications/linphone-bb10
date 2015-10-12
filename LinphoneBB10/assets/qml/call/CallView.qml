@@ -70,12 +70,29 @@ Page {
                         horizontalAlignment: HorizontalAlignment.Fill
                         
                         CallVideoView {
-                            visible: callAudioView.visible && inCallModel.isVideoEnabled
+                            visible: !inCallModel.isInConference && inCallModel.runningCallsNotInAnyConferenceCount > 0 && inCallModel.isVideoEnabled
                         }
                         
-                        CallAudioView {
-                            id: callAudioView
-                            visible: !inCallModel.isInConference && inCallModel.runningCallsNotInAnyConferenceCount > 0
+                        InCallContactAvatar {
+                            visible: currentCallHeader.visible && !inCallModel.isVideoEnabled && inCallModel.areControlsVisible
+                            imageSource: inCallModel.currentCall.photo
+                            horizontalAlignment: HorizontalAlignment.Center
+                            verticalAlignment: VerticalAlignment.Center
+                            maxWidth: ui.sdu(41)
+                            maxHeight: ui.sdu(41)
+                        }
+                        
+                        CurrentCallHeaderView {
+                            id: currentCallHeader
+                            visible: !inCallModel.isInConference && inCallModel.runningCallsNotInAnyConferenceCount > 0 && inCallModel.areControlsVisible
+                        }
+                        
+                        SwitchCameraButton {
+                            visible: currentCallHeader.visible && inCallModel.isVideoEnabled
+                        }
+                        
+                        PauseCurrentCallButton {
+                            visible: currentCallHeader.visible
                         }
                         
                         CallPausedView {

@@ -156,7 +156,7 @@ Page {
                     } else if (event.isUp() || event.isCancel()) {
                         background = colors.colorD
                         if (event.isUp()) {
-                            inCallModel.hangUp(inCallModel.incomingCall);
+                            inCallModel.hangUp(inCallModel.outgoingCall);
                         }
                     }
                 }

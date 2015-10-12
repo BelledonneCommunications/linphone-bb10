@@ -25,10 +25,8 @@ Container {
     layout: DockLayout {
 
     }
-    layoutProperties: StackLayoutProperties {
-        spaceQuota: 1
-    }
     horizontalAlignment: HorizontalAlignment.Fill
+    verticalAlignment: VerticalAlignment.Fill
 
     ForeignWindowControl {
         windowId: "LinphoneVideoWindowId" // Do not change the name of this windowId

@@ -304,12 +304,13 @@ void CallModel::accept(LinphoneCallModel *callModel) {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
 
-    if (callModel) {
-        LinphoneCall *call = callModel->_call;
+    if (callModel == NULL) {
+        return;
+    }
 
-        if (call) {
-            linphone_core_accept_call(lc, call);
-        }
+    LinphoneCall *call = callModel->_call;
+    if (call) {
+        linphone_core_accept_call(lc, call);
     }
 }
 
@@ -318,12 +319,13 @@ void CallModel::hangUp(LinphoneCallModel *callModel)
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
 
-    if (callModel) {
-        LinphoneCall *call = callModel->_call;
+    if (callModel == NULL) {
+        return;
+    }
 
-        if (call) {
-            linphone_core_terminate_call(lc, call);
-        }
+    LinphoneCall *call = callModel->_call;
+    if (call) {
+        linphone_core_terminate_call(lc, call);
     }
 }
 
