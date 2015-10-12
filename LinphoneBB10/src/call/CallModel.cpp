@@ -199,10 +199,27 @@ void CallModel::onOrientationAboutToChange(DisplayDirection::Type displayDirecti
     }
 }
 
+void CallModel::updateCallTimerInPausedCalls() {
+    foreach (QVariantMap variant, _pausedCallsDataModel->toListOfMaps()) {
+        LinphoneCallModel *model = variant["call"].value<LinphoneCallModel*>();
+        if (!model) {
+            continue;
+        }
+        variant["callTime"] = model->callTime();
+        QVariantList indexPath = _pausedCallsDataModel->find(variant);
+        _pausedCallsDataModel->updateItem(indexPath, variant);
+    }
+
+    emit pausedCallsUpdated();
+}
+
 void CallModel::statsTimerTimeout()
 {
+    updateCallTimerInPausedCalls();
+
     LinphoneCall *call = getCurrentCall();
     if (!call) {
+        emit statsUpdated();
         return;
     }
 

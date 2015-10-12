@@ -101,6 +101,8 @@ Q_SIGNALS:
     void nextNewCallActionUpdated();
 
 private:
+    void updateCallTimerInPausedCalls();
+
     const char *window_id;
     const char *window_group;
 
