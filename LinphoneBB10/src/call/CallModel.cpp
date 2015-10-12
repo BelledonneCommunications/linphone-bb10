@@ -36,6 +36,8 @@ CallModel::CallModel(QObject *parent) :
         _pausedCallsDataModel(new GroupDataModel(this)),
         _callStatsModel(new CallStatsModel(this)),
         _currentCall(NULL),
+        _incomingCall(NULL),
+        _outgoingCall(NULL),
         _isVideoEnabled(false),
         _isMicMuted(false),
         _isSpeakerEnabled(false),
@@ -90,7 +92,8 @@ static LinphoneCall* getCurrentCall()
 
     LinphoneCall *call = linphone_core_get_current_call(lc);
     if (!call) {
-        call = (LinphoneCall *) ms_list_nth_data(linphone_core_get_calls(lc), 0);
+        const MSList *calls = linphone_core_get_calls(lc);
+        call = (LinphoneCall *) ms_list_nth_data(calls, 0);
     }
 
     return call;
@@ -130,8 +133,14 @@ void CallModel::callStateChanged(LinphoneCall *call) {
 
         LinphoneCallModel *model = new LinphoneCallModel(this, call, GetAddressFromLinphoneAddress(addr), displayName, photo);
         linphone_call_set_user_data(call, model);
-        _currentCall = model;
-        emit currentCallChanged();
+
+        if (state == LinphoneCallIncomingReceived) {
+            _incomingCall = model;
+            emit incomingCallChanged();
+        } else {
+            _outgoingCall = model;
+            emit outgoingCallChanged();
+        }
     } else if (state == LinphoneCallEnd || state == LinphoneCallError) {
         LinphoneCallModel *model = (LinphoneCallModel *)linphone_call_get_user_data(call);
         delete(model);
@@ -167,8 +176,7 @@ void CallModel::callStateChanged(LinphoneCall *call) {
             emit mediaInProgressUpdated();
         }
 
-        LinphoneCallModel *model = (LinphoneCallModel *)linphone_call_get_user_data(call);
-        _currentCall = model;
+        _currentCall = (LinphoneCallModel *)linphone_call_get_user_data(call);
         emit currentCallChanged();
     } else if (state == LinphoneCallResuming || state == LinphoneCallPaused) {
         pausedCalls();
@@ -205,8 +213,8 @@ void CallModel::updateCallTimerInPausedCalls() {
         if (!model) {
             continue;
         }
+        QVariantList indexPath = _pausedCallsDataModel->findExact(variant);
         variant["callTime"] = model->callTime();
-        QVariantList indexPath = _pausedCallsDataModel->find(variant);
         _pausedCallsDataModel->updateItem(indexPath, variant);
     }
 
@@ -290,12 +298,24 @@ void CallModel::cameraPreviewAttached(screen_window_t handle) {
     screen_set_window_property_iv(handle, SCREEN_PROPERTY_ZORDER, &z);
 }
 
-void CallModel::accept() {
+void CallModel::accept(LinphoneCallModel *callModel) {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
-    LinphoneCall *call = getCurrentCall();
+    LinphoneCall *call = callModel->_call;
+
     if (call) {
         linphone_core_accept_call(lc, call);
+    }
+}
+
+void CallModel::hangUp(LinphoneCallModel *callModel)
+{
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+    LinphoneCall *call = callModel->_call;
+
+    if (call) {
+        linphone_core_terminate_call(lc, call);
     }
 }
 
@@ -304,6 +324,7 @@ void CallModel::hangUp()
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
     LinphoneCall *call = getCurrentCall();
+
     if (call) {
         linphone_core_terminate_call(lc, call);
     }

@@ -194,9 +194,9 @@ NavigationPane {
     function callEnded(call) {
         if (!inCallModel.isInCall) {
             inCallView.close();
-            outgoingCallView.close();
-            incomingCallView.close();
         }
+        outgoingCallView.close();
+        incomingCallView.close();
     }
 
     function outgoingCallInit(call) {

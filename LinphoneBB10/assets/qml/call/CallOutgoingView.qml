@@ -63,7 +63,7 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Center
                 
                 InCallContactAvatar {
-                    imageSource: inCallModel.currentCall.photo
+                    imageSource: inCallModel.outgoingCall.photo
                     horizontalAlignment: HorizontalAlignment.Center
                     maxHeight: ui.sdu(41)
                     maxWidth: ui.sdu(41)
@@ -78,7 +78,7 @@ Page {
                     topPadding: ui.sdu(2)
                     
                     Label {
-                        text: inCallModel.currentCall.displayName
+                        text: inCallModel.outgoingCall.displayName
                         horizontalAlignment: HorizontalAlignment.Center
                         textStyle.fontSize: FontSize.XLarge
                         textStyle.color: colors.colorC
@@ -90,7 +90,7 @@ Page {
                         topPadding: ui.sdu(8)
                         
                         Label {
-                            text: inCallModel.currentCall.sipUri
+                            text: inCallModel.outgoingCall.sipUri
                             horizontalAlignment: HorizontalAlignment.Center
                             textStyle.color: colors.colorA
                             textStyle.base: titilliumWeb.style
@@ -156,7 +156,7 @@ Page {
                     } else if (event.isUp() || event.isCancel()) {
                         background = colors.colorD
                         if (event.isUp()) {
-                            inCallModel.hangUp()
+                            inCallModel.hangUp(inCallModel.incomingCall);
                         }
                     }
                 }

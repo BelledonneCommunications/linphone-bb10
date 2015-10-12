@@ -43,6 +43,8 @@ class CallModel : public QObject
     Q_OBJECT
     Q_PROPERTY(bb::cascades::GroupDataModel* pausedCallsDataModel READ pausedCallsDataModel NOTIFY pausedCallsUpdated);
     Q_PROPERTY(LinphoneCallModel* currentCall READ currentCall NOTIFY currentCallChanged);
+    Q_PROPERTY(LinphoneCallModel* incomingCall READ incomingCall NOTIFY incomingCallChanged);
+    Q_PROPERTY(LinphoneCallModel* outgoingCall READ outgoingCall NOTIFY outgoingCallChanged);
 
     Q_PROPERTY(bool mediaInProgress READ mediaInProgress NOTIFY mediaInProgressUpdated);
     Q_PROPERTY(bool isInCall READ isInCall NOTIFY callStateChanged);
@@ -70,7 +72,8 @@ public Q_SLOTS:
     void callStateChanged(LinphoneCall *call);
     void statsTimerTimeout();
 
-    void accept();
+    void accept(LinphoneCallModel *callModel);
+    void hangUp(LinphoneCallModel *callModel);
     void hangUp();
 
     void pausedCalls();
@@ -90,6 +93,8 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void currentCallChanged();
+    void incomingCallChanged();
+    void outgoingCallChanged();
     void callStateChanged();
     void pausedCallsUpdated();
     void conferenceUpdated();
@@ -120,6 +125,16 @@ private:
         return _currentCall;
     }
     LinphoneCallModel* _currentCall;
+
+    LinphoneCallModel* incomingCall() const {
+        return _incomingCall;
+    }
+    LinphoneCallModel* _incomingCall;
+
+    LinphoneCallModel* outgoingCall() const {
+        return _outgoingCall;
+    }
+    LinphoneCallModel* _outgoingCall;
 
     bool isInCall() const;
 
