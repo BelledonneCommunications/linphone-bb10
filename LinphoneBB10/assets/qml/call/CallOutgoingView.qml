@@ -58,45 +58,17 @@ Page {
             }
             horizontalAlignment: HorizontalAlignment.Fill
 
-            Container {
-                verticalAlignment: VerticalAlignment.Center
+            InCallContactAvatar {
+                imageSource: inCallModel.outgoingCall.photo
                 horizontalAlignment: HorizontalAlignment.Center
-                
-                InCallContactAvatar {
-                    imageSource: inCallModel.outgoingCall.photo
-                    horizontalAlignment: HorizontalAlignment.Center
-                    maxHeight: ui.sdu(41)
-                    maxWidth: ui.sdu(41)
-                }
-    
-                Container {
-                    layout: DockLayout {
-                    
-                    }
-                    verticalAlignment: VerticalAlignment.Center
-                    horizontalAlignment: HorizontalAlignment.Center
-                    topPadding: ui.sdu(2)
-                    
-                    Label {
-                        text: inCallModel.outgoingCall.displayName
-                        horizontalAlignment: HorizontalAlignment.Center
-                        textStyle.fontSize: FontSize.XLarge
-                        textStyle.color: colors.colorC
-                        textStyle.base: titilliumWeb.style
-                    }
-                    
-                    Container {
-                        horizontalAlignment: HorizontalAlignment.Center
-                        topPadding: ui.sdu(8)
-                        
-                        Label {
-                            text: inCallModel.outgoingCall.sipUri
-                            horizontalAlignment: HorizontalAlignment.Center
-                            textStyle.color: colors.colorA
-                            textStyle.base: titilliumWeb.style
-                        }
-                    }
-                }
+                verticalAlignment: VerticalAlignment.Center
+                maxWidth: ui.sdu(41)
+                maxHeight: ui.sdu(41)
+            }
+            
+            CurrentCallHeaderView {
+                title: inCallModel.outgoingCall.displayName
+                subtitle: inCallModel.outgoingCall.sipUri
             }
         }
 

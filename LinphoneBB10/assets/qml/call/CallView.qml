@@ -84,6 +84,8 @@ Page {
                         
                         CurrentCallHeaderView {
                             id: currentCallHeader
+                            title: inCallModel.currentCall.displayName
+                            subtitle: inCallModel.currentCall.callTime
                             visible: !inCallModel.isInConference && inCallModel.runningCallsNotInAnyConferenceCount > 0 && inCallModel.areControlsVisible
                         }
                         

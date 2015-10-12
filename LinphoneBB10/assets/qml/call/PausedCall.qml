@@ -28,6 +28,7 @@ Container {
     }
     id: itemRoot
     maxHeight: ui.sdu(15)
+    background: Qt.colors.colorH
     
     Container {
         horizontalAlignment: HorizontalAlignment.Fill

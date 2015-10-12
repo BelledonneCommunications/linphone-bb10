@@ -18,10 +18,14 @@
  */
 
 import bb.cascades 1.4
+import org.linphone 1.0
 
 import "../custom_controls"
 
 Container {
+    property alias title: displayName.text
+    property alias subtitle: callTimeOrSipUri.text
+    
     layout: DockLayout {
 
     }
@@ -45,7 +49,7 @@ Container {
         horizontalAlignment: HorizontalAlignment.Center
 
         Label {
-            text: inCallModel.currentCall.displayName
+            id: displayName
             horizontalAlignment: HorizontalAlignment.Center
             textStyle.fontSize: FontSize.XLarge
             textStyle.color: colors.colorC
@@ -57,7 +61,7 @@ Container {
             topPadding: ui.sdu(8)
 
             Label {
-                text: inCallModel.currentCall.callTime
+                id: callTimeOrSipUri
                 horizontalAlignment: HorizontalAlignment.Center
                 textStyle.color: colors.colorA
                 textStyle.base: titilliumWeb.style
