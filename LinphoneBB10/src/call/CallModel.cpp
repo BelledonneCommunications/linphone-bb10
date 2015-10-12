@@ -179,6 +179,11 @@ void CallModel::callStateChanged(LinphoneCall *call) {
         _currentCall = (LinphoneCallModel *)linphone_call_get_user_data(call);
         emit currentCallChanged();
     } else if (state == LinphoneCallResuming || state == LinphoneCallPaused) {
+        if (state == LinphoneCallPaused && _isVideoEnabled) {
+            if (_controlsFadeTimer->isActive()) {
+                _controlsFadeTimer->stop();
+            }
+        }
         pausedCalls();
     }
     setVideoEnabled(linphone_call_params_video_enabled(params));
