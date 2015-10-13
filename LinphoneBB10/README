@@ -6,9 +6,7 @@ Getting started:
   * To build the Blackbbery 10 application, you must have the Momentics IDE installed with at least the 10.3.1.995 Blackberry 10 Native SDK installed
 
 1- Compile Blackberry 10 liblinphone SDK:
-  * Go into the build directory
-  * ./prepare.py [-l] <bb10-arm | bb10-i486>
-  * make -C WORK/bb10-arm/cmake
+  * Go into the build directory and read the README.bb10.md
 
 2- Move/Copy the requiered SDK files to the assets folder:
   * <cp -R | mv> build/OUTPUT/liblinphone-bb10-sdk/arm/include LinphoneBB10/assets/liblinphone-bb10-sdk/arm/
