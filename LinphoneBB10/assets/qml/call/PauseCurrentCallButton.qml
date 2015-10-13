@@ -21,7 +21,7 @@ import bb.cascades 1.4
 
 Container {
     rightPadding: ui.sdu(5)
-    topPadding: ui.sdu(20)
+    topPadding: ui.sdu(21)
     verticalAlignment: VerticalAlignment.Top
     horizontalAlignment: HorizontalAlignment.Right
     
