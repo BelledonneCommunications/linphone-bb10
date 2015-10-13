@@ -11,7 +11,7 @@ directory. For more information about it, take a look at the README.bb10 file
 in this directory. However the important things to know are that you need:
  - to use a Linux or Mac OS X platform to build
  - to install CMake 2.8.x
- - to install the BlackBerry10 native SDK (Momentics IDE)
+ - to install the BlackBerry10 native SDK (Momentics IDE) >= 10.3.1.995
 
 BUILDING THE SDK
 ****************
