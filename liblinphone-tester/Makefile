@@ -31,14 +31,16 @@ all: build
 build-arm:
 	mkdir -p $(WORKING_DIR)/arm && \
 	cd $(WORKING_DIR)/../build/ && \
-	make build-bb10-arm -- $(filter -D%,$(MAKEFLAGS))
-	cp ../build/WORK/Build-bb10-arm/linphone/tester/.libs/liblinphone_tester $(WORKING_DIR)/arm/
+	./prepare.py -c bb10-arm && ./prepare.py bb10-arm && \
+	make -C WORK/bb10-arm/cmake -- $(filter -D%,$(MAKEFLAGS))
+	cp ../build/WORK/bb10-arm/Build/linphone/tester/liblinphone_tester $(WORKING_DIR)/arm/
 
 build-i486:
 	mkdir -p $(WORKING_DIR)/i486 && \
 	cd $(WORKING_DIR)/../build/ && \
-	make build-bb10-i486 -- $(filter -D%,$(MAKEFLAGS))
-	cp ../build/WORK/Build-bb10-i486/linphone/tester/.libs/liblinphone_tester $(WORKING_DIR)/i486/
+	./prepare.py -c bb10-i486 && ./prepare.py bb10-i486 && \
+        make -C WORK/bb10-i486/cmake -- $(filter -D%,$(MAKEFLAGS))
+	cp ../build/WORK/bb10-i486/Build/linphone/tester/liblinphone_tester $(WORKING_DIR)/i486/
 
 build: build-arm build-i486
 

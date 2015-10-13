@@ -22,6 +22,7 @@ directory (the liblinphone-tester directory)
 
 BUILDING WITH THE COMMAND LINE
 ******************************
+First add the following to your PATH: /home/<username>/bbndk/host_10_3_1_12/linux/x86/usr/bin/
 
 In the current directory (the liblinphone-tester directory), run the following 
 commands:

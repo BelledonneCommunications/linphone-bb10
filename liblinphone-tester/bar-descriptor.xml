@@ -82,10 +82,10 @@
 
     <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/share/linphone/rootca.pem">assets/linphone/rootca.pem</asset>
     <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/share/sounds/linphone/rings">assets/sounds/linphone/rings</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/certificates">assets/certificates</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/rcfiles">assets/rcfiles</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/sounds">assets/sounds</asset>
-    <asset path="../build/WORK/Source/EP_linphone/tester/tester_hosts">assets/tester_hosts</asset>
+    <asset path="../build/WORK/bb10-arm/Source/EP_linphone/tester/certificates">assets/certificates</asset>
+    <asset path="../build/WORK/bb10-arm/Source/EP_linphone/tester/rcfiles">assets/rcfiles</asset>
+    <asset path="../build/WORK/bb10-arm/Source/EP_linphone/tester/sounds">assets/sounds</asset>
+    <asset path="../build/WORK/bb10-arm/Source/EP_linphone/tester/tester_hosts">assets/tester_hosts</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
