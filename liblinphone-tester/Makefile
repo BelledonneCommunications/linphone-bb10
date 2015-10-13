@@ -61,7 +61,7 @@ install: package
 run: install
 	blackberry-nativepackager -launchApp -device $(DEVICE) -password $(PASSWORD) liblinphone-tester.bar
 	blackberry-deploy -terminateApp -device $(DEVICE) -password $(PASSWORD) liblinphone-tester.bar
-	ssh bb10 'sh -c "cd /accounts/1000/appdata/com.belledonne_communications.liblinphone_tester* && LD_LIBRARY_PATH=app/native/lib app/native/liblinphone_tester --verbose"'
+	ssh bb10 'sh -c "cd /accounts/1000/appdata/com.belledonne_communications.liblinphone_tester* && LD_LIBRARY_PATH=app/native/lib app/native/liblinphone_tester --resource-dir app/native/assets/ --writable-dir tmp/ --verbose"'
 
 uninstall:
 	blackberry-deploy -uninstallApp -device $(DEVICE) -password $(PASSWORD) liblinphone-tester.bar

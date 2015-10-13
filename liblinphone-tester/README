@@ -31,7 +31,7 @@ commands:
     $ make run
 
 For the "make run" step to be succesful you will need to add the following 
-lines to your SSH configuration:
+lines to your SSH configuration (~/.ssh/config):
 
 Host bb10
     Hostname 169.254.0.1
