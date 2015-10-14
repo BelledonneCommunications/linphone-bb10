@@ -11,3 +11,5 @@ LinphoneBB10/assets/.assets.index
 LinphoneBB10/.settings/
 LinphoneBB10/config.pri
 LinphoneBB10/.assets.index
+Makefile
+WORK
