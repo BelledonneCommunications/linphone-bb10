@@ -16,7 +16,15 @@ in this directory. However the important things to know are that you need:
 BUILDING THE SDK
 ****************
 
-Read the README.bb10 file in the build directory to know how to do this.
+First, check you do have the latest submodules:
+	$ git submodule sync
+	$ git submodule update --recursive --init
+
+Then, to compile the linphone blackberry 10 SDK, run the following commands:
+	$ ./prepare.py [-d] [arm/i486]
+	$ make [zipsdk]
+
+You'll see a new folder, liblinphone-bb10-sdk (or a zip archive named liblinphone-bb10-sdk-<something>.zip if you did a make zipsdk) that contains your SDK.
 
 BUILDING AND RUNNING THE TESTERS
 ********************************

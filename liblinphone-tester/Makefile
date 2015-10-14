@@ -23,19 +23,17 @@
 DEVICE?=169.254.0.1
 PASSWORD?=1234
 DEBUG_TOKEN?=~/.rim/debugtoken1.bar
-PREPAREPY_PARAMS?=
 
 WORKING_DIR=$(shell pwd)
 
 all: package
 
 clean:
-	rm -rf $(WORKING_DIR)/arm && rm -rf $(WORKING_DIR)/i486
+	rm -rf $(WORKING_DIR)/arm
 
 package:
-	mkdir -p $(WORKING_DIR)/arm && mkdir -p $(WORKING_DIR)/i486 && \
+	mkdir -p $(WORKING_DIR)/arm && \
 	cp $(WORKING_DIR)/../WORK/bb10-arm/Build/linphone/tester/liblinphone_tester $(WORKING_DIR)/arm/ && \
-	cp $(WORKING_DIR)/../WORK/bb10-i486/Build/linphone/tester/liblinphone_tester $(WORKING_DIR)/i486/ && \
 	blackberry-nativepackager -package -devMode -debugToken $(DEBUG_TOKEN) -configuration Device-Debug liblinphone-tester.bar bar-descriptor.xml
 
 install: package

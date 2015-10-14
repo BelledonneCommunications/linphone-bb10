@@ -24,10 +24,10 @@ BUILDING WITH THE COMMAND LINE
 ******************************
 First add the following to your PATH: /home/<username>/bbndk/host_10_3_1_12/linux/x86/usr/bin/
 
-In the current directory (the liblinphone-tester directory), run the following 
-commands:
+Then build the SDK (see README file in above directory)
 
-    $ make
+Finally, in the current directory (the liblinphone-tester directory), run the following 
+command:
     $ make run
 
 For the "make run" step to be succesful you will need to add the following 
