@@ -1,3 +1,42 @@
 [submodule "build"]
 	path = build
 	url = git://git.linphone.org/linphone-cmake-builder.git
+[submodule "submodules/cmake-builder"]
+	path = submodules/cmake-builder
+	url = git://git.linphone.org/linphone-cmake-builder.git
+[submodule "submodules/bzrtp"]
+	path = submodules/bzrtp
+	url = git://git.linphone.org:/bzrtp.git
+[submodule "submodules/belle-sip"]
+	path = submodules/belle-sip
+	url = git://git.linphone.org/belle-sip.git
+[submodule "submodules/externals/antlr3"]
+	path = submodules/externals/antlr3
+	url = git://git.linphone.org/antlr3.git
+[submodule "submodules/externals/gsm"]
+	path = submodules/externals/gsm
+	url = git://git.linphone.org/gsm.git
+[submodule "submodules/externals/libvpx"]
+	path = submodules/externals/libvpx
+	url = git://git.linphone.org/libvpx.git
+[submodule "submodules/externals/libxml2"]
+	path = submodules/externals/libxml2
+	url = git://git.gnome.org/libxml2.git
+[submodule "submodules/externals/opus"]
+	path = submodules/externals/opus
+	url = git://git.linphone.org/opus.git
+[submodule "submodules/externals/polarssl"]
+	path = submodules/externals/polarssl
+	url = git://git.linphone.org/polarssl.git
+[submodule "submodules/externals/speex"]
+	path = submodules/externals/speex
+	url = git://git.linphone.org/speex.git
+[submodule "submodules/externals/srtp"]
+	path = submodules/externals/srtp
+	url = git://git.linphone.org/srtp.git
+[submodule "submodules/cunit"]
+	path = submodules/cunit
+	url = git://git.linphone.org/cunit.git
+[submodule "submodules/linphone"]
+	path = submodules/linphone
+	url = git://git.linphone.org/linphone.git
