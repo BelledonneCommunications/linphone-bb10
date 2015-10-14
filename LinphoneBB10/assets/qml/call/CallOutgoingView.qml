@@ -88,11 +88,11 @@ Page {
                 }
                 imageSource: "asset:///images/call/micro_default.png"
                 selectedImageSource: "asset:///images/call/micro_selected.png"
-                selected: inCallModel.isSpeakerEnabled
+                selected: inCallModel.isMicMuted
                 
                 gestureHandlers: TapHandler {
                     onTapped: {
-                        inCallModel.isSpeakerEnabled = ! inCallModel.isSpeakerEnabled
+                        inCallModel.isMicMuted = ! inCallModel.isMicMuted
                     }
                 }
             }
@@ -103,11 +103,11 @@ Page {
                 }
                 imageSource: "asset:///images/call/speaker_default.png"
                 selectedImageSource: "asset:///images/call/speaker_selected.png"
-                selected: inCallModel.isMicMuted
+                selected: inCallModel.isSpeakerEnabled
                 
                 gestureHandlers: TapHandler {
                     onTapped: {
-                        inCallModel.isMicMuted = ! inCallModel.isMicMuted
+                        inCallModel.isSpeakerEnabled = ! inCallModel.isSpeakerEnabled
                     }
                 }
             }
@@ -143,7 +143,6 @@ Page {
                     verticalAlignment: VerticalAlignment.Center
                 }
             }
-
         }
     }
 }

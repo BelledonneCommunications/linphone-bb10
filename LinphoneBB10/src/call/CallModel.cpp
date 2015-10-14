@@ -159,6 +159,7 @@ void CallModel::callStateChanged(LinphoneCall *call) {
             _isSpeakerEnabled = false;
             _isMicMuted = false;
             _isVideoEnabled = false;
+            emit callControlsUpdated();
         }
     } else if (state == LinphoneCallStreamsRunning) {
         if (_isVideoEnabled) {
