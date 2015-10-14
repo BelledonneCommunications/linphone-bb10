@@ -177,21 +177,20 @@ all: build
 dev: $(addsuffix -dev, $(archs))
 \t$(MAKE) sdk
 
-sdk:
-\t@echo "TODO"
+sdk: build
 
 build: $(addsuffix -build, $(archs))
-\t$(MAKE) sdk
 
 zipsdk: sdk
-\t@echo "TODO"
+\techo "Generating SDK zip file for version $(LINPHONE_BB10_VERSION)"
+\tzip -r liblinphone-bb10-sdk-$(LINPHONE_BB10_VERSION).zip \\
+\tliblinphone-bb10-sdk
 
 pull-transifex:
-\ttx pull -af
+\t@echo "TODO"
 
 push-transifex:
-\t./Tools/i18n_generate_strings_files.sh && \\
-\ttx push -s -f --no-interactive
+\t@echo "TODO"
 
 {arch_targets}
 
@@ -207,9 +206,8 @@ help: help-prepare-options
 \t@echo ""
 \t@echo "Available targets:"
 \t@echo ""
-\t@echo "   * all or build: builds all architectures and creates the liblinphone SDK"
-\t@echo "   * sdk: creates the liblinphone SDK. Use this only after a full build"
-\t@echo "   * zipsdk: generates a ZIP archive of liblinphone-bb10-sdk containing the SDK. Use this only after SDK is built."
+\t@echo "   * all, build or sdk: builds all architectures and creates the liblinphone SDK."
+\t@echo "   * zipsdk: generates a ZIP archive of liblinphone-bb10-sdk containing the SDK."
 \t@echo ""
 \t@echo "=== Advanced usage ==="
 \t@echo ""
