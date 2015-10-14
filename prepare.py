@@ -153,7 +153,7 @@ WORK/bb10-{arch}/build.done:
 \t$(MAKE) {arch}-build && touch WORK/bb10-{arch}/build.done
 
 {arch}-dev: WORK/bb10-{arch}/build.done
-\t{generator} WORK/bb10-{arch}/Build/linphone_builder
+\t{generator} WORK/bb10-{arch}/Build/linphone_builder install
 \t@echo "Done"
 """.format(arch=arch, generator=generator)
     multiarch = ""
