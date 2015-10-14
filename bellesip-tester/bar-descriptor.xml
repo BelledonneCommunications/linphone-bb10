@@ -79,7 +79,7 @@
         <transparent>false</transparent>
     </initialWindow>
 
-    <asset path="../build/OUTPUT/liblinphone-bb10-sdk/arm/share/linphone/rootca.pem">assets/rootca.pem</asset>
+    <asset path="../liblinphone-bb10-sdk/arm/share/linphone/rootca.pem">assets/rootca.pem</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>

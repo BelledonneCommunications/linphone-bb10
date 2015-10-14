@@ -26,31 +26,15 @@ DEBUG_TOKEN?=~/.rim/debugtoken1.bar
 
 WORKING_DIR=$(shell pwd)
 
-all: build
+all: package
 
-build-arm:
-	mkdir -p $(WORKING_DIR)/arm && \
-	cd $(WORKING_DIR)/../build/ && \
-	make build-bb10-arm -- $(filter -D%,$(MAKEFLAGS))
-	cp ../build/OUTPUT/liblinphone-bb10-sdk/arm/bin/linphonec $(WORKING_DIR)/arm/
-
-build-i486:
-	mkdir -p $(WORKING_DIR)/i486 && \
-	cd $(WORKING_DIR)/../build/ && \
-	make build-bb10-i486 -- $(filter -D%,$(MAKEFLAGS))
-	cp ../build/OUTPUT/liblinphone-bb10-sdk/i486/bin/linphonec $(WORKING_DIR)/i486/
-
-build: build-arm build-i486
-
-clean-arm:
-	rm -f $(WORKING_DIR)/arm/linphonec
-
-clean-i486:
-	rm -f $(WORKING_DIR)/i486/linphonec
-
-clean: clean-arm clean-i486
+clean:
+	rm -rf $(WORKING_DIR)/arm && rm -rf $(WORKING_DIR)/i486
 
 package:
+	mkdir -p $(WORKING_DIR)/arm && mkdir -p $(WORKING_DIR)/i486 && \
+	cp $(WORKING_DIR)/../WORK/bb10-arm/Build/linphone/console/linphonec $(WORKING_DIR)/arm/ && \
+	cp $(WORKING_DIR)/../WORK/bb10-i486/Build/linphone/console/linphonec $(WORKING_DIR)/i486/ && \
 	blackberry-nativepackager -package -devMode -debugToken $(DEBUG_TOKEN) -configuration Device-Debug linphonec.bar bar-descriptor.xml
 
 install: package

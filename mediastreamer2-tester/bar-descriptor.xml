@@ -80,7 +80,7 @@
         <transparent>false</transparent>
     </initialWindow>
 
-    <asset path="../build/WORK/Source/EP_ms2/tester/sounds">assets/sounds</asset>
+    <asset path="../submodules/linphone/mediastreamer2/tester/sounds">assets/sounds</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>

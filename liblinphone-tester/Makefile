@@ -27,33 +27,15 @@ PREPAREPY_PARAMS?=
 
 WORKING_DIR=$(shell pwd)
 
-all: build
+all: package
 
-build-arm:
-	mkdir -p $(WORKING_DIR)/arm && \
-	cd $(WORKING_DIR)/../build/ && \
-	./prepare.py -c bb10-arm && ./prepare.py $(PREPAREPY_PARAMS) bb10-arm && \
-	make -C WORK/bb10-arm/cmake -- $(filter -D%,$(MAKEFLAGS))
-	cp ../build/WORK/bb10-arm/Build/linphone/tester/liblinphone_tester $(WORKING_DIR)/arm/
-
-build-i486:
-	mkdir -p $(WORKING_DIR)/i486 && \
-	cd $(WORKING_DIR)/../build/ && \
-	./prepare.py -c bb10-i486 && ./prepare.py $(PREPAREPY_PARAMS) bb10-i486 && \
-        make -C WORK/bb10-i486/cmake -- $(filter -D%,$(MAKEFLAGS))
-	cp ../build/WORK/bb10-i486/Build/linphone/tester/liblinphone_tester $(WORKING_DIR)/i486/
-
-build: build-arm build-i486
-
-clean-arm:
-	rm -f $(WORKING_DIR)/arm/liblinphone_tester
-
-clean-i486:
-	rm -f $(WORKING_DIR)/i486/liblinphone_tester
-
-clean: clean-arm clean-i486
+clean:
+	rm -rf $(WORKING_DIR)/arm && rm -rf $(WORKING_DIR)/i486
 
 package:
+	mkdir -p $(WORKING_DIR)/arm && mkdir -p $(WORKING_DIR)/i486 && \
+	cp $(WORKING_DIR)/../WORK/bb10-arm/Build/linphone/tester/liblinphone_tester $(WORKING_DIR)/arm/ && \
+	cp $(WORKING_DIR)/../WORK/bb10-i486/Build/linphone/tester/liblinphone_tester $(WORKING_DIR)/i486/ && \
 	blackberry-nativepackager -package -devMode -debugToken $(DEBUG_TOKEN) -configuration Device-Debug liblinphone-tester.bar bar-descriptor.xml
 
 install: package
