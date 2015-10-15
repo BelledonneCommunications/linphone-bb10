@@ -89,6 +89,7 @@
 	<asset path="../submodules/linphone/tester/images">assets/images</asset>
 	<asset path="../submodules/linphone/tester/sipp">assets/sipp</asset>
 	<asset path="../submodules/linphone/tester/flexisip">assets/flexisip</asset>
+	<asset path="../submodules/linphone/tester/messages.db">assets/messages.db</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
