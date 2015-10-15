@@ -52,5 +52,7 @@ need to tell where to find it with DEBUG_TOKEN=<path_to_debug_token> with using
 the "make run" command.
 For example, to run the program on a BlackBerry 10 device with the IP address 
 192.168.0.192 and the 5678 password, use:
-
     $ DEVICE=192.168.0.192 PASSWORD=5678 make run
+
+For the above command to work, you must have another shell running (or a nohup) the following command:
+    $ blackberry-connect -targetHost 169.254.0.1 -devicePassword 1234 -sshPublicKey ~/.rim/bbt_id_rsa.pub

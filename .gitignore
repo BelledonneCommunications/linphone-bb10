@@ -13,3 +13,4 @@ LinphoneBB10/config.pri
 LinphoneBB10/.assets.index
 Makefile
 WORK
+liblinphone-bb10-sdk-*.zip
