@@ -86,6 +86,9 @@
     <asset path="../submodules/linphone/tester/rcfiles">assets/rcfiles</asset>
     <asset path="../submodules/linphone/tester/sounds">assets/sounds</asset>
     <asset path="../submodules/linphone/tester/tester_hosts">assets/tester_hosts</asset>
+	<asset path="../submodules/linphone/tester/images">assets/images</asset>
+	<asset path="../submodules/linphone/tester/sipp">assets/sipp</asset>
+	<asset path="../submodules/linphone/tester/flexisip">assets/flexisip</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
