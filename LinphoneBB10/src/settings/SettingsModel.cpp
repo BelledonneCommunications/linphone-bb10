@@ -22,6 +22,13 @@
 
 #include "SettingsModel.h"
 
+#include <bb/system/SystemProgressToast>
+#include <bb/system/SystemUiProgressState>
+#include <bb/system/SystemUiPosition>
+#include <bb/system/InvokeManager.hpp>
+
+using namespace bb::system;
+
 SettingsModel::SettingsModel(QObject *parent)
     : QObject(parent),
       _manager(LinphoneManager::getInstance()),
@@ -74,9 +81,60 @@ void SettingsModel::setLogCollectionEnabled(const bool& enabled) {
     lp_config_set_int(lpc, "app", "log_collection", enabled ? 1 : 0);
 }
 
+static void log_collection_upload_progress(LinphoneCore *lc, size_t offset, size_t total) {
+    LinphoneCoreVTable *vtable = linphone_core_get_current_vtable(lc);
+    SystemProgressToast* log_upload_toast = (SystemProgressToast *)linphone_core_v_table_get_user_data(vtable);
+    int progress = (int)offset * 100 / total;
+    log_upload_toast->setProgress(progress);
+    log_upload_toast->setStatusMessage(QString("%0%").arg(progress));
+    log_upload_toast->update();
+}
+
+static void log_collection_upload_state(LinphoneCore *lc, LinphoneCoreLogCollectionUploadState state, const char *info) {
+    LinphoneCoreVTable *vtable = linphone_core_get_current_vtable(lc);
+    SystemProgressToast* log_upload_toast = (SystemProgressToast *)linphone_core_v_table_get_user_data(vtable);
+
+    if (state == LinphoneCoreLogCollectionUploadStateDelivered || state == LinphoneCoreLogCollectionUploadStateNotDelivered) {
+        linphone_core_remove_listener(lc, vtable);
+        log_upload_toast->cancel();
+
+        if (state == LinphoneCoreLogCollectionUploadStateDelivered) {
+            QString recipient = "linphone-blackberry@belledonne-communications.com";
+            QString subject = QObject::tr("Linphone Blackberry 10 logs");
+            QString body = info;
+            InvokeManager invokeManager;
+            InvokeRequest invokeRequest;
+
+            invokeRequest.setTarget("sys.pim.uib.email.hybridcomposer");
+            invokeRequest.setAction("bb.action.OPEN, bb.action.SENDEMAIL");
+            invokeRequest.setUri(QString("mailto:%0?subject=%1&body=%2").arg(recipient, subject, body));
+
+            invokeManager.invoke(invokeRequest);
+        }
+    }
+}
+
 void SettingsModel::uploadLogs() {
     LinphoneCore *lc = _manager->getLc();
+
+    LinphoneCoreVTable *vtable = (LinphoneCoreVTable*) malloc(sizeof(LinphoneCoreVTable));
+    memset (vtable, 0, sizeof(LinphoneCoreVTable));
+    vtable->log_collection_upload_progress_indication = log_collection_upload_progress;
+    vtable->log_collection_upload_state_changed = log_collection_upload_state;
+
+    SystemProgressToast* log_upload_toast;
+    log_upload_toast = new SystemProgressToast();
+
+    log_upload_toast->setBody(tr("Logs upload"));
+    log_upload_toast->setProgress(0);
+    log_upload_toast->setStatusMessage(QString("0%"));
+    log_upload_toast->setState(SystemUiProgressState::Active);
+    log_upload_toast->setPosition(SystemUiPosition::MiddleCenter);
+
+    linphone_core_v_table_set_user_data(vtable, log_upload_toast);
+    linphone_core_add_listener(lc, vtable);
     linphone_core_upload_log_collection(lc);
+    log_upload_toast->show();
 }
 
 void SettingsModel::resetLogs() {

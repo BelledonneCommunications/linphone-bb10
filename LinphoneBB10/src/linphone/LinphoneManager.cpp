@@ -271,7 +271,7 @@ void LinphoneManager::createAndStartLinphoneCore()
     char* linphoneRC = strdup(moveLinphoneRcToRWFolder().toUtf8().data());
     LpConfig *lpc = lp_config_new(linphoneRC);
 
-    QString logsPath = QDir::homePath() + "/logs/";
+    QString logsPath = QDir::homePath();
     linphone_core_set_log_collection_path(logsPath.toUtf8().constData());
     if (lp_config_get_int(lpc, "app", "log_collection", 0) == 1) {
         linphone_core_enable_log_collection(LinphoneLogCollectionEnabled);
