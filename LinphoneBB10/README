@@ -16,13 +16,12 @@ Getting started:
   * File -> Import -> Blackberry -> Existing Code as Blackberry C/C++ Makefile Project
     # Set the code location to the directory this file is in
     # Choose C++ as language
+    
   * Edit the bar-descriptor.xml file (in the Source tab) and remove the following lines:
-    <configuration name="Device-Coverage">       <platformArchitecture>armle-v7</platformArchitecture>
-</configuration>
-    <configuration name="Simulator-Profile">       <platformArchitecture>x86</platformArchitecture>
-</configuration>
-    <configuration name="Simulator-Coverage">       <platformArchitecture>x86</platformArchitecture>
-</configuration>
+    <configuration name="Device-Coverage"><platformArchitecture>armle-v7</platformArchitecture></configuration>
+    <configuration name="Simulator-Profile"><platformArchitecture>x86</platformArchitecture></configuration>
+    <configuration name="Simulator-Coverage"><platformArchitecture>x86</platformArchitecture></configuration>
+    
   * Go to the project properties, C/C++ General category, Paths and Symbols section, Source Location tab:
     # Add a new folder "/LinphoneBB10/src"
     # Delete the previous source folder "/LinphoneBB10"
@@ -30,7 +29,7 @@ Getting started:
 4- Build the project
 
 /!\ Known issues:
-- If you encounter the following issue:
-C:/bbndk/target_10_3_1_995/qnx6/armle-v7/lib/crt1S.o: In function `LPIC0':
-(.text+0x9c): undefined reference to `main'
-Check you correctly followed the step 3.2 in the above Getting Started tutorial
+  * If you encounter the following issue:
+    C:/bbndk/target_10_3_1_995/qnx6/armle-v7/lib/crt1S.o: In function `LPIC0':
+    (.text+0x9c): undefined reference to `main'
+    Check you correctly followed the step 3.2 in the above Getting Started tutorial
