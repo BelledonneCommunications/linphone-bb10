@@ -33,15 +33,20 @@ ScrollView {
         horizontalAlignment: HorizontalAlignment.Fill
         leftPadding: ui.sdu(1)
         rightPadding: ui.sdu(1)
-
-        SettingsToggle {
-            text: qsTr("Debug") + Retranslate.onLanguageChanged
-            checked: settingsModel.debugEnabled
-            horizontalAlignment: HorizontalAlignment.Fill
-
-            onToggled: {
-                settingsModel.debugEnabled = checked;
+        
+        SettingsHeader {
+            text: qsTr("DEBUG") + Retranslate.onLanguageChanged
+            
+            gestureHandlers: TapHandler {
+                onTapped: {
+                    debugSettings.visible = !debugSettings.visible
+                }
             }
+        }
+        
+        SettingsDebugView {
+            id: debugSettings
+            visible: true
         }
         
         SettingsHeader {

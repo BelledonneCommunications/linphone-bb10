@@ -271,6 +271,12 @@ void LinphoneManager::createAndStartLinphoneCore()
     char* linphoneRC = strdup(moveLinphoneRcToRWFolder().toUtf8().data());
     LpConfig *lpc = lp_config_new(linphoneRC);
 
+    QString logsPath = QDir::homePath() + "/logs/";
+    linphone_core_set_log_collection_path(logsPath.toUtf8().constData());
+    if (lp_config_get_int(lpc, "app", "log_collection", 0) == 1) {
+        linphone_core_enable_log_collection(LinphoneLogCollectionEnabled);
+    }
+
     bool debugEnabled = lp_config_get_int(lpc, "app", "debug", 0) == 1;
     OrtpLogLevel logLevel = static_cast<OrtpLogLevel>(ORTP_LOGLEV_END);
     if (debugEnabled) {

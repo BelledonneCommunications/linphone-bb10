@@ -35,6 +35,7 @@ class SettingsModel : public QObject
     Q_PROPERTY(AccountSettingsModel* accountSettingsModel READ accountSettingsModel CONSTANT);
 
     Q_PROPERTY(bool debugEnabled READ debugEnabled WRITE setDebugEnabled NOTIFY settingsUpdated);
+    Q_PROPERTY(bool logCollectionEnabled READ logCollectionEnabled WRITE setLogCollectionEnabled NOTIFY logsCollectionSettingUpdated);
 
     Q_PROPERTY(bool adaptiveRateControl READ adaptiveRateControl WRITE setAdaptiveRateControl NOTIFY settingsUpdated);
     Q_PROPERTY(QVariantMap audioCodecs READ audioCodecs NOTIFY settingsUpdated);
@@ -63,9 +64,12 @@ public:
 public Q_SLOTS:
     void setPreferredVideoSize(const QString& videoSize);
     void setPayloadEnable(QString mime, int bitrate, bool enable);
+    void uploadLogs();
+    void resetLogs();
 
 Q_SIGNALS:
     void settingsUpdated();
+    void logsCollectionSettingUpdated();
 
 private:
     LinphoneManager *_manager;
@@ -77,6 +81,8 @@ private:
 
     bool debugEnabled() const;
     void setDebugEnabled(const bool& enabled);
+    bool logCollectionEnabled() const;
+    void setLogCollectionEnabled(const bool& enabled);
 
     bool adaptiveRateControl() const;
     void setAdaptiveRateControl(const bool& enabled);

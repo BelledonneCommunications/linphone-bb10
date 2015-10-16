@@ -62,6 +62,27 @@ void SettingsModel::setDebugEnabled(const bool& enabled) {
     lp_config_sync(lpc);
 }
 
+bool SettingsModel::logCollectionEnabled() const {
+    return linphone_core_log_collection_enabled();
+}
+
+void SettingsModel::setLogCollectionEnabled(const bool& enabled) {
+    linphone_core_enable_log_collection(enabled ? LinphoneLogCollectionEnabled : LinphoneLogCollectionDisabled);
+    emit logsCollectionSettingUpdated();
+
+    LpConfig *lpc = linphone_core_get_config(_manager->getLc());
+    lp_config_set_int(lpc, "app", "log_collection", enabled ? 1 : 0);
+}
+
+void SettingsModel::uploadLogs() {
+    LinphoneCore *lc = _manager->getLc();
+    linphone_core_upload_log_collection(lc);
+}
+
+void SettingsModel::resetLogs() {
+    linphone_core_reset_log_collection();
+}
+
 bool SettingsModel::adaptiveRateControl() const {
     return linphone_core_adaptive_rate_control_enabled(_manager->getLc());
 }

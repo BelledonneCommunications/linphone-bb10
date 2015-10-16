@@ -683,29 +683,52 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
-    <name>SettingsHomeView</name>
+    <name>SettingsDebugView</name>
     <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="38"/>
+        <location filename="../assets/qml/settings/SettingsDebugView.qml" line="31"/>
         <source>Debug</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="48"/>
+        <location filename="../assets/qml/settings/SettingsDebugView.qml" line="41"/>
+        <source>Log collection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsDebugView.qml" line="59"/>
+        <source>Reset logs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsDebugView.qml" line="77"/>
+        <source>Upload logs</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsHomeView</name>
+    <message>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="38"/>
+        <source>DEBUG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="53"/>
         <source>AUDIO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="63"/>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="68"/>
         <source>VIDEO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="78"/>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="83"/>
         <source>SECURITY</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="93"/>
+        <location filename="../assets/qml/settings/SettingsHomeView.qml" line="98"/>
         <source>NETWORK</source>
         <translation type="unfinished"></translation>
     </message>
