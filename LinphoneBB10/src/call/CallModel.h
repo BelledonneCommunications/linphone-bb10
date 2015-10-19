@@ -47,6 +47,7 @@ class CallModel : public QObject
     Q_PROPERTY(LinphoneCallModel* outgoingCall READ outgoingCall NOTIFY outgoingCallChanged);
 
     Q_PROPERTY(bool mediaInProgress READ mediaInProgress NOTIFY mediaInProgressUpdated);
+    Q_PROPERTY(bool callUpdatedByRemoteInProgress READ callUpdatedByRemoteInProgress NOTIFY callUpdatedByRemote);
     Q_PROPERTY(bool isInCall READ isInCall NOTIFY callStateChanged);
     Q_PROPERTY(bool isVideoEnabled READ isVideoEnabled WRITE setVideoEnabled NOTIFY callStateChanged);
     Q_PROPERTY(bool isMicMuted READ isMicMuted WRITE setMicMuted NOTIFY callControlsUpdated);
@@ -71,6 +72,8 @@ public:
 public Q_SLOTS:
     void callStateChanged(LinphoneCall *call);
     void statsTimerTimeout();
+    void acceptCallUpdate(bool accept);
+    void acceptCallUpdatedByRemoteTimeout();
 
     void accept(LinphoneCallModel *callModel);
     void hangUp(LinphoneCallModel *callModel);
@@ -104,6 +107,7 @@ Q_SIGNALS:
     void fadeControlsUpdated();
     void deviceOrientationChanged();
     void nextNewCallActionUpdated();
+    void callUpdatedByRemote();
 
 private:
     void updateCallTimerInPausedCalls();
@@ -163,6 +167,7 @@ private:
 
     QTimer *_statsTimer;
     QTimer *_controlsFadeTimer;
+    QTimer *_acceptCallUpdateTimer;
 
     int dialerCallButtonMode() const {
         return _dialerCallButtonMode;
@@ -197,6 +202,12 @@ private:
        return _mediaInProgress;
     }
     bool _mediaInProgress;
+
+    bool callUpdatedByRemoteInProgress() const {
+        return _acceptCallUpdatedByRemoteVisible;
+    }
+    bool _acceptCallUpdatedByRemoteVisible;
+    LinphoneCall *_callUpdatedByRemote;
 };
 
 #endif /* CALLMODEL_H_ */

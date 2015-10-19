@@ -36,6 +36,24 @@ under GNU Public License V2</source>
     </message>
 </context>
 <context>
+    <name>AcceptCallUpdatedByRemoteDialog</name>
+    <message>
+        <location filename="../assets/qml/call/AcceptCallUpdatedByRemoteDialog.qml" line="43"/>
+        <source>Your correspondent would like to turn on the video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/call/AcceptCallUpdatedByRemoteDialog.qml" line="59"/>
+        <source>Deny</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/call/AcceptCallUpdatedByRemoteDialog.qml" line="72"/>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AllCallsPausedView</name>
     <message>
         <location filename="../assets/qml/call/AllCallsPausedView.qml" line="58"/>
@@ -343,7 +361,7 @@ please choose another one</source>
 <context>
     <name>CallStatsModel</name>
     <message>
-        <location filename="../src/call/CallStatsModel.cpp" line="73"/>
+        <location filename="../src/call/CallStatsModel.cpp" line="74"/>
         <source>ZRTP token is %1.
 You should only accept if you have the same token as your correspondent.</source>
         <translation type="unfinished"></translation>

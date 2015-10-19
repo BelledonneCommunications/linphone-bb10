@@ -172,6 +172,10 @@ Page {
                 ZrtpDialog {
                     id: zrtpDialog
                 }
+                
+                AcceptCallUpdatedByRemoteDialog {
+                    visible: inCallModel.callUpdatedByRemoteInProgress
+                }
             }
         }
     }

@@ -44,10 +44,13 @@ CallModel::CallModel(QObject *parent) :
         _areControlsVisible(true),
         _statsTimer(new QTimer(this)),
         _controlsFadeTimer(new QTimer(this)),
+        _acceptCallUpdateTimer(new QTimer(this)),
         _dialerCallButtonMode(0),
         _deviceOrientation(0),
         _previewSize(QSize(0, 0)),
-        _mediaInProgress(false)
+        _mediaInProgress(false),
+        _acceptCallUpdatedByRemoteVisible(false),
+        _callUpdatedByRemote(NULL)
 {
     _pausedCallsDataModel->setGrouping(ItemGrouping::None);
     _pausedCallsDataModel->setSortedAscending(false);
@@ -59,6 +62,9 @@ CallModel::CallModel(QObject *parent) :
     Q_ASSERT(result);
 
     result = QObject::connect(_controlsFadeTimer, SIGNAL(timeout()), this, SLOT(fadeTimerTimeout()));
+    Q_ASSERT(result);
+
+    result = QObject::connect(_acceptCallUpdateTimer, SIGNAL(timeout()), this, SLOT(acceptCallUpdatedByRemoteTimeout()));
     Q_ASSERT(result);
 
     result = connect(OrientationSupport::instance(), SIGNAL(displayDirectionAboutToChange(bb::cascades::DisplayDirection::Type, bb::cascades::UIOrientation::Type)), this, SLOT(onOrientationAboutToChange(bb::cascades::DisplayDirection::Type, bb::cascades::UIOrientation::Type)));
@@ -78,6 +84,7 @@ CallModel::CallModel(QObject *parent) :
 
     _statsTimer->setInterval(1000);
     _controlsFadeTimer->setInterval(30000);
+    _acceptCallUpdateTimer->setInterval(30000);
 
     Q_UNUSED(result);
 }
@@ -183,7 +190,18 @@ void CallModel::callStateChanged(LinphoneCall *call) {
             }
         }
         pausedCalls();
+    } else if (state == LinphoneCallUpdatedByRemote) {
+        bool localVideoEnabled = linphone_call_params_video_enabled(linphone_call_get_current_params(call));
+        bool remoteVideoEnabled = linphone_call_params_video_enabled(linphone_call_get_remote_params(call));
+        bool autoAcceptVideoPolicy = linphone_core_get_video_policy(lc)->automatically_accept;
+        if (!localVideoEnabled && remoteVideoEnabled && !autoAcceptVideoPolicy) {
+            linphone_core_defer_call_update(lc, call);
+            _acceptCallUpdatedByRemoteVisible = true;
+            _callUpdatedByRemote = call;
+            emit callUpdatedByRemote();
+        }
     }
+
     setVideoEnabled(linphone_call_params_video_enabled(params));
     setMicMuted(linphone_core_is_mic_muted(lc));
 
@@ -257,6 +275,34 @@ void CallModel::fadeTimerTimeout()
     emit fadeControlsUpdated();
 
     _controlsFadeTimer->stop();
+}
+
+void CallModel::acceptCallUpdate(bool accept) {
+    if (_acceptCallUpdateTimer->isActive()) {
+        _acceptCallUpdateTimer->stop();
+    }
+
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+    LinphoneCall *call = _callUpdatedByRemote;
+
+    if (call) {
+        const LinphoneCallParams *params = linphone_call_get_current_params(call);
+        LinphoneCallParams *params_copy = linphone_call_params_copy(params);
+        if (accept) {
+            linphone_call_params_enable_video(params_copy, true);
+        }
+        linphone_core_accept_call_update(lc, call, params_copy);
+    }
+
+    _callUpdatedByRemote = NULL;
+    _acceptCallUpdatedByRemoteVisible = false;
+    emit callUpdatedByRemote();
+}
+
+void CallModel::acceptCallUpdatedByRemoteTimeout()
+{
+    acceptCallUpdate(false);
 }
 
 void CallModel::resetFadeTimer()
