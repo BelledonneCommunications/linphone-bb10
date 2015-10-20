@@ -361,7 +361,7 @@ please choose another one</source>
 <context>
     <name>CallStatsModel</name>
     <message>
-        <location filename="../src/call/CallStatsModel.cpp" line="74"/>
+        <location filename="../src/call/CallStatsModel.cpp" line="75"/>
         <source>ZRTP token is %1.
 You should only accept if you have the same token as your correspondent.</source>
         <translation type="unfinished"></translation>
@@ -872,12 +872,12 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>ZrtpDialog</name>
     <message>
-        <location filename="../assets/qml/call/ZrtpDialog.qml" line="60"/>
+        <location filename="../assets/qml/call/ZrtpDialog.qml" line="59"/>
         <source>Deny</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/call/ZrtpDialog.qml" line="74"/>
+        <location filename="../assets/qml/call/ZrtpDialog.qml" line="73"/>
         <source>Accept</source>
         <translation type="unfinished"></translation>
     </message>

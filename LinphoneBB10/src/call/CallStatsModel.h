@@ -33,7 +33,8 @@ class CallStatsModel : public QObject
 
     Q_PROPERTY(QString callQualityIcon READ callQualityIcon NOTIFY statsUpdated);
     Q_PROPERTY(QString callSecurityIcon READ callSecurityIcon NOTIFY statsUpdated);
-    Q_PROPERTY(QString callSecurityToken READ callSecurityToken NOTIFY statsUpdated);
+    Q_PROPERTY(QString callSecurityToken READ callSecurityToken NOTIFY zrtpUpdated);
+    Q_PROPERTY(bool zrtpDialogVisible READ zrtpDialogVisible WRITE setZrtpDialogVisible NOTIFY zrtpUpdated);
     Q_PROPERTY(QString audioCodec READ audioCodec NOTIFY statsUpdated);
     Q_PROPERTY(QString videoCodec READ videoCodec NOTIFY statsUpdated);
     Q_PROPERTY(QString downloadAudioBandwidth READ downloadAudioBandwidth NOTIFY statsUpdated);
@@ -50,6 +51,7 @@ public:
 
 Q_SIGNALS:
     void statsUpdated();
+    void zrtpUpdated();
 
 private:
     QString callQualityIcon() const {
@@ -66,6 +68,16 @@ private:
         return _callSecurityToken;
     }
     QString _callSecurityToken;
+
+    bool zrtpDialogVisible() const {
+        return _zrtpDialogVisible;
+    }
+    void setZrtpDialogVisible(const bool &visible) {
+        _zrtpDialogVisible = visible;
+        emit zrtpUpdated();
+    }
+    bool _zrtpDialogVisible;
+    bool _zrtpDialogShown;
 
     QString audioCodec() const {
         return _audioCodec;

@@ -29,7 +29,6 @@ Container {
     horizontalAlignment: HorizontalAlignment.Fill
     background: colors.colorC
     opacity: 0.9
-    visible: false
     
     Container {
         layout: StackLayout {
@@ -64,8 +63,8 @@ Container {
                 horizontalAlignment: HorizontalAlignment.Center
                 
                 onButtonClicked: {
-                    zrtpDialog.visible = false
-                    inCallModel.updateZRTPTokenValidation(false)
+                    inCallModel.updateZRTPTokenValidation(false);
+                    inCallModel.callStatsModel.zrtpDialogVisible = false;
                 }
             }
             
@@ -79,8 +78,8 @@ Container {
                 leftMargin: ui.sdu(3)
                 
                 onButtonClicked: {
-                    zrtpDialog.visible = false
-                    inCallModel.updateZRTPTokenValidation(true)
+                    inCallModel.updateZRTPTokenValidation(true);
+                    inCallModel.callStatsModel.zrtpDialogVisible = false;
                 }
             }
         }

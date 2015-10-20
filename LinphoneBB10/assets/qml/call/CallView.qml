@@ -170,7 +170,7 @@ Page {
                 }
                 
                 ZrtpDialog {
-                    id: zrtpDialog
+                    visible: inCallModel.callStatsModel.zrtpDialogVisible
                 }
                 
                 AcceptCallUpdatedByRemoteDialog {

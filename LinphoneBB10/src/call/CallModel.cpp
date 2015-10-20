@@ -196,6 +196,7 @@ void CallModel::callStateChanged(LinphoneCall *call) {
         bool autoAcceptVideoPolicy = linphone_core_get_video_policy(lc)->automatically_accept;
         if (!localVideoEnabled && remoteVideoEnabled && !autoAcceptVideoPolicy) {
             linphone_core_defer_call_update(lc, call);
+            _acceptCallUpdateTimer->start();
             _acceptCallUpdatedByRemoteVisible = true;
             _callUpdatedByRemote = call;
             emit callUpdatedByRemote();
@@ -517,6 +518,7 @@ void CallModel::updateZRTPTokenValidation(bool isTokenOk) {
     LinphoneCall *call = getCurrentCall();
     if (call) {
         linphone_call_set_authentication_token_verified(call, isTokenOk);
+        _callStatsModel->updateStats(call);
     }
 }
 

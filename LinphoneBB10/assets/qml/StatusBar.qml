@@ -135,7 +135,7 @@ Container {
 
             onClicked: {
                 if (inCallModel.callStatsModel.callSecurityToken.length > 0) {
-                    zrtpDialog.visible = true;
+                    inCallModel.callStatsModel.zrtpDialogVisible = true;
                 }
             }
         }
