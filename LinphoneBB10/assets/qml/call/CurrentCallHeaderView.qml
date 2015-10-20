@@ -31,8 +31,8 @@ Container {
     }
     verticalAlignment: VerticalAlignment.Top
     horizontalAlignment: HorizontalAlignment.Fill
-    minHeight: ui.sdu(20)
-    maxHeight: ui.sdu(20)
+    minHeight: ui.sdu(19)
+    maxHeight: ui.sdu(19)
 
     Container {
         background: colors.colorH
