@@ -26,6 +26,7 @@ Container {
     verticalAlignment: VerticalAlignment.Fill
     horizontalAlignment: HorizontalAlignment.Fill
     background: colors.colorC
+    opacity: 0.9
     
     Container {
         layout: DockLayout {
