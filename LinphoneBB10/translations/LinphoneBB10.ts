@@ -423,6 +423,14 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
+    <name>ConferenceView</name>
+    <message>
+        <location filename="../assets/qml/call/ConferenceView.qml" line="44"/>
+        <source>Conference</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ContactDetailsView</name>
     <message>
         <location filename="../assets/qml/contacts/ContactDetailsView.qml" line="85"/>

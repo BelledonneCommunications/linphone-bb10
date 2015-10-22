@@ -47,7 +47,7 @@ Container {
         gestureHandlers: TapHandler {
             onTapped: {
                 optionsMenu.menuVisible = false;
-                //TODO
+                inCallModel.startConference();
             }
         }
     }

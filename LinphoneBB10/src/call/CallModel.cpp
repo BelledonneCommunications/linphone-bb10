@@ -34,6 +34,7 @@ CallModel::CallModel(QObject *parent) :
         window_id(NULL),
         window_group(NULL),
         _pausedCallsDataModel(new GroupDataModel(this)),
+        _conferenceCallsDataModel(new GroupDataModel(this)),
         _callStatsModel(new CallStatsModel(this)),
         _currentCall(NULL),
         _incomingCall(NULL),
@@ -56,6 +57,8 @@ CallModel::CallModel(QObject *parent) :
 {
     _pausedCallsDataModel->setGrouping(ItemGrouping::None);
     _pausedCallsDataModel->setSortedAscending(false);
+    _conferenceCallsDataModel->setGrouping(ItemGrouping::None);
+    _conferenceCallsDataModel->setSortedAscending(false);
 
     bool result = QObject::connect(LinphoneManager::getInstance(), SIGNAL(callStateChanged(LinphoneCall*)), this, SLOT(callStateChanged(LinphoneCall*)));
     Q_ASSERT(result);
@@ -156,6 +159,7 @@ void CallModel::callStateChanged(LinphoneCall *call) {
         linphone_call_set_user_data(call, NULL);
 
         pausedCalls();
+        conferenceCalls();
 
         if (linphone_core_get_calls_nb(lc) == 0) {
             if (_statsTimer->isActive()) {
@@ -169,6 +173,7 @@ void CallModel::callStateChanged(LinphoneCall *call) {
             _isMicMuted = false;
             _isVideoEnabled = false;
             emit callControlsUpdated();
+            emit conferenceUpdated();
         }
     } else if (state == LinphoneCallStreamsRunning) {
         if (_isVideoEnabled) {
@@ -238,7 +243,7 @@ void CallModel::onOrientationAboutToChange(DisplayDirection::Type displayDirecti
     }
 }
 
-void CallModel::updateCallTimerInPausedCalls() {
+void CallModel::updateCallTimerInPausedAndConferenceCalls() {
     foreach (QVariantMap variant, _pausedCallsDataModel->toListOfMaps()) {
         LinphoneCallModel *model = variant["call"].value<LinphoneCallModel*>();
         if (!model) {
@@ -250,11 +255,23 @@ void CallModel::updateCallTimerInPausedCalls() {
     }
 
     emit pausedCallsUpdated();
+
+    foreach (QVariantMap variant, _conferenceCallsDataModel->toListOfMaps()) {
+        LinphoneCallModel *model = variant["call"].value<LinphoneCallModel*>();
+        if (!model) {
+            continue;
+        }
+        QVariantList indexPath = _conferenceCallsDataModel->findExact(variant);
+        variant["callTime"] = model->callTime();
+        _conferenceCallsDataModel->updateItem(indexPath, variant);
+    }
+
+    emit conferenceUpdated();
 }
 
 void CallModel::statsTimerTimeout()
 {
-    updateCallTimerInPausedCalls();
+    updateCallTimerInPausedAndConferenceCalls();
 
     LinphoneCall *call = getCurrentCall();
     if (!call) {
@@ -390,7 +407,21 @@ void CallModel::hangUp()
 {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
-    LinphoneCall *call = getCurrentCall();
+
+    if (linphone_core_is_in_conference(lc)) {
+        linphone_core_terminate_conference(lc);
+        emit conferenceUpdated();
+        return;
+    }
+
+    LinphoneCall *call = NULL;
+    if (_currentCall) {
+        call = _currentCall->_call;
+    }
+
+    if (!call) {
+        call = getCurrentCall();
+    }
 
     if (call) {
         linphone_core_terminate_call(lc, call);
@@ -556,13 +587,7 @@ bool CallModel::isConferenceAllowed() const {
         calls = ms_list_next(calls);
     }
 
-    return count > 1;
-}
-
-bool CallModel::isInConference() const {
-    LinphoneManager *manager = LinphoneManager::getInstance();
-    LinphoneCore *lc = manager->getLc();
-    return linphone_core_is_in_conference(lc);
+    return (linphone_core_is_in_conference(lc) && count >= 1) || count >= 2;
 }
 
 int CallModel::runningCallsNotInAnyConferenceCount() const {
@@ -607,4 +632,62 @@ void CallModel::pausedCalls() {
     }
 
     emit pausedCallsUpdated();
+}
+
+bool CallModel::isInConference() const {
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+    return linphone_core_get_calls_nb(lc) > 1 && linphone_core_is_in_conference(lc);
+}
+
+void CallModel::startConference() {
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+
+    if (linphone_core_get_calls_nb(lc) < 2) {
+        return;
+    }
+
+    linphone_core_add_all_to_conference(lc);
+    emit conferenceUpdated();
+
+    conferenceCalls();
+}
+
+void CallModel::conferenceCalls() {
+    if (_conferenceCallsDataModel == NULL) {
+        return;
+    }
+    _conferenceCallsDataModel->clear();
+
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+    const MSList *calls = linphone_core_get_calls(lc);
+
+    while (calls) {
+        LinphoneCall *call = (LinphoneCall*) calls->data;
+        if (call && linphone_call_is_in_conference(call)) {
+            QVariantMap entry;
+            LinphoneCallModel *model = (LinphoneCallModel *)linphone_call_get_user_data(call);
+            entry["call"] = QVariant::fromValue<LinphoneCallModel*>(model);
+            entry["displayName"] = model->displayName();
+            entry["photo"] = model->photo();
+            entry["callTime"] = model->callTime();
+            _conferenceCallsDataModel->insert(entry);
+        }
+        calls = ms_list_next(calls);
+    }
+
+    emit conferenceUpdated();
+}
+
+void CallModel::ejectFromConference(const LinphoneCallModel*& callModel) {
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+
+    if (lc && callModel) {
+        if (linphone_call_is_in_conference(callModel->_call)) {
+            linphone_core_remove_from_conference(lc, callModel->_call);
+        }
+    }
 }

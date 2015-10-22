@@ -105,13 +105,13 @@ Page {
                             visible: !inCallModel.isInConference && inCallModel.runningCallsNotInAnyConferenceCount == 0
                         }
                         
+                        ConferenceView {
+                            visible: inCallModel.isInConference
+                        }
+                        
                         PausedCallsView {
                             
                         }
-                        
-                        /*CallConferenceView {
-                            visible: inCallModel.isInConference
-                        }*/
                         
                         CallOptionsMenuBar {
                             id: optionsMenu

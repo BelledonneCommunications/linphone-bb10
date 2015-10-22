@@ -42,6 +42,7 @@ class CallModel : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bb::cascades::GroupDataModel* pausedCallsDataModel READ pausedCallsDataModel NOTIFY pausedCallsUpdated);
+    Q_PROPERTY(bb::cascades::GroupDataModel* conferenceCallsDataModel READ conferenceCallsDataModel NOTIFY conferenceUpdated);
     Q_PROPERTY(LinphoneCallModel* currentCall READ currentCall NOTIFY currentCallChanged);
     Q_PROPERTY(LinphoneCallModel* incomingCall READ incomingCall NOTIFY incomingCallChanged);
     Q_PROPERTY(LinphoneCallModel* outgoingCall READ outgoingCall NOTIFY outgoingCallChanged);
@@ -84,6 +85,9 @@ public Q_SLOTS:
     void pausedCalls();
     void pauseCurrentCall();
     void resumeCall(const LinphoneCallModel*& callModel);
+    void startConference();
+    void conferenceCalls();
+    void ejectFromConference(const LinphoneCallModel*& callModel);
 
     void onVideoSurfaceCreationCompleted(QString id, QString group);
     void fadeTimerTimeout();
@@ -113,7 +117,7 @@ Q_SIGNALS:
     void callPausedByRemoteUpdated();
 
 private:
-    void updateCallTimerInPausedCalls();
+    void updateCallTimerInPausedAndConferenceCalls();
 
     const char *window_id;
     const char *window_group;
@@ -122,6 +126,11 @@ private:
         return _pausedCallsDataModel;
     }
     bb::cascades::GroupDataModel* _pausedCallsDataModel;
+
+    bb::cascades::GroupDataModel* conferenceCallsDataModel() const {
+        return _conferenceCallsDataModel;
+    }
+    bb::cascades::GroupDataModel* _conferenceCallsDataModel;
 
     CallStatsModel *callStatsModel() const {
         return _callStatsModel;
