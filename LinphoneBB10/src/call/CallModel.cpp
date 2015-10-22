@@ -39,6 +39,7 @@ CallModel::CallModel(QObject *parent) :
         _incomingCall(NULL),
         _outgoingCall(NULL),
         _isVideoEnabled(false),
+        _videoUpdateInProgress(false),
         _isMicMuted(false),
         _isSpeakerEnabled(false),
         _areControlsVisible(true),
@@ -178,6 +179,7 @@ void CallModel::callStateChanged(LinphoneCall *call) {
                 _controlsFadeTimer->stop();
         }
 
+        _videoUpdateInProgress = false;
         _mediaInProgress = linphone_call_media_in_progress(call);
         emit mediaInProgressUpdated();
 
@@ -417,6 +419,7 @@ void CallModel::setVideoEnabled(const bool &enabled)
     const LinphoneCallParams *cp = linphone_call_get_current_params(call);
     LinphoneCallParams *params = linphone_call_params_copy(cp);
     if (linphone_call_params_video_enabled(params) != _isVideoEnabled) {
+        _videoUpdateInProgress = true;
         linphone_call_params_enable_video(params, enabled);
         linphone_core_update_call(lc, call, params);
     }

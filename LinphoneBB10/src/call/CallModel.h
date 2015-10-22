@@ -50,6 +50,7 @@ class CallModel : public QObject
     Q_PROPERTY(bool callUpdatedByRemoteInProgress READ callUpdatedByRemoteInProgress NOTIFY callUpdatedByRemote);
     Q_PROPERTY(bool isInCall READ isInCall NOTIFY callStateChanged);
     Q_PROPERTY(bool isVideoEnabled READ isVideoEnabled WRITE setVideoEnabled NOTIFY callStateChanged);
+    Q_PROPERTY(bool videoUpdateInProgress READ videoUpdateInProgress NOTIFY callStateChanged);
     Q_PROPERTY(bool isMicMuted READ isMicMuted WRITE setMicMuted NOTIFY callControlsUpdated);
     Q_PROPERTY(bool isSpeakerEnabled READ isSpeakerEnabled WRITE setSpeakerEnabled NOTIFY callControlsUpdated);
     Q_PROPERTY(bool areControlsVisible READ areControlsVisible NOTIFY fadeControlsUpdated);
@@ -147,6 +148,11 @@ private:
     }
     void setVideoEnabled(const bool &enabled);
     bool _isVideoEnabled;
+
+    bool videoUpdateInProgress() const {
+        return _videoUpdateInProgress;
+    }
+    bool _videoUpdateInProgress;
 
     bool isMicMuted() const {
         return _isMicMuted;
