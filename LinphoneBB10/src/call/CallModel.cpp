@@ -688,6 +688,8 @@ void CallModel::ejectFromConference(const LinphoneCallModel*& callModel) {
     if (lc && callModel) {
         if (linphone_call_is_in_conference(callModel->_call)) {
             linphone_core_remove_from_conference(lc, callModel->_call);
+
+            conferenceCalls();
         }
     }
 }
