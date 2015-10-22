@@ -93,6 +93,10 @@ Page {
                             visible: currentCallHeader.visible && inCallModel.isVideoEnabled
                         }
                         
+                        PausedByRemoteView {
+                            visible: inCallModel.isPausedByRemote
+                        }
+                        
                         PauseCurrentCallButton {
                             visible: currentCallHeader.visible
                         }

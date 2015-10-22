@@ -55,6 +55,7 @@ class CallModel : public QObject
     Q_PROPERTY(bool isSpeakerEnabled READ isSpeakerEnabled WRITE setSpeakerEnabled NOTIFY callControlsUpdated);
     Q_PROPERTY(bool areControlsVisible READ areControlsVisible NOTIFY fadeControlsUpdated);
     Q_PROPERTY(bool isInConference READ isInConference NOTIFY conferenceUpdated);
+    Q_PROPERTY(bool isPausedByRemote READ isPausedByRemote NOTIFY callPausedByRemoteUpdated);
     Q_PROPERTY(int runningCallsNotInAnyConferenceCount READ runningCallsNotInAnyConferenceCount NOTIFY callStateChanged);
     Q_PROPERTY(int dialerCallButtonMode READ dialerCallButtonMode WRITE setDialerCallButtonMode NOTIFY nextNewCallActionUpdated);
 
@@ -109,6 +110,7 @@ Q_SIGNALS:
     void deviceOrientationChanged();
     void nextNewCallActionUpdated();
     void callUpdatedByRemote();
+    void callPausedByRemoteUpdated();
 
 private:
     void updateCallTimerInPausedCalls();
@@ -214,6 +216,11 @@ private:
     }
     bool _acceptCallUpdatedByRemoteVisible;
     LinphoneCall *_callUpdatedByRemote;
+
+    bool isPausedByRemote() const {
+        return _isPausedByRemote;
+    }
+    bool _isPausedByRemote;
 };
 
 #endif /* CALLMODEL_H_ */

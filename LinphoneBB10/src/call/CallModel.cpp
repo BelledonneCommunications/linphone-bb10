@@ -51,7 +51,8 @@ CallModel::CallModel(QObject *parent) :
         _previewSize(QSize(0, 0)),
         _mediaInProgress(false),
         _acceptCallUpdatedByRemoteVisible(false),
-        _callUpdatedByRemote(NULL)
+        _callUpdatedByRemote(NULL),
+        _isPausedByRemote(false)
 {
     _pausedCallsDataModel->setGrouping(ItemGrouping::None);
     _pausedCallsDataModel->setSortedAscending(false);
@@ -185,6 +186,9 @@ void CallModel::callStateChanged(LinphoneCall *call) {
 
         _currentCall = (LinphoneCallModel *)linphone_call_get_user_data(call);
         emit currentCallChanged();
+
+        _isPausedByRemote = false;
+        emit callPausedByRemoteUpdated();
     } else if (state == LinphoneCallResuming || state == LinphoneCallPaused) {
         if (state == LinphoneCallPaused && _isVideoEnabled) {
             if (_controlsFadeTimer->isActive()) {
@@ -203,6 +207,9 @@ void CallModel::callStateChanged(LinphoneCall *call) {
             _callUpdatedByRemote = call;
             emit callUpdatedByRemote();
         }
+    } else if (state == LinphoneCallPausedByRemote) {
+        _isPausedByRemote = true;
+        emit callPausedByRemoteUpdated();
     }
 
     setVideoEnabled(linphone_call_params_video_enabled(params));
