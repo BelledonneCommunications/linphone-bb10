@@ -55,9 +55,7 @@ void HistoryModel::setSelectedHistoryLog(LinphoneCallLog *log) {
     _sipUri = GetAddressFromLinphoneAddress(addr);
     _linphoneAddress = linphone_address_as_string(addr);
 
-    _incomingLogs.clear();
-    _outgoingLogs.clear();
-    _missedLogs.clear();
+    _logs.clear();
 
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
@@ -73,13 +71,13 @@ void HistoryModel::setSelectedHistoryLog(LinphoneCallLog *log) {
         QString displayValue = date + " - " + time;
 
         if (linphone_call_log_get_status(callLog) == LinphoneCallMissed) {
-            _missedLogs.append(displayValue);
+            _logs[displayValue] = "/images/history/call_missed.png";
         } else {
             LinphoneCallDir direction = linphone_call_log_get_dir(callLog);
             if (direction == LinphoneCallIncoming) {
-                _incomingLogs.append(displayValue);
+                _logs[displayValue] = "/images/history/call_incoming.png";
             } else {
-                _outgoingLogs.append(displayValue);
+                _logs[displayValue] = "/images/history/call_outgoing.png";
             }
         }
 

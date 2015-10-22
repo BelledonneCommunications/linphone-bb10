@@ -164,7 +164,7 @@ Container {
             }
             
             CustomDivider {
-                visible: historyListModel.historyModel.incomingLogs.length > 0
+                
             }
             
             Container {
@@ -172,10 +172,9 @@ Container {
                     
                 }
                 horizontalAlignment: HorizontalAlignment.Fill
-                visible: historyListModel.historyModel.incomingLogs.length > 0
                 
                 Label {
-                    text: qsTr("INCOMING CALLS") + Retranslate.onLanguageChanged
+                    text: qsTr("CALLS") + Retranslate.onLanguageChanged
                     horizontalAlignment: HorizontalAlignment.Center
                     verticalAlignment: VerticalAlignment.Top
                     textStyle.fontSize: FontSize.Small
@@ -184,63 +183,7 @@ Container {
                 }
                 
                 Container {
-                    id: incomingCallsContainer
-                    verticalAlignment: VerticalAlignment.Bottom
-                    horizontalAlignment: HorizontalAlignment.Center
-                    topPadding: ui.sdu(6)
-                }
-            }
-            
-            CustomDivider {
-                visible: historyListModel.historyModel.outgoingLogs.length > 0
-            }
-            
-            Container {
-                layout: DockLayout {
-                
-                }
-                horizontalAlignment: HorizontalAlignment.Fill
-                visible: historyListModel.historyModel.outgoingLogs.length > 0
-                
-                Label {
-                    text: qsTr("OUTGOING CALLS") + Retranslate.onLanguageChanged
-                    horizontalAlignment: HorizontalAlignment.Center
-                    verticalAlignment: VerticalAlignment.Top
-                    textStyle.fontSize: FontSize.Small
-                    textStyle.color: colors.colorD
-                    textStyle.base: titilliumWeb.style
-                }
-                
-                Container {
-                    id: outgoingCallsContainer
-                    verticalAlignment: VerticalAlignment.Bottom
-                    horizontalAlignment: HorizontalAlignment.Center
-                    topPadding: ui.sdu(6)
-                }
-            }
-            
-            CustomDivider {
-                visible: historyListModel.historyModel.missedLogs.length > 0
-            }
-            
-            Container {
-                layout: DockLayout {
-                
-                }
-                horizontalAlignment: HorizontalAlignment.Fill
-                visible: historyListModel.historyModel.missedLogs.length > 0
-                
-                Label {
-                    text: qsTr("MISSED CALLS") + Retranslate.onLanguageChanged
-                    horizontalAlignment: HorizontalAlignment.Center
-                    verticalAlignment: VerticalAlignment.Top
-                    textStyle.fontSize: FontSize.Small
-                    textStyle.color: colors.colorD
-                    textStyle.base: titilliumWeb.style
-                }
-                
-                Container {
-                    id: missedCallsContainer
+                    id: callsContainer
                     verticalAlignment: VerticalAlignment.Bottom
                     horizontalAlignment: HorizontalAlignment.Center
                     topPadding: ui.sdu(6)
@@ -250,26 +193,13 @@ Container {
     }
     
     function fillHistoryDetails() {
-        incomingCallsContainer.removeAll();
-        outgoingCallsContainer.removeAll();
-        missedCallsContainer.removeAll();
+        callsContainer.removeAll();
         
-        for (var log in historyListModel.historyModel.incomingLogs) {
+        for (var log in historyListModel.historyModel.logs) {
             var item = historyDetailsItem.createObject();
-            item.text = historyListModel.historyModel.incomingLogs[log];
-            incomingCallsContainer.add(item);
-        }
-        
-        for (var log in historyListModel.historyModel.outgoingLogs) {
-            var item = historyDetailsItem.createObject();
-            item.text = historyListModel.historyModel.outgoingLogs[log];
-            outgoingCallsContainer.add(item);
-        }
-        
-        for (var log in historyListModel.historyModel.missedLogs) {
-            var item = historyDetailsItem.createObject();
-            item.text = historyListModel.historyModel.missedLogs[log];
-            missedCallsContainer.add(item);
+            item.text = log;
+            item.image = historyListModel.historyModel.logs[log];
+            callsContainer.insert(0, item);
         }
     }
     

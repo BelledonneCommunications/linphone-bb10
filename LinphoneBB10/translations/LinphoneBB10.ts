@@ -105,14 +105,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
         <source>Password is too short
 (6 characters minimum)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -498,18 +498,8 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>HistoryDetailsView</name>
     <message>
-        <location filename="../assets/qml/history/HistoryDetailsView.qml" line="178"/>
-        <source>INCOMING CALLS</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/history/HistoryDetailsView.qml" line="206"/>
-        <source>OUTGOING CALLS</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/history/HistoryDetailsView.qml" line="234"/>
-        <source>MISSED CALLS</source>
+        <location filename="../assets/qml/history/HistoryDetailsView.qml" line="177"/>
+        <source>CALLS</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -21,11 +21,26 @@ import bb.cascades 1.4
 
 Container {
     property alias text: label.text
+    property alias image: image.imageSource
     
-    Label {
-        id: label
+    Container {
+        layout: StackLayout {
+            orientation: LayoutOrientation.LeftToRight
+        }
         horizontalAlignment: HorizontalAlignment.Center
-        textStyle.color: colors.colorD
-        textStyle.base: titilliumWeb.style
+
+        ImageView {
+            id: image
+            imageSource: "asset:///images/history/call_missed.png"
+            verticalAlignment: VerticalAlignment.Center
+        }
+        
+        Label {
+            id: label
+            text: "22/10 - 9h32 - 00:00:10"
+            textStyle.color: colors.colorD
+            textStyle.base: titilliumWeb.style
+            verticalAlignment: VerticalAlignment.Center
+        }
     }
 }
