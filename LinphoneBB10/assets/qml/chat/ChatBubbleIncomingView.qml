@@ -130,6 +130,10 @@ Container {
                             }
                         }
                         
+                        FileTransferCancelButton {
+                            visible: ListItemData.isFileTransferMessage && !ListItemData.isTransferComplete && ListItemData.transferProgress > 0
+                        }
+                        
                         Container {
                             layout: StackLayout {
                                 orientation: LayoutOrientation.TopToBottom

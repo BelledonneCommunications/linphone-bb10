@@ -123,19 +123,8 @@ Container {
                             }
                         }
                         
-                        CustomButton {
-                            topPadding: ui.sdu(5)
-                            text: qsTr("Cancel") + Retranslate.onLanguageChanged
-                            imageSource: "asset:///images/resizable_confirm_delete_button.amd"
-                            textStyle.color: colors.colorH
-                            textStyle.base: titilliumWeb.style
-                            horizontalAlignment: HorizontalAlignment.Center
-                            leftMargin: ui.sdu(3)
+                        FileTransferCancelButton {
                             visible: ListItemData.isFileTransferMessage && !ListItemData.isTransferComplete && ListItemData.transferProgress > 0
-                            
-                            onButtonClicked: {
-                                itemRoot.ListItem.view.cancelFileTransfer(ListItemData.message);
-                            }
                         }
                         
                         Container {

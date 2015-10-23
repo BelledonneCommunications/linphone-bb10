@@ -1,5 +1,5 @@
 /*
- * AssistantButton.qml
+ * SettingsToggle.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -18,22 +18,38 @@
  */
 
 import bb.cascades 1.4
+import "../custom_controls"
 
 Container {
-    property alias text: button.text
-    property alias minW: button.minWidth
-
-    signal clicked()
-
-    CustomButton {
-        id: button
-        imageSource: "asset:///images/assistant/resizable_assistant_button.amd"
-        pressedImageSource: "asset:///images/assistant/resizable_assistant_button_over.amd"
-        textStyle.color: colors.colorC
+    property alias text: label.text
+    property alias checked: toggle.checked
+    
+    signal toggled(bool checked);
+    
+    layout: DockLayout {
+    
+    }
+    id: parent
+    horizontalAlignment: HorizontalAlignment.Fill
+    verticalAlignment: VerticalAlignment.Center
+    topPadding: ui.sdu(1)
+    bottomPadding: ui.sdu(1)
+    
+    Label {
+        id: label
+        horizontalAlignment: HorizontalAlignment.Left
+        verticalAlignment: VerticalAlignment.Center
         textStyle.base: titilliumWeb.style
-
-        onButtonClicked: {
-            clicked();
+    }
+    
+    ToggleButton {
+        id: toggle
+        horizontalAlignment: HorizontalAlignment.Right
+        verticalAlignment: VerticalAlignment.Center
+        enabled: parent.enabled
+        
+        onCheckedChanged: {
+            toggled(checked);
         }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * SettingsToggle.qml
+ * SettingsHeader.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -18,37 +18,30 @@
  */
 
 import bb.cascades 1.4
+import "../custom_controls"
 
 Container {
-    property alias text: label.text
-    property alias checked: toggle.checked
-    
-    signal toggled(bool checked);
+    property alias text: title.text
     
     layout: DockLayout {
     
     }
-    id: parent
     horizontalAlignment: HorizontalAlignment.Fill
     verticalAlignment: VerticalAlignment.Center
     topPadding: ui.sdu(1)
     bottomPadding: ui.sdu(1)
+    minHeight: ui.sdu(10)
     
     Label {
-        id: label
-        horizontalAlignment: HorizontalAlignment.Left
+        id: title
+        text: "Header"
         verticalAlignment: VerticalAlignment.Center
+        horizontalAlignment: HorizontalAlignment.Left
+        textStyle.color: colors.colorA
         textStyle.base: titilliumWeb.style
     }
     
-    ToggleButton {
-        id: toggle
-        horizontalAlignment: HorizontalAlignment.Right
-        verticalAlignment: VerticalAlignment.Center
-        enabled: parent.enabled
-        
-        onCheckedChanged: {
-            toggled(checked);
-        }
+    CustomDivider {
+        verticalAlignment: VerticalAlignment.Bottom
     }
 }

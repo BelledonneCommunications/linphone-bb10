@@ -1,5 +1,5 @@
 /*
- * DownloadButton.qml
+ * FileTransferCancelButton.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -18,19 +18,22 @@
  */
 
 import bb.cascades 1.4
+import "../custom_controls"
 
 Container {
-    signal downloadClicked()
+    topPadding: ui.sdu(5)
+    leftMargin: ui.sdu(3)
+    horizontalAlignment: HorizontalAlignment.Center
     
     CustomButton {
-        text: qsTr("DOWNLOAD") + Retranslate.onLanguageChanged
-        imageSource: "asset:///images/resizable_cancel_button.amd"
-        pressedImageSource: "asset:///images/resizable_cancel_button_over.amd"
-        textStyle.color: Qt.colors.colorC
+        text: qsTr("Cancel") + Retranslate.onLanguageChanged
+        imageSource: "asset:///images/resizable_confirm_delete_button.amd"
+        textStyle.color: Qt.colors.colorH
         textStyle.base: Qt.titilliumWeb.style
+        horizontalAlignment: HorizontalAlignment.Center
         
         onButtonClicked: {
-            downloadClicked();
+            itemRoot.ListItem.view.cancelFileTransfer(ListItemData.message);
         }
     }
 }

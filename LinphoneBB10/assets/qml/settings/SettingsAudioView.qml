@@ -44,7 +44,7 @@ Container {
     attachedObjects: [                  
         ComponentDefinition {                      
             id: settingsToggle                       
-            source: "../custom_controls/CodecSettingsToggle.qml"             
+            source: "CodecSettingsToggle.qml"             
         }
     ]
     

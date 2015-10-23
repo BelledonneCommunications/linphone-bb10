@@ -400,11 +400,6 @@ You should only accept if you have the same token as your correspondent.</source
         <source>Copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../assets/qml/chat/ChatBubbleOutgoingView.qml" line="128"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ChatConversationView</name>
@@ -506,9 +501,17 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
 </context>
 <context>
-    <name>DownloadButton</name>
+    <name>FileTransferCancelButton</name>
     <message>
-        <location filename="../assets/qml/custom_controls/DownloadButton.qml" line="26"/>
+        <location filename="../assets/qml/chat/FileTransferCancelButton.qml" line="29"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FileTransferDownloadButton</name>
+    <message>
+        <location filename="../assets/qml/chat/FileTransferDownloadButton.qml" line="27"/>
         <source>DOWNLOAD</source>
         <translation type="unfinished"></translation>
     </message>

@@ -18,6 +18,7 @@
  */
 
 import bb.cascades 1.4
+import "../custom_controls"
 
 Container {
     property alias text: title.text

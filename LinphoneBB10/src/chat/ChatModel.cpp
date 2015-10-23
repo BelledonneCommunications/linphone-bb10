@@ -451,6 +451,8 @@ void ChatModel::cancelFileTransfer(LinphoneChatMessage* message) {
                 }
             }
             emit messageHistoryChanged();
+        } else {
+            updateMessage(message, -1, -1, -1, ProgressIndicatorState::Progress);
         }
     }
 }

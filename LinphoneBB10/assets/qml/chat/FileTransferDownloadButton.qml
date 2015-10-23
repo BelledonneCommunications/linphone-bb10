@@ -1,5 +1,5 @@
 /*
- * SettingsHeader.qml
+ * FileTransferDownloadButton.qml
  * Copyright (C) 2015  Belledonne Communications, Grenoble, France
  *
  * This program is free software; you can redistribute it and/or
@@ -18,29 +18,20 @@
  */
 
 import bb.cascades 1.4
+import "../custom_controls"
 
 Container {
-    property alias text: title.text
+    signal downloadClicked()
     
-    layout: DockLayout {
-    
-    }
-    horizontalAlignment: HorizontalAlignment.Fill
-    verticalAlignment: VerticalAlignment.Center
-    topPadding: ui.sdu(1)
-    bottomPadding: ui.sdu(1)
-    minHeight: ui.sdu(10)
-    
-    Label {
-        id: title
-        text: "Header"
-        verticalAlignment: VerticalAlignment.Center
-        horizontalAlignment: HorizontalAlignment.Left
-        textStyle.color: colors.colorA
-        textStyle.base: titilliumWeb.style
-    }
-    
-    CustomDivider {
-        verticalAlignment: VerticalAlignment.Bottom
+    CustomButton {
+        text: qsTr("DOWNLOAD") + Retranslate.onLanguageChanged
+        imageSource: "asset:///images/resizable_cancel_button.amd"
+        pressedImageSource: "asset:///images/resizable_cancel_button_over.amd"
+        textStyle.color: Qt.colors.colorC
+        textStyle.base: Qt.titilliumWeb.style
+        
+        onButtonClicked: {
+            downloadClicked();
+        }
     }
 }
