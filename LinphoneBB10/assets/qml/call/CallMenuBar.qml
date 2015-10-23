@@ -108,7 +108,7 @@ Container {
         
         gestureHandlers: TapHandler {
             onTapped: {
-                chatListModel.viewConversation(inCallModel.sipUri);
+                chatListModel.viewConversation(inCallModel.currentCall.sipUri);
                 tabDelegate.source = "../chat/ChatConversationView.qml"
                 inCallView.close();
             }

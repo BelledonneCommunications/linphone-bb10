@@ -137,6 +137,8 @@ Container {
         topPadding: ui.sdu(1)
         bottomPadding: ui.sdu(1)
         hintText: qsTr("Search") + Retranslate.onLanguageChanged
+        inputMode: TextFieldInputMode.EmailAddress
+        input.keyLayout: KeyLayout.EmailAddress
         
         onTextFieldChanging: {
             contactListModel.contactSearchFilter = text

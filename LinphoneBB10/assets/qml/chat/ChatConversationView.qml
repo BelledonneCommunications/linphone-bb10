@@ -93,7 +93,7 @@ Container {
         }
 
         TopBarButton {
-            visible: ! chatListModel.chatModel.isNewConversation && !chatListModel.chatModel.editor.isEditMode && !(inCallModel.isInCall && inCallModel.sipUri == chatListModel.chatModel.linphoneAddress)
+            visible: !chatListModel.chatModel.isNewConversation && !chatListModel.chatModel.editor.isEditMode && !(inCallModel.isInCall && inCallModel.currentCall.sipUri == chatListModel.chatModel.linphoneAddress)
             imageSource: "asset:///images/chat/call_alt_start.png"
 
             gestureHandlers: TapHandler {
@@ -104,7 +104,7 @@ Container {
         }
         
         TopBarButton {
-            visible: inCallModel.isInCall && inCallModel.sipUri == chatListModel.chatModel.linphoneAddress && !chatListModel.chatModel.editor.isEditMode 
+            visible: inCallModel.isInCall && inCallModel.currentCall.sipUri == chatListModel.chatModel.linphoneAddress && !chatListModel.chatModel.editor.isEditMode 
             imageSource: "asset:///images/chat/call_back.png"
             
             gestureHandlers: TapHandler {

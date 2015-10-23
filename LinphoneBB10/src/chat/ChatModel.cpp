@@ -99,7 +99,7 @@ bool ChatModel::setSelectedConversationSipAddress(QString sipAddress)
             } else {
                 _displayName = GetDisplayNameFromLinphoneAddress(address);
             }
-            _linphoneAddress = linphone_address_as_string(address);
+            _linphoneAddress = sipAddress;
 
             linphone_chat_room_mark_as_read(_room);
             emit messagesRead(sipAddress);
