@@ -437,7 +437,7 @@ void CallModel::setVideoEnabled(const bool &enabled)
     _isVideoEnabled = enabled;
 
     if (_isVideoEnabled) {
-        resetFadeTimer();
+        switchFullScreenMode();
     } else {
         _areControlsVisible = true;
         emit fadeControlsUpdated();

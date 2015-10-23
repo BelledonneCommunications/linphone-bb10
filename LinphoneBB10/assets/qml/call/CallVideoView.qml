@@ -27,6 +27,7 @@ Container {
     }
     horizontalAlignment: HorizontalAlignment.Fill
     verticalAlignment: VerticalAlignment.Fill
+    background: Color.Black
 
     ForeignWindowControl {
         windowId: "LinphoneVideoWindowId" // Do not change the name of this windowId
@@ -54,6 +55,7 @@ Container {
         verticalAlignment: VerticalAlignment.Bottom
         preferredWidth: inCallModel.previewSize.width
         preferredHeight: inCallModel.previewSize.height
+        touchPropagationMode: TouchPropagationMode.None
 
         onWindowAttached: {
             inCallModel.cameraPreviewAttached(windowHandle)

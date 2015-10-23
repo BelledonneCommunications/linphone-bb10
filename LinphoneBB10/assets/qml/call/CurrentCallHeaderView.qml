@@ -33,6 +33,7 @@ Container {
     horizontalAlignment: HorizontalAlignment.Fill
     minHeight: ui.sdu(19)
     maxHeight: ui.sdu(19)
+    touchPropagationMode: TouchPropagationMode.None
 
     Container {
         background: colors.colorH
