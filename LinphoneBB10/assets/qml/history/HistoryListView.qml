@@ -124,7 +124,8 @@ Container {
         
         TopBarEditListControls {
             visible: historyListModel.editor.isEditMode
-            selectionEmpty: historyListModel.editor.selectionSize == 0
+            selectionSize: historyListModel.editor.selectionSize
+            itemsCount: historyListModel.editor.itemsCount
             onCancelEdit: {
                 historyListModel.editor.isEditMode = false;
             }

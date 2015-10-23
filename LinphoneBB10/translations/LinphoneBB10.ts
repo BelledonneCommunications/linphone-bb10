@@ -409,12 +409,12 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/chat/ChatConversationView.qml" line="142"/>
+        <location filename="../assets/qml/chat/ChatConversationView.qml" line="143"/>
         <source>Do you want to delete selected messages?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/chat/ChatConversationView.qml" line="164"/>
+        <location filename="../assets/qml/chat/ChatConversationView.qml" line="165"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -422,7 +422,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>ChatListView</name>
     <message>
-        <location filename="../assets/qml/chat/ChatListView.qml" line="90"/>
+        <location filename="../assets/qml/chat/ChatListView.qml" line="91"/>
         <source>Do you want to delete selected conversations?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -474,12 +474,12 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>ContactsListView</name>
     <message>
-        <location filename="../assets/qml/contacts/ContactsListView.qml" line="126"/>
+        <location filename="../assets/qml/contacts/ContactsListView.qml" line="127"/>
         <source>Do you want to delete selected contacts?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactsListView.qml" line="138"/>
+        <location filename="../assets/qml/contacts/ContactsListView.qml" line="139"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -519,7 +519,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>HistoryListView</name>
     <message>
-        <location filename="../assets/qml/history/HistoryListView.qml" line="139"/>
+        <location filename="../assets/qml/history/HistoryListView.qml" line="140"/>
         <source>Do you want to delete selected logs?</source>
         <translation type="unfinished"></translation>
     </message>

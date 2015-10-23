@@ -127,7 +127,8 @@ Container {
         
         TopBarEditListControls {
             visible: chatListModel.chatModel.editor.isEditMode
-            selectionEmpty: chatListModel.chatModel.editor.selectionSize == 0
+            selectionSize: chatListModel.chatModel.editor.selectionSize
+            itemsCount: chatListModel.chatModel.editor.itemsCount
             onCancelEdit: {
                 chatListModel.chatModel.editor.isEditMode = false;
             }

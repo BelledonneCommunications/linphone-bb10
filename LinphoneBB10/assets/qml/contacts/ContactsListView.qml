@@ -111,7 +111,8 @@ Container {
         
         TopBarEditListControls {
             visible: contactListModel.editor.isEditMode
-            selectionEmpty: contactListModel.editor.selectionSize == 0
+            selectionSize: contactListModel.editor.selectionSize
+            itemsCount: contactListModel.editor.itemsCount
             onCancelEdit: {
                 contactListModel.editor.isEditMode = false;
             }

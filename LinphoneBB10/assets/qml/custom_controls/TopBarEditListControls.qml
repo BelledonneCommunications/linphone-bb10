@@ -20,7 +20,8 @@
 import bb.cascades 1.4
 
 Container {
-    property bool selectionEmpty
+    property int selectionSize : 0
+    property int itemsCount : 0
     
     signal cancelEdit();
     signal selectAll();
@@ -52,7 +53,7 @@ Container {
     
     TopBarButton {
         imageSource: "asset:///images/select_all.png"
-        visible: selectionEmpty
+        visible: selectionSize < itemsCount
         
         gestureHandlers: TapHandler {
             onTapped: {
@@ -63,7 +64,7 @@ Container {
     
     TopBarButton {
         imageSource: "asset:///images/deselect_all.png"
-        visible: !selectionEmpty
+        visible: selectionSize == itemsCount
         
         gestureHandlers: TapHandler {
             onTapped: {
@@ -74,11 +75,11 @@ Container {
     
     TopBarButton {
         imageSource: "asset:///images/delete.png"
-        enabled: !selectionEmpty
+        enabled: selectionSize > 0
         
         gestureHandlers: TapHandler {
             onTapped: {
-                if (!selectionEmpty) {
+                if (selectionSize > 0) {
                     deleteSelected();
                 }
             }

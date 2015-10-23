@@ -32,6 +32,7 @@ class ListEditorHelper: public QObject
 
     Q_PROPERTY(bool isEditMode READ isEditMode WRITE setEditMode NOTIFY editModeUpdated);
     Q_PROPERTY(int selectionSize READ selectionSize NOTIFY editModeUpdated);
+    Q_PROPERTY(int itemsCount READ itemsCount NOTIFY editModeUpdated);
 
 public:
     ListEditorHelper(bb::cascades::GroupDataModel *dataModel);
@@ -57,6 +58,10 @@ private:
         return _selection.size();
     }
     QList<QVariantList> _selection;
+
+    int itemsCount() const {
+        return _dataModel->size();
+    }
 
     bb::cascades::GroupDataModel *_dataModel;
 };
