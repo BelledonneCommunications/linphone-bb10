@@ -122,7 +122,7 @@ Container {
                             }
                         }
                         
-                        DownloadButton {
+                        FileTransferDownloadButton {
                             visible: ListItemData.isFileTransferMessage && !ListItemData.isTransferComplete && ListItemData.transferProgress < 0
                             
                             onDownloadClicked: {
