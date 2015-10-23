@@ -522,22 +522,27 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>LinphoneManager</name>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="141"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="46"/>
+        <source>no account configured</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="143"/>
         <source>registered</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="145"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="147"/>
         <source>in progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="149"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="151"/>
         <source>error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="153"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="155"/>
         <source>disconnected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -856,22 +861,27 @@ by the correspondent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="174"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="157"/>
+        <source>No account configured</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="185"/>
         <source>Assistant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="189"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="200"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="204"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="215"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="240"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="251"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>

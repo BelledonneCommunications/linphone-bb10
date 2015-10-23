@@ -105,6 +105,7 @@ Container {
             }
             verticalAlignment: VerticalAlignment.Center
             leftPadding: ui.sdu(1)
+            visible: menuModel.sipUri.length > 0
             
             gestureHandlers: TapHandler {
                 onTapped: {
@@ -149,6 +150,16 @@ Container {
                     verticalAlignment: VerticalAlignment.Center
                 }
             }
+        }
+        
+        Label {
+            visible: menuModel.sipUri.length == 0
+            text: qsTr("No account configured") + Retranslate.onLanguageChanged
+            textStyle.color: colors.colorC
+            textStyle.fontWeight: FontWeight.Bold
+            textStyle.base: titilliumWeb.style
+            textStyle.fontSize: FontSize.Medium
+            verticalAlignment: VerticalAlignment.Center
         }
     }
     

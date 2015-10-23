@@ -42,6 +42,8 @@ LinphoneManager::LinphoneManager(bb::Application *app)
       _iterate_timer(NULL),
       _isAppInBackground(FALSE),
       _notificationManager(new NotificationManager(app)),
+      _registrationStatusImage("/images/statusbar/led_disconnected.png"),
+      _registrationStatusText(tr("no account configured")),
       _unreadChatMessages(0),
       _unreadMissedCalls(0)
 {
