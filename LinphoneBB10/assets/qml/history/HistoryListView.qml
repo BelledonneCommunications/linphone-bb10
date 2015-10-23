@@ -136,7 +136,7 @@ Container {
             }
             onDeleteSelected: {
                 actionConfirmationScreen.visible = true;
-                actionConfirmationScreen.text = qsTr("Are you sure you want to delete the selected logs?") + Retranslate.onLanguageChanged;
+                actionConfirmationScreen.text = qsTr("Do you want to delete selected logs?") + Retranslate.onLanguageChanged;
                 actionConfirmationScreen.confirmActionClicked.connect(onDelete);
                 actionConfirmationScreen.cancelActionClicked.connect(onCancel);
             }

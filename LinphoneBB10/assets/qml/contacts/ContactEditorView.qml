@@ -74,7 +74,7 @@ Container {
                 onTapped: {
                     if (!contactEditorModel.isNewContact) {
                         actionConfirmationScreen.visible = true;
-                        actionConfirmationScreen.text = qsTr("Are you sure you want to delete this contact?") + Retranslate.onLanguageChanged;
+                        actionConfirmationScreen.text = qsTr("Do you want to delete this contact?") + Retranslate.onLanguageChanged;
                         actionConfirmationScreen.confirmActionClicked.connect(onDelete);
                     }
                 }
