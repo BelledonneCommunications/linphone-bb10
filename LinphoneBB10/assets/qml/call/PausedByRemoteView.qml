@@ -56,7 +56,7 @@ Container {
         Label {
             verticalAlignment: VerticalAlignment.Top
             horizontalAlignment: HorizontalAlignment.Center
-            text: qsTr("Current call has been paused\nby the correspondent") + Retranslate.onLanguageChanged
+            text: qsTr("Your correspondent paused the call") + Retranslate.onLanguageChanged
             multiline: true
             textStyle.textAlign: TextAlign.Center
             textStyle.color: colors.colorH

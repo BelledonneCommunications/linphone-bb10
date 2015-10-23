@@ -108,7 +108,7 @@ ScrollView {
                 Label {
                     verticalAlignment: VerticalAlignment.Top
                     text: qsTr("USERNAME") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorD
+                    textStyle.color: colors.colorE
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }
@@ -132,7 +132,7 @@ ScrollView {
                 Label {
                     verticalAlignment: VerticalAlignment.Top
                     text: qsTr("PASSWORD") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorD
+                    textStyle.color: colors.colorE
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }
@@ -155,8 +155,8 @@ ScrollView {
     
                 Label {
                     verticalAlignment: VerticalAlignment.Top
-                    text: qsTr("CONFIRM THE PASSWORD") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorD
+                    text: qsTr("PASSWORD CONFIRMATION") + Retranslate.onLanguageChanged
+                    textStyle.color: colors.colorE
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }
@@ -180,7 +180,7 @@ ScrollView {
                 Label {
                     verticalAlignment: VerticalAlignment.Top
                     text: qsTr("EMAIL (we'll send you an activation link)") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorD
+                    textStyle.color: colors.colorE
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }

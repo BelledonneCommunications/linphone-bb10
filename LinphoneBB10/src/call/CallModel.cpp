@@ -564,7 +564,9 @@ void CallModel::updateZRTPTokenValidation(bool isTokenOk) {
 }
 
 bool CallModel::isCallTransferAllowed() const {
-    return true;
+    LinphoneManager *manager = LinphoneManager::getInstance();
+    LinphoneCore *lc = manager->getLc();
+    return linphone_core_get_current_call(lc) != NULL;
 }
 
 bool CallModel::isMultiCallAllowed() const {

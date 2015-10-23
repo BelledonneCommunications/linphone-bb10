@@ -161,6 +161,7 @@ Container {
         visible: chatListModel.chatModel.isNewConversation
         input.keyLayout: KeyLayout.EmailAddress
         inputMode: TextFieldInputMode.EmailAddress
+        hintText: qsTr("Search") + Retranslate.onLanguageChanged
     }
 
     ListView {

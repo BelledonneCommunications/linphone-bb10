@@ -57,7 +57,7 @@ Container {
             CustomButton {
                 topPadding: ui.sdu(5)
                 text: qsTr("Deny") + Retranslate.onLanguageChanged
-                imageSource: "asset:///images/resizable_confirm_delete_button.amd"
+                imageSource: "asset:///images/resizable_cancel_button.amd"
                 textStyle.color: colors.colorH
                 textStyle.base: titilliumWeb.style
                 horizontalAlignment: HorizontalAlignment.Center
@@ -70,7 +70,7 @@ Container {
             CustomButton {
                 topPadding: ui.sdu(5)
                 text: qsTr("Accept") + Retranslate.onLanguageChanged
-                imageSource: "asset:///images/resizable_cancel_button.amd"
+                imageSource: "asset:///images/resizable_confirm_delete_button.amd"
                 textStyle.color: colors.colorC
                 textStyle.base: titilliumWeb.style
                 horizontalAlignment: HorizontalAlignment.Center

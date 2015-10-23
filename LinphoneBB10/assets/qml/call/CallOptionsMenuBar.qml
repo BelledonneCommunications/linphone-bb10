@@ -46,8 +46,10 @@ Container {
         enabled: inCallModel.isConferenceAllowed
         gestureHandlers: TapHandler {
             onTapped: {
-                optionsMenu.menuVisible = false;
-                inCallModel.startConference();
+                if (enabled) {
+                    optionsMenu.menuVisible = false;
+                    inCallModel.startConference();
+                }
             }
         }
     }
@@ -59,10 +61,12 @@ Container {
         enabled: inCallModel.isMultiCallAllowed
         gestureHandlers: TapHandler {
             onTapped: {
-                optionsMenu.menuVisible = false;
-                inCallModel.dialerCallButtonMode = 2;
-                tabDelegate.source = "../DialerView.qml"
-                inCallView.close();
+                if (enabled) {
+                    optionsMenu.menuVisible = false;
+                    inCallModel.dialerCallButtonMode = 2;
+                    tabDelegate.source = "../DialerView.qml"
+                    inCallView.close();
+                }
             }
         }
     }
@@ -74,10 +78,12 @@ Container {
         enabled: inCallModel.isCallTransferAllowed
         gestureHandlers: TapHandler {
             onTapped: {
-                optionsMenu.menuVisible = false;
-                inCallModel.dialerCallButtonMode = 1;
-                tabDelegate.source = "../DialerView.qml"
-                inCallView.close();
+                if (enabled) {
+                    optionsMenu.menuVisible = false;
+                    inCallModel.dialerCallButtonMode = 1;
+                    tabDelegate.source = "../DialerView.qml"
+                    inCallView.close();
+                }
             }
         }
     }

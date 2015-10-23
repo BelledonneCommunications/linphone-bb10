@@ -30,6 +30,19 @@ Container {
     horizontalAlignment: HorizontalAlignment.Fill
     verticalAlignment: VerticalAlignment.Fill
     opacity: enabled ? 1 : 0.2
+    background: colors.colorF
+    
+    onTouch: {
+        if (event.isDown() || event.isMove()) {
+            background = colors.colorE
+        } else if (event.isUp() || event.isCancel()) {
+            background = colors.colorF
+        }
+    }
+    
+    onTouchExit: {
+        background = colors.colorF
+    }
     
     ImageView {
         id: image

@@ -57,7 +57,7 @@ under GNU Public License V2</source>
     <name>AllCallsPausedView</name>
     <message>
         <location filename="../assets/qml/call/AllCallsPausedView.qml" line="58"/>
-        <source>No current call</source>
+        <source>No active call</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -149,7 +149,13 @@ please choose another one</source>
     </message>
     <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="158"/>
-        <source>CONFIRM THE PASSWORD</source>
+        <source>PASSWORD CONFIRMATION</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="210"/>
+        <source>Username is too short
+(4 characters minimum)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -160,12 +166,6 @@ please choose another one</source>
     <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="203"/>
         <source>CREATE ACCOUNT</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="210"/>
-        <source>Username is too short
-(4 characters minimum)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -413,6 +413,11 @@ You should only accept if you have the same token as your correspondent.</source
         <source>Do you want to delete selected messages?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../assets/qml/chat/ChatConversationView.qml" line="164"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ChatListView</name>
@@ -452,17 +457,17 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
     <message>
         <location filename="../assets/qml/contacts/ContactEditorView.qml" line="127"/>
-        <source>Last Name</source>
+        <source>LAST NAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/qml/contacts/ContactEditorView.qml" line="155"/>
-        <source>First Name</source>
+        <source>FIRST NAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/qml/contacts/ContactEditorView.qml" line="183"/>
-        <source>SIP Address</source>
+        <source>SIP ADDRESS</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -475,7 +480,7 @@ You should only accept if you have the same token as your correspondent.</source
     </message>
     <message>
         <location filename="../assets/qml/contacts/ContactsListView.qml" line="138"/>
-        <source>Contact search</source>
+        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -551,8 +556,7 @@ You should only accept if you have the same token as your correspondent.</source
     <name>PausedByRemoteView</name>
     <message>
         <location filename="../assets/qml/call/PausedByRemoteView.qml" line="59"/>
-        <source>Current call has been paused
-by the correspondent</source>
+        <source>Your correspondent paused the call</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

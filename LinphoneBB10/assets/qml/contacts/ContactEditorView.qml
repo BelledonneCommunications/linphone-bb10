@@ -124,8 +124,8 @@ Container {
 
                 Label {
                     verticalAlignment: VerticalAlignment.Top
-                    text: qsTr("Last Name") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorD
+                    text: qsTr("LAST NAME") + Retranslate.onLanguageChanged
+                    textStyle.color: colors.colorE
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }
@@ -152,8 +152,8 @@ Container {
 
                 Label {
                     verticalAlignment: VerticalAlignment.Top
-                    text: qsTr("First Name") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorD
+                    text: qsTr("FIRST NAME") + Retranslate.onLanguageChanged
+                    textStyle.color: colors.colorE
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }
@@ -180,8 +180,8 @@ Container {
 
                 Label {
                     verticalAlignment: VerticalAlignment.Top
-                    text: qsTr("SIP Address") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorD
+                    text: qsTr("SIP ADDRESS") + Retranslate.onLanguageChanged
+                    textStyle.color: colors.colorE
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }

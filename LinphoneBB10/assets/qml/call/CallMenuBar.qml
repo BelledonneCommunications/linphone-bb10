@@ -42,16 +42,23 @@ Container {
         gestureHandlers: TapHandler {
             onTapped: {
                 numpad.visible = ! numpad.visible
-                numpadToggle.selected = numpad.visible
             }
         }
         
-        CustomImageToggle {
-            id: numpadToggle
+        ImageView {
+            visible: !numpad.visible
             imageSource: "asset:///images/footer_dialer.png"
-            selectedImageSource: "asset:///images/call/dialer_alt_back.png"
-            verticalAlignment: VerticalAlignment.Fill
-            horizontalAlignment: HorizontalAlignment.Fill
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            scalingMethod: ScalingMethod.AspectFit
+        }
+        
+        ImageView {
+            visible: numpad.visible
+            imageSource: "asset:///images/call/dialer_alt_back.png"
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            scalingMethod: ScalingMethod.AspectFit
         }
     }
     

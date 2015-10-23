@@ -54,7 +54,7 @@ ScrollView {
                 Label {
                     verticalAlignment: VerticalAlignment.Top
                     text: qsTr("USERNAME") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorD
+                    textStyle.color: colors.colorE
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }
@@ -78,7 +78,7 @@ ScrollView {
                 Label {
                     verticalAlignment: VerticalAlignment.Top
                     text: qsTr("PASSWORD") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorD
+                    textStyle.color: colors.colorE
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }
@@ -102,7 +102,7 @@ ScrollView {
                 Label {
                     verticalAlignment: VerticalAlignment.Top
                     text: qsTr("DOMAIN") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorD
+                    textStyle.color: colors.colorE
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }
@@ -126,7 +126,7 @@ ScrollView {
                 Label {
                     verticalAlignment: VerticalAlignment.Top
                     text: qsTr("DISPLAY NAME (optional)") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorD
+                    textStyle.color: colors.colorE
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }

@@ -60,12 +60,14 @@ Container {
                 imageSource: "asset:///images/history_chat_indicator.png"
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
+                minWidth: ui.sdu(5)
+                minHeight: ui.sdu(5)
             }
             
             Label {
                 text: badgeValue
                 textStyle.base: titilliumWeb.style
-                textStyle.fontSize: FontSize.XXSmall
+                textStyle.fontSize: FontSize.Small
                 textStyle.color: colors.colorH
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center

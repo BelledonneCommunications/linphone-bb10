@@ -55,7 +55,7 @@ Container {
         Label {
             verticalAlignment: VerticalAlignment.Top
             horizontalAlignment: HorizontalAlignment.Center
-            text: qsTr("No current call") + Retranslate.onLanguageChanged
+            text: qsTr("No active call") + Retranslate.onLanguageChanged
             textStyle.color: colors.colorH
             textStyle.base: titilliumWeb.style
             textStyle.fontSize: FontSize.Large

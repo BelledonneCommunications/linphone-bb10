@@ -55,7 +55,7 @@ ScrollView {
                 Label {
                     verticalAlignment: VerticalAlignment.Top
                     text: qsTr("PROVISIONING URL") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorD
+                    textStyle.color: colors.colorE
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }

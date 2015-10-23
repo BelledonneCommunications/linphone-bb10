@@ -135,7 +135,7 @@ Container {
         rightPadding: ui.sdu(2)
         topPadding: ui.sdu(1)
         bottomPadding: ui.sdu(1)
-        hintText: qsTr("Contact search") + Retranslate.onLanguageChanged
+        hintText: qsTr("Search") + Retranslate.onLanguageChanged
         
         onTextFieldChanging: {
             contactListModel.contactSearchFilter = text

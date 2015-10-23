@@ -197,7 +197,7 @@ Container {
                                         }
                                         horizontalAlignment: HorizontalAlignment.Center
                                         verticalAlignment: VerticalAlignment.Center
-                                        visible: ListItemData.unreadCount > 0
+                                        visible: ListItemData.unreadCount > 0 && !Qt.editor.isEditMode
 
                                         ImageView {
                                             imageSource: "asset:///images/chat/chat_list_indicator.png"
