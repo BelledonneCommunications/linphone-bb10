@@ -72,6 +72,7 @@ public Q_SLOTS:
     void onFilePicked(const QStringList& filePicked);
     void openPicture(QString file);
     void downloadFile(QVariant variant);
+    void cancelFileTransfer(LinphoneChatMessage* message);
     void copyToClipboard(QString text);
 
     void setPreviousPage(QString previousPage) {

@@ -437,3 +437,20 @@ void ChatModel::copyToClipboard(QString text) {
     clipboard.clear();
     clipboard.insert("text/plain", text.toUtf8());
 }
+
+void ChatModel::cancelFileTransfer(LinphoneChatMessage* message) {
+    if (message) {
+        linphone_chat_message_cancel_file_transfer(message);
+
+        if (linphone_chat_message_is_outgoing(message)) {
+            foreach (QVariantMap entry, _dataModel->toListOfMaps()) {
+                LinphoneChatMessage *msg = entry.value("message").value<LinphoneChatMessage*>();
+                if (msg == message) {
+                    _dataModel->remove(entry);
+                    break;
+                }
+            }
+            emit messageHistoryChanged();
+        }
+    }
+}

@@ -191,6 +191,10 @@ Container {
             chatListModel.chatModel.openPicture(file);
         }
         
+        function cancelFileTransfer(message) {
+            chatListModel.chatModel.cancelFileTransfer(message);
+        }
+        
         function copyToClipboard(text) {
             chatListModel.chatModel.copyToClipboard(text);
         }
