@@ -139,6 +139,7 @@ Container {
         hintText: qsTr("Search") + Retranslate.onLanguageChanged
         inputMode: TextFieldInputMode.EmailAddress
         input.keyLayout: KeyLayout.EmailAddress
+        visible: contactListModel.dataModel.size() > 0
         
         onTextFieldChanging: {
             contactListModel.contactSearchFilter = text
@@ -146,6 +147,9 @@ Container {
     }
 
     Container {
+        layout: DockLayout {
+            
+        }
         layoutProperties: StackLayoutProperties {
             spaceQuota: 1
         }
@@ -154,6 +158,7 @@ Container {
         ListView {
             id: contactsList
             dataModel: contactListModel.dataModel
+            visible: contactListModel.dataModel.size() > 0
 
             listItemComponents: [
                 ListItemComponent {
@@ -262,6 +267,16 @@ Container {
                     return "item";
                 }
             }
+        }
+        
+        Label {
+            visible: contactListModel.dataModel.size() == 0
+            text: qsTr("No contacts") + Retranslate.onLanguageChanged
+            verticalAlignment: VerticalAlignment.Center
+            horizontalAlignment: HorizontalAlignment.Center
+            textStyle.fontSize: FontSize.XLarge
+            textStyle.color: colors.colorC
+            textStyle.base: titilliumWeb.style
         }
     }
     

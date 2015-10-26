@@ -105,14 +105,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
         <source>Password is too short
 (6 characters minimum)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -426,6 +426,11 @@ You should only accept if you have the same token as your correspondent.</source
         <source>Do you want to delete selected conversations?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../assets/qml/chat/ChatListView.qml" line="280"/>
+        <source>No conversations</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ConferenceView</name>
@@ -483,6 +488,11 @@ You should only accept if you have the same token as your correspondent.</source
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../assets/qml/contacts/ContactsListView.qml" line="274"/>
+        <source>No contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DeleteButton</name>
@@ -529,6 +539,11 @@ You should only accept if you have the same token as your correspondent.</source
     <message>
         <location filename="../assets/qml/history/HistoryListView.qml" line="140"/>
         <source>Do you want to delete selected logs?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/history/HistoryListView.qml" line="289"/>
+        <source>No call in your history</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

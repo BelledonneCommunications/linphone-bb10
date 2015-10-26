@@ -27,14 +27,14 @@ Container {
     horizontalAlignment: HorizontalAlignment.Center
     visible: Qt.editor.isEditMode
     leftPadding: ui.sdu(1)
-    id: checkbox
     
-    CustomImageToggle {
+    Container {
+        layout: DockLayout {
+        
+        }
         verticalAlignment: VerticalAlignment.Top
         horizontalAlignment: HorizontalAlignment.Center
-        imageSource: "asset:///images/checkbox_unchecked.png"
-        selectedImageSource: "asset:///images/checkbox_checked.png"
-        selected: ListItemData.selected
+        opacity: enabled ? 1 : 0.2
         minWidth: ui.sdu(4)
         
         gestureHandlers: TapHandler {
@@ -43,6 +43,22 @@ Container {
                     Qt.editor.updateSelection(itemRoot.ListItem.indexPath, !ListItemData.selected);
                 }
             }
+        }
+        
+        ImageView {
+            visible: !ListItemData.selected
+            imageSource: "asset:///images/checkbox_unchecked.png"
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            scalingMethod: ScalingMethod.AspectFit
+        }
+        
+        ImageView {
+            visible: ListItemData.selected
+            imageSource: "asset:///images/checkbox_checked.png"
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            scalingMethod: ScalingMethod.AspectFit
         }
     }
 }

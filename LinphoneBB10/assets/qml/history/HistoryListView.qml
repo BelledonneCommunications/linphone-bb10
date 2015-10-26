@@ -144,133 +144,154 @@ Container {
         }
     }
 
-    ListView {
-        id: historyList
-        dataModel: historyListModel.dataModel
+    Container {
+        layout: DockLayout {
+        
+        }
+        layoutProperties: StackLayoutProperties {
+            spaceQuota: 1
+        }
+        horizontalAlignment: HorizontalAlignment.Fill
 
-        listItemComponents: [
-            ListItemComponent {
-                type: "header"
-
-                Container {
-                    layout: StackLayout {
-                        orientation: LayoutOrientation.TopToBottom
-                    }
-                    background: Qt.colors.colorH
-                    horizontalAlignment: HorizontalAlignment.Fill
-
-                    Label {
-                        text: ListItemData
-                        horizontalAlignment: HorizontalAlignment.Center
-                        textStyle.color: Qt.colors.colorA
-                        textStyle.fontWeight: FontWeight.Bold
-                        textStyle.base: Qt.titilliumWeb.style
-                        textStyle.fontSize: FontSize.Large
-                    }
-                    
-                    CustomListDivider {
-                        
-                    }
-                }
-            },
-
-            ListItemComponent {
-                type: "item"
-
-                Container {
-                    id: itemRoot
-                    layout: StackLayout {
-                        orientation: LayoutOrientation.TopToBottom
-                    }
-                    
+        ListView {
+            id: historyList
+            dataModel: historyListModel.dataModel
+            visible: historyListModel.dataModel.size() > 0
+    
+            listItemComponents: [
+                ListItemComponent {
+                    type: "header"
+    
                     Container {
                         layout: StackLayout {
-                            orientation: LayoutOrientation.LeftToRight
+                            orientation: LayoutOrientation.TopToBottom
                         }
                         background: Qt.colors.colorH
-                        topPadding: ui.sdu(1)
-                        bottomPadding: ui.sdu(1)
-                        leftPadding: ui.sdu(2)
-                        rightPadding: ui.sdu(2)
                         horizontalAlignment: HorizontalAlignment.Fill
-                        
-                        ContactAvatar {
-                            maxHeight: ui.sdu(13)
-                            maxWidth: ui.sdu(13)
-                            minHeight: ui.sdu(13)
-                            minWidth: ui.sdu(13)
-                            imageSource: ListItemData.contactPhoto
-                            verticalAlignment: VerticalAlignment.Center
-                            rightMargin: ui.sdu(2)
-                        }
-                        
-                        ImageView {
-                            minWidth: ui.sdu(6.5)
-                            minHeight: ui.sdu(6.5)
-                            imageSource: ListItemData.directionPicture
-                            verticalAlignment: VerticalAlignment.Center
-                            scalingMethod: ScalingMethod.AspectFit
-                            rightMargin: ui.sdu(2)
-                        }
-                        
+    
                         Label {
-                            layoutProperties: StackLayoutProperties {
-                                spaceQuota: 1
-                            }
-                            text: ListItemData.displayName
-                            textStyle.color: Qt.colors.colorC
+                            text: ListItemData
+                            horizontalAlignment: HorizontalAlignment.Center
+                            textStyle.color: Qt.colors.colorA
+                            textStyle.fontWeight: FontWeight.Bold
                             textStyle.base: Qt.titilliumWeb.style
                             textStyle.fontSize: FontSize.Large
-                            verticalAlignment: VerticalAlignment.Center
                         }
                         
-                        ImageButton {
-                            verticalAlignment: VerticalAlignment.Center
-                            rightMargin: ui.sdu(2)
-                            defaultImageSource: "asset:///images/history/list_details_default.png"
-                            pressedImageSource: "asset:///images/history/list_details_over.png"
-                            visible: !Qt.editor.isEditMode
+                        CustomListDivider {
                             
-                            onClicked: {
-                                itemRoot.ListItem.view.viewHistory(itemRoot.ListItem.indexPath, ListItemData.log);
+                        }
+                    }
+                },
+    
+                ListItemComponent {
+                    type: "item"
+    
+                    Container {
+                        id: itemRoot
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.TopToBottom
+                        }
+                        
+                        Container {
+                            layout: StackLayout {
+                                orientation: LayoutOrientation.LeftToRight
+                            }
+                            background: Qt.colors.colorH
+                            topPadding: ui.sdu(1)
+                            bottomPadding: ui.sdu(1)
+                            leftPadding: ui.sdu(2)
+                            rightPadding: ui.sdu(2)
+                            horizontalAlignment: HorizontalAlignment.Fill
+                            
+                            ContactAvatar {
+                                maxHeight: ui.sdu(13)
+                                maxWidth: ui.sdu(13)
+                                minHeight: ui.sdu(13)
+                                minWidth: ui.sdu(13)
+                                imageSource: ListItemData.contactPhoto
+                                verticalAlignment: VerticalAlignment.Center
+                                rightMargin: ui.sdu(2)
+                            }
+                            
+                            ImageView {
+                                minWidth: ui.sdu(6.5)
+                                minHeight: ui.sdu(6.5)
+                                imageSource: ListItemData.directionPicture
+                                verticalAlignment: VerticalAlignment.Center
+                                scalingMethod: ScalingMethod.AspectFit
+                                rightMargin: ui.sdu(2)
+                            }
+                            
+                            Label {
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: 1
+                                }
+                                text: ListItemData.displayName
+                                textStyle.color: Qt.colors.colorC
+                                textStyle.base: Qt.titilliumWeb.style
+                                textStyle.fontSize: FontSize.Large
+                                verticalAlignment: VerticalAlignment.Center
+                            }
+                            
+                            ImageButton {
+                                verticalAlignment: VerticalAlignment.Center
+                                rightMargin: ui.sdu(2)
+                                defaultImageSource: "asset:///images/history/list_details_default.png"
+                                pressedImageSource: "asset:///images/history/list_details_over.png"
+                                visible: !Qt.editor.isEditMode
+                                
+                                onClicked: {
+                                    itemRoot.ListItem.view.viewHistory(itemRoot.ListItem.indexPath, ListItemData.log);
+                                }
+                            }
+                            
+                            CustomCheckBox {
+                                verticalAlignment: VerticalAlignment.Center
+                                enabled: false // This is because clicking on it will also trigger a click on the row, that will do the checkbox toggle
                             }
                         }
                         
-                        CustomCheckBox {
-                            verticalAlignment: VerticalAlignment.Center
-                            enabled: false // This is because clicking on it will also trigger a click on the row, that will do the checkbox toggle
+                        CustomListDivider {
+                            
                         }
                     }
-                    
-                    CustomListDivider {
-                        
+                }
+            ]
+    
+            onTriggered: {
+                if (indexPath.length > 1) {
+                    var selectedItem = dataModel.data(indexPath);
+                    if (historyListModel.editor.isEditMode) {
+                        Qt.editor.updateSelection(indexPath, !selectedItem.selected);
+                    } else {
+                        newOutgoingCallOrCallTransfer(selectedItem.linphoneAddress);
                     }
                 }
             }
-        ]
-
-        onTriggered: {
-            if (indexPath.length > 1) {
-                var selectedItem = dataModel.data(indexPath);
-                if (historyListModel.editor.isEditMode) {
-                    Qt.editor.updateSelection(indexPath, !selectedItem.selected);
+            
+            function viewHistory(indexPath, log) {
+                historyListModel.viewHistory(indexPath, log);
+                tabDelegate.source = "HistoryDetailsView.qml"
+            }
+    
+            function itemType(data, indexPath) {
+                if (indexPath.length == 1) {
+                    return "header";
                 } else {
-                    newOutgoingCallOrCallTransfer(selectedItem.linphoneAddress);
+                    return "item";
                 }
             }
         }
         
-        function viewHistory(indexPath, log) {
-            historyListModel.viewHistory(indexPath, log);
-            tabDelegate.source = "HistoryDetailsView.qml"
-        }
-
-        function itemType(data, indexPath) {
-            if (indexPath.length == 1) {
-                return "header";
-            } else {
-                return "item";
-            }
+        Label {
+            visible: historyListModel.dataModel.size() == 0
+            text: qsTr("No call in your history") + Retranslate.onLanguageChanged
+            verticalAlignment: VerticalAlignment.Center
+            horizontalAlignment: HorizontalAlignment.Center
+            textStyle.fontSize: FontSize.XLarge
+            textStyle.color: colors.colorC
+            textStyle.base: titilliumWeb.style
         }
     }
     

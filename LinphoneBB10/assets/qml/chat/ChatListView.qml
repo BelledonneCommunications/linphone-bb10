@@ -96,6 +96,9 @@ Container {
     }
 
     Container {
+        layout: DockLayout {
+            
+        }
         layoutProperties: StackLayoutProperties {
             spaceQuota: 1
         }
@@ -103,6 +106,7 @@ Container {
 
         ListView {
             dataModel: chatListModel.dataModel
+            visible: chatListModel.dataModel.size() > 0
             
             listItemComponents: [
                 ListItemComponent {
@@ -269,6 +273,16 @@ Container {
                     }
                 }
             }
+        }
+        
+        Label {
+            visible: chatListModel.dataModel.size() == 0
+            text: qsTr("No conversations") + Retranslate.onLanguageChanged
+            verticalAlignment: VerticalAlignment.Center
+            horizontalAlignment: HorizontalAlignment.Center
+            textStyle.fontSize: FontSize.XLarge
+            textStyle.color: colors.colorC
+            textStyle.base: titilliumWeb.style
         }
     }
     
