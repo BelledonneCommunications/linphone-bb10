@@ -31,7 +31,6 @@ Container {
             id: filePicker
             type: FileType.Picture
             mode: FilePickerMode.Picker
-            imageCropEnabled: true
             title: qsTr("Select picture") + Retranslate.onLanguageChanged
             onFileSelected: {
                 menuModel.setPicture(selectedFiles);

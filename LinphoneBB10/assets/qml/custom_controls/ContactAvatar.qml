@@ -20,7 +20,7 @@
 import bb.cascades 1.4
 
 Container {
-    property alias imageSource: contact.imageSource
+    property alias imageSource: tracker.imageSource
     property alias filterColor: mask.filterColor
     
     layout: DockLayout {
@@ -44,6 +44,17 @@ Container {
             verticalAlignment: VerticalAlignment.Fill
             scalingMethod: ScalingMethod.AspectFill
             imageSource: "asset:///images/avatar.png"
+            
+            attachedObjects: [
+                ImageTracker {
+                    id: tracker
+                    onStateChanged: {                    
+                        if (state == ResourceState.Loaded) {
+                            contact.image = tracker.image
+                        }
+                    }
+                }
+            ]
          }
      }
     

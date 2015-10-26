@@ -109,7 +109,7 @@ Container {
                         }
                         
                         ImageView {
-                            imageSource: ListItemData.imageSource
+                            id: downloadedImage
                             visible: ListItemData.isFileTransferMessage && ListItemData.isTransferComplete
                             scalingMethod: ScalingMethod.AspectFit
                             maxWidth: ui.sdu(30)
@@ -120,6 +120,18 @@ Container {
                                     itemRoot.ListItem.view.openPicture(ListItemData.imageSource);
                                 }
                             }
+                            
+                            attachedObjects: [
+                                ImageTracker {
+                                    id: tracker
+                                    imageSource: ListItemData.imageSource ? ListItemData.imageSource : ""
+                                    onStateChanged: {                    
+                                        if (state == ResourceState.Loaded) {
+                                            downloadedImage.image = tracker.image
+                                        }
+                                    }
+                                }
+                            ]
                         }
                         
                         FileTransferDownloadButton {

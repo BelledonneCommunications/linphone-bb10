@@ -105,14 +105,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
-        <source>Password is too short
-(6 characters minimum)</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
+        <source>Password is too short
+(6 characters minimum)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -451,27 +451,27 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>ContactEditorView</name>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="33"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="32"/>
         <source>Select picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="77"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="76"/>
         <source>Do you want to delete this contact?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="127"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="126"/>
         <source>LAST NAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="155"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="154"/>
         <source>FIRST NAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="183"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="182"/>
         <source>SIP ADDRESS</source>
         <translation type="unfinished"></translation>
     </message>
@@ -883,32 +883,32 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>SideMenu</name>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="35"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="34"/>
         <source>Select picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="157"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="156"/>
         <source>No account configured</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="185"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="184"/>
         <source>Assistant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="200"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="199"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="215"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="214"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="251"/>
+        <location filename="../assets/qml/sidemenu/SideMenu.qml" line="250"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
