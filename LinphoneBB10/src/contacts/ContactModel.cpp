@@ -66,7 +66,6 @@ void ContactModel::updateContact()
             if (attr.kind() == AttributeKind::VideoChat) {
                 _isSipContact = true;
             }
-
             _numbersAndAddresses[attr.value()] = attr.attributeDisplayLabel();
         }
     }

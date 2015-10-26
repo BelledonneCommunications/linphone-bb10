@@ -33,21 +33,6 @@ Container {
         }
     ]
 
-    onCreationCompleted: {
-        fillContactNumbers();
-    }
-    
-    function fillContactNumbers() {
-        contactNumbers.removeAll();
-        
-        for (var number in contactListModel.contactModel.numbersAndAddresses) {
-            var item = contactDetailsNumber.createObject();
-            item.label = contactListModel.contactModel.numbersAndAddresses[number];
-            item.number = number;
-            contactNumbers.add(item);
-        }
-    }
-
     Container {
         layout: StackLayout {
             orientation: LayoutOrientation.LeftToRight
@@ -146,11 +131,27 @@ Container {
             }
 
             Container {
-                layout: StackLayout {
-                    orientation: LayoutOrientation.TopToBottom
-                }
-                id: contactNumbers
+                id: contactNumbersContainer
+                horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment: VerticalAlignment.Top
+                topPadding: ui.sdu(2)
             }
+        }
+    }
+    
+    onCreationCompleted: {
+        fillContactNumbers();
+        contactListModel.contactModel.contactUpdated.connect(fillContactNumbers);
+    }
+    
+    function fillContactNumbers() {
+        contactNumbersContainer.removeAll();
+        
+        for (var number in contactListModel.contactModel.numbersAndAddresses) {
+            var item = contactDetailsNumber.createObject();
+            item.label = contactListModel.contactModel.numbersAndAddresses[number];
+            item.number = number;
+            contactNumbersContainer.add(item);
         }
     }
 

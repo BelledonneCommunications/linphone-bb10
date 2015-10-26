@@ -149,7 +149,11 @@ void ContactListModel::contactFetched(QVariantMap entry, bool isSipContact, bool
 
             if (isSipContact && _sipContactsDataModel) {
                 indexPath = _sipContactsDataModel->find(variant);
-                _sipContactsDataModel->updateItem(indexPath, entry);
+                if (indexPath.isEmpty()) {
+                    _sipContactsDataModel->insert(entry);
+                } else {
+                    _sipContactsDataModel->updateItem(indexPath, entry);
+                }
             }
             found = true;
             break;

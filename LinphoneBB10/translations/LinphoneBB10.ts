@@ -443,7 +443,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>ContactDetailsView</name>
     <message>
-        <location filename="../assets/qml/contacts/ContactDetailsView.qml" line="85"/>
+        <location filename="../assets/qml/contacts/ContactDetailsView.qml" line="70"/>
         <source>Do you want to delete this contact?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -461,17 +461,17 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="126"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="127"/>
         <source>LAST NAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="154"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="155"/>
         <source>FIRST NAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="182"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="183"/>
         <source>SIP ADDRESS</source>
         <translation type="unfinished"></translation>
     </message>

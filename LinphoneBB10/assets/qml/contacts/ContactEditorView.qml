@@ -85,6 +85,7 @@ Container {
 
             gestureHandlers: TapHandler {
                 onTapped: {
+                    enabled = false;
                     contactEditorModel.saveChanges();
                     tabDelegate.source = contactEditorModel.getPreviousPage();
                 }

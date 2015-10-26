@@ -84,7 +84,8 @@
 
     <initialWindow>
         <systemChrome>none</systemChrome>
-        <autoOrients>true</autoOrients>
+        <autoOrients>false</autoOrients>
+        <aspectRatio>portrait</aspectRatio>
     </initialWindow>
 
     <!--  The icon for the application, which should be 114x114. -->

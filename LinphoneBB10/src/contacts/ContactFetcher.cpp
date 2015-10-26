@@ -48,7 +48,7 @@ void ContactFetcher::run()
     ContactListFilters filter;
     filter.setLimit(200);
     if (_contactsToUpdate.size() > 0) {
-        filter.setContactIds(_contactsToUpdate);
+        filter = filter.setContactIds(_contactsToUpdate);
         _contactsToUpdate.clear();
     }
     QList<Contact> contacts = _contactService->contacts(filter);
