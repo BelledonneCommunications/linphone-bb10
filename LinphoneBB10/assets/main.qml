@@ -92,9 +92,8 @@ NavigationPane {
                                 source: "qml/DialerView.qml"
                                 
                                 onSourceChanged: {
-                                    if (source.toString() != "asset:///qml/chat/ChatConversationView.qml") {
-                                        chatListModel.chatModel.setSelectedConversationSipAddress("");
-                                    } else {
+                                    // This is to select the chat tab when user clicked the chat button while in call
+                                    if (source.toString() == "asset:///qml/chat/ChatListView.qml") {
                                         tabs.setChatTabSelected();
                                     }
                                 }
