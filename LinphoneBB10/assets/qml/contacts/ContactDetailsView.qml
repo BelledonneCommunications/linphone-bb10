@@ -32,6 +32,14 @@ Container {
             source: "ContactDetailsNumber.qml"
         }
     ]
+    
+    onCreationCompleted: {
+        // This is a needed hack since listeItemComponents are created in a different context,
+        // so colors and fonts aren't available
+        Qt.colors = colors
+        Qt.titilliumWeb = titilliumWeb
+        Qt.contactModel = contactListModel.contactModel
+    }
 
     Container {
         layout: StackLayout {
@@ -85,73 +93,58 @@ Container {
             }
         }
     }
-
-    ScrollView {
-        horizontalAlignment: HorizontalAlignment.Fill
-        verticalAlignment: VerticalAlignment.Fill
+    
+    ListView {
+        id: contactsList
+        dataModel: contactListModel.contactModel.dataModel
+        visible: contactListModel.contactModel.dataModel.size() > 0
         
-        Container {
-            layout: StackLayout {
-                orientation: LayoutOrientation.TopToBottom
-            }
-            topPadding: ui.sdu(2)
-            horizontalAlignment: HorizontalAlignment.Fill
-            verticalAlignment: VerticalAlignment.Fill
-
-            Container {
-                layout: StackLayout {
-                    orientation: LayoutOrientation.LeftToRight
+        listItemComponents: [
+            ListItemComponent {
+                type: "header"
+                
+                ContactHeader {
+                    photo: Qt.contactModel.photo
+                    displayName:Qt.contactModel.displayName
                 }
-                horizontalAlignment: HorizontalAlignment.Center
-                verticalAlignment: VerticalAlignment.Center
-
-                ContactAvatar {
-                    maxHeight: ui.sdu(20)
-                    maxWidth: ui.sdu(20)
-                    minWidth: ui.sdu(20)
-                    minHeight: ui.sdu(20)
-                    imageSource: contactListModel.contactModel.photo
-                    horizontalAlignment: HorizontalAlignment.Center
+            },
+            
+            ListItemComponent {
+                type: "item"
+                
+                ContactDetailsNumber {
+                    label: ListItemData.label
+                    number: ListItemData.number
                 }
-
-                /*ImageView {
-                    visible: contactListModel.contactModel.isSipContact
-                    imageSource: "asset:///images/presence/linphone_user.png"
-                    verticalAlignment: VerticalAlignment.Center
-                    scalingMethod: ScalingMethod.AspectFit
-                }*/
+            },
+            
+            ListItemComponent {
+                type: "empty"
+                
+                Container {
+                    
+                }
             }
-
-            Label {
-                text: contactListModel.contactModel.displayName
-                horizontalAlignment: HorizontalAlignment.Center
-                textStyle.fontSize: FontSize.XLarge
-                textStyle.color: colors.colorC
-                textStyle.base: titilliumWeb.style
-            }
-
-            Container {
-                id: contactNumbersContainer
-                horizontalAlignment: HorizontalAlignment.Center
-                verticalAlignment: VerticalAlignment.Top
-                topPadding: ui.sdu(2)
+        ]
+        
+        function itemType(data, indexPath) {
+            if (indexPath.length == 1 && indexPath[0] == 0) {
+                return "header";
+            } else if (indexPath.length > 1) {
+                return "item";
+            } else {
+                return "empty";
             }
         }
-    }
-    
-    onCreationCompleted: {
-        fillContactNumbers();
-        contactListModel.contactModel.contactUpdated.connect(fillContactNumbers);
-    }
-    
-    function fillContactNumbers() {
-        contactNumbersContainer.removeAll();
         
-        for (var number in contactListModel.contactModel.numbersAndAddresses) {
-            var item = contactDetailsNumber.createObject();
-            item.label = contactListModel.contactModel.numbersAndAddresses[number];
-            item.number = number;
-            contactNumbersContainer.add(item);
+        function callNumber(number) {
+            newOutgoingCallOrCallTransfer(number);
+        }
+        
+        function chatNumber(number) {
+            chatListModel.viewConversation(number);
+            chatListModel.chatModel.setPreviousPage("../contacts/ContactDetailsView.qml");
+            tabDelegate.source = "../chat/ChatConversationView.qml";
         }
     }
 

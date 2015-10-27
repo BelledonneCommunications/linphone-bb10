@@ -24,6 +24,7 @@
 #define CONTACTMODEL_H_
 
 #include <bb/pim/contacts/ContactService>
+#include <bb/cascades/GroupDataModel>
 #include <QObject>
 
 class ContactModel : public QObject
@@ -33,8 +34,8 @@ class ContactModel : public QObject
     Q_PROPERTY(QString displayName READ displayName NOTIFY contactUpdated);
     Q_PROPERTY(QString photo READ photo NOTIFY contactUpdated);
     Q_PROPERTY(bool isSipContact READ isSipContact NOTIFY contactUpdated);
-    Q_PROPERTY(QVariantMap numbersAndAddresses READ numbersAndAddresses NOTIFY contactUpdated);
     Q_PROPERTY(int contactId READ contactId NOTIFY contactUpdated);
+    Q_PROPERTY(bb::cascades::GroupDataModel* dataModel READ dataModel NOTIFY contactUpdated);
 
 public:
     ContactModel(QObject *parent = 0);
@@ -73,10 +74,10 @@ private:
     }
     bool _isSipContact;
 
-    QVariantMap numbersAndAddresses() const {
-        return _numbersAndAddresses;
+    bb::cascades::GroupDataModel* dataModel() const {
+        return _dataModel;
     }
-    QVariantMap _numbersAndAddresses;
+    bb::cascades::GroupDataModel* _dataModel;
 };
 
 #endif /* CONTACTMODEL_H_ */

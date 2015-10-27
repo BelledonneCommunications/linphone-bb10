@@ -30,6 +30,7 @@ Container {
     }
     leftPadding: ui.sdu(1)
     rightPadding: ui.sdu(1)
+    id: itemRoot
     
     CustomListDivider {
         
@@ -39,7 +40,7 @@ Container {
         layout: DockLayout {
             
         }
-        background: colors.colorH
+        background: Qt.colors.colorH
         topPadding: ui.sdu(2)
         bottomPadding: ui.sdu(2)
         leftPadding: ui.sdu(2)
@@ -48,9 +49,9 @@ Container {
         
         Label {
             id: label
-            textStyle.color: colors.colorD
+            textStyle.color: Qt.colors.colorD
             textStyle.fontSize: FontSize.Small
-            textStyle.base: titilliumWeb.style
+            textStyle.base: Qt.titilliumWeb.style
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Top
         }
@@ -62,9 +63,9 @@ Container {
             
             Label {
                 id: number
-                textStyle.color: colors.colorC
+                textStyle.color: Qt.colors.colorC
                 textStyle.fontSize: FontSize.Large
-                textStyle.base: titilliumWeb.style
+                textStyle.base: Qt.titilliumWeb.style
             }
         }
         
@@ -83,7 +84,7 @@ Container {
                 disabledImageSource: "asset:///images/call_start_body_disabled.png"
                 
                 onClicked: {
-                    newOutgoingCallOrCallTransfer(number.text);
+                    itemRoot.ListItem.view.callNumber(number.text);
                 }
             }
             
@@ -94,9 +95,7 @@ Container {
                 disabledImageSource: "asset:///images/chat_start_body_disabled.png"
                 
                 onClicked: {
-                    chatListModel.viewConversation(number.text);
-                    chatListModel.chatModel.setPreviousPage("../contacts/ContactDetailsView.qml");
-                    tabDelegate.source = "../chat/ChatConversationView.qml";
+                    itemRoot.ListItem.view.chatNumber(number.text);
                 }
             }
         }

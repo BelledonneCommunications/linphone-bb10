@@ -24,6 +24,7 @@
 #include "ContactFetcher.h"
 #include <bb/pim/contacts/Contact>
 
+using namespace bb::cascades;
 using namespace bb::pim::contacts;
 
 ContactModel::ContactModel(QObject *parent)
@@ -31,10 +32,16 @@ ContactModel::ContactModel(QObject *parent)
       _contactId(-1),
       _displayName(""),
       _photo(""),
-      _isSipContact(false)
+      _isSipContact(false),
+      _dataModel(new GroupDataModel(this))
 {
     bool result = connect(ContactFetcher::getInstance()->getContactService(), SIGNAL(contactsChanged(QList<int>)), SLOT(contactsChanged(QList<int>)));
     Q_ASSERT(result);
+
+    QStringList sortingKeys;
+    sortingKeys << "priority";
+    _dataModel->setGrouping(ItemGrouping::ByFullValue);
+    _dataModel->setSortingKeys(sortingKeys);
 }
 
 void ContactModel::setSelectedContactId(ContactId contactId)
@@ -57,16 +64,23 @@ void ContactModel::updateContact()
         _photo = "/images/avatar.png";
     }
 
-    _numbersAndAddresses.clear();
+    _dataModel->clear();
     _isSipContact = false;
 
     QList<ContactAttribute> attrs = contact.attributes();
     foreach (ContactAttribute attr, attrs) {
+        QVariantMap entry;
         if (attr.kind() == AttributeKind::VideoChat || attr.kind() == AttributeKind::Phone) {
             if (attr.kind() == AttributeKind::VideoChat) {
                 _isSipContact = true;
+                entry["priority"] = 0;
+            } else {
+                entry["priority"] = 1;
             }
-            _numbersAndAddresses[attr.value()] = attr.attributeDisplayLabel();
+
+            entry["number"] = attr.value();
+            entry["label"] = attr.attributeDisplayLabel();
+            _dataModel->insert(entry);
         }
     }
 
