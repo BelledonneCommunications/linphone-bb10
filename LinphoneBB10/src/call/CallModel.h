@@ -74,6 +74,7 @@ public:
 
 public Q_SLOTS:
     void callStateChanged(LinphoneCall *call);
+    void callEncryptionChanged(LinphoneCall *call);
     void statsTimerTimeout();
     void acceptCallUpdate(bool accept);
     void acceptCallUpdatedByRemoteTimeout();

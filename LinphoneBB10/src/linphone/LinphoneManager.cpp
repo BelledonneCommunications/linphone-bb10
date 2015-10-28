@@ -236,6 +236,22 @@ static void composing_received(LinphoneCore *lc, LinphoneChatRoom *room)
     Q_UNUSED(room);
 }
 
+void LinphoneManager::onCallEncryptionChanged(LinphoneCall *call)
+{
+    emit callEncryptionChanged(call);
+}
+
+static void call_encryption_changed(LinphoneCore *lc, LinphoneCall *call, bool_t on, const char *authentication_token)
+{
+    LinphoneManager *manager = (LinphoneManager *)linphone_core_get_user_data(lc);
+    if (on) {
+        manager->onCallEncryptionChanged(call);
+    }
+
+    Q_UNUSED(lc);
+    Q_UNUSED(authentication_token);
+}
+
 QString LinphoneManager::moveLinphoneRcToRWFolder()
 {
     QString dataFolder = QDir::homePath();
@@ -293,6 +309,7 @@ void LinphoneManager::createAndStartLinphoneCore()
     vtable->call_state_changed = call_state_changed;
     vtable->message_received = message_received;
     vtable->is_composing_received = composing_received;
+    vtable->call_encryption_changed = call_encryption_changed;
 
     _lc = linphone_core_new(vtable, linphoneRC, "app/native/assets/linphone/factory", this);
 

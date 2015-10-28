@@ -53,6 +53,7 @@ public:
     void onRegistrationStatusChanged(LinphoneProxyConfig *cfg, LinphoneRegistrationState status);
     void onComposingReceived(LinphoneChatRoom *room);
     void onCallStateChanged(LinphoneCall *call, LinphoneCallState state);
+    void onCallEncryptionChanged(LinphoneCall *call);
 
     int unreadChatMessages() const {
         return _unreadChatMessages;
@@ -92,6 +93,7 @@ Q_SIGNALS:
     void callConnected(LinphoneCall *call);
     void callStateChanged(LinphoneCall *call);
     void onUnreadCountUpdated();
+    void callEncryptionChanged(LinphoneCall *call);
 
 private Q_SLOTS:
     void onAppExit();

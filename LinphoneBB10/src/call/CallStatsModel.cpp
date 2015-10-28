@@ -29,7 +29,6 @@ CallStatsModel::CallStatsModel(QObject *parent)
     _currentCallSecurityIcon(""),
     _callSecurityToken(""),
     _zrtpDialogVisible(false),
-    _zrtpDialogShown(false),
     _audioCodec(""),
     _videoCodec(""),
     _downloadAudioBandwidth(""),
@@ -41,6 +40,21 @@ CallStatsModel::CallStatsModel(QObject *parent)
     _receivedVideoSize("")
 {
 
+}
+
+void CallStatsModel::showZRTPDialog(LinphoneCall *call)
+{
+    const LinphoneCallParams *params = linphone_call_get_current_params(call);
+    if (!params) {
+        return;
+    }
+
+    LinphoneMediaEncryption encryption = linphone_call_params_get_media_encryption(params);
+    if (encryption == LinphoneMediaEncryptionZRTP) {
+        _callSecurityToken = tr("ZRTP token is %1.\r\nYou should only accept if you have the same token as your correspondent.").arg(linphone_call_get_authentication_token(call));
+        _zrtpDialogVisible = true;
+        emit zrtpUpdated();
+    }
 }
 
 void CallStatsModel::updateStats(LinphoneCall *call)
@@ -72,22 +86,13 @@ void CallStatsModel::updateStats(LinphoneCall *call)
     if (encryption == LinphoneMediaEncryptionSRTP || encryption == LinphoneMediaEncryptionDTLS) {
         _currentCallSecurityIcon = "/images/statusbar/security_ok.png";
     } else if (encryption == LinphoneMediaEncryptionZRTP) {
-        QString zrtpToken = tr("ZRTP token is %1.\r\nYou should only accept if you have the same token as your correspondent.").arg(linphone_call_get_authentication_token(call));
-        if (zrtpToken != _callSecurityToken) {
-            _zrtpDialogShown = false;
-        }
-        _callSecurityToken = zrtpToken;
+        _callSecurityToken = tr("ZRTP token is %1.\r\nYou should only accept if you have the same token as your correspondent.").arg(linphone_call_get_authentication_token(call));
 
         bool isAuthTokenVerified = linphone_call_get_authentication_token_verified(call);
         if (isAuthTokenVerified) {
             _currentCallSecurityIcon = "/images/statusbar/security_ok.png";
-            _zrtpDialogShown = true;
         } else {
             _currentCallSecurityIcon = "/images/statusbar/security_pending.png";
-            if (!_zrtpDialogShown) {
-                _zrtpDialogShown = true;
-                _zrtpDialogVisible = true;
-            }
         }
         emit zrtpUpdated();
     }

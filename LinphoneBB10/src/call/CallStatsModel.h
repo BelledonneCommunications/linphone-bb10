@@ -48,6 +48,7 @@ class CallStatsModel : public QObject
 public:
     CallStatsModel(QObject *parent = NULL);
     void updateStats(LinphoneCall *call);
+    void showZRTPDialog(LinphoneCall *call);
 
 Q_SIGNALS:
     void statsUpdated();
@@ -77,7 +78,6 @@ private:
         emit zrtpUpdated();
     }
     bool _zrtpDialogVisible;
-    bool _zrtpDialogShown;
 
     QString audioCodec() const {
         return _audioCodec;

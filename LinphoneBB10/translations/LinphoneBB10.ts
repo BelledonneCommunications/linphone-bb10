@@ -361,7 +361,8 @@ please choose another one</source>
 <context>
     <name>CallStatsModel</name>
     <message>
-        <location filename="../src/call/CallStatsModel.cpp" line="75"/>
+        <location filename="../src/call/CallStatsModel.cpp" line="54"/>
+        <location filename="../src/call/CallStatsModel.cpp" line="89"/>
         <source>ZRTP token is %1.
 You should only accept if you have the same token as your correspondent.</source>
         <translation type="unfinished"></translation>

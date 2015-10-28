@@ -63,6 +63,9 @@ CallModel::CallModel(QObject *parent) :
     bool result = QObject::connect(LinphoneManager::getInstance(), SIGNAL(callStateChanged(LinphoneCall*)), this, SLOT(callStateChanged(LinphoneCall*)));
     Q_ASSERT(result);
 
+    result = QObject::connect(LinphoneManager::getInstance(), SIGNAL(callEncryptionChanged(LinphoneCall*)), this, SLOT(callEncryptionChanged(LinphoneCall*)));
+    Q_ASSERT(result);
+
     result = QObject::connect(_statsTimer, SIGNAL(timeout()), this, SLOT(statsTimerTimeout()));
     Q_ASSERT(result);
 
@@ -109,6 +112,12 @@ static LinphoneCall* getCurrentCall()
     }
 
     return call;
+}
+
+void CallModel::callEncryptionChanged(LinphoneCall *call) {
+    if (call && !linphone_call_get_authentication_token_verified(call)) {
+        _callStatsModel->showZRTPDialog(call);
+    }
 }
 
 void CallModel::callStateChanged(LinphoneCall *call) {
