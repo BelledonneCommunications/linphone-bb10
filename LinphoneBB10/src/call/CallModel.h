@@ -54,7 +54,7 @@ class CallModel : public QObject
     Q_PROPERTY(bool videoUpdateInProgress READ videoUpdateInProgress NOTIFY callStateChanged);
     Q_PROPERTY(bool isMicMuted READ isMicMuted WRITE setMicMuted NOTIFY callControlsUpdated);
     Q_PROPERTY(bool isSpeakerEnabled READ isSpeakerEnabled WRITE setSpeakerEnabled NOTIFY callControlsUpdated);
-    Q_PROPERTY(bool areControlsVisible READ areControlsVisible NOTIFY fadeControlsUpdated);
+    Q_PROPERTY(bool areControlsVisible READ areControlsVisible NOTIFY fullScreenModeSwitched);
     Q_PROPERTY(bool isInConference READ isInConference NOTIFY conferenceUpdated);
     Q_PROPERTY(bool isPausedByRemote READ isPausedByRemote NOTIFY callPausedByRemoteUpdated);
     Q_PROPERTY(int runningCallsNotInAnyConferenceCount READ runningCallsNotInAnyConferenceCount NOTIFY callStateChanged);
@@ -91,8 +91,6 @@ public Q_SLOTS:
     void ejectFromConference(const LinphoneCallModel*& callModel);
 
     void onVideoSurfaceCreationCompleted(QString id, QString group);
-    void fadeTimerTimeout();
-    void resetFadeTimer();
     void switchFullScreenMode();
     void switchCamera();
     void cameraPreviewAttached(screen_window_t handle);
@@ -111,7 +109,7 @@ Q_SIGNALS:
     void mediaInProgressUpdated();
     void callControlsUpdated();
     void statsUpdated();
-    void fadeControlsUpdated();
+    void fullScreenModeSwitched();
     void deviceOrientationChanged();
     void nextNewCallActionUpdated();
     void callUpdatedByRemote();
@@ -184,7 +182,6 @@ private:
     bool _areControlsVisible;
 
     QTimer *_statsTimer;
-    QTimer *_controlsFadeTimer;
     QTimer *_acceptCallUpdateTimer;
 
     int dialerCallButtonMode() const {

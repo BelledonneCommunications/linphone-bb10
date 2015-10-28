@@ -45,7 +45,6 @@ CallModel::CallModel(QObject *parent) :
         _isSpeakerEnabled(false),
         _areControlsVisible(true),
         _statsTimer(new QTimer(this)),
-        _controlsFadeTimer(new QTimer(this)),
         _acceptCallUpdateTimer(new QTimer(this)),
         _dialerCallButtonMode(0),
         _deviceOrientation(0),
@@ -69,9 +68,6 @@ CallModel::CallModel(QObject *parent) :
     result = QObject::connect(_statsTimer, SIGNAL(timeout()), this, SLOT(statsTimerTimeout()));
     Q_ASSERT(result);
 
-    result = QObject::connect(_controlsFadeTimer, SIGNAL(timeout()), this, SLOT(fadeTimerTimeout()));
-    Q_ASSERT(result);
-
     result = QObject::connect(_acceptCallUpdateTimer, SIGNAL(timeout()), this, SLOT(acceptCallUpdatedByRemoteTimeout()));
     Q_ASSERT(result);
 
@@ -91,7 +87,6 @@ CallModel::CallModel(QObject *parent) :
     linphone_core_set_device_rotation(lc, _deviceOrientation);
 
     _statsTimer->setInterval(1000);
-    _controlsFadeTimer->setInterval(30000);
     _acceptCallUpdateTimer->setInterval(30000);
 
     Q_UNUSED(result);
@@ -174,9 +169,6 @@ void CallModel::callStateChanged(LinphoneCall *call) {
             if (_statsTimer->isActive()) {
                 _statsTimer->stop();
             }
-            if (_controlsFadeTimer->isActive()) {
-                _controlsFadeTimer->stop();
-            }
 
             _isSpeakerEnabled = false;
             _isMicMuted = false;
@@ -185,15 +177,6 @@ void CallModel::callStateChanged(LinphoneCall *call) {
             emit conferenceUpdated();
         }
     } else if (state == LinphoneCallStreamsRunning) {
-        if (_isVideoEnabled) {
-            if (!_controlsFadeTimer->isActive()) {
-                _controlsFadeTimer->start();
-            }
-        } else {
-            if (_controlsFadeTimer->isActive())
-                _controlsFadeTimer->stop();
-        }
-
         _videoUpdateInProgress = false;
         _mediaInProgress = linphone_call_media_in_progress(call);
         emit mediaInProgressUpdated();
@@ -204,11 +187,6 @@ void CallModel::callStateChanged(LinphoneCall *call) {
         _isPausedByRemote = false;
         emit callPausedByRemoteUpdated();
     } else if (state == LinphoneCallResuming || state == LinphoneCallPaused) {
-        if (state == LinphoneCallPaused && _isVideoEnabled) {
-            if (_controlsFadeTimer->isActive()) {
-                _controlsFadeTimer->stop();
-            }
-        }
         pausedCalls();
     } else if (state == LinphoneCallUpdatedByRemote) {
         bool localVideoEnabled = linphone_call_params_video_enabled(linphone_call_get_current_params(call));
@@ -305,14 +283,6 @@ void CallModel::statsTimerTimeout()
     emit statsUpdated();
 }
 
-void CallModel::fadeTimerTimeout()
-{
-    _areControlsVisible = false;
-    emit fadeControlsUpdated();
-
-    _controlsFadeTimer->stop();
-}
-
 void CallModel::acceptCallUpdate(bool accept) {
     if (_acceptCallUpdateTimer->isActive()) {
         _acceptCallUpdateTimer->stop();
@@ -341,29 +311,10 @@ void CallModel::acceptCallUpdatedByRemoteTimeout()
     acceptCallUpdate(false);
 }
 
-void CallModel::resetFadeTimer()
-{
-    _areControlsVisible = true;
-    emit fadeControlsUpdated();
-
-    if (_controlsFadeTimer->isActive()) {
-        _controlsFadeTimer->stop();
-    }
-    _controlsFadeTimer->start();
-}
-
 void CallModel::switchFullScreenMode()
 {
-    if (_areControlsVisible) {
-        _controlsFadeTimer->stop();
-    } else {
-        if (_controlsFadeTimer->isActive()) {
-            _controlsFadeTimer->stop();
-        }
-        _controlsFadeTimer->start();
-    }
     _areControlsVisible = !_areControlsVisible;
-    emit fadeControlsUpdated();
+    emit fullScreenModeSwitched();
 }
 
 void CallModel::onVideoSurfaceCreationCompleted(QString id, QString group)
@@ -449,11 +400,7 @@ void CallModel::setVideoEnabled(const bool &enabled)
         switchFullScreenMode();
     } else {
         _areControlsVisible = true;
-        emit fadeControlsUpdated();
-
-        if (_controlsFadeTimer->isActive()) {
-            _controlsFadeTimer->stop();
-        }
+        emit fullScreenModeSwitched();
     }
 
     LinphoneManager *manager = LinphoneManager::getInstance();
