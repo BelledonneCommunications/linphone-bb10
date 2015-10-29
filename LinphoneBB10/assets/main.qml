@@ -96,6 +96,10 @@ NavigationPane {
                                     if (source.toString() == "asset:///qml/chat/ChatListView.qml") {
                                         tabs.setChatTabSelected();
                                     }
+                                    // This is to select the contact tab when user clicked the add contact button from dialer or history
+                                    else if (source.toString() == "asset:///qml/contacts/ContactsListView.qml") {
+                                        tabs.setContactsTabSelected();
+                                    }
                                 }
                             }
                         }

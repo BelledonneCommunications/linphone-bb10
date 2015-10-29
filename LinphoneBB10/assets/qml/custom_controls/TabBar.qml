@@ -156,4 +156,9 @@ Container {
         resetAllTabsBackgroundColor();
         chat.selected = true;
     }
+    
+    function setContactsTabSelected() {
+        resetAllTabsBackgroundColor();
+        contacts.selected = true;
+    }
 }
