@@ -20,8 +20,9 @@
  *      Author: Sylvain Berfini
  */
 
-#include "HistoryListModel.h"
+#include <bb/pim/contacts/ContactService>
 
+#include "HistoryListModel.h"
 #include "src/contacts/ContactFetcher.h"
 #include "src/linphone/LinphoneManager.h"
 #include "src/utils/Misc.h"
@@ -55,6 +56,12 @@ HistoryListModel::HistoryListModel(QObject *parent) :
     Q_ASSERT(result);
 
     result = connect(_listEditorHelper, SIGNAL(deleteRequested(QList<QVariantList>)), this, SLOT(deleteItems(QList<QVariantList>)));
+    Q_ASSERT(result);
+
+    bb::pim::contacts::ContactService *contactService = ContactFetcher::getInstance()->getContactService();
+    result = connect(contactService, SIGNAL(contactsChanged(QList<int>)), this, SLOT(getHistory()));
+    Q_ASSERT(result);
+    result = connect(contactService, SIGNAL(contactsDeleted(QList<int>)), this, SLOT(getHistory()));
     Q_ASSERT(result);
 
     getHistory();
