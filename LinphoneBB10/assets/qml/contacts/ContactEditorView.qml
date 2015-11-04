@@ -185,19 +185,38 @@ Container {
                     textStyle.fontSize: FontSize.Small
                     textStyle.base: titilliumWeb.style
                 }
-
-                CustomTextField {
+                
+                ListView {
                     topPadding: ui.sdu(6)
                     verticalAlignment: VerticalAlignment.Bottom
-                    text: contactEditorModel.sipAddress
-                    input.keyLayout: KeyLayout.EmailAddress
-                    inputMode: TextFieldInputMode.EmailAddress
-                    textStyle.textAlign: TextAlign.Center
-                    input.submitKey: SubmitKey.Done
-                    input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
-
-                    onTextFieldChanging: {
-                        contactEditorModel.sipAddress = text
+                    dataModel: contactEditorModel.sipAddresses
+                    
+                    listItemComponents: [
+                        ListItemComponent {
+                            type: "textfield"
+                            
+                            CustomTextField {
+                                topPadding: ui.sdu(3)
+                                text: ListItemData.value
+                                input.keyLayout: KeyLayout.EmailAddress
+                                inputMode: TextFieldInputMode.EmailAddress
+                                textStyle.textAlign: TextAlign.Center
+                                input.submitKey: SubmitKey.Done
+                                input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
+                                
+                                onTextFieldChanging: {
+                                    ListItem.view.updateSipAddress(ListItemData.id, text);
+                                }
+                            }
+                        }
+                    ]
+                    
+                    function updateSipAddress(index, value) {
+                        contactEditorModel.updateSipAddressForIndex(index, value);
+                    }
+                    
+                    function itemType(data, indexPath) {
+                        return "textfield";
                     }
                 }
             }

@@ -24,6 +24,7 @@
 #define CONTACTEDITORMODEL_H_
 
 #include <QObject>
+#include <bb/cascades/GroupDataModel>
 #include <bb/pim/contacts/ContactService>
 
 class ContactEditorModel : public QObject
@@ -33,7 +34,7 @@ class ContactEditorModel : public QObject
     Q_PROPERTY(bool isNewContact READ isNewContact NOTIFY contactUpdated);
     Q_PROPERTY(QString firstName READ firstName WRITE setFirstName NOTIFY contactUpdated);
     Q_PROPERTY(QString lastName READ lastName WRITE setLastName NOTIFY contactUpdated);
-    Q_PROPERTY(QString sipAddress READ sipAddress WRITE setSipAddress NOTIFY contactUpdated);
+    Q_PROPERTY(bb::cascades::GroupDataModel* sipAddresses READ sipAddresses NOTIFY sipAddressesUpdated);
     Q_PROPERTY(QString photo READ photo NOTIFY contactUpdated);
 
 public:
@@ -41,6 +42,7 @@ public:
 
 Q_SIGNALS:
     void contactUpdated();
+    void sipAddressesUpdated();
 
 public Q_SLOTS:
     void setSelectedContactId(int contactId);
@@ -56,9 +58,9 @@ public Q_SLOTS:
         return _previousPage;
     }
 
-    void setNextEditSipAddress(QString sipAddress) {
-        _nextEditSipAddress = sipAddress;
-    }
+    void updateSipAddressForIndex(int index, QString sipAddress);
+    //void addNewSipAddressRow();
+    //void deleteSipAddressRowAtIndex(int index);
 
 private:
     void getContact();
@@ -70,6 +72,11 @@ private:
     bb::pim::contacts::ContactId _contactId;
 
     QString _previousPage;
+
+    bb::cascades::GroupDataModel* sipAddresses() const {
+        return _sipAddresses;
+    }
+    bb::cascades::GroupDataModel* _sipAddresses;
 
     bool isNewContact() const {
         return _isNewContact;
@@ -92,22 +99,12 @@ private:
     }
     QString _lastName;
 
-    QString sipAddress() const {
-        return _sipAddress;
-    }
-    void setSipAddress(const QString &sipAddress) {
-        _sipAddress = sipAddress;
-    }
-    QString _sipAddress;
-
     QString photo() const {
         return _photo;
     }
     QString _photo;
 
     QString _photoUrl;
-
-    QString _nextEditSipAddress;
 };
 
 #endif /* CONTACTEDITORMODEL_H_ */

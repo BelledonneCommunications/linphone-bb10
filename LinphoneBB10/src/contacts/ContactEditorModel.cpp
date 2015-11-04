@@ -21,6 +21,7 @@
  */
 
 #include "ContactEditorModel.h"
+#include "linphone/linphonecore.h"
 
 #include <bb/pim/contacts/Contact>
 #include <bb/pim/contacts/ContactBuilder>
@@ -28,6 +29,7 @@
 #include <bb/pim/contacts/ContactPhotoBuilder>
 #include <bb/pim/contacts/ContactConsts>
 
+using namespace bb::cascades;
 using namespace bb::pim::contacts;
 
 ContactEditorModel::ContactEditorModel(QObject *parent)
@@ -35,15 +37,14 @@ ContactEditorModel::ContactEditorModel(QObject *parent)
       _contactService(new ContactService(this)),
       _contactId(-1),
       _previousPage("ContactsListView.qml"),
+      _sipAddresses(new GroupDataModel(this)),
       _isNewContact(true),
       _firstName(""),
       _lastName(""),
-      _sipAddress(""),
       _photo(""),
-      _photoUrl(""),
-      _nextEditSipAddress("")
+      _photoUrl("")
 {
-
+    _sipAddresses->setGrouping(ItemGrouping::None);
 }
 
 void ContactEditorModel::setSelectedContactId(int contactId)
@@ -54,18 +55,11 @@ void ContactEditorModel::setSelectedContactId(int contactId)
     _lastName = "";
     _photo = "/images/avatar.png";
     _photoUrl = "";
-    _sipAddress = "";
+    _sipAddresses->clear();
 
     if (!_isNewContact) {
         getContact();
     }
-
-    if (!_nextEditSipAddress.isEmpty()) {
-        _sipAddress = _nextEditSipAddress;
-        _nextEditSipAddress = "";
-    }
-
-    emit contactUpdated();
 }
 
 void ContactEditorModel::getContact() {
@@ -80,10 +74,23 @@ void ContactEditorModel::getContact() {
         _photo = contact.primaryPhoto().largePhoto();
     }
 
+    emit contactUpdated();
+
+    if (!_sipAddresses) {
+        return;
+    }
+
+    int i = 0;
     QList<ContactAttribute> attrs = contact.filteredAttributes(AttributeKind::VideoChat);
     foreach (ContactAttribute attr, attrs) {
-        _sipAddress = attr.value();
+        QVariantMap entry;
+        entry["value"] = attr.value();
+        entry["id"] = i;
+        _sipAddresses->insert(entry);
+        i++;
     }
+
+    emit sipAddressesUpdated();
 }
 
 void ContactEditorModel::editPicture(const QStringList &filePicked) {
@@ -114,9 +121,9 @@ static void prepareLastNameBuilder(ContactAttributeBuilder *builder, QString las
     builder->setValue(lastName);
 }
 
-static void prepareSipAddressBuilder(ContactAttributeBuilder *builder, QString sipAddress) {
+static void prepareSipAddressBuilder(ContactAttributeBuilder *builder, QString sipAddress, AttributeSubKind::Type subKind) {
     builder->setKind(AttributeKind::VideoChat);
-    builder->setSubKind(ContactAttributeBuilder::determineAttributeSubKind("Linphone"));
+    builder->setSubKind(subKind);
     builder->setLabel("Linphone");
     builder->setValue(sipAddress);
 }
@@ -126,19 +133,22 @@ void ContactEditorModel::createContact() {
         return;
     }
 
+    ContactBuilder contactBuilder;
+
     ContactAttributeBuilder firstNameAttributeBuilder;
     prepareFirstNameBuilder(&firstNameAttributeBuilder, _firstName);
+    contactBuilder.addAttribute(firstNameAttributeBuilder);
 
     ContactAttributeBuilder lastNameAttributeBuilder;
     prepareLastNameBuilder(&lastNameAttributeBuilder, _lastName);
-
-    ContactAttributeBuilder sipAddressAttributeBuilder;
-    prepareSipAddressBuilder(&sipAddressAttributeBuilder, _sipAddress);
-
-    ContactBuilder contactBuilder;
-    contactBuilder.addAttribute(firstNameAttributeBuilder);
     contactBuilder.addAttribute(lastNameAttributeBuilder);
-    contactBuilder.addAttribute(sipAddressAttributeBuilder);
+
+    foreach (QVariantMap entry, _sipAddresses->toListOfMaps()) {
+        ContactAttributeBuilder sipAddressAttributeBuilder;
+        QString sipAddress = entry.value("value").toString();
+        prepareSipAddressBuilder(&sipAddressAttributeBuilder, sipAddress, ContactAttributeBuilder::determineAttributeSubKind("Linphone"));
+        contactBuilder.addAttribute(sipAddressAttributeBuilder);
+    }
 
     if (!_photoUrl.isEmpty()) {
         const ContactPhoto photo = ContactPhotoBuilder().setOriginalPhoto(_photoUrl);
@@ -154,45 +164,99 @@ void ContactEditorModel::updateContact() {
         return;
     }
 
+    bool need_to_update = FALSE;
     Contact contact = _contactService->contactDetails(_contactId);
-    bool existingSipAddressFound = false;
+    ContactBuilder editor = contact.edit();
 
-    QList<ContactAttribute> attrs = contact.attributes();
-    foreach (ContactAttribute attr, attrs) {
-        if (attr.kind() == AttributeKind::Name) {
-            if (attr.subKind() == AttributeSubKind::NameSurname) {
+    bool nameSurnameFound = FALSE;
+    bool nameGivenFound = FALSE;
+    foreach (ContactAttribute attr, contact.filteredAttributes(AttributeKind::Name)) {
+        if (attr.subKind() == AttributeSubKind::NameSurname) {
+            if (attr.value() != _lastName) {
                 ContactAttributeBuilder builder = attr.edit();
                 prepareLastNameBuilder(&builder, _lastName);
-                _contactService->updateContact(contact);
-            } else if (attr.subKind() == AttributeSubKind::NameGiven) {
+                need_to_update = TRUE;
+            }
+            nameSurnameFound = TRUE;
+        } else if (attr.subKind() == AttributeSubKind::NameGiven) {
+            if (attr.value() != _firstName) {
                 ContactAttributeBuilder builder = attr.edit();
                 prepareFirstNameBuilder(&builder, _firstName);
-                _contactService->updateContact(contact);
+                need_to_update = TRUE;
             }
-        }
-        if (attr.kind() == AttributeKind::VideoChat) {
-            ContactAttributeBuilder builder = attr.edit();
-            prepareSipAddressBuilder(&builder, _sipAddress);
-            _contactService->updateContact(contact);
-            existingSipAddressFound = true;
+            nameGivenFound = TRUE;
         }
     }
 
-    if (!existingSipAddressFound) {
-        ContactBuilder editor = contact.edit();
+    if (!nameSurnameFound) {
+        ContactAttributeBuilder lastNameAttributeBuilder;
+        prepareLastNameBuilder(&lastNameAttributeBuilder, _lastName);
+        editor.addAttribute(lastNameAttributeBuilder);
+        need_to_update = TRUE;
+    }
+    if (!nameGivenFound) {
+        ContactAttributeBuilder firstNameAttributeBuilder;
+        prepareFirstNameBuilder(&firstNameAttributeBuilder, _firstName);
+        editor.addAttribute(firstNameAttributeBuilder);
+        need_to_update = TRUE;
+    }
 
-        ContactAttributeBuilder sipAddressAttributeBuilder;
-        prepareSipAddressBuilder(&sipAddressAttributeBuilder, _sipAddress);
-        editor.addAttribute(sipAddressAttributeBuilder);
-
-        if (!_photoUrl.isEmpty()) {
-            const ContactPhoto photo = ContactPhotoBuilder().setOriginalPhoto(_photoUrl);
-            if (photo.isValid()) {
-                editor.addPhoto(photo, true);
+    QList<ContactAttribute> videoChatAttributes = contact.filteredAttributes(AttributeKind::VideoChat);
+    int i = 0;
+    foreach (ContactAttribute attr, videoChatAttributes) {
+        bool found = FALSE;
+        foreach (QVariantMap entry, _sipAddresses->toListOfMaps()) {
+            int id = entry.value("id").toInt();
+            if (i == id) {
+                found = TRUE;
+                break;
             }
         }
 
-        _contactService->updateContact(editor);
+        if (!found) {
+            ContactAttributeBuilder builder = attr.edit();
+            editor.deleteAttribute(attr);
+            need_to_update = TRUE;
+        }
+        i++;
+    }
+
+    foreach (QVariantMap entry, _sipAddresses->toListOfMaps()) {
+        QString value = entry["value"].toString();
+        int id = entry.value("id").toInt();
+        bool found = FALSE;
+        i = 0;
+        foreach (ContactAttribute attr, videoChatAttributes) {
+            if (i == id) {
+                if (attr.value() != value) {
+                    ContactAttributeBuilder builder = attr.edit();
+                    prepareSipAddressBuilder(&builder, value, attr.subKind());
+                    need_to_update = TRUE;
+                }
+                found = TRUE;
+                break;
+            }
+            i++;
+        }
+
+        if (!found) {
+            ContactAttributeBuilder sipAddressAttributeBuilder;
+            prepareSipAddressBuilder(&sipAddressAttributeBuilder, value, ContactAttributeBuilder::determineAttributeSubKind("Linphone"));
+            editor.addAttribute(sipAddressAttributeBuilder);
+            need_to_update = TRUE;
+        }
+    }
+
+    if (!_photoUrl.isEmpty()) {
+        const ContactPhoto photo = ContactPhotoBuilder().setOriginalPhoto(_photoUrl);
+        if (photo.isValid()) {
+            editor.addPhoto(photo, true);
+            need_to_update = TRUE;
+        }
+    }
+
+    if (need_to_update) {
+        _contactService->updateContact(contact);
     }
 }
 
@@ -202,4 +266,15 @@ void ContactEditorModel::deleteContact() {
     }
 
     _contactService->deleteContact(_contactId);
+}
+
+void ContactEditorModel::updateSipAddressForIndex(int index, QString sipAddress) {
+    foreach (QVariantMap entry, _sipAddresses->toListOfMaps()) {
+        int id = entry.value("id").toInt();
+        if (id == index) {
+            QVariantList indexPath = _sipAddresses->findExact(entry);
+            entry["value"] = sipAddress;
+            _sipAddresses->updateItem(indexPath, entry);
+        }
+    }
 }
