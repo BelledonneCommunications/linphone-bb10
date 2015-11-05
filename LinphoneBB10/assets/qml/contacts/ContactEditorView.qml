@@ -103,7 +103,6 @@ Container {
     }
 
     ListView {
-        topPadding: ui.sdu(6)
         bottomPadding: ui.sdu(6)
         verticalAlignment: VerticalAlignment.Bottom
         dataModel: contactEditorModel.sipAddresses

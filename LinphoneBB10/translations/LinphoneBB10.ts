@@ -462,17 +462,17 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="145"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="144"/>
         <source>LAST NAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="173"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="172"/>
         <source>FIRST NAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="202"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="201"/>
         <source>SIP ADDRESS</source>
         <translation type="unfinished"></translation>
     </message>

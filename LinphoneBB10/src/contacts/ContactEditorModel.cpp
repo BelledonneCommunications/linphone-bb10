@@ -83,15 +83,23 @@ void ContactEditorModel::getContact() {
         return;
     }
 
-    int i = 0;
     QList<ContactAttribute> attrs = contact.filteredAttributes(AttributeKind::VideoChat);
-    foreach (ContactAttribute attr, attrs) {
+    if (attrs.isEmpty()) { // Always display at least an empty SIP address field, else there won't be anything to be displayed because other informations are the header of the first group in the list
         QVariantMap entry;
-        entry["value"] = attr.value();
-        entry["id"] = i;
-        entry["first"] = i == 0;
+        entry["value"] = "";
+        entry["id"] = 0;
+        entry["first"] = TRUE;
         _sipAddresses->insert(entry);
-        i++;
+    } else {
+        int i = 0;
+        foreach (ContactAttribute attr, attrs) {
+            QVariantMap entry;
+            entry["value"] = attr.value();
+            entry["id"] = i;
+            entry["first"] = i == 0;
+            _sipAddresses->insert(entry);
+            i++;
+        }
     }
 
     emit sipAddressesUpdated();

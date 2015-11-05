@@ -94,6 +94,12 @@ Container {
         }
     }
     
+    ContactHeader {
+        photo: Qt.contactModel.photo
+        displayName:Qt.contactModel.displayName
+        visible: contactListModel.contactModel.dataModel.size() == 0
+    }
+    
     ListView {
         id: contactsList
         dataModel: contactListModel.contactModel.dataModel

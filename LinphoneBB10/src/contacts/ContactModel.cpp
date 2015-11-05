@@ -68,19 +68,21 @@ void ContactModel::updateContact()
     _isSipContact = false;
 
     QList<ContactAttribute> attrs = contact.attributes();
-    foreach (ContactAttribute attr, attrs) {
-        QVariantMap entry;
-        if (attr.kind() == AttributeKind::VideoChat || attr.kind() == AttributeKind::Phone) {
-            if (attr.kind() == AttributeKind::VideoChat) {
-                _isSipContact = true;
-                entry["priority"] = 0;
-            } else {
-                entry["priority"] = 1;
-            }
+    if (!attrs.isEmpty()) {
+        foreach (ContactAttribute attr, attrs) {
+            if (attr.kind() == AttributeKind::VideoChat || attr.kind() == AttributeKind::Phone) {
+                QVariantMap entry;
+                if (attr.kind() == AttributeKind::VideoChat) {
+                    _isSipContact = true;
+                    entry["priority"] = 0;
+                } else {
+                    entry["priority"] = 1;
+                }
 
-            entry["number"] = attr.value();
-            entry["label"] = attr.attributeDisplayLabel();
-            _dataModel->insert(entry);
+                entry["number"] = attr.value();
+                entry["label"] = attr.attributeDisplayLabel();
+                _dataModel->insert(entry);
+            }
         }
     }
 
