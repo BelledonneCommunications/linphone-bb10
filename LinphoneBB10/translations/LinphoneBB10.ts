@@ -457,22 +457,22 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="76"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="85"/>
         <source>Do you want to delete this contact?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="127"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="145"/>
         <source>LAST NAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="155"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="173"/>
         <source>FIRST NAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="183"/>
+        <location filename="../assets/qml/contacts/ContactEditorView.qml" line="202"/>
         <source>SIP ADDRESS</source>
         <translation type="unfinished"></translation>
     </message>

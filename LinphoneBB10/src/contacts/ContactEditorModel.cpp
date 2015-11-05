@@ -44,7 +44,10 @@ ContactEditorModel::ContactEditorModel(QObject *parent)
       _photo(""),
       _photoUrl("")
 {
-    _sipAddresses->setGrouping(ItemGrouping::None);
+    QStringList sortingKeys;
+    sortingKeys << "id";
+    _sipAddresses->setGrouping(ItemGrouping::ByFullValue);
+    _sipAddresses->setSortingKeys(sortingKeys);
 }
 
 void ContactEditorModel::setSelectedContactId(int contactId)
@@ -86,6 +89,7 @@ void ContactEditorModel::getContact() {
         QVariantMap entry;
         entry["value"] = attr.value();
         entry["id"] = i;
+        entry["first"] = i == 0;
         _sipAddresses->insert(entry);
         i++;
     }
@@ -207,7 +211,8 @@ void ContactEditorModel::updateContact() {
         bool found = FALSE;
         foreach (QVariantMap entry, _sipAddresses->toListOfMaps()) {
             int id = entry.value("id").toInt();
-            if (i == id) {
+            QString value = entry.value("value").toString();
+            if (i == id && !value.isEmpty()) {
                 found = TRUE;
                 break;
             }
@@ -277,4 +282,31 @@ void ContactEditorModel::updateSipAddressForIndex(int index, QString sipAddress)
             _sipAddresses->updateItem(indexPath, entry);
         }
     }
+}
+
+void ContactEditorModel::addNewSipAddressRow() {
+    int i = 0;
+    foreach (QVariantMap entry, _sipAddresses->toListOfMaps()) {
+        i = entry.value("id").toInt() + 1;
+    }
+
+    QVariantMap newEntry;
+    newEntry["value"] = "";
+    newEntry["id"] = i;
+    newEntry["first"] = FALSE;
+    _sipAddresses->insert(newEntry);
+
+    emit sipAddressesUpdated();
+}
+
+void ContactEditorModel::deleteSipAddressRowAtIndex(int index) {
+    foreach (QVariantMap entry, _sipAddresses->toListOfMaps()) {
+        int i = entry.value("id").toInt();
+        if (i == index) {
+            _sipAddresses->remove(entry);
+            break;
+        }
+    }
+
+    emit sipAddressesUpdated();
 }

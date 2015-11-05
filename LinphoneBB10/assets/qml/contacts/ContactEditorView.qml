@@ -36,6 +36,15 @@ Container {
         }
     ]
     
+    onCreationCompleted: {
+        // This is a needed hack since listeItemComponents are created in a different context,
+        // so colors and fonts aren't available
+        Qt.colors = colors
+        Qt.titilliumWeb = titilliumWeb
+        Qt.contactEditorModel = contactEditorModel
+        Qt.filePicker = filePicker
+    }
+    
     layout: StackLayout {
         orientation: LayoutOrientation.TopToBottom
     }
@@ -93,132 +102,178 @@ Container {
         }
     }
 
-    ScrollView {
-        Container {
-            layout: StackLayout {
-                orientation: LayoutOrientation.TopToBottom
-            }
-            leftPadding: ui.sdu(2)
-            rightPadding: ui.sdu(2)
-            topPadding: ui.sdu(2)
+    ListView {
+        topPadding: ui.sdu(6)
+        bottomPadding: ui.sdu(6)
+        verticalAlignment: VerticalAlignment.Bottom
+        dataModel: contactEditorModel.sipAddresses
 
-            ContactAvatar {
-                imageSource: contactEditorModel.photo
-                maxHeight: ui.sdu(20)
-                maxWidth: ui.sdu(20)
-                minWidth: ui.sdu(20)
-                minHeight: ui.sdu(20)
-                horizontalAlignment: HorizontalAlignment.Center
-                
-                gestureHandlers: TapHandler {
-                    onTapped: {
-                        filePicker.open();
+        listItemComponents: [
+            ListItemComponent {
+                type: "header"
+
+                Container {
+                    layout: StackLayout {
+                        orientation: LayoutOrientation.TopToBottom
                     }
-                }
-            }
+                    leftPadding: ui.sdu(2)
+                    rightPadding: ui.sdu(2)
+                    topPadding: ui.sdu(2)
 
-            Container {
-                layout: DockLayout {
+                    ContactAvatar {
+                        imageSource: Qt.contactEditorModel.photo
+                        maxHeight: ui.sdu(20)
+                        maxWidth: ui.sdu(20)
+                        minWidth: ui.sdu(20)
+                        minHeight: ui.sdu(20)
+                        horizontalAlignment: HorizontalAlignment.Center
 
-                }
-
-                Label {
-                    verticalAlignment: VerticalAlignment.Top
-                    text: qsTr("LAST NAME") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorE
-                    textStyle.fontSize: FontSize.Small
-                    textStyle.base: titilliumWeb.style
-                }
-
-                CustomTextField {
-                    topPadding: ui.sdu(6)
-                    verticalAlignment: VerticalAlignment.Bottom
-                    text: contactEditorModel.lastName
-                    input.keyLayout: KeyLayout.Contact
-                    inputMode: TextFieldInputMode.Text
-                    textStyle.textAlign: TextAlign.Center
-
-                    onTextFieldChanging: {
-                        contactEditorModel.lastName = text
-                    }
-                }
-            }
-
-            Container {
-                layout: DockLayout {
-
-                }
-                topPadding: ui.sdu(4)
-
-                Label {
-                    verticalAlignment: VerticalAlignment.Top
-                    text: qsTr("FIRST NAME") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorE
-                    textStyle.fontSize: FontSize.Small
-                    textStyle.base: titilliumWeb.style
-                }
-
-                CustomTextField {
-                    topPadding: ui.sdu(6)
-                    verticalAlignment: VerticalAlignment.Bottom
-                    text: contactEditorModel.firstName
-                    input.keyLayout: KeyLayout.Contact
-                    inputMode: TextFieldInputMode.Text
-                    textStyle.textAlign: TextAlign.Center
-
-                    onTextFieldChanging: {
-                        contactEditorModel.firstName = text
-                    }
-                }
-            }
-
-            Container {
-                layout: DockLayout {
-
-                }
-                topPadding: ui.sdu(4)
-
-                Label {
-                    verticalAlignment: VerticalAlignment.Top
-                    text: qsTr("SIP ADDRESS") + Retranslate.onLanguageChanged
-                    textStyle.color: colors.colorE
-                    textStyle.fontSize: FontSize.Small
-                    textStyle.base: titilliumWeb.style
-                }
-                
-                ListView {
-                    topPadding: ui.sdu(6)
-                    verticalAlignment: VerticalAlignment.Bottom
-                    dataModel: contactEditorModel.sipAddresses
-                    
-                    listItemComponents: [
-                        ListItemComponent {
-                            type: "textfield"
-                            
-                            CustomTextField {
-                                topPadding: ui.sdu(3)
-                                text: ListItemData.value
-                                input.keyLayout: KeyLayout.EmailAddress
-                                inputMode: TextFieldInputMode.EmailAddress
-                                textStyle.textAlign: TextAlign.Center
-                                input.submitKey: SubmitKey.Done
-                                input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
-                                
-                                onTextFieldChanging: {
-                                    ListItem.view.updateSipAddress(ListItemData.id, text);
-                                }
+                        gestureHandlers: TapHandler {
+                            onTapped: {
+                                Qt.filePicker.open();
                             }
                         }
-                    ]
-                    
-                    function updateSipAddress(index, value) {
-                        contactEditorModel.updateSipAddressForIndex(index, value);
                     }
-                    
-                    function itemType(data, indexPath) {
-                        return "textfield";
+
+                    Container {
+                        layout: DockLayout {
+
+                        }
+
+                        Label {
+                            verticalAlignment: VerticalAlignment.Top
+                            text: qsTr("LAST NAME") + Retranslate.onLanguageChanged
+                            textStyle.color: Qt.colors.colorE
+                            textStyle.fontSize: FontSize.Small
+                            textStyle.base: Qt.titilliumWeb.style
+                        }
+
+                        CustomListTextField {
+                            topPadding: ui.sdu(6)
+                            verticalAlignment: VerticalAlignment.Bottom
+                            text: Qt.contactEditorModel.lastName
+                            input.keyLayout: KeyLayout.Contact
+                            inputMode: TextFieldInputMode.Text
+                            textStyle.textAlign: TextAlign.Center
+
+                            onTextFieldChanging: {
+                                Qt.contactEditorModel.lastName = text
+                            }
+                        }
+                    }
+
+                    Container {
+                        layout: DockLayout {
+
+                        }
+                        topPadding: ui.sdu(4)
+
+                        Label {
+                            verticalAlignment: VerticalAlignment.Top
+                            text: qsTr("FIRST NAME") + Retranslate.onLanguageChanged
+                            textStyle.color: Qt.colors.colorE
+                            textStyle.fontSize: FontSize.Small
+                            textStyle.base: Qt.titilliumWeb.style
+                        }
+
+                        CustomListTextField {
+                            topPadding: ui.sdu(6)
+                            verticalAlignment: VerticalAlignment.Bottom
+                            text: Qt.contactEditorModel.firstName
+                            input.keyLayout: KeyLayout.Contact
+                            inputMode: TextFieldInputMode.Text
+                            textStyle.textAlign: TextAlign.Center
+
+                            onTextFieldChanging: {
+                                Qt.contactEditorModel.firstName = text
+                            }
+                        }
+                    }
+
+                    Container {
+                        layout: DockLayout {
+
+                        }
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        topPadding: ui.sdu(4)
+
+                        Label {
+                            verticalAlignment: VerticalAlignment.Bottom
+                            text: qsTr("SIP ADDRESS") + Retranslate.onLanguageChanged
+                            textStyle.color: Qt.colors.colorE
+                            textStyle.fontSize: FontSize.Small
+                            textStyle.base: Qt.titilliumWeb.style
+                        }
+
+                        ImageButton {
+                            defaultImageSource: "asset:///images/contacts/add_field_default.png"
+                            pressedImageSource: "asset:///images/contacts/add_field_over.png"
+                            verticalAlignment: VerticalAlignment.Center
+                            horizontalAlignment: HorizontalAlignment.Right
+                            
+                            onClicked: {
+                                Qt.contactEditorModel.addNewSipAddressRow();
+                            }
+                        }
                     }
                 }
+            },
+            ListItemComponent {
+                type: "textfield"
+
+                Container {
+                    layout: StackLayout {
+                        orientation: LayoutOrientation.LeftToRight
+                    }
+                    leftPadding: ui.sdu(2)
+                    rightPadding: ui.sdu(2)
+                    bottomPadding: ui.sdu(2)
+                    
+                    CustomListTextField {
+                        layoutProperties: StackLayoutProperties {
+                            spaceQuota: 1
+                        }
+                        text: ListItemData.value
+                        input.keyLayout: KeyLayout.EmailAddress
+                        inputMode: TextFieldInputMode.EmailAddress
+                        textStyle.textAlign: TextAlign.Center
+                        input.submitKey: SubmitKey.Done
+                        input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
+    
+                        onTextFieldChanging: {
+                            Qt.contactEditorModel.updateSipAddressForIndex(ListItemData.id, text);
+                        }
+                    }
+                    
+                    ImageButton {
+                        visible: !ListItemData.first // Don't allow to delete the first SIP address
+                        defaultImageSource: "asset:///images/contacts/delete_field_default.png"
+                        pressedImageSource: "asset:///images/contacts/delete_field_over.png"
+                        verticalAlignment: VerticalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Right
+                        
+                        onClicked: {
+                            Qt.contactEditorModel.deleteSipAddressRowAtIndex(ListItemData.id);
+                        }
+                    }
+                }
+            },
+            ListItemComponent {
+                type: "empty"
+
+                Container {
+
+                }
+            }
+        ]
+
+        function itemType(data, indexPath) {
+            if (indexPath.length == 1 && indexPath[0] == 0) {
+                return "header";
+            } else if (indexPath.length > 1) {
+                return "textfield";
+            } else {
+                return "empty";
             }
         }
     }

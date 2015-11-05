@@ -59,8 +59,8 @@ public Q_SLOTS:
     }
 
     void updateSipAddressForIndex(int index, QString sipAddress);
-    //void addNewSipAddressRow();
-    //void deleteSipAddressRowAtIndex(int index);
+    void addNewSipAddressRow();
+    void deleteSipAddressRowAtIndex(int index);
 
 private:
     void getContact();
