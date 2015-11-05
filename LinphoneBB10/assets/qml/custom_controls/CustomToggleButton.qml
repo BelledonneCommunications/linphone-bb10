@@ -21,7 +21,7 @@ import bb.cascades 1.4
 
 Container {
     property alias imageSource: image.imageSource
-    property alias selectedImageSource: image.selectedImageSource
+    property alias selectedImageSource: selectedImage.imageSource
     property alias selected: selection.visible
     
     layout: DockLayout {
@@ -43,9 +43,16 @@ Container {
         background = colors.colorF
     }
     
-    CustomImageToggle {
+    ImageView {
         id: image
-        selected: selection.visible
+        visible: !selection.visible
+        horizontalAlignment: HorizontalAlignment.Center
+        verticalAlignment: VerticalAlignment.Center
+    }
+    
+    ImageView {
+        id: selectedImage
+        visible: selection.visible
         horizontalAlignment: HorizontalAlignment.Center
         verticalAlignment: VerticalAlignment.Center
     }
