@@ -97,6 +97,7 @@ ContactFound ContactFetcher::findContact(QString searchValue)
     fields.append(SearchField::Phone);
     options.setSearchFields(fields);
     options.setIncludePhotos(true);
+    options.setExactMatch(TRUE);
     options.setSearchValue(searchValue);
 
     QList<Contact> contacts = _contactService->searchContacts(options);

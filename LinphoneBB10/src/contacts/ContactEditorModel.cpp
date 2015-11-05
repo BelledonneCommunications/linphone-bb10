@@ -42,7 +42,8 @@ ContactEditorModel::ContactEditorModel(QObject *parent)
       _firstName(""),
       _lastName(""),
       _photo(""),
-      _photoUrl("")
+      _photoUrl(""),
+      _nextEditSipAddress("")
 {
     QStringList sortingKeys;
     sortingKeys << "id";
@@ -86,7 +87,7 @@ void ContactEditorModel::getContact() {
     QList<ContactAttribute> attrs = contact.filteredAttributes(AttributeKind::VideoChat);
     if (attrs.isEmpty()) { // Always display at least an empty SIP address field, else there won't be anything to be displayed because other informations are the header of the first group in the list
         QVariantMap entry;
-        entry["value"] = "";
+        entry["value"] = _nextEditSipAddress;
         entry["id"] = 0;
         entry["first"] = TRUE;
         _sipAddresses->insert(entry);
@@ -100,7 +101,17 @@ void ContactEditorModel::getContact() {
             _sipAddresses->insert(entry);
             i++;
         }
+
+        if (!_nextEditSipAddress.isEmpty()) {
+            QVariantMap entry;
+            entry["value"] = _nextEditSipAddress;
+            entry["id"] = i;
+            entry["first"] = FALSE;
+            _sipAddresses->insert(entry);
+        }
     }
+
+    _nextEditSipAddress = "";
 
     emit sipAddressesUpdated();
 }

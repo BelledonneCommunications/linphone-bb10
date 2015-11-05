@@ -58,6 +58,10 @@ public Q_SLOTS:
         return _previousPage;
     }
 
+    void setNextEditSipAddress(QString sipAddress) { // Stores a SIP address for the user to add to the next edited contact
+        _nextEditSipAddress = sipAddress;
+    }
+
     void updateSipAddressForIndex(int index, QString sipAddress);
     void addNewSipAddressRow();
     void deleteSipAddressRowAtIndex(int index);
@@ -105,6 +109,8 @@ private:
     QString _photo;
 
     QString _photoUrl;
+
+    QString _nextEditSipAddress;
 };
 
 #endif /* CONTACTEDITORMODEL_H_ */
