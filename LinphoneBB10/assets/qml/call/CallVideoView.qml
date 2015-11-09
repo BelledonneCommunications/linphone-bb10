@@ -28,6 +28,12 @@ Container {
     horizontalAlignment: HorizontalAlignment.Fill
     verticalAlignment: VerticalAlignment.Fill
     background: Color.Black
+    
+    gestureHandlers: TapHandler {
+        onTapped: {
+            inCallModel.switchFullScreenMode();
+        }
+    }
 
     ForeignWindowControl {
         windowId: "LinphoneVideoWindowId" // Do not change the name of this windowId
