@@ -45,12 +45,6 @@ Container {
         onCreationCompleted: {
             inCallModel.onVideoSurfaceCreationCompleted(windowId, windowGroup);
         }
-
-        gestureHandlers: TapHandler {
-            onTapped: {
-                inCallModel.switchFullScreenMode();
-            }
-        }
     }
 
     ForeignWindowControl {
