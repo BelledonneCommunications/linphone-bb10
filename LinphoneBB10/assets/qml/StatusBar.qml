@@ -26,116 +26,127 @@ Container {
     property bool menuEnabled: true
     property bool statsEnabled: false
     property bool isInCall: false
+    property bool isHidden: false
     
     signal menuOpened();
     signal menuClosed();
-
+    
     Container {
-        layout: StackLayout {
-            orientation: LayoutOrientation.LeftToRight
+        layout: DockLayout {
+            
         }
-
-        leftPadding: ui.sdu(2)
-        rightPadding: ui.sdu(2)
-        topPadding: ui.sdu(2)
-        bottomPadding: ui.sdu(2)
-        background: colors.colorA
-        clipContentToBounds: false
         minHeight: ui.sdu(10)
+        background: Colors.Black
+        horizontalAlignment: HorizontalAlignment.Fill
 
         Container {
+            layout: StackLayout {
+                orientation: LayoutOrientation.LeftToRight
+            }
+    
+            leftPadding: ui.sdu(2)
             rightPadding: ui.sdu(2)
-            verticalAlignment: VerticalAlignment.Center
-
-            ImageButton {
+            topPadding: ui.sdu(2)
+            bottomPadding: ui.sdu(2)
+            background: colors.colorA
+            clipContentToBounds: false
+            minHeight: ui.sdu(10)
+            opacity: isHidden ? 0 : 1
+    
+            Container {
+                rightPadding: ui.sdu(2)
+                verticalAlignment: VerticalAlignment.Center
+    
+                ImageButton {
+                    visible: ! isInCall
+                    enabled: menuEnabled
+                    opacity: menuEnabled ? 1 : 0.2
+                    defaultImageSource: "asset:///images/statusbar/menu.png"
+                    verticalAlignment: VerticalAlignment.Center
+    
+                    onClicked: {
+                        if (pageContent.translationX == 0) {
+                            pageContent.translationX = sideMenu.minWidth;
+                            menuOpened();
+                        } else {
+                            pageContent.translationX = 0;
+                            menuClosed();
+                        }
+                    }
+                }
+    
+                ImageButton {
+                    visible: isInCall
+                    enabled: statsEnabled
+                    opacity: statsEnabled ? 1 : 0.2
+                    defaultImageSource: inCallModel.callStatsModel.callQualityIcon
+                    verticalAlignment: VerticalAlignment.Center
+    
+                    onClicked: {
+                        if (callPageContent.translationX == 0) {
+                            callPageContent.translationX = statsMenu.minWidth;
+                        } else {
+                            callPageContent.translationX = 0;
+                        }
+                    }
+                }
+            }
+    
+            ImageView {
+                imageSource: linphoneManager.registrationStatusImage
+                verticalAlignment: VerticalAlignment.Center
+                scalingMethod: ScalingMethod.AspectFit
+    
+                gestureHandlers: TapHandler {
+                    onTapped: {
+                        linphoneManager.refreshRegisters();
+                    }
+                }
+            }
+    
+            Label {
+                verticalAlignment: VerticalAlignment.Center
+                layoutProperties: StackLayoutProperties {
+                    spaceQuota: 1
+                }
+                text: linphoneManager.registrationStatusText
+                textStyle.color: colors.colorH
+                textStyle.base: titilliumWeb.style
+    
+                gestureHandlers: TapHandler {
+                    onTapped: {
+                        linphoneManager.refreshRegisters();
+                    }
+                }
+            }
+    
+            ImageView {
+                id: voicemail
+                visible: ! isInCall && messagesCountText > 0
+                verticalAlignment: VerticalAlignment.Center
+                imageSource: "asset:///images/statusbar/voicemail.png"
+                scalingMethod: ScalingMethod.AspectFit
+            }
+    
+            Label {
+                id: messagesCount
                 visible: ! isInCall
-                enabled: menuEnabled
-                opacity: menuEnabled ? 1 : 0.2
-                defaultImageSource: "asset:///images/statusbar/menu.png"
                 verticalAlignment: VerticalAlignment.Center
-
-                onClicked: {
-                    if (pageContent.translationX == 0) {
-                        pageContent.translationX = sideMenu.minWidth;
-                        menuOpened();
-                    } else {
-                        pageContent.translationX = 0;
-                        menuClosed();
-                    }
-                }
+                text: messagesCountText
+                textStyle.color: colors.colorH
+                textStyle.base: titilliumWeb.style
             }
-
+    
             ImageButton {
+                id: security
                 visible: isInCall
-                enabled: statsEnabled
-                opacity: statsEnabled ? 1 : 0.2
-                defaultImageSource: inCallModel.callStatsModel.callQualityIcon
                 verticalAlignment: VerticalAlignment.Center
-
+                defaultImageSource: inCallModel.callStatsModel.callSecurityIcon
+    
                 onClicked: {
-                    if (callPageContent.translationX == 0) {
-                        callPageContent.translationX = statsMenu.minWidth;
-                    } else {
-                        callPageContent.translationX = 0;
+                    if (inCallModel.callStatsModel.callSecurityToken.length > 0) {
+                        inCallModel.callStatsModel.zrtpDialogVisible = true;
                     }
-                }
-            }
-        }
-
-        ImageView {
-            imageSource: linphoneManager.registrationStatusImage
-            verticalAlignment: VerticalAlignment.Center
-            scalingMethod: ScalingMethod.AspectFit
-
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    linphoneManager.refreshRegisters();
-                }
-            }
-        }
-
-        Label {
-            verticalAlignment: VerticalAlignment.Center
-            layoutProperties: StackLayoutProperties {
-                spaceQuota: 1
-            }
-            text: linphoneManager.registrationStatusText
-            textStyle.color: colors.colorH
-            textStyle.base: titilliumWeb.style
-
-            gestureHandlers: TapHandler {
-                onTapped: {
-                    linphoneManager.refreshRegisters();
-                }
-            }
-        }
-
-        ImageView {
-            id: voicemail
-            visible: ! isInCall && messagesCountText > 0
-            verticalAlignment: VerticalAlignment.Center
-            imageSource: "asset:///images/statusbar/voicemail.png"
-            scalingMethod: ScalingMethod.AspectFit
-        }
-
-        Label {
-            id: messagesCount
-            visible: ! isInCall
-            verticalAlignment: VerticalAlignment.Center
-            text: messagesCountText
-            textStyle.color: colors.colorH
-            textStyle.base: titilliumWeb.style
-        }
-
-        ImageButton {
-            id: security
-            visible: isInCall
-            verticalAlignment: VerticalAlignment.Center
-            defaultImageSource: inCallModel.callStatsModel.callSecurityIcon
-
-            onClicked: {
-                if (inCallModel.callStatsModel.callSecurityToken.length > 0) {
-                    inCallModel.callStatsModel.zrtpDialogVisible = true;
                 }
             }
         }

@@ -105,14 +105,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
-        <source>Password is too short
-(6 characters minimum)</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
+        <source>Password is too short
+(6 characters minimum)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -323,37 +323,37 @@ please choose another one</source>
 <context>
     <name>CallStats</name>
     <message>
-        <location filename="../assets/qml/call/CallStats.qml" line="34"/>
+        <location filename="../assets/qml/call/CallStats.qml" line="35"/>
         <source>Audio codec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/call/CallStats.qml" line="48"/>
+        <location filename="../assets/qml/call/CallStats.qml" line="49"/>
         <source>Video codec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/call/CallStats.qml" line="62"/>
+        <location filename="../assets/qml/call/CallStats.qml" line="63"/>
         <source>Audio bandwidth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/call/CallStats.qml" line="92"/>
+        <location filename="../assets/qml/call/CallStats.qml" line="93"/>
         <source>Video bandwidth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/call/CallStats.qml" line="122"/>
+        <location filename="../assets/qml/call/CallStats.qml" line="123"/>
         <source>Received video size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/call/CallStats.qml" line="136"/>
+        <location filename="../assets/qml/call/CallStats.qml" line="137"/>
         <source>Sent video size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/call/CallStats.qml" line="150"/>
+        <location filename="../assets/qml/call/CallStats.qml" line="151"/>
         <source>Ice connectivity</source>
         <translation type="unfinished"></translation>
     </message>

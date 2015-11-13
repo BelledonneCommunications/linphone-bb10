@@ -22,6 +22,7 @@ import bb.cascades 1.4
 Container {
     verticalAlignment: VerticalAlignment.Fill
     minWidth: ui.sdu(75)
+    background: Color.White
     
     Container {
         layout: GridLayout {
