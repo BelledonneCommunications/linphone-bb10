@@ -62,8 +62,6 @@ Page {
                 imageSource: inCallModel.incomingCall.photo
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
-                maxWidth: ui.sdu(41)
-                maxHeight: ui.sdu(41)
             }
             
             CurrentCallHeaderView {

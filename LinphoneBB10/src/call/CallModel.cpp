@@ -162,7 +162,6 @@ void CallModel::callStateChanged(LinphoneCall *call) {
         delete(model);
         linphone_call_set_user_data(call, NULL);
 
-        pausedCalls();
         conferenceCalls();
 
         if (linphone_core_get_calls_nb(lc) == 0) {
@@ -186,8 +185,6 @@ void CallModel::callStateChanged(LinphoneCall *call) {
 
         _isPausedByRemote = false;
         emit callPausedByRemoteUpdated();
-    } else if (state == LinphoneCallResuming || state == LinphoneCallPaused) {
-        pausedCalls();
     } else if (state == LinphoneCallUpdatedByRemote) {
         bool localVideoEnabled = linphone_call_params_video_enabled(linphone_call_get_current_params(call));
         bool remoteVideoEnabled = linphone_call_params_video_enabled(linphone_call_get_remote_params(call));
@@ -203,6 +200,8 @@ void CallModel::callStateChanged(LinphoneCall *call) {
         _isPausedByRemote = true;
         emit callPausedByRemoteUpdated();
     }
+
+    pausedCalls();
 
     setVideoEnabled(linphone_call_params_video_enabled(params));
     setMicMuted(linphone_core_is_mic_muted(lc));
@@ -497,10 +496,29 @@ void CallModel::resumeCall(const LinphoneCallModel*& callModel) {
     LinphoneManager *manager = LinphoneManager::getInstance();
     LinphoneCore *lc = manager->getLc();
 
-    if (lc && callModel) {
-        LinphoneCallState state = linphone_call_get_state(callModel->_call);
-        if (state == LinphoneCallPaused) {
-            linphone_core_resume_call(lc, callModel->_call);
+    if (lc) {
+        if (callModel) {
+            LinphoneCallState state = linphone_call_get_state(callModel->_call);
+            if (state == LinphoneCallPaused) {
+                linphone_core_resume_call(lc, callModel->_call);
+            }
+        } else {
+            const MSList *calls = linphone_core_get_calls(lc);
+            bool isConference = false;
+            while (calls) {
+                LinphoneCall *call = (LinphoneCall*) calls->data;
+                const LinphoneCallParams *params = linphone_call_get_current_params(call);
+                if (linphone_call_params_get_local_conference_mode(params)) {
+                    isConference = true;
+                    break;
+                }
+            }
+
+            if (isConference && !linphone_core_is_in_conference(lc)) {
+                // Conference is paused, resume it
+                linphone_core_enter_conference(lc);
+                pausedCalls();
+            }
         }
     }
 }
@@ -575,9 +593,15 @@ void CallModel::pausedCalls() {
     LinphoneCore *lc = manager->getLc();
     const MSList *calls = linphone_core_get_calls(lc);
 
+    int conferenceCount = 0;
     while (calls) {
         LinphoneCall *call = (LinphoneCall*) calls->data;
-        if (call && linphone_call_get_state(call) == LinphoneCallPaused) {
+        const LinphoneCallParams *params = linphone_call_get_current_params(call);
+        if (linphone_call_params_get_local_conference_mode(params)) {
+            conferenceCount++;
+        }
+
+        if (linphone_call_get_state(call) == LinphoneCallPaused) {
             QVariantMap entry;
             LinphoneCallModel *model = (LinphoneCallModel *)linphone_call_get_user_data(call);
             entry["call"] = QVariant::fromValue<LinphoneCallModel*>(model);
@@ -587,6 +611,13 @@ void CallModel::pausedCalls() {
             _pausedCallsDataModel->insert(entry);
         }
         calls = ms_list_next(calls);
+    }
+
+    if (conferenceCount > 1 && !linphone_core_is_in_conference(lc)) { // Conference is paused
+        QVariantMap entry;
+        entry["displayName"] = tr("Conference");
+        entry["photo"] = "/images/avatar.png";
+        _pausedCallsDataModel->insert(entry);
     }
 
     emit pausedCallsUpdated();

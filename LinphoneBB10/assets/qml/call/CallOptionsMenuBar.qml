@@ -29,8 +29,6 @@ Container {
         orientation: LayoutOrientation.TopToBottom
     }
     background: colors.colorF
-    visible: inCallModel.areControlsVisible && menuVisible
-    verticalAlignment: VerticalAlignment.Bottom
     horizontalAlignment: HorizontalAlignment.Right
     
     attachedObjects: [

@@ -26,7 +26,6 @@ Container {
         orientation: LayoutOrientation.LeftToRight
     }
     minHeight: ui.sdu(15)
-    visible: inCallModel.areControlsVisible
     
     Container {
         layout: DockLayout {

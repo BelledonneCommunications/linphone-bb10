@@ -27,7 +27,6 @@ Container {
     }
     minHeight: ui.sdu(15)
     background: colors.colorF
-    visible: inCallModel.areControlsVisible
     
     CustomImageToggle {
         layoutProperties: StackLayoutProperties {

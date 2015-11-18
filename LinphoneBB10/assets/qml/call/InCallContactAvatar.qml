@@ -27,17 +27,27 @@ Container {
     layout: DockLayout {
     
     }
+    verticalAlignment: VerticalAlignment.Fill
+    horizontalAlignment: HorizontalAlignment.Fill
     
     ContactAvatar {
         id: avatar
-        horizontalAlignment: HorizontalAlignment.Fill
-        verticalAlignment: VerticalAlignment.Fill
+        horizontalAlignment: HorizontalAlignment.Center
+        verticalAlignment: VerticalAlignment.Center
+        maxWidth: ui.sdu(41)
+        maxHeight: ui.sdu(41)
+        minWidth: ui.sdu(41)
+        minHeight: ui.sdu(41)
     }
     
     ImageView {
-        horizontalAlignment: HorizontalAlignment.Fill
-        verticalAlignment: VerticalAlignment.Fill
+        horizontalAlignment: HorizontalAlignment.Center
+        verticalAlignment: VerticalAlignment.Center
         scalingMethod: ScalingMethod.AspectFill
         imageSource: "asset:///images/call/avatar_mask_border.png"
+        maxWidth: ui.sdu(41)
+        maxHeight: ui.sdu(41)
+        minWidth: ui.sdu(41)
+        minHeight: ui.sdu(41)
     }
 }

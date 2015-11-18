@@ -313,6 +313,14 @@ please choose another one</source>
     </message>
 </context>
 <context>
+    <name>CallModel</name>
+    <message>
+        <location filename="../src/call/CallModel.cpp" line="618"/>
+        <source>Conference</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CallOutgoingView</name>
     <message>
         <location filename="../assets/qml/call/CallOutgoingView.qml" line="43"/>
@@ -423,12 +431,12 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>ChatListView</name>
     <message>
-        <location filename="../assets/qml/chat/ChatListView.qml" line="91"/>
+        <location filename="../assets/qml/chat/ChatListView.qml" line="109"/>
         <source>Do you want to delete selected conversations?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/chat/ChatListView.qml" line="280"/>
+        <location filename="../assets/qml/chat/ChatListView.qml" line="298"/>
         <source>No conversations</source>
         <translation type="unfinished"></translation>
     </message>

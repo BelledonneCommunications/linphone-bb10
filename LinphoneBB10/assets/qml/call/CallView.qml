@@ -68,10 +68,8 @@ Page {
                 InCallContactAvatar {
                     visible: currentCallHeader.visible && ! inCallModel.isVideoEnabled && inCallModel.areControlsVisible
                     imageSource: inCallModel.currentCall.photo
-                    horizontalAlignment: HorizontalAlignment.Center
-                    verticalAlignment: VerticalAlignment.Center
-                    maxWidth: ui.sdu(41)
-                    maxHeight: ui.sdu(41)
+                    verticalAlignment: VerticalAlignment.Top
+                    topPadding: ui.sdu(21)
                 }
 
                 CurrentCallHeaderView {
@@ -87,6 +85,7 @@ Page {
 
                 PausedByRemoteView {
                     visible: inCallModel.isPausedByRemote
+                    bottomPadding: ui.sdu(30)
                 }
 
                 PauseCurrentCallButton {
@@ -95,19 +94,16 @@ Page {
 
                 AllCallsPausedView {
                     visible: ! inCallModel.isInConference && inCallModel.runningCallsNotInAnyConferenceCount == 0
+                    bottomPadding: ui.sdu(30)
                 }
 
                 ConferenceView {
                     visible: inCallModel.isInConference
+                    bottomPadding: ui.sdu(30)
                 }
 
                 PausedCallsView {
-
-                }
-
-                CallOptionsMenuBar {
-                    id: optionsMenu
-                    menuVisible: false
+                    bottomPadding: inCallModel.areControlsVisible ? ui.sdu(30) : 0
                 }
 
                 Container {
@@ -147,6 +143,13 @@ Page {
                     }
                     horizontalAlignment: HorizontalAlignment.Fill
                     verticalAlignment: VerticalAlignment.Bottom
+                    visible: inCallModel.areControlsVisible
+                    
+                    CallOptionsMenuBar {
+                        id: optionsMenu
+                        menuVisible: false
+                        visible: menuVisible
+                    }
 
                     CallControlBar {
 
