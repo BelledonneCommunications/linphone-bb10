@@ -185,6 +185,9 @@ void CallModel::callStateChanged(LinphoneCall *call) {
 
         _isPausedByRemote = false;
         emit callPausedByRemoteUpdated();
+
+        setVideoEnabled(linphone_call_params_video_enabled(params));
+        setMicMuted(linphone_core_is_mic_muted(lc));
     } else if (state == LinphoneCallUpdatedByRemote) {
         bool localVideoEnabled = linphone_call_params_video_enabled(linphone_call_get_current_params(call));
         bool remoteVideoEnabled = linphone_call_params_video_enabled(linphone_call_get_remote_params(call));
@@ -202,9 +205,6 @@ void CallModel::callStateChanged(LinphoneCall *call) {
     }
 
     pausedCalls();
-
-    setVideoEnabled(linphone_call_params_video_enabled(params));
-    setMicMuted(linphone_core_is_mic_muted(lc));
 
     emit callStateChanged();
 }
