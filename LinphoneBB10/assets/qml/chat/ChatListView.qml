@@ -55,10 +55,28 @@ Container {
                 }
             }
         }
+        
+        TopBarButton {
+            visible: inCallModel.isInCall
+            imageSource: "asset:///images/chat/call_back.png"
+            
+            gestureHandlers: TapHandler {
+                onTapped: {
+                    inCallView.open();
+                }
+            }
+        }
+        
+        Container {
+            visible: !inCallModel.isInCall
+            layoutProperties: StackLayoutProperties {
+                spaceQuota: 1
+            }
+        }
 
         Container {
             layoutProperties: StackLayoutProperties {
-                spaceQuota: 3
+                spaceQuota: 2
             }
         }
 
