@@ -201,7 +201,7 @@ void LinphoneManager::onCallStateChanged(LinphoneCall *call, LinphoneCallState s
         if (linphone_call_log_get_status(log) == LinphoneCallMissed) {
             directionPicture = "CallMissed.png";
         }
-        _hubHelper->processNewCall(displayName, linphone_address_as_string_uri_only(from), "", directionPicture, true);
+        _hubHelper->processNewCall(displayName, linphone_address_as_string_uri_only(from), "", directionPicture, false);
 
         _unreadMissedCalls = linphone_core_get_missed_calls_count(_lc);
         emit onUnreadCountUpdated();
