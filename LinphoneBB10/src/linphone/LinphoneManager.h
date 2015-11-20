@@ -30,6 +30,7 @@
 
 #include "NotificationManager.h"
 #include "linphone/linphonecore.h"
+#include "hub/HubIntegration.hpp"
 
 class LinphoneManager : public QObject
 {
@@ -145,6 +146,8 @@ private:
         QString version = QT_TR_NOOP("Blackberry OS %%s");
         return version.replace("%%s", packageInfo.systemDependency());
     }
+
+    HubIntegration *_hubHelper;
 };
 
 static LinphoneManager *_linphoneManagerInstance = NULL;

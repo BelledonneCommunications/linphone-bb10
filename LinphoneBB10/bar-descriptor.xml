@@ -97,6 +97,7 @@
     </icon>
 
     <asset path="assets">assets</asset>
+    <asset public="true" path="hubassets">hubassets</asset>
 
     <!-- Locale support -->
     <asset path="translations" dest="qm">
@@ -117,9 +118,37 @@
 	        <mime-type>application/vnd.linphone</mime-type>
 	    </filter>
 	</invoke-target>
+	
+	<invoke-target id="org.linphone.HubIntegration">
+       <invoke-target-type>application</invoke-target-type>
+       <invoke-target-name>Hub Integration</invoke-target-name>
+       <entry-point-id>HubIntegration</entry-point-id>
+		<filter>
+			<action>bb.action.VIEW</action>
+			<mime-type>hub/vnd.linphone.chat</mime-type>
+			<property var="uris" value="data://,pim:"/>
+		</filter>
+		<filter>
+			<action>bb.action.OPEN</action>
+			<mime-type>hub/vnd.linphone.chat</mime-type>
+			<property var="uris" value="data://,pim:"/>
+		</filter>
+		<filter>
+			<action>bb.action.VIEW</action>
+			<mime-type>hub/vnd.linphone.history</mime-type>
+			<property var="uris" value="data://,pim:"/>
+		</filter>
+		<filter>
+			<action>bb.action.OPEN</action>
+			<mime-type>hub/vnd.linphone.history</mime-type>
+			<property var="uris" value="data://,pim:"/>
+		</filter>
+	</invoke-target>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
+    <permission system="true">_sys_manage_pimdomain_external_accounts</permission>
+	<permission system="true">_sys_access_pim_unified</permission>
     <permission>post_notification</permission>
     <permission>run_when_backgrounded</permission>
     <permission>access_pimdomain_contacts</permission>

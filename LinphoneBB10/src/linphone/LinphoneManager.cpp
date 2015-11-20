@@ -30,6 +30,7 @@
 
 #include "LinphoneManager.h"
 #include "src/utils/Misc.h"
+#include "src/contacts/ContactFetcher.h"
 
 using namespace bb::cascades;
 using namespace bb::device;
@@ -45,7 +46,8 @@ LinphoneManager::LinphoneManager(bb::Application *app)
       _registrationStatusImage("/images/statusbar/led_disconnected.png"),
       _registrationStatusText(tr("no account configured")),
       _unreadChatMessages(0),
-      _unreadMissedCalls(0)
+      _unreadMissedCalls(0),
+      _hubHelper(new HubIntegration(app))
 {
     bool result = QObject::connect(_app, SIGNAL(manualExit()), this, SLOT(onAppExit()));
     Q_ASSERT(result);
@@ -167,6 +169,8 @@ static void registration_state_changed(LinphoneCore *lc, LinphoneProxyConfig *cf
 }
 
 void LinphoneManager::onCallStateChanged(LinphoneCall *call, LinphoneCallState state) {
+    emit callStateChanged(call);
+
     if (state == LinphoneCallIncomingReceived) {
         emit incomingCallReceived(call);
 
@@ -180,15 +184,28 @@ void LinphoneManager::onCallStateChanged(LinphoneCall *call, LinphoneCallState s
     } else if (state == LinphoneCallEnd || state == LinphoneCallError) {
         emit callEnded(call);
 
-        if (_isAppInBackground) {
-            _notificationManager->dismissIncomingCallNotification();
+        const LinphoneAddress *from = linphone_call_get_remote_address(call);
+        ContactFound cf = ContactFetcher::getInstance()->findContact(linphone_address_get_username(from));
+        QString displayName = "";
+        if (cf.id >= 0) {
+            displayName = cf.displayName;
+        } else {
+            displayName = GetDisplayNameFromLinphoneAddress(from);
         }
+
+        LinphoneCallLog *log = linphone_call_get_call_log(call);
+        QString directionPicture = "CallOutgoing.png";
+        if (linphone_call_log_get_dir(log) == LinphoneCallIncoming) {
+            directionPicture = "CallIncoming.png";
+        }
+        if (linphone_call_log_get_status(log) == LinphoneCallMissed) {
+            directionPicture = "CallMissed.png";
+        }
+        _hubHelper->processNewCall(displayName, linphone_address_as_string_uri_only(from), "", directionPicture, true);
 
         _unreadMissedCalls = linphone_core_get_missed_calls_count(_lc);
         emit onUnreadCountUpdated();
-        updateAppIconBadge();
     }
-    emit callStateChanged(call);
 }
 
 static void call_state_changed(LinphoneCore *lc, LinphoneCall *call, LinphoneCallState state, const char *msg)
@@ -205,9 +222,16 @@ void LinphoneManager::onMessageReceived(LinphoneChatRoom *room, LinphoneChatMess
 {
     emit messageReceived(room, message);
 
-    if (_isAppInBackground) {
-        _notificationManager->notifyIncomingMessage(message);
+    const LinphoneAddress *from = linphone_chat_message_get_from_address(message);
+    ContactFound cf = ContactFetcher::getInstance()->findContact(linphone_address_get_username(from));
+    QString displayName = "";
+    if (cf.id >= 0) {
+        displayName = cf.displayName;
+    } else {
+        displayName = GetDisplayNameFromLinphoneAddress(from);
     }
+    const char *text = linphone_chat_message_get_text(message);
+    _hubHelper->processNewMessage(displayName, text, linphone_address_as_string_uri_only(from), false, _isAppInBackground);
 
     updateUnreadChatMessagesCount();
 }

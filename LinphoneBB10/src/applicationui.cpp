@@ -95,7 +95,7 @@ ApplicationUI::ApplicationUI() :
     AbstractPane *root = qml->createRootObject<AbstractPane>();
 
     // Set created root object as the application scene
-    Application::instance()->setScene(root);
+    bb::cascades::Application::instance()->setScene(root);
 }
 
 void ApplicationUI::onSystemLanguageChanged()
