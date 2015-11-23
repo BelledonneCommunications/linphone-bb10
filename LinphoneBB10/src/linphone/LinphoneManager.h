@@ -117,7 +117,8 @@ private:
     void notifyIncomingMessage(LinphoneChatMessage *message);
     void clearNotifications();
     void updateAppIconBadge();
-    void addOrUpdateChatConversationItemInHub(QString sipUri, QString displayName, QString text);
+    void addOrUpdateChatConversationItemInHub(LinphoneChatMessage *message);
+    void addCallLogItemInHub(LinphoneCall *call);
 
     bb::Application *_app;
     LinphoneCore *_lc;

@@ -82,13 +82,13 @@ void LinphoneManager::onInvoke(const InvokeRequest& invoke)
         if (item["sourceId"].toString() == itemMap["messageid"].toString() ||
             item["sourceId"].toString() == itemMap["sourceId"].toString()) {
             body = item["body"].toString();
-            _hubHelper->markHubItemRead(item);
             break;
         }
     }
 
     if (!body.isEmpty()) {
         if (invoke.mimeType() == "hub/vnd.linphone.chat") {
+            _hubHelper->markHubItemRead(itemMap);
             emit invokeRequestChat(body);
         } else if (invoke.mimeType() == "hub/vnd.linphone.history") {
             emit invokeRequestHistory(body);
@@ -218,24 +218,7 @@ void LinphoneManager::onCallStateChanged(LinphoneCall *call, LinphoneCallState s
     } else if (state == LinphoneCallEnd || state == LinphoneCallError) {
         emit callEnded(call);
 
-        const LinphoneAddress *from = linphone_call_get_remote_address(call);
-        ContactFound cf = ContactFetcher::getInstance()->findContact(linphone_address_get_username(from));
-        QString displayName = "";
-        if (cf.id >= 0) {
-            displayName = cf.displayName;
-        } else {
-            displayName = GetDisplayNameFromLinphoneAddress(from);
-        }
-
-        LinphoneCallLog *log = linphone_call_get_call_log(call);
-        QString directionPicture = "CallOutgoing.png";
-        if (linphone_call_log_get_dir(log) == LinphoneCallIncoming) {
-            directionPicture = "CallIncoming.png";
-        }
-        if (linphone_call_log_get_status(log) == LinphoneCallMissed) {
-            directionPicture = "CallMissed.png";
-        }
-        _hubHelper->addCallHistoryInHub(displayName, linphone_address_as_string_uri_only(from), linphone_call_log_get_call_id(log), directionPicture, false);
+        addCallLogItemInHub(call);
 
         _unreadMissedCalls = linphone_core_get_missed_calls_count(_lc);
         emit onUnreadCountUpdated();
@@ -254,16 +237,7 @@ static void call_state_changed(LinphoneCore *lc, LinphoneCall *call, LinphoneCal
 
 void LinphoneManager::onMessageReceived(LinphoneChatRoom *room, LinphoneChatMessage *message)
 {
-    const LinphoneAddress *from = linphone_chat_message_get_from_address(message);
-    ContactFound cf = ContactFetcher::getInstance()->findContact(linphone_address_get_username(from));
-    QString displayName = "";
-    if (cf.id >= 0) {
-        displayName = cf.displayName;
-    } else {
-        displayName = GetDisplayNameFromLinphoneAddress(from);
-    }
-    const char *text = linphone_chat_message_get_text(message);
-    addOrUpdateChatConversationItemInHub(linphone_address_as_string_uri_only(from), displayName, text);
+    addOrUpdateChatConversationItemInHub(message);
 
     emit messageReceived(room, message);
     updateUnreadChatMessagesCount();
@@ -484,7 +458,21 @@ void LinphoneManager::markChatConversationReadInHub(QString sipUri) {
     }
 }
 
-void LinphoneManager::addOrUpdateChatConversationItemInHub(QString sipUri, QString displayName, QString text) {
+void LinphoneManager::addOrUpdateChatConversationItemInHub(LinphoneChatMessage *message) {
+    const LinphoneAddress *from = linphone_chat_message_get_from_address(message);
+    ContactFound cf = ContactFetcher::getInstance()->findContact(linphone_address_get_username(from));
+    QString displayName = "";
+    if (cf.id >= 0) {
+        displayName = cf.displayName;
+    } else {
+        displayName = GetDisplayNameFromLinphoneAddress(from);
+    }
+    const char *text = linphone_chat_message_get_text(message);
+    if (!text) {
+        text = "";
+    }
+    QString sipUri = linphone_address_as_string_uri_only(from);
+
     bool found = false;
     QVariantMap itemMap;
 
@@ -503,4 +491,25 @@ void LinphoneManager::addOrUpdateChatConversationItemInHub(QString sipUri, QStri
     } else {
         _hubHelper->addConversationInHub(displayName, text, sipUri, false, _isAppInBackground);
     }
+}
+
+void LinphoneManager::addCallLogItemInHub(LinphoneCall *call) {
+    const LinphoneAddress *from = linphone_call_get_remote_address(call);
+    ContactFound cf = ContactFetcher::getInstance()->findContact(linphone_address_get_username(from));
+    QString displayName = "";
+    if (cf.id >= 0) {
+        displayName = cf.displayName;
+    } else {
+        displayName = GetDisplayNameFromLinphoneAddress(from);
+    }
+
+    LinphoneCallLog *log = linphone_call_get_call_log(call);
+    QString directionPicture = "CallOutgoing.png";
+    if (linphone_call_log_get_dir(log) == LinphoneCallIncoming) {
+        directionPicture = "CallIncoming.png";
+    }
+    if (linphone_call_log_get_status(log) == LinphoneCallMissed) {
+        directionPicture = "CallMissed.png";
+    }
+    _hubHelper->addCallHistoryInHub(displayName, linphone_address_as_string_uri_only(from), linphone_call_log_get_call_id(log), directionPicture, false);
 }

@@ -29,17 +29,17 @@ using namespace bb::system;
 
 static void test_account_existence_cb(LinphoneAccountCreator *creator, LinphoneAccountCreatorStatus status) {
     AssistantModel *thiz = (AssistantModel *)linphone_account_creator_get_user_data(creator);
-    thiz->emitUsernameAvailable(status == LinphoneAccountCreatorOk);
+    thiz->emitUsernameAvailable(status == LinphoneAccountCreatorOK);
 }
 
 static void test_account_validation_cb(LinphoneAccountCreator *creator, LinphoneAccountCreatorStatus status) {
     AssistantModel *thiz = (AssistantModel *)linphone_account_creator_get_user_data(creator);
-    thiz->emitAccountActivated(status == LinphoneAccountCreatorOk);
+    thiz->emitAccountActivated(status == LinphoneAccountCreatorOK);
 }
 
 static void account_validate_cb(LinphoneAccountCreator *creator, LinphoneAccountCreatorStatus status) {
     AssistantModel *thiz = (AssistantModel *)linphone_account_creator_get_user_data(creator);
-    thiz->emitAccountCreated(status == LinphoneAccountCreatorOk);
+    thiz->emitAccountCreated(status == LinphoneAccountCreatorOK);
 }
 
 AssistantModel::AssistantModel(QObject *parent)
