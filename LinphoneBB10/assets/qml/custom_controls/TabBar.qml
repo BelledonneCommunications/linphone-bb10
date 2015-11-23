@@ -161,4 +161,9 @@ Container {
         resetAllTabsBackgroundColor();
         contacts.selected = true;
     }
+    
+    function setHistoryTabSelected() {
+        resetAllTabsBackgroundColor();
+        history.selected = true;
+    }
 }

@@ -6,4 +6,4 @@ include(config.pri)
 
 include(linphone.pri)
 
-LIBS += -lbb -lbbsystem -lbbplatform -lbbdevice -lsocket -lslog2 -lasound -laudio_manager -lbbpim -lbbcascadespickers -lscreen -lcamapi -lbps -lunifieddatasourcec 
+LIBS += -lbb -lbbsystem -lbbplatform -lbbdevice -lsocket -lslog2 -lasound -laudio_manager -lbbpim -lbbcascadespickers -lscreen -lcamapi -lbps -lunifieddatasourcec -lbbdata

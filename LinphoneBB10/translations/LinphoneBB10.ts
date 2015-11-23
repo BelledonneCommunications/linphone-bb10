@@ -105,14 +105,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
-        <source>Password is too short
-(6 characters minimum)</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
+        <source>Password is too short
+(6 characters minimum)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -559,27 +559,27 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>LinphoneManager</name>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="47"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="49"/>
         <source>no account configured</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="145"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="179"/>
         <source>registered</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="149"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="183"/>
         <source>in progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="153"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="187"/>
         <source>error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/linphone/LinphoneManager.cpp" line="157"/>
+        <location filename="../src/linphone/LinphoneManager.cpp" line="191"/>
         <source>disconnected</source>
         <translation type="unfinished"></translation>
     </message>

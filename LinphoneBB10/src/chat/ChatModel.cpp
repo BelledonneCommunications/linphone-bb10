@@ -68,6 +68,9 @@ void ChatModel::onMessageReceived(LinphoneChatRoom *room, LinphoneChatMessage *m
     if (_room == room && _room) {
         addMessageToList(message);
         linphone_chat_room_mark_as_read(_room);
+
+        const LinphoneAddress *addr = linphone_chat_room_get_peer_address(room);
+        LinphoneManager::getInstance()->markChatConversationReadInHub(linphone_address_as_string_uri_only(addr));
     }
 }
 
@@ -103,6 +106,7 @@ bool ChatModel::setSelectedConversationSipAddress(QString sipAddress)
 
             linphone_chat_room_mark_as_read(_room);
             emit messagesRead(sipAddress);
+            LinphoneManager::getInstance()->markChatConversationReadInHub(linphone_address_as_string_uri_only(address));
 
             updateMessagesList();
         }

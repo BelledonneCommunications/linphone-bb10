@@ -27,6 +27,7 @@
 #include <bb/cascades/Page>
 #include <bb/cascades/Application>
 #include <bb/device/HardwareInfo>
+#include <bb/data/JsonDataAccess>
 
 #include "LinphoneManager.h"
 #include "src/utils/Misc.h"
@@ -34,6 +35,7 @@
 
 using namespace bb::cascades;
 using namespace bb::device;
+using namespace bb::system;
 
 LinphoneManager::LinphoneManager(bb::Application *app)
     : QObject(app),
@@ -47,7 +49,8 @@ LinphoneManager::LinphoneManager(bb::Application *app)
       _registrationStatusText(tr("no account configured")),
       _unreadChatMessages(0),
       _unreadMissedCalls(0),
-      _hubHelper(new HubIntegration(app))
+      _hubHelper(new HubIntegration(app)),
+      _invokeManager(new InvokeManager(this))
 {
     bool result = QObject::connect(_app, SIGNAL(manualExit()), this, SLOT(onAppExit()));
     Q_ASSERT(result);
@@ -57,9 +60,40 @@ LinphoneManager::LinphoneManager(bb::Application *app)
 
     result = QObject::connect(_app, SIGNAL(thumbnail()), this, SLOT(onAppThumbnail()));
     Q_ASSERT(result);
+
+    result = QObject::connect(_invokeManager, SIGNAL(invoked(const bb::system::InvokeRequest&)), this, SLOT(onInvoke(const bb::system::InvokeRequest&)));
     Q_UNUSED(result);
 
     _app->setAutoExit(false);
+}
+
+void LinphoneManager::onInvoke(const InvokeRequest& invoke)
+{
+    bb::data::JsonDataAccess jda;
+    QVariantMap objectMap = (jda.loadFromBuffer(invoke.data())).toMap();
+    QVariantMap itemMap = objectMap["attributes"].toMap();
+    QString body = "";
+
+    QVariantList items = _hubHelper->getItems();
+    for (int index = 0; index < items.size(); index++) {
+        QVariantMap item = items.at(index).toMap();
+        QString sourceId = item["messageid"].toString();
+
+        if (item["sourceId"].toString() == itemMap["messageid"].toString() ||
+            item["sourceId"].toString() == itemMap["sourceId"].toString()) {
+            body = item["body"].toString();
+            _hubHelper->markHubItemRead(item);
+            break;
+        }
+    }
+
+    if (!body.isEmpty()) {
+        if (invoke.mimeType() == "hub/vnd.linphone.chat") {
+            emit invokeRequestChat(body);
+        } else if (invoke.mimeType() == "hub/vnd.linphone.history") {
+            emit invokeRequestHistory(body);
+        }
+    }
 }
 
 LinphoneManager* LinphoneManager::createInstance(bb::Application *app)
@@ -201,7 +235,7 @@ void LinphoneManager::onCallStateChanged(LinphoneCall *call, LinphoneCallState s
         if (linphone_call_log_get_status(log) == LinphoneCallMissed) {
             directionPicture = "CallMissed.png";
         }
-        _hubHelper->processNewCall(displayName, linphone_address_as_string_uri_only(from), "", directionPicture, false);
+        _hubHelper->addCallHistoryInHub(displayName, linphone_address_as_string_uri_only(from), linphone_call_log_get_call_id(log), directionPicture, false);
 
         _unreadMissedCalls = linphone_core_get_missed_calls_count(_lc);
         emit onUnreadCountUpdated();
@@ -220,8 +254,6 @@ static void call_state_changed(LinphoneCore *lc, LinphoneCall *call, LinphoneCal
 
 void LinphoneManager::onMessageReceived(LinphoneChatRoom *room, LinphoneChatMessage *message)
 {
-    emit messageReceived(room, message);
-
     const LinphoneAddress *from = linphone_chat_message_get_from_address(message);
     ContactFound cf = ContactFetcher::getInstance()->findContact(linphone_address_get_username(from));
     QString displayName = "";
@@ -231,8 +263,9 @@ void LinphoneManager::onMessageReceived(LinphoneChatRoom *room, LinphoneChatMess
         displayName = GetDisplayNameFromLinphoneAddress(from);
     }
     const char *text = linphone_chat_message_get_text(message);
-    _hubHelper->processNewMessage(displayName, text, linphone_address_as_string_uri_only(from), false, _isAppInBackground);
+    addOrUpdateChatConversationItemInHub(linphone_address_as_string_uri_only(from), displayName, text);
 
+    emit messageReceived(room, message);
     updateUnreadChatMessagesCount();
 }
 
@@ -438,4 +471,36 @@ bool LinphoneManager::shouldStartWizardWhenAppStarts() {
 
     LpConfig *conf = linphone_core_get_config(_lc);
     return lp_config_get_int(conf, "app", "first_start_successful", 0) == 0;
+}
+
+void LinphoneManager::markChatConversationReadInHub(QString sipUri) {
+    QVariantList items = _hubHelper->getItems();
+    for (int index = 0; index < items.size(); index++) {
+        QVariantMap item = items.at(index).toMap();
+        if (sipUri == item["body"].toString()) {
+            _hubHelper->markHubItemRead(item);
+            break;
+        }
+    }
+}
+
+void LinphoneManager::addOrUpdateChatConversationItemInHub(QString sipUri, QString displayName, QString text) {
+    bool found = false;
+    QVariantMap itemMap;
+
+    QVariantList items = _hubHelper->getItems();
+    for (int index = 0; index < items.size(); index++) {
+        QVariantMap item = items.at(index).toMap();
+        if (sipUri == item["body"].toString()) {
+            found = true;
+            itemMap = item;
+            break;
+        }
+    }
+
+    if (found) {
+        _hubHelper->updateConversationInHub(displayName, text, itemMap, false, _isAppInBackground);
+    } else {
+        _hubHelper->addConversationInHub(displayName, text, sipUri, false, _isAppInBackground);
+    }
 }

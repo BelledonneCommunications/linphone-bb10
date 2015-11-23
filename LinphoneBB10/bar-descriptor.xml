@@ -121,7 +121,7 @@
 	
 	<invoke-target id="org.linphone.HubIntegration">
        <invoke-target-type>application</invoke-target-type>
-       <invoke-target-name>Hub Integration</invoke-target-name>
+       <invoke-target-name>Linphone</invoke-target-name>
        <entry-point-id>HubIntegration</entry-point-id>
 		<filter>
 			<action>bb.action.VIEW</action>

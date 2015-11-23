@@ -30,14 +30,12 @@ HubCache::HubCache(QSettings* settings) :
 					_itemsKey("hub/items"),
                     _settings(settings)
 {
-	qDebug()  << "HubCache::HubCache ";
-
 	_accountId = -1;
 	_lastItemId = 0;
 }
 
 HubCache::~HubCache() {
-	// TODO Auto-generated destructor stub
+
 }
 
 qint64 HubCache::accountId()
@@ -101,8 +99,6 @@ QVariant* HubCache::getItem(qint64 categoryId, qint64 itemId)
 
     for(int index = 0; index < _items.size(); index++) {
         QVariantMap item = _items.at(index).toMap();
-
-        qDebug()  << "HubCache::getItem " << index << ":" << item;
 
         if (item["categoryId"].toLongLong() == categoryId && item["sourceId"].toLongLong() == itemId) {
             foundItem = new QVariant(item);

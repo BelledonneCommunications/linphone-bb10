@@ -73,6 +73,12 @@ void HistoryListModel::viewHistory(const QVariantList &indexPath, LinphoneCallLo
     _historyModel->setSelectedHistoryLog(log);
 }
 
+void HistoryListModel::viewHistory(QString callID)
+{
+    //LinphoneCallLog *log = linphone_core_find_call_log_from_id(callID.toUtf8().constData());
+    //_historyModel->setSelectedHistoryLog(log);
+}
+
 void HistoryListModel::getHistory()
 {
     if (_historyFetcher) {

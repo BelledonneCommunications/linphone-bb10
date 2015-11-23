@@ -100,6 +100,11 @@ NavigationPane {
                                     else if (source.toString() == "asset:///qml/contacts/ContactsListView.qml") {
                                         tabs.setContactsTabSelected();
                                     }
+                                    
+                                    // This is to cancel the message received signal on chat conversation that will mark message as read even though we leaved the chat view
+                                    if (source.toString() != "asset:///qml/chat/ChatConversationView.qml") {
+                                        chatListModel.chatModel.setSelectedConversationSipAddress("");
+                                    }
                                 }
                             }
                         }
@@ -216,12 +221,28 @@ NavigationPane {
             linphoneManager.call(number);
         }
     }
+    
+    function invokeChat(sipAddr) {
+        chatListModel.viewConversation(sipAddr);
+        chatListModel.chatModel.setPreviousPage("ChatListView.qml");
+        tabDelegate.source = "qml/chat/ChatConversationView.qml";
+        tabs.setChatTabSelected();
+    }
+    
+    function invokeHistory(callID) {
+        historyListModel.viewHistory(callID);
+        tabDelegate.source = "qml/history/HistoryDetailsView.qml";
+        tabs.setHistoryTabSelected();
+    }
 
     onCreationCompleted: {
         linphoneManager.incomingCallReceived.connect(incomingCallReceived);
         linphoneManager.callConnected.connect(callConnected);
         linphoneManager.callEnded.connect(callEnded);
         linphoneManager.outgoingCallInit.connect(outgoingCallInit);
+        
+        linphoneManager.invokeRequestChat.connect(invokeChat);
+        linphoneManager.invokeRequestHistory.connect(invokeHistory);
         
         if (linphoneManager.shouldStartWizardWhenAppStarts()) {
             var assistantPage = assistant.createObject();

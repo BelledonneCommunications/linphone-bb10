@@ -52,6 +52,7 @@ public:
 
 public Q_SLOTS:
     void viewHistory(const QVariantList &indexPath, LinphoneCallLog *log);
+    void viewHistory(QString callID);
     void getHistory();
     void resetLastSelectedItemPath();
     void setMissedFilter(bool enable);

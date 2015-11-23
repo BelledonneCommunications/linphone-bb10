@@ -22,8 +22,6 @@
 
 LinphoneAccount::LinphoneAccount(UDSUtil* udsUtil, HubCache* hubCache) : HubAccount(udsUtil, hubCache)
 {
-	qDebug()  << "TestAccount::TestAccount " << udsUtil;
-
 	_categoryId = 0;
 
     _name = "Linphone";

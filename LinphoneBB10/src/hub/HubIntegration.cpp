@@ -37,15 +37,11 @@ HubIntegration::HubIntegration(Application* app) :
     _itemCounter(0),
 	_app(app)
 {
-	qDebug() << "HeadlessHubIntegration: HeadlessHubIntegration";
-
 	initialize();
 }
 
 HubIntegration::~HubIntegration()
 {
-	qDebug() << "HeadlessHubIntegration: ~HeadlessHubIntegration";
-
 	// don't need to delete _invokeManager since this is its parent it will be
 	// killed appropriately by Qt
 
@@ -65,8 +61,6 @@ HubIntegration::~HubIntegration()
 
 void HubIntegration::initialize()
 {
-    qDebug() << "HeadlessHubIntegration: initialize: " << (_udsUtil != NULL);
-
     _initMutex.lock();
 
     // initialize UDS
@@ -88,8 +82,6 @@ void HubIntegration::initialize()
         if (!_linphoneAccount) {
             _linphoneAccount = new LinphoneAccount(_udsUtil, _hubCache);
         }
-
-       qDebug() << "HeadlessHubIntegration: initialize: initialized " << (_udsUtil != NULL);
     }
 
     _initMutex.unlock();
@@ -97,11 +89,6 @@ void HubIntegration::initialize()
 
 void HubIntegration::markHubItemRead(QVariantMap itemProperties)
 {
-    qDebug()  << "HeadlessHubIntegration::markHubItemRead: item: " << itemProperties;
-
-    qDebug()  << "HeadlessHubIntegration::markHubItemRead: item src Id: " << itemProperties["sourceId"].toString();
-    qDebug()  << "HeadlessHubIntegration::markHubItemRead: item message Id: " << itemProperties["messageid"].toString();
-
     qint64 itemId;
 
     if (itemProperties["sourceId"].toString().length() > 0) {
@@ -110,16 +97,11 @@ void HubIntegration::markHubItemRead(QVariantMap itemProperties)
         itemId = itemProperties["messageid"].toLongLong();
     }
 
-    _linphoneAccount->markHubItemRead(itemProperties["categoryid"].toLongLong(), itemId);
+    _linphoneAccount->markHubItemRead(itemProperties["categoryId"].toLongLong(), itemId);
 }
 
 void HubIntegration::markHubItemUnread(QVariantMap itemProperties)
 {
-    qDebug()  << "HeadlessHubIntegration::markHubItemUnread: item: " << itemProperties;
-
-    qDebug()  << "HeadlessHubIntegration::markHubItemUnread: item src Id: " << itemProperties["sourceId"].toString();
-    qDebug()  << "HeadlessHubIntegration::markHubItemUnread: item message Id: " << itemProperties["messageid"].toString();
-
     qint64 itemId;
 
     if (itemProperties["sourceId"].toString().length() > 0) {
@@ -128,16 +110,11 @@ void HubIntegration::markHubItemUnread(QVariantMap itemProperties)
         itemId = itemProperties["messageid"].toLongLong();
     }
 
-    _linphoneAccount->markHubItemUnread(itemProperties["categoryid"].toLongLong(), itemId);
+    _linphoneAccount->markHubItemUnread(itemProperties["categoryId"].toLongLong(), itemId);
 }
 
 void HubIntegration::removeHubItem(QVariantMap itemProperties)
 {
-    qDebug()  << "HeadlessHubIntegration::removeHubItem: item: " << itemProperties;
-
-    qDebug()  << "HeadlessHubIntegration::removeHubItem: item src Id: " << itemProperties["sourceId"].toString();
-    qDebug()  << "HeadlessHubIntegration::removeHubItem: item message Id: " << itemProperties["messageid"].toString();
-
     qint64 itemId;
     if (itemProperties["sourceId"].toString().length() > 0) {
         itemId = itemProperties["sourceId"].toLongLong();
@@ -145,27 +122,35 @@ void HubIntegration::removeHubItem(QVariantMap itemProperties)
         itemId = itemProperties["messageid"].toLongLong();
     }
 
-    _linphoneAccount->removeHubItem(itemProperties["categoryid"].toLongLong(), itemId);
+    _linphoneAccount->removeHubItem(itemProperties["categoryId"].toLongLong(), itemId);
 }
 
-void HubIntegration::processNewMessage(QString from, QString title, QString body, bool read, bool notify) {
-
-	qDebug()  << "HeadlessHubIntegration::processNewMessage: message: " << body;
-    QString priority("");
+void HubIntegration::addConversationInHub(QString from, QString title, QString body, bool read, bool notify) {
     QVariantMap* itemMap = new QVariantMap();
     (*itemMap)["body"] = body;
 
     _itemCounter++;
-    _linphoneAccount->addHubItem(_linphoneAccount->chatMessageCategoryId(), *itemMap, from, title, QDateTime::currentDateTime().toMSecsSinceEpoch(), QString::number(_itemCounter),"", "", QString::null, read, notify);
+    _linphoneAccount->addHubItem(_linphoneAccount->chatMessageCategoryId(), *itemMap, from, title, QDateTime::currentDateTime().toMSecsSinceEpoch(), QString::number(_itemCounter), "", "", QString::null, read, notify);
 }
 
-void HubIntegration::processNewCall(QString from, QString title, QString body, QString icon, bool notify) {
+void HubIntegration::updateConversationInHub(QString from, QString title, QVariantMap itemMap, bool read, bool notify) {
+    itemMap["timestamp"] = QDateTime::currentDateTime().toMSecsSinceEpoch();
+    itemMap["readCount"] = read ? 1 : 0;
+    itemMap["name"] = from;
+    itemMap["description"] = title;
 
-    qDebug()  << "HeadlessHubIntegration::processNewMessage: message: " << body;
-    QString priority("");
+    _linphoneAccount->updateHubItem(_linphoneAccount->chatMessageCategoryId(), itemMap["sourceId"].toLongLong(), itemMap, notify);
+}
+
+void HubIntegration::addCallHistoryInHub(QString from, QString title, QString body, QString icon, bool notify) {
+
     QVariantMap* itemMap = new QVariantMap();
     (*itemMap)["body"] = body;
 
     _itemCounter++;
-    _linphoneAccount->addHubItem(_linphoneAccount->callHistoryCategoryId(), *itemMap, from, title, QDateTime::currentDateTime().toMSecsSinceEpoch(), QString::number(_itemCounter),"", "", icon, true, notify);
+    _linphoneAccount->addHubItem(_linphoneAccount->callHistoryCategoryId(), *itemMap, from, title, QDateTime::currentDateTime().toMSecsSinceEpoch(), QString::number(_itemCounter), "", "", icon, true, notify);
+}
+
+QVariantList HubIntegration::getItems() {
+    return _hubCache->items();
 }

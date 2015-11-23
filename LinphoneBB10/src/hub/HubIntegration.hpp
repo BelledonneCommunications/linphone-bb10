@@ -37,11 +37,13 @@ public:
     virtual ~HubIntegration();
 
     void initialize();
-    void processNewMessage(QString from, QString title, QString body, bool unread, bool notify);
-    void processNewCall(QString from, QString title, QString body, QString icon, bool notify);
+    void addConversationInHub(QString from, QString title, QString body, bool unread, bool notify);
+    void updateConversationInHub(QString from, QString title, QVariantMap itemMap, bool unread, bool notify);
+    void addCallHistoryInHub(QString from, QString title, QString body, QString icon, bool notify);
+    void markHubItemRead(QVariantMap itemProperties);
+    QVariantList getItems();
 
 private slots:
-    void markHubItemRead(QVariantMap itemProperties);
     void markHubItemUnread(QVariantMap itemProperties);
     void removeHubItem(QVariantMap itemProperties);
 

@@ -27,6 +27,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QTimer>
 #include <bb/PackageInfo>
+#include <bb/system/InvokeManager>
 
 #include "NotificationManager.h"
 #include "linphone/linphonecore.h"
@@ -70,7 +71,10 @@ public:
         _unreadMissedCalls = count;
     }
 
+    void markChatConversationReadInHub(QString sipUri);
+
 public Q_SLOTS:
+    void onInvoke(const bb::system::InvokeRequest& invoke);
     void call(QString sipUri);
     void transferCall(QString toSipUri);
     void refreshRegisters();
@@ -96,6 +100,9 @@ Q_SIGNALS:
     void onUnreadCountUpdated();
     void callEncryptionChanged(LinphoneCall *call);
 
+    void invokeRequestChat(QString sipAddr);
+    void invokeRequestHistory(QString callID);
+
 private Q_SLOTS:
     void onAppExit();
     void onAppFullscreen();
@@ -110,6 +117,7 @@ private:
     void notifyIncomingMessage(LinphoneChatMessage *message);
     void clearNotifications();
     void updateAppIconBadge();
+    void addOrUpdateChatConversationItemInHub(QString sipUri, QString displayName, QString text);
 
     bb::Application *_app;
     LinphoneCore *_lc;
@@ -148,6 +156,7 @@ private:
     }
 
     HubIntegration *_hubHelper;
+    bb::system::InvokeManager *_invokeManager;
 };
 
 static LinphoneManager *_linphoneManagerInstance = NULL;
