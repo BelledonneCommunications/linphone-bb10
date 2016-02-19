@@ -32,8 +32,11 @@
 	path = submodules/externals/srtp
 	url = git://git.linphone.org/srtp.git
 [submodule "submodules/cunit"]
-	path = submodules/cunit
+	path = submodules/externals/cunit
 	url = git://git.linphone.org/cunit.git
 [submodule "submodules/linphone"]
 	path = submodules/linphone
 	url = git://git.linphone.org/linphone.git
+[submodule "submodules/bctoolbox"]
+	path = submodules/bctoolbox
+	url = git://git.linphone.org/bctoolbox
