@@ -18,7 +18,8 @@ nortp_timeout=30
 [sound]
 dtmf_player_amp=0.1
 remote_ring=app/native/assets/sounds/ringback.wav
-hold_music=app/native/assets/sounds/toy-mono.wav
+hold_music=app/native/assets/sounds/dont_wait_too_long.wav
+local_ring=app/native/assets/sounds/notes_of_the_optimistic.wav
 playback_dev_id=QSA: voice
 
 [video]

@@ -351,8 +351,6 @@ void LinphoneManager::createAndStartLinphoneCore()
     const HardwareInfo hi;
     ms_set_cpu_count(hi.processorCount());
 
-    linphone_core_set_ring(_lc, "app/native/assets/sounds/oldphone_mono.wav");
-
     QString chatMessagesDatabase = QDir::homePath() + "/chat.db";
     linphone_core_set_chat_database_path(_lc, strdup(chatMessagesDatabase.toUtf8().constData()));
     QString historyLogsDatabase = QDir::homePath() + "/history.db";
