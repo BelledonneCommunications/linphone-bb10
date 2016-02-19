@@ -255,7 +255,7 @@ void ChatModel::updateMessage(LinphoneChatMessage *message, int transferProgress
 {
     foreach (QVariantMap entry, _dataModel->toListOfMaps()) {
         LinphoneChatMessage *msg = entry.value("message").value<LinphoneChatMessage*>();
-        if (linphone_chat_message_get_storage_id(message) == linphone_chat_message_get_storage_id(msg)) {
+        if (msg == message) {
             QVariantList indexPath = _dataModel->findExact(entry);
             entry = updateFileTransferInformations(entry, message, transferProgress, transferOffset, transferTotal, progressStatus);
             entry = setMessageDeliveryState(entry, message);
