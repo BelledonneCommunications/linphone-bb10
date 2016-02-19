@@ -35,11 +35,11 @@ Container {
         selected: inCallModel.isVideoEnabled
         imageSource: "asset:///images/call/camera_default.png"
         selectedImageSource: "asset:///images/call/camera_selected.png"
-        enabled: settingsModel.videoEnabled && !inCallModel.mediaInProgress && !inCallModel.videoUpdateInProgress
+        enabled: settingsModel.videoEnabled && !inCallModel.mediaInProgress && !inCallModel.videoUpdateInProgress && inCallModel.runningCallsNotInAnyConferenceCount > 0
         
         gestureHandlers: TapHandler {
             onTapped: {
-                if (settingsModel.videoEnabled) {
+                if (parent.enabled && settingsModel.videoEnabled) {
                     inCallModel.isVideoEnabled = ! inCallModel.isVideoEnabled
                 }
             }
@@ -56,7 +56,9 @@ Container {
         
         gestureHandlers: TapHandler {
             onTapped: {
-                inCallModel.isMicMuted = ! inCallModel.isMicMuted
+                if (parent.enabled) {
+                    inCallModel.isMicMuted = ! inCallModel.isMicMuted
+                }
             }
         }
     }
@@ -71,7 +73,9 @@ Container {
         
         gestureHandlers: TapHandler {
             onTapped: {
-                inCallModel.isSpeakerEnabled = ! inCallModel.isSpeakerEnabled
+                if (parent.enabled) {
+                    inCallModel.isSpeakerEnabled = ! inCallModel.isSpeakerEnabled
+                }
             }
         }
     }
@@ -86,7 +90,9 @@ Container {
         
         gestureHandlers: TapHandler {
             onTapped: {
-                optionsMenu.menuVisible = !optionsMenu.menuVisible
+                if (parent.enabled) {
+                    optionsMenu.menuVisible = !optionsMenu.menuVisible
+                }
             }
         }
     }

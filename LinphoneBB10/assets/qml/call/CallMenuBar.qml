@@ -40,7 +40,9 @@ Container {
         
         gestureHandlers: TapHandler {
             onTapped: {
-                numpad.visible = ! numpad.visible
+                if (parent.enabled) {
+                    numpad.visible = ! numpad.visible
+                }
             }
         }
         
@@ -107,8 +109,10 @@ Container {
         
         gestureHandlers: TapHandler {
             onTapped: {
-                tabDelegate.source = "../chat/ChatListView.qml"
-                inCallView.close();
+                if (parent.enabled) {
+                    tabDelegate.source = "../chat/ChatListView.qml"
+                    inCallView.close();
+                }
             }
         }
         
