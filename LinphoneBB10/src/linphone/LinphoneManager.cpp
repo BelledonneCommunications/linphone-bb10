@@ -448,6 +448,10 @@ bool LinphoneManager::shouldStartWizardWhenAppStarts() {
 }
 
 void LinphoneManager::markChatConversationReadInHub(QString sipUri) {
+    if (_isAppInBackground) {
+        return;
+    }
+
     QVariantList items = _hubHelper->getItems();
     for (int index = 0; index < items.size(); index++) {
         QVariantMap item = items.at(index).toMap();
@@ -459,19 +463,28 @@ void LinphoneManager::markChatConversationReadInHub(QString sipUri) {
 }
 
 void LinphoneManager::addOrUpdateChatConversationItemInHub(LinphoneChatMessage *message) {
-    const LinphoneAddress *from = linphone_chat_message_get_from_address(message);
-    ContactFound cf = ContactFetcher::getInstance()->findContact(linphone_address_get_username(from));
-    QString displayName = "";
-    if (cf.id >= 0) {
-        displayName = cf.displayName;
-    } else {
-        displayName = GetDisplayNameFromLinphoneAddress(from);
-    }
     const char *text = linphone_chat_message_get_text(message);
     if (!text) {
         text = "";
     }
-    QString sipUri = linphone_address_as_string_uri_only(from);
+
+    const LinphoneAddress *addr = NULL;
+    bool_t is_outgoing = linphone_chat_message_is_outgoing(message);
+    if (!is_outgoing) {
+        addr = linphone_chat_message_get_from_address(message);
+    } else {
+        addr = linphone_chat_message_get_to_address(message);
+    }
+
+    QString displayName = "";
+    QString sipUri = linphone_address_as_string_uri_only(addr);
+
+    ContactFound cf = ContactFetcher::getInstance()->findContact(linphone_address_get_username(addr));
+    if (cf.id >= 0) {
+        displayName = cf.displayName;
+    } else {
+        displayName = GetDisplayNameFromLinphoneAddress(addr);
+    }
 
     bool found = false;
     QVariantMap itemMap;
@@ -487,9 +500,9 @@ void LinphoneManager::addOrUpdateChatConversationItemInHub(LinphoneChatMessage *
     }
 
     if (found) {
-        _hubHelper->updateConversationInHub(displayName, text, itemMap, false, _isAppInBackground);
+        _hubHelper->updateConversationInHub(displayName, text, itemMap, is_outgoing, _isAppInBackground);
     } else {
-        _hubHelper->addConversationInHub(displayName, text, sipUri, false, _isAppInBackground);
+        _hubHelper->addConversationInHub(displayName, text, sipUri, is_outgoing, _isAppInBackground);
     }
 }
 

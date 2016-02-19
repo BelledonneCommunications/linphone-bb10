@@ -138,7 +138,7 @@ void ChatModel::sendMessage(QString message)
     if (_room) {
         LinphoneChatMessage *msg = linphone_chat_room_create_message(_room, message.toUtf8().constData());
         linphone_chat_room_send_message2(_room, msg, onMessageStateChanged, this);
-        emit messageSent(_room, msg);
+        emitSendMessageSignal(_room, msg);
     }
 }
 
@@ -324,6 +324,7 @@ void ChatModel::openPicture(QString file)
 }
 
 void ChatModel::emitSendMessageSignal(LinphoneChatRoom *room, LinphoneChatMessage *lastMessage) {
+    LinphoneManager::getInstance()->addOrUpdateChatConversationItemInHub(lastMessage);
     emit messageSent(room, lastMessage);
 }
 

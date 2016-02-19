@@ -72,6 +72,7 @@ public:
     }
 
     void markChatConversationReadInHub(QString sipUri);
+    void addOrUpdateChatConversationItemInHub(LinphoneChatMessage *message);
 
 public Q_SLOTS:
     void onInvoke(const bb::system::InvokeRequest& invoke);
@@ -117,7 +118,6 @@ private:
     void notifyIncomingMessage(LinphoneChatMessage *message);
     void clearNotifications();
     void updateAppIconBadge();
-    void addOrUpdateChatConversationItemInHub(LinphoneChatMessage *message);
     void addCallLogItemInHub(LinphoneCall *call);
 
     bb::Application *_app;
