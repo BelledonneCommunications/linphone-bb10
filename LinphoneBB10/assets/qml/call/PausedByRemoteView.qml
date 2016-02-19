@@ -28,6 +28,12 @@ Container {
     background: colors.colorC
     opacity: 0.9
     
+    gestureHandlers: TapHandler {
+        onTapped: {
+            inCallModel.switchFullScreenMode();
+        }
+    }
+    
     Container {
         layout: DockLayout {
         

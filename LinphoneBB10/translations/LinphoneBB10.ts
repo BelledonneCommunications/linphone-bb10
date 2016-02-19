@@ -587,7 +587,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>PausedByRemoteView</name>
     <message>
-        <location filename="../assets/qml/call/PausedByRemoteView.qml" line="59"/>
+        <location filename="../assets/qml/call/PausedByRemoteView.qml" line="65"/>
         <source>Your correspondent paused the call</source>
         <translation type="unfinished"></translation>
     </message>

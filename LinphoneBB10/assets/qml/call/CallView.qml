@@ -120,7 +120,7 @@ Page {
                     leftPadding: ui.sdu(2)
                     rightPadding: ui.sdu(2)
                     topPadding: ui.sdu(2)
-                    bottomPadding: ui.sdu(2)
+                    bottomPadding: ui.sdu(30)
 
                     Container {
                         verticalAlignment: VerticalAlignment.Fill
