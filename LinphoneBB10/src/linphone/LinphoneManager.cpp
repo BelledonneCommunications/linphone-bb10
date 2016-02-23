@@ -348,14 +348,10 @@ void LinphoneManager::createAndStartLinphoneCore()
     linphone_core_set_user_agent(_lc, "Linphone BB10", _app->applicationVersion().toUtf8().constData());
     linphone_core_set_network_reachable(_lc, true);
 
-    const HardwareInfo hi;
-    ms_set_cpu_count(hi.processorCount());
-
     QString chatMessagesDatabase = QDir::homePath() + "/chat.db";
     linphone_core_set_chat_database_path(_lc, strdup(chatMessagesDatabase.toUtf8().constData()));
     QString historyLogsDatabase = QDir::homePath() + "/history.db";
     linphone_core_set_call_logs_database_path(_lc, strdup(historyLogsDatabase.toUtf8().constData()));
-
     QString zrtpCache = QDir::homePath() + "/zrtp_secrets";
     linphone_core_set_zrtp_secrets_file(_lc, strdup(zrtpCache.toUtf8().constData()));
 
