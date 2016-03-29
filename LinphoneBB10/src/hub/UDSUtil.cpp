@@ -590,8 +590,30 @@ qint64 UDSUtil::addItem(qint64 accountId, qint64 categoryId, QVariantMap &itemMa
         return retVal;
     }
 
+    if (name.size() > 256) {
+        name = name.left(256);
+    }
+    if (subject.size() > 256) {
+        subject = subject.left(256);
+    }
+    if (mimeType.size() > 256) {
+        mimeType = mimeType.left(256);
+    }
+    if (icon.size() > 256) {
+        icon = icon.left(256);
+    }
+    if (syncId.size() > 256) {
+        syncId = syncId.left(256);
+    }
+    if (userData.size() > 2048) {
+        userData = userData.left(2048);
+    }
+    if (extendedData.size() > 2048) {
+        extendedData = extendedData.left(2048);
+    }
+
     memset(itemName, 0, 256);
-    strcpy(itemName,name.toUtf8().data());
+    strcpy(itemName, name.toUtf8().data());
     memset(subjectDesc, 0, 256);
     strcpy(subjectDesc, subject.toUtf8().data());
     memset(mime, 0, 256);
@@ -687,6 +709,28 @@ bool UDSUtil::updateItem(qint64 accountId, qint64 categoryId, QVariantMap &itemM
     if (accountId <= 0 || categoryId <= 0 || srcId.size() == 0 || name.size() == 0 || subject.size() == 0 || mimeType.size() == 0 || icon.size() == 0 || syncId.size() == 0 || timestamp <= 0) {
         qCritical() << "UDSUtil::updateItem: invalid parameters\n";
         return retVal;
+    }
+
+    if (name.size() > 256) {
+        name = name.left(256);
+    }
+    if (subject.size() > 256) {
+        subject = subject.left(256);
+    }
+    if (mimeType.size() > 256) {
+        mimeType = mimeType.left(256);
+    }
+    if (icon.size() > 256) {
+        icon = icon.left(256);
+    }
+    if (syncId.size() > 256) {
+        syncId = syncId.left(256);
+    }
+    if (userData.size() > 2048) {
+        userData = userData.left(2048);
+    }
+    if (extendedData.size() > 2048) {
+        extendedData = extendedData.left(2048);
     }
 
     memset(itemName, 0, 256);
@@ -809,6 +853,25 @@ bool UDSUtil::addAccountAction(qint64 accountId, QString action, QString title,
         return retVal;
     }
 
+    if (action.size() > 256) {
+        action = action.left(256);
+    }
+    if (title.size() > 256) {
+        title = title.left(256);
+    }
+    if (invtarget.size() > 256) {
+        invtarget = invtarget.left(256);
+    }
+    if (invtargettype.size() > 256) {
+        invtargettype = invtargettype.left(256);
+    }
+    if (imgsource.size() > 256) {
+        imgsource = imgsource.left(256);
+    }
+    if (mimetype.size() > 256) {
+        mimetype = mimetype.left(256);
+    }
+
     memset(accAction, 0, 256);
     strcpy(accAction, action.toUtf8().data());
     memset(accTitle, 0, 256);
@@ -867,6 +930,25 @@ bool UDSUtil::updateAccountAction(qint64 accountId, QString action, QString titl
     if (accountId <= 0 || action.size() == 0|| title.size() == 0 || invtarget.size() == 0 || invtargettype.size() == 0 || mimetype.size() == 0 || placement <= 0) {
         qCritical() << "UDSUtil::updateAccountActionData: invalid parameters\n";
         return retVal;
+    }
+
+    if (action.size() > 256) {
+        action = action.left(256);
+    }
+    if (title.size() > 256) {
+        title = title.left(256);
+    }
+    if (invtarget.size() > 256) {
+        invtarget = invtarget.left(256);
+    }
+    if (invtargettype.size() > 256) {
+        invtargettype = invtargettype.left(256);
+    }
+    if (imgsource.size() > 256) {
+        imgsource = imgsource.left(256);
+    }
+    if (mimetype.size() > 256) {
+        mimetype = mimetype.left(256);
     }
 
     memset(accAction, 0, 256);
@@ -928,6 +1010,25 @@ bool UDSUtil::addItemAction(qint64 accountId, QString action,
         return retVal;
     }
 
+    if (action.size() > 256) {
+        action = action.left(256);
+    }
+    if (title.size() > 256) {
+        title = title.left(256);
+    }
+    if (invtarget.size() > 256) {
+        invtarget = invtarget.left(256);
+    }
+    if (invtargettype.size() > 256) {
+        invtargettype = invtargettype.left(256);
+    }
+    if (imgsource.size() > 256) {
+        imgsource = imgsource.left(256);
+    }
+    if (mimetype.size() > 256) {
+        mimetype = mimetype.left(256);
+    }
+
     memset(itemAction, 0, 256);
     strcpy(itemAction, action.toUtf8().data());
     memset(itemActionTitle, 0, 256);
@@ -987,6 +1088,25 @@ bool UDSUtil::updateItemAction(qint64 accountId, QString action,
     if (accountId <= 0 || action.size() == 0|| title.size() == 0 || invtarget.size() == 0 || invtargettype.size() == 0 || imgsource.size() == 0 || mimetype.size() == 0 || placement <= 0) {
         qCritical() << "UDSUtil::updateItemActionData: invalid parameters\n";
         return retVal;
+    }
+
+    if (action.size() > 256) {
+        action = action.left(256);
+    }
+    if (title.size() > 256) {
+        title = title.left(256);
+    }
+    if (invtarget.size() > 256) {
+        invtarget = invtarget.left(256);
+    }
+    if (invtargettype.size() > 256) {
+        invtargettype = invtargettype.left(256);
+    }
+    if (imgsource.size() > 256) {
+        imgsource = imgsource.left(256);
+    }
+    if (mimetype.size() > 256) {
+        mimetype = mimetype.left(256);
     }
 
     memset(itemAction, 0, 256);
