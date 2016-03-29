@@ -109,7 +109,7 @@ Page {
                 }
                 
                 Label {
-                    text: qsTr("© 2015 Belledonne Communications") + Retranslate.onLanguageChanged
+                    text: qsTr("© 2016 Belledonne Communications") + Retranslate.onLanguageChanged
                     textStyle.base: titilliumWeb.style
                     horizontalAlignment: HorizontalAlignment.Center
                     verticalAlignment: VerticalAlignment.Center

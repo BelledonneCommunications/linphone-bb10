@@ -74,6 +74,22 @@ public:
     void markChatConversationReadInHub(QString sipUri);
     void addOrUpdateChatConversationItemInHub(LinphoneChatMessage *message);
 
+    QString appVersion() const {
+        QString version = QT_TR_NOOP("Linphone %%s");
+        return version.replace("%%s", _app->applicationVersion());
+    }
+
+    QString coreVersion() const {
+        QString version = QT_TR_NOOP("LinphoneCore %%s");
+        return version.replace("%%s", linphone_core_get_version());
+    }
+
+    QString blackberryVersion() const {
+        bb::PackageInfo packageInfo;
+        QString version = QT_TR_NOOP("Blackberry OS %%s");
+        return version.replace("%%s", packageInfo.systemDependency());
+    }
+
 public Q_SLOTS:
     void onInvoke(const bb::system::InvokeRequest& invoke);
     void call(QString sipUri);
@@ -139,22 +155,6 @@ private:
 
     int _unreadChatMessages;
     int _unreadMissedCalls;
-
-    QString appVersion() const {
-        QString version = QT_TR_NOOP("Linphone %%s");
-        return version.replace("%%s", _app->applicationVersion());
-    }
-
-    QString coreVersion() const {
-        QString version = QT_TR_NOOP("LinphoneCore %%s");
-        return version.replace("%%s", linphone_core_get_version());
-    }
-
-    QString blackberryVersion() const {
-        bb::PackageInfo packageInfo;
-        QString version = QT_TR_NOOP("Blackberry OS %%s");
-        return version.replace("%%s", packageInfo.systemDependency());
-    }
 
     HubIntegration *_hubHelper;
     bb::system::InvokeManager *_invokeManager;
