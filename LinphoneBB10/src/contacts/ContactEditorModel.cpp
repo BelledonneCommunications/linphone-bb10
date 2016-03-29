@@ -63,6 +63,13 @@ void ContactEditorModel::setSelectedContactId(int contactId)
 
     if (!_isNewContact) {
         getContact();
+    } else {
+        // Always display at least an empty SIP address field, else there won't be anything to be displayed because other informations are the header of the first group in the list
+        QVariantMap entry;
+        entry["value"] = _nextEditSipAddress;
+        entry["id"] = 0;
+        entry["first"] = TRUE;
+        _sipAddresses->insert(entry);
     }
 }
 
