@@ -27,6 +27,7 @@ Container {
     horizontalAlignment: HorizontalAlignment.Center
     visible: Qt.editor.isEditMode
     leftPadding: ui.sdu(1)
+    id: checkbox
     
     Container {
         layout: DockLayout {
