@@ -61,7 +61,7 @@ void HistoryModel::setSelectedHistoryLog(LinphoneCallLog *log) {
     LinphoneCore *lc = manager->getLc();
     MSList *callLogs = linphone_core_get_call_history_for_address(lc, linphone_call_log_get_remote_address(_selectedHistoryLog));
 
-    while (callLogs) {
+    while (callLogs && _logs.size() < 10) {
         LinphoneCallLog *callLog = (LinphoneCallLog *) callLogs->data;
 
         time_t start = linphone_call_log_get_start_date(callLog);

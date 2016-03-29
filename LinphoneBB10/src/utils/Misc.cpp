@@ -74,7 +74,7 @@ QString FormatDateForHistoryLog(time_t time) {
     QDateTime *dateTime = new QDateTime();
     dateTime->setTime_t(time);
 
-    return dateTime->toString("dd/MM - hh'h'mm");
+    return dateTime->toString("dd/MM - hh':'mm':'ss");
 }
 
 QString FormatDateForChat(time_t time) {
