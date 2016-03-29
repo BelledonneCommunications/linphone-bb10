@@ -77,7 +77,7 @@
     <category>core.media</category>
     
     <author>Belledonne Communications</author>
-    <buildId>1</buildId>
+    <buildId>0</buildId>
 
     <!--  Unique author ID assigned by signing authority. Required if using debug tokens. -->
     <!-- <authorId>ABC1234YjsnUk235h</authorId> -->
