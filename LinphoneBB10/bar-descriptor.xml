@@ -45,6 +45,18 @@
        <platformArchitecture>x86</platformArchitecture>
        <asset path="x86/o-g/LinphoneBB10" entry="true" type="Qnx/Elf">LinphoneBB10</asset>
     </configuration>
+    <configuration name="Device-Coverage">
+    	<platformArchitecture>armle-v7</platformArchitecture>
+       <asset path="arm-p/o.le-v7-g/LinphoneBB10" entry="true" type="Qnx/Elf">LinphoneBB10</asset>
+	</configuration>
+    <configuration name="Simulator-Profile">
+    	<platformArchitecture>x86</platformArchitecture>
+       <asset path="x86/o-g/LinphoneBB10" entry="true" type="Qnx/Elf">LinphoneBB10</asset>
+	</configuration>
+    <configuration name="Simulator-Coverage">
+    	<platformArchitecture>x86</platformArchitecture>
+       <asset path="x86/o-g/LinphoneBB10" entry="true" type="Qnx/Elf">LinphoneBB10</asset>
+	</configuration>
 
     <!-- The name that is displayed in the BlackBerry 10 application installer.
          May have multiple values for each language. See samples or xsd schema file. Optional. -->

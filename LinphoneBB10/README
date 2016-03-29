@@ -17,11 +17,6 @@ Getting started:
     # Set the code location to the directory this file is in
     # Choose C++ as language
     
-  * Edit the bar-descriptor.xml file (in the Source tab) and remove the following lines:
-    <configuration name="Device-Coverage"><platformArchitecture>armle-v7</platformArchitecture></configuration>
-    <configuration name="Simulator-Profile"><platformArchitecture>x86</platformArchitecture></configuration>
-    <configuration name="Simulator-Coverage"><platformArchitecture>x86</platformArchitecture></configuration>
-    
   * Go to the project properties, C/C++ General category, Paths and Symbols section, Source Location tab:
     # Add a new folder "/LinphoneBB10/src"
     # Delete the previous source folder "/LinphoneBB10"
