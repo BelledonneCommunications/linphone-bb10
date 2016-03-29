@@ -26,7 +26,7 @@ under GNU Public License V2</source>
     </message>
     <message>
         <location filename="../assets/qml/sidemenu/AboutView.qml" line="112"/>
-        <source>© 2015 Belledonne Communications</source>
+        <source>© 2016 Belledonne Communications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -105,14 +105,14 @@ Once it is done, click on the button below to complete your account setup.</sour
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
         <source>Password is too short
 (6 characters minimum)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
+        <source>Passwords are different</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -627,6 +627,11 @@ You should only accept if you have the same token as your correspondent.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/settings/SettingsModel.cpp" line="103"/>
+        <source>Linphone Blackberry 10 logs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/utils/Misc.cpp" line="125"/>
         <source>Failed</source>
         <translation type="unfinished"></translation>
@@ -654,11 +659,6 @@ You should only accept if you have the same token as your correspondent.</source
     <message>
         <location filename="../src/utils/Misc.cpp" line="135"/>
         <source>Not activated</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings/SettingsModel.cpp" line="103"/>
-        <source>Linphone Blackberry 10 logs</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -807,7 +807,7 @@ You should only accept if you have the same token as your correspondent.</source
 <context>
     <name>SettingsModel</name>
     <message>
-        <location filename="../src/settings/SettingsModel.cpp" line="128"/>
+        <location filename="../src/settings/SettingsModel.cpp" line="131"/>
         <source>Logs upload</source>
         <translation type="unfinished"></translation>
     </message>
