@@ -101,10 +101,11 @@ static void log_collection_upload_state(LinphoneCore *lc, LinphoneCoreLogCollect
         if (state == LinphoneCoreLogCollectionUploadStateDelivered) {
             QString recipient = "linphone-blackberry@belledonne-communications.com";
             QString subject = QObject::tr("Linphone Blackberry 10 logs");
+            QString body_start = QObject::tr("Please describe your issue here or this mail will be ignored: ");
             QString appVersion = LinphoneManager::getInstance()->appVersion();
             QString coreVersion = LinphoneManager::getInstance()->coreVersion();
             QString blackberryVersion = LinphoneManager::getInstance()->blackberryVersion();
-            QString body = QString("%0\r\n%1\r\n%2\r\n\r\n%3").arg(appVersion, coreVersion, blackberryVersion, info);
+            QString body = QString("%0\r\n\r\n%1\r\n%2\r\n%3\r\n\r\n%4").arg(body_start, appVersion, coreVersion, blackberryVersion, info);
             InvokeManager invokeManager;
             InvokeRequest invokeRequest;
 
