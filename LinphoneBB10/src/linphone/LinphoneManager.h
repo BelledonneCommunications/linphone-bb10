@@ -26,7 +26,7 @@
 #include <bb/Application>
 #include <QtCore/QObject>
 #include <QtCore/QTimer>
-#include <bb/PackageInfo>
+#include <bb/platform/PlatformInfo>
 #include <bb/system/InvokeManager>
 
 #include "NotificationManager.h"
@@ -85,9 +85,9 @@ public:
     }
 
     QString blackberryVersion() const {
-        bb::PackageInfo packageInfo;
+        bb::platform::PlatformInfo platformInfo;
         QString version = QT_TR_NOOP("Blackberry OS %%s");
-        return version.replace("%%s", packageInfo.systemDependency());
+        return version.replace("%%s", platformInfo.osVersion());
     }
 
 public Q_SLOTS:
