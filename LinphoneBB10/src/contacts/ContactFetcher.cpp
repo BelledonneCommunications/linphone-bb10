@@ -92,15 +92,18 @@ ContactFound ContactFetcher::findContact(QString searchValue)
     contactFound.smallPicturePath = "/images/avatar.png";
 
     ContactSearchFilters options;
-    QList<SearchField::Type> fields;
-    fields.append(SearchField::VideoChat);
-    fields.append(SearchField::Phone);
-    options.setSearchFields(fields);
     options.setIncludePhotos(true);
-    options.setExactMatch(TRUE);
     options.setSearchValue(searchValue);
+    options.setExactMatch(TRUE);
+    options.setLimit(1);
 
-    QList<Contact> contacts = _contactService->searchContacts(options);
+    QList<Contact> contacts = _contactService->searchContactsByPhoneNumber(options);
+    if (contacts.size() == 0) {
+        QList<SearchField::Type> fields;
+        fields.append(SearchField::VideoChat);
+        options.setSearchFields(fields);
+        contacts = _contactService->searchContacts(options);
+    }
     if (contacts.size() > 0) {
         Contact contact = contacts.first();
         contactFound.id = contact.id();
