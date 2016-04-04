@@ -31,22 +31,27 @@ class AssistantModel : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QString remoteProvisioningUrl READ remoteProvisioningUrl);
+    Q_PROPERTY(QString usernameError READ usernameError NOTIFY assistantErrorUpdated);
+    Q_PROPERTY(QString pwdError READ pwdError NOTIFY assistantErrorUpdated);
+    Q_PROPERTY(QString emailError READ emailError NOTIFY assistantErrorUpdated);
 
 public:
     AssistantModel(QObject *parent = NULL);
+    void setUsernameError(QString err);
     void emitAccountActivated(bool yesno);
-    void emitUsernameAvailable(bool yesno);
     void emitAccountCreated(bool yesno);
 
 public Q_SLOTS:
+    void setUsername(QString username);
+    void setPassword(QString password);
+    void setEmail(QString email);
+    bool createLinphoneAccount();
+    void configureAccount();
+
     bool configureLinphoneAccount(QString username, QString password, QString displayName);
     bool configureSipAccount(QString username, QString password, QString domain, QString displayName);
-    void createLinphoneAccount(QString username, QString password, QString email);
-    void isUsernameAvailable(QString username);
-    void configureCreatedAccount();
     void isAccountActivated();
     bool remoteProvisioning(QString url);
-    bool isValidEmail(QString email);
 
     void setPreviousPage(QString previousPage) {
         _previousPage = previousPage;
@@ -57,8 +62,8 @@ public Q_SLOTS:
     }
 
 Q_SIGNALS:
+    void assistantErrorUpdated();
     void accountActivated(bool yesno);
-    void usernameAvailable(bool yesno);
     void accountCreated(bool yesno);
 
 private:
@@ -66,7 +71,6 @@ private:
 
     LinphoneAccountCreator *_accountCreator;
     LinphoneAccountCreatorCbs *_accountCreatorCbs;
-    const char *_defaultSipDomain;
 
     QString _previousPage;
 
@@ -74,6 +78,21 @@ private:
         return _currentRemoteProvisioningUrl;
     }
     QString _currentRemoteProvisioningUrl;
+
+    QString usernameError() const {
+        return _usernameError;
+    }
+    QString _usernameError;
+
+    QString pwdError() const {
+        return _pwdError;
+    }
+    QString _pwdError;
+
+    QString emailError() const {
+        return _emailError;
+    }
+    QString _emailError;
 };
 
 #endif /* ASSISTANTMODEL_H_ */

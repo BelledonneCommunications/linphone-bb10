@@ -27,10 +27,10 @@ ScrollView {
     
     function isAccountActivated(yesno) {
         if (yesno) {
-            assistantModel.configureCreatedAccount();
+            assistantModel.configureAccount();
             navigationPane.pop();
         } else {
-            showDialog(qsTr("You account isn't activated yet\r\nClick on the link in the email we sent you") + Retranslate.onLanguageChanged)
+            showDialog(qsTr("Your account isn't activated yet\r\nClick on the link in the email we sent you") + Retranslate.onLanguageChanged)
         }
     }
     

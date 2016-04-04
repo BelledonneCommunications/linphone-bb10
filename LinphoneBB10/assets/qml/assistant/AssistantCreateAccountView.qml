@@ -24,36 +24,15 @@ import "../custom_controls"
 ScrollView {
     verticalAlignment: VerticalAlignment.Fill
     
-    function isUsernameAvailable(yesno) {
-        if (yesno) {
-            if (password.text == confirmPassword.text) {
-                if (password.text.length >= 6) {
-                    if (assistantModel.isValidEmail(email.text)) {
-                        assistantModel.createLinphoneAccount(username.text, password.text, email.text)
-                    } else {
-                        showDialog(qsTr("Please fill in a valid email to receive the activation link") + Retranslate.onLanguageChanged)
-                    }
-                } else {
-                    showDialog(qsTr("Password is too short\r\n(6 characters minimum)") + Retranslate.onLanguageChanged)
-                }
-            } else {
-                showDialog(qsTr("Passwords are different") + Retranslate.onLanguageChanged)
-            }
-        } else {
-            showDialog(qsTr("Username already in use,\r\nplease choose another one") + Retranslate.onLanguageChanged)
-        }
-    }
-    
     function isAccountCreated(yesno) {
         if (yesno) {
             assistantDelegate.source = "AssistantCreateAccountActivationView.qml";
         } else {
-            showDialog(qsTr("Account creation failed\r\n,please try again later") + Retranslate.onLanguageChanged)
+            showDialog(qsTr("Account creation failed,\r\nplease try again later") + Retranslate.onLanguageChanged)
         }
     }
     
     onCreationCompleted: {
-        assistantModel.usernameAvailable.connect(isUsernameAvailable);
         assistantModel.accountCreated.connect(isAccountCreated);
     }
 
@@ -120,6 +99,11 @@ ScrollView {
                     input.keyLayout: KeyLayout.Contact
                     inputMode: TextFieldInputMode.EmailAddress
                     textStyle.textAlign: TextAlign.Center
+                    errorText: assistantModel.usernameError
+                    
+                    onTextFieldChanging: {
+                        assistantModel.setUsername(text);
+                    }
                 }
             }
     
@@ -144,6 +128,16 @@ ScrollView {
                     input.keyLayout: KeyLayout.Alphanumeric
                     inputMode: TextFieldInputMode.Password
                     textStyle.textAlign: TextAlign.Center
+                    errorText: assistantModel.pwdError
+                    
+                    onTextFieldChanging: {
+                        assistantModel.setPassword(text);
+                        if (password.text != confirmPassword.text) {
+                            confirmPassword.errorText = qsTr("Passwords are different");
+                        } else {
+                            confirmPassword.errorText = "";
+                        }
+                    }
                 }
             }
     
@@ -168,6 +162,14 @@ ScrollView {
                     input.keyLayout: KeyLayout.Alphanumeric
                     inputMode: TextFieldInputMode.Password
                     textStyle.textAlign: TextAlign.Center
+                    
+                    onTextFieldChanging: {
+                        if (password.text != confirmPassword.text) {
+                            confirmPassword.errorText = qsTr("Passwords are different");
+                        } else {
+                            confirmPassword.errorText = "";
+                        }
+                    }
                 }
             }
     
@@ -194,6 +196,11 @@ ScrollView {
                     textStyle.textAlign: TextAlign.Center
                     input.submitKey: SubmitKey.Done
                     input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
+                    errorText: assistantModel.emailError
+                    
+                    onTextFieldChanging: {
+                        assistantModel.setEmail(text);
+                    }
                 }
             }
     
@@ -204,10 +211,8 @@ ScrollView {
                 horizontalAlignment: HorizontalAlignment.Center
     
                 onClicked: {
-                    if (username.text.length >= 4) {
-                        assistantModel.isUsernameAvailable(username.text)
-                    } else {
-                        showDialog(qsTr("Username is too short\r\n(4 characters minimum)") + Retranslate.onLanguageChanged)
+                    if (confirmPassword.errorText.length > 0 || !assistantModel.createLinphoneAccount()) {
+                        showDialog(qsTr("Account creation failed,\r\ncheck there is no error above") + Retranslate.onLanguageChanged)
                     }
                 }
             }

@@ -28,6 +28,7 @@ Container {
     property alias errorText: error.text
     
     signal textFieldChanging(string text)
+    signal textFieldChanged(string text)
     
     layout: DockLayout {
         
@@ -62,6 +63,10 @@ Container {
             
             onTextChanging: {
                 textFieldChanging(text);
+            }
+            
+            onTextChanged: {
+                textFieldChanged(text);
             }
         }
     }

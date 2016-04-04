@@ -65,7 +65,7 @@ under GNU Public License V2</source>
     <name>AssistantCreateAccountActivationView</name>
     <message>
         <location filename="../assets/qml/assistant/AssistantCreateAccountActivationView.qml" line="33"/>
-        <source>You account isn&apos;t activated yet
+        <source>Your account isn&apos;t activated yet
 Click on the link in the email we sent you</source>
         <translation type="unfinished"></translation>
     </message>
@@ -100,71 +100,55 @@ Once it is done, click on the button below to complete your account setup.</sour
 <context>
     <name>AssistantCreateAccountView</name>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="34"/>
-        <source>Please fill in a valid email to receive the activation link</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="31"/>
+        <source>Account creation failed,
+please try again later</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="40"/>
-        <source>Passwords are different</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="37"/>
-        <source>Password is too short
-(6 characters minimum)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="43"/>
-        <source>Username already in use,
-please choose another one</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="51"/>
-        <source>Account creation failed
-,please try again later</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="76"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="55"/>
         <source>CREATE AN ACCOUNT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="85"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="64"/>
         <source>1/2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="110"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="89"/>
         <source>USERNAME</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="134"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="118"/>
         <source>PASSWORD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="158"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="152"/>
         <source>PASSWORD CONFIRMATION</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="210"/>
-        <source>Username is too short
-(4 characters minimum)</source>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="215"/>
+        <source>Account creation failed,
+check there is no error above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="182"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="136"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="168"/>
+        <source>Passwords are different</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="184"/>
         <source>EMAIL (we&apos;ll send you an activation link)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="203"/>
+        <location filename="../assets/qml/assistant/AssistantCreateAccountView.qml" line="210"/>
         <source>CREATE ACCOUNT</source>
         <translation type="unfinished"></translation>
     </message>
@@ -237,6 +221,56 @@ please choose another one</source>
     <message>
         <location filename="../assets/qml/assistant/AssistantLoginView.qml" line="153"/>
         <source>Please fill in at least your username and the domain</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AssistantModel</name>
+    <message>
+        <location filename="../src/assistant/AssistantModel.cpp" line="96"/>
+        <source>Username is too short (%%s characters min)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/assistant/AssistantModel.cpp" line="100"/>
+        <source>Username is too long (%%s characters max)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/assistant/AssistantModel.cpp" line="104"/>
+        <source>Username must be %%s characters long</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/assistant/AssistantModel.cpp" line="107"/>
+        <source>Username is not authorized</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/assistant/AssistantModel.cpp" line="109"/>
+        <source>Username is invalid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/assistant/AssistantModel.cpp" line="111"/>
+        <location filename="../src/assistant/AssistantModel.cpp" line="136"/>
+        <location filename="../src/assistant/AssistantModel.cpp" line="152"/>
+        <source>Unknown error: %%s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/assistant/AssistantModel.cpp" line="129"/>
+        <source>Password is too short (%%s characters min)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/assistant/AssistantModel.cpp" line="133"/>
+        <source>Password is too long (%%s characters max)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/assistant/AssistantModel.cpp" line="150"/>
+        <source>Email is invalid</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

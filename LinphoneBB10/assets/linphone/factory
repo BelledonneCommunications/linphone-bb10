@@ -31,3 +31,10 @@ root_ca=app/native/assets/linphone/rootca.pem
 [misc]
 history_max_size=30
 log_collection_upload_server_url=https://www.linphone.org:444/lft.php
+
+[assistant]
+username_min_length=6
+username_max_length=12
+password_min_length=6
+domain=sip.linphone.org
+asssitant_url=https://www.linphone.org/wizard.php
