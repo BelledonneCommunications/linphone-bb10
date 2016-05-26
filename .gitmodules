@@ -22,9 +22,6 @@
 [submodule "submodules/externals/opus"]
 	path = submodules/externals/opus
 	url = git://git.linphone.org/opus.git
-[submodule "submodules/externals/polarssl"]
-	path = submodules/externals/polarssl
-	url = git://git.linphone.org/polarssl.git
 [submodule "submodules/externals/speex"]
 	path = submodules/externals/speex
 	url = git://git.linphone.org/speex.git
@@ -43,3 +40,6 @@
 [submodule "submodules/externals/libmatroska-c"]
 	path = submodules/externals/libmatroska-c
 	url = git://git.linphone.org/libmatroska-c.git
+[submodule "submodules/externals/mbedtls"]
+	path = submodules/externals/mbedtls
+	url = git://git.linphone.org/mbedtls.git
