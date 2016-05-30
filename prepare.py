@@ -44,105 +44,72 @@ except Exception as e:
 class BB10Target(prepare.Target):
 
     def __init__(self, arch):
-        prepare.Target.__init__(self, 'bb10-' + arch)
+        super(BB10Target, self).__init__('bb10-' + arch)
         current_path = os.path.dirname(os.path.realpath(__file__))
         self.config_file = 'configs/config-bb10-' + arch + '.cmake'
         self.toolchain_file = 'toolchains/toolchain-bb10-' + arch + '.cmake'
         self.output = 'liblinphone-bb10-sdk/' + arch
-        self.additional_args = [
-            '-DLINPHONE_BUILDER_GROUP_EXTERNAL_SOURCE_PATH_BUILDERS=YES',
-            '-DLINPHONE_BUILDER_EXTERNAL_SOURCE_PATH=' + current_path + '/submodules'
-        ]
-
-    def clean(self):
-        if os.path.isdir('WORK'):
-            shutil.rmtree(
-                'WORK', ignore_errors=False, onerror=self.handle_remove_read_only)
-        if os.path.isdir('liblinphone-bb10-sdk'):
-            shutil.rmtree(
-                'liblinphone-bb10-sdk', ignore_errors=False, onerror=self.handle_remove_read_only)
+        self.external_source_path = os.path.join(current_path, 'submodules')
 
 
 class BB10i486Target(BB10Target):
 
     def __init__(self):
-        BB10Target.__init__(self, 'i486')
+        super(BB10i486Target, self).__init__('i486')
 
 
 class BB10armTarget(BB10Target):
 
     def __init__(self):
-        BB10Target.__init__(self, 'arm')
+        super(BB10armTarget, self).__init__('arm')
 
 
-targets = {
+bb10_targets = {
     'i486': BB10i486Target(),
     'arm': BB10armTarget()
 }
-archs_device = ['arm']
-archs_simu = ['i486']
-platforms = ['all', 'devices', 'simulators'] + archs_device + archs_simu
 
+class BB10Preparator(prepare.Preparator):
 
-class PlatformListAction(argparse.Action):
+    def __init__(self, targets=bb10_targets):
+        super(BB10Preparator, self).__init__(targets)
+        self.veryclean = True
+        self.show_gpl_disclaimer = True
 
-    def __call__(self, parser, namespace, values, option_string=None):
-        if values:
-            for value in values:
-                if value not in platforms:
-                    message = ("invalid platform: {0!r} (choose from {1})".format(
-                        value, ', '.join([repr(platform) for platform in platforms])))
-                    raise argparse.ArgumentError(self, message)
-            setattr(namespace, self.dest, values)
+    def clean(self):
+        super(BB10Preparator, self).clean()
+        if os.path.isfile('Makefile'):
+            os.remove('Makefile')
+        if os.path.isdir('WORK') and not os.listdir('WORK'):
+            os.rmdir('WORK')
+        if os.path.isdir('liblinphone-bb10-sdk') and not os.listdir('liblinphone-bb10-sdk'):
+            os.rmdir('liblinphone-bb10-sdk')
 
+    def prepare(self):
+        retcode = super(BB10Preparator, self).prepare()
+        if retcode != 0:
+            if retcode == 51:
+                if os.path.isfile('Makefile'):
+                    Popen("make help-prepare-options".split(" "))
+                retcode = 0
+            return retcode
+        # Only generated makefile if we are using Ninja or Makefile
+        if self.generator().endswith('Ninja'):
+            if not check_is_installed("ninja", "it"):
+                return 1
+            self.generate_makefile('ninja -C')
+            info("You can now run 'make' to build.")
+        elif self.generator().endswith("Unix Makefiles"):
+            self.generate_makefile('$(MAKE) -C')
+            info("You can now run 'make' to build.")
+        else:
+            warning("Not generating meta-makefile for generator {}.".format(self.generator()))
 
-def gpl_disclaimer(platforms):
-    cmakecache = 'WORK/bb10-{arch}/cmake/CMakeCache.txt'.format(arch=platforms[0])
-    gpl_third_parties_enabled = "ENABLE_GPL_THIRD_PARTIES:BOOL=YES" in open(
-        cmakecache).read() or "ENABLE_GPL_THIRD_PARTIES:BOOL=ON" in open(cmakecache).read()
-
-    if gpl_third_parties_enabled:
-        warning("\n***************************************************************************"
-                "\n***************************************************************************"
-                "\n***** CAUTION, this liblinphone SDK is built using 3rd party GPL code *****"
-                "\n***** Even if you acquired a proprietary license from Belledonne      *****"
-                "\n***** Communications, this SDK is GPL and GPL only.                   *****"
-                "\n***** To disable 3rd party gpl code, please use:                      *****"
-                "\n***** $ ./prepare.py -DENABLE_GPL_THIRD_PARTIES=NO                    *****"
-                "\n***************************************************************************"
-                "\n***************************************************************************")
-    else:
-        warning("\n***************************************************************************"
-                "\n***************************************************************************"
-                "\n***** Linphone SDK without 3rd party GPL software                     *****"
-                "\n***** If you acquired a proprietary license from Belledonne           *****"
-                "\n***** Communications, this SDK can be used to create                  *****"
-                "\n***** a proprietary linphone-based application.                       *****"
-                "\n***************************************************************************"
-                "\n***************************************************************************")
-
-
-missing_dependencies = {}
-
-
-def check_is_installed(binary, prog=None, warn=True):
-    if not find_executable(binary):
-        if warn:
-            missing_dependencies[binary] = prog
-            # error("Could not find {}. Please install {}.".format(binary, prog))
-        return False
-    return True
-
-
-def check_tools():
-    # TODO
-    return 0
-
-
-def generate_makefile(platforms, generator):
-    arch_targets = ""
-    for arch in platforms:
-        arch_targets += """
+    def generate_makefile(self, generator):
+        platforms = self.args.target
+        arch_targets = ""
+        for arch in platforms:
+            arch_targets += """
 {arch}: {arch}-build
 
 {arch}-build:
@@ -156,9 +123,9 @@ WORK/bb10-{arch}/build.done:
 \t{generator} WORK/bb10-{arch}/Build/linphone_builder install
 \t@echo "Done"
 """.format(arch=arch, generator=generator)
-    multiarch = ""
-    for arch in platforms[1:]:
-        multiarch += \
+        multiarch = ""
+        for arch in platforms[1:]:
+            multiarch += \
             """\tif test -f "$${arch}_path"; then \\
 \t\tall_paths=`echo $$all_paths $${arch}_path`; \\
 \t\tall_archs="$$all_archs,{arch}" ; \\
@@ -166,7 +133,7 @@ WORK/bb10-{arch}/build.done:
 \t\techo "WARNING: archive `basename $$archive` exists in {first_arch} tree but does not exists in {arch} tree: $${arch}_path."; \\
 \tfi; \\
 """.format(first_arch=platforms[0], arch=arch)
-    makefile = """
+        makefile = """
 archs={archs}
 LINPHONE_BB10_VERSION=$(shell git describe --always)
 
@@ -219,130 +186,18 @@ help: help-prepare-options
            first_arch=platforms[0], options=' '.join(sys.argv),
            arch_targets=arch_targets,
            multiarch=multiarch, generator=generator)
-    f = open('Makefile', 'w')
-    f.write(makefile)
-    f.close()
-    gpl_disclaimer(platforms)
+        f = open('Makefile', 'w')
+        f.write(makefile)
+        f.close()
 
 
-def main(argv=None):
-    basicConfig(format="%(levelname)s: %(message)s", level=INFO)
 
-    if argv is None:
-        argv = sys.argv
-    argparser = argparse.ArgumentParser(
-        description="Prepare build of Linphone and its dependencies.")
-    argparser.add_argument(
-        '-c', '-C', '--clean', help="Clean a previous build instead of preparing a build.", action='store_true')
-    argparser.add_argument(
-        '-d', '--debug', help="Prepare a debug build, eg. add debug symbols and use no optimizations.", action='store_true')
-    argparser.add_argument(
-        '-dv', '--debug-verbose', help="Activate ms_debug logs.", action='store_true')
-    argparser.add_argument(
-        '-f', '--force', help="Force preparation, even if working directory already exist.", action='store_true')
-    argparser.add_argument(
-        '--disable-gpl-third-parties', help="Disable GPL third parties such as FFMpeg, x264.", action='store_true')
-    argparser.add_argument(
-        '--enable-non-free-codecs', help="Enable non-free codecs such as OpenH264, MPEG4, etc.. Final application must comply with their respective license (see README.md).", action='store_true')
-    argparser.add_argument(
-        '-G', '--generator', help="CMake build system generator (default: Unix Makefiles, use cmake -h to get the complete list).", default='Unix Makefiles', dest='generator')
-    argparser.add_argument(
-        '-L', '--list-cmake-variables', help="List non-advanced CMake cache variables.", action='store_true', dest='list_cmake_variables')
-    argparser.add_argument(
-        '-lf', '--list-features', help="List optional features and their default values.", action='store_true', dest='list_features')
-    argparser.add_argument(
-        '-t', '--tunnel', help="Enable Tunnel.", action='store_true')
-    argparser.add_argument('platform', nargs='*', action=PlatformListAction, default=[
-                           'all'], help="The platform to build for (default is 'devices'). Space separated architectures in list: {0}.".format(', '.join([repr(platform) for platform in platforms])))
-
-    args, additional_args = argparser.parse_known_args()
-
-    additional_args += ["-G", args.generator]
-
-    if check_tools() != 0:
+def main():
+    preparator = BB10Preparator()
+    preparator.parse_args()
+    if preparator.check_tools() != 0:
         return 1
-
-    if args.debug_verbose is True:
-        additional_args += ["-DENABLE_DEBUG_LOGS=YES"]
-    if args.enable_non_free_codecs is True:
-        additional_args += ["-DENABLE_NON_FREE_CODECS=YES"]
-    if args.disable_gpl_third_parties is True:
-        additional_args += ["-DENABLE_GPL_THIRD_PARTIES=NO"]
-
-    if args.tunnel or os.path.isdir("submodules/tunnel"):
-        if not os.path.isdir("submodules/tunnel"):
-            info("Tunnel wanted but not found yet, trying to clone it...")
-            p = Popen("git clone gitosis@git.linphone.org:tunnel.git submodules/tunnel".split(" "))
-            p.wait()
-            if p.retcode != 0:
-                error("Could not clone tunnel. Please see http://www.belledonne-communications.com/voiptunnel.html")
-                return 1
-        warning("Tunnel enabled, disabling GPL third parties.")
-        additional_args += ["-DENABLE_TUNNEL=ON", "-DENABLE_GPL_THIRD_PARTIES=OFF"]
-
-    if args.list_features:
-        tmpdir = tempfile.mkdtemp(prefix="linphone-bb10")
-        tmptarget = BB10armTarget()
-        tmptarget.abs_cmake_dir = tmpdir
-
-        option_regex = re.compile("ENABLE_(.*):(.*)=(.*)")
-        option_list = [""]
-        build_type = 'Debug' if args.debug else 'Release'
-        for line in Popen(tmptarget.cmake_command(build_type, False, True, additional_args),
-                          cwd=tmpdir, shell=False, stdout=PIPE).stdout.readlines():
-            match = option_regex.match(line)
-            if match is not None:
-                option_list.append("ENABLE_{} (is currently {})".format(match.groups()[0], match.groups()[2]))
-        info("Here is the list of available features: {}".format("\n\t".join(option_list)))
-        info("To enable some feature, please use -DENABLE_SOMEOPTION=ON")
-        info("Similarly, to disable some feature, please use -DENABLE_SOMEOPTION=OFF")
-        shutil.rmtree(tmpdir)
-        return 0
-
-    selected_platforms_dup = []
-    for platform in args.platform:
-        if platform == 'all':
-            selected_platforms_dup += archs_device + archs_simu
-        elif platform == 'devices':
-            selected_platforms_dup += archs_device
-        elif platform == 'simulators':
-            selected_platforms_dup += archs_simu
-        else:
-            selected_platforms_dup += [platform]
-    # unify platforms but keep provided order
-    selected_platforms = []
-    for x in selected_platforms_dup:
-        if x not in selected_platforms:
-            selected_platforms.append(x)
-
-    for platform in selected_platforms:
-        target = targets[platform]
-
-        if args.clean:
-            target.clean()
-        else:
-            retcode = prepare.run(target, args.debug, False, args.list_cmake_variables, args.force, additional_args)
-            if retcode != 0:
-                if retcode == 51:
-                    Popen("make help-prepare-options".split(" "))
-                    retcode = 0
-                return retcode
-
-    if args.clean:
-        if os.path.isfile('Makefile'):
-            os.remove('Makefile')
-    elif selected_platforms:
-        # only generated makefile if we are using Ninja or Makefile
-        if args.generator == 'Ninja':
-            if not check_is_installed("ninja", "it"):
-                return 1
-            generate_makefile(selected_platforms, 'ninja -C')
-        elif args.generator == "Unix Makefiles":
-            generate_makefile(selected_platforms, '$(MAKE) -C')
-        else:
-            print("Not generating meta-makefile for generator {}.".format(args.generator))
-
-    return 0
+    return preparator.run()
 
 if __name__ == "__main__":
     sys.exit(main())
