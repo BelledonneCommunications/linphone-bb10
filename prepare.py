@@ -173,6 +173,7 @@ def main():
     preparator = BB10Preparator()
     preparator.parse_args()
     if preparator.check_tools() != 0:
+        preparator.show_missing_dependencies()
         return 1
     return preparator.run()
 
