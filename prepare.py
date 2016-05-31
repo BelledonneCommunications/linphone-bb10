@@ -22,29 +22,26 @@
 #
 ############################################################################
 
-import argparse
 import os
-import re
-import shutil
-import tempfile
 import sys
-from logging import *
-from distutils.spawn import find_executable
-from subprocess import Popen, PIPE
+from logging import error, warning, info
+from subprocess import Popen
 sys.dont_write_bytecode = True
 sys.path.insert(0, 'submodules/cmake-builder')
 try:
     import prepare
 except Exception as e:
     error(
-        "Could not find prepare module: {}, probably missing submodules/cmake-builder? Try running:\ngit submodule update --init --recursive".format(e))
+        "Could not find prepare module: {}, probably missing submodules/cmake-builder? Try running:\n"
+        "git submodule sync && git submodule update --init --recursive".format(e))
     exit(1)
+
 
 
 class BB10Target(prepare.Target):
 
     def __init__(self, arch):
-        super(BB10Target, self).__init__('bb10-' + arch)
+        prepare.Target.__init__(self, 'bb10-' + arch)
         current_path = os.path.dirname(os.path.realpath(__file__))
         self.config_file = 'configs/config-bb10-' + arch + '.cmake'
         self.toolchain_file = 'toolchains/toolchain-bb10-' + arch + '.cmake'
@@ -55,13 +52,13 @@ class BB10Target(prepare.Target):
 class BB10i486Target(BB10Target):
 
     def __init__(self):
-        super(BB10i486Target, self).__init__('i486')
+        BB10Target.__init__(self, 'i486')
 
 
 class BB10armTarget(BB10Target):
 
     def __init__(self):
-        super(BB10armTarget, self).__init__('arm')
+        BB10Target.__init__(self, 'arm')
 
 
 bb10_targets = {
@@ -72,38 +69,18 @@ bb10_targets = {
 class BB10Preparator(prepare.Preparator):
 
     def __init__(self, targets=bb10_targets):
-        super(BB10Preparator, self).__init__(targets)
+        prepare.Preparator.__init__(self, targets)
         self.veryclean = True
         self.show_gpl_disclaimer = True
 
     def clean(self):
-        super(BB10Preparator, self).clean()
+        prepare.Preparator.clean(self)
         if os.path.isfile('Makefile'):
             os.remove('Makefile')
         if os.path.isdir('WORK') and not os.listdir('WORK'):
             os.rmdir('WORK')
         if os.path.isdir('liblinphone-bb10-sdk') and not os.listdir('liblinphone-bb10-sdk'):
             os.rmdir('liblinphone-bb10-sdk')
-
-    def prepare(self):
-        retcode = super(BB10Preparator, self).prepare()
-        if retcode != 0:
-            if retcode == 51:
-                if os.path.isfile('Makefile'):
-                    Popen("make help-prepare-options".split(" "))
-                retcode = 0
-            return retcode
-        # Only generated makefile if we are using Ninja or Makefile
-        if self.generator().endswith('Ninja'):
-            if not check_is_installed("ninja", "it"):
-                return 1
-            self.generate_makefile('ninja -C')
-            info("You can now run 'make' to build.")
-        elif self.generator().endswith("Unix Makefiles"):
-            self.generate_makefile('$(MAKE) -C')
-            info("You can now run 'make' to build.")
-        else:
-            warning("Not generating meta-makefile for generator {}.".format(self.generator()))
 
     def generate_makefile(self, generator):
         platforms = self.args.target
