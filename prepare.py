@@ -82,7 +82,7 @@ class BB10Preparator(prepare.Preparator):
         if os.path.isdir('liblinphone-bb10-sdk') and not os.listdir('liblinphone-bb10-sdk'):
             os.rmdir('liblinphone-bb10-sdk')
 
-    def generate_makefile(self, generator):
+    def generate_makefile(self, generator, project_file=''):
         platforms = self.args.target
         arch_targets = ""
         for arch in platforms:
@@ -172,8 +172,8 @@ help: help-prepare-options
 def main():
     preparator = BB10Preparator()
     preparator.parse_args()
-    if preparator.check_tools() != 0:
-        preparator.show_missing_dependencies()
+    if preparator.check_environment() != 0:
+        preparator.show_environment_errors()
         return 1
     return preparator.run()
 
